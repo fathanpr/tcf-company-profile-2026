@@ -14,6 +14,20 @@ class PageController extends Controller
 
 
 
+    public function visionMission()
+    {
+        return Inertia::render('About/VisionMission');
+    }
+
+    public function organization()
+    {
+        return Inertia::render('About/Organization');
+    }
+
+    public function facilities()
+    {
+        return Inertia::render('About/Facilities');
+    }
     public function setLanguage($locale)
     {
         if (in_array($locale, ['en', 'id', 'ja'])) {

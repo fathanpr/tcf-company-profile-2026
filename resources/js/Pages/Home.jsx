@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
-import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Home({ translations }) {
+
+
     // --- Data & State ---
     const values = [
         { letter: 'E', title: 'Empowerment', desc: 'Giving our people the strength and confidence to achieve more.' },
@@ -18,21 +20,39 @@ export default function Home({ translations }) {
 
     const capabilities = [
         {
-            title: 'Precision Stamping',
+            title: 'STAMPING',
             desc: 'High-tonnage press capabilities delivering intricate automotive components with micron-level accuracy.',
             icon: <Award className="w-12 h-12 text-orange-500" />,
             image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
         },
         {
-            title: 'Robotic Welding',
-            desc: 'State-of-the-art automated welding lines ensuring structural integrity and consistent quality for safety-critical parts.',
+            title: 'WELDING',
+            desc: 'State-of-the-art automated welding lines ensuring structural integrity and consistent quality.',
             icon: <Zap className="w-12 h-12 text-blue-500" />,
             image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         },
         {
-            title: 'Assembly & Tooling',
-            desc: 'End-to-end assembly solutions and in-house tooling maintenance to guarantee uninterrupted production flow.',
+            title: 'BENDING',
+            desc: 'Precision bending services for complex geometries and structural requirements.',
             icon: <Shield className="w-12 h-12 text-green-500" />,
+            image: "https://images.unsplash.com/photo-1531297461136-82lw8e41f5e8?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+            title: 'MACHINING',
+            desc: 'Advanced CNC machining for tight tolerances and high-quality surface finishes.',
+            icon: <Zap className="w-12 h-12 text-purple-500" />,
+            image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+            title: 'PAINTING',
+            desc: 'Automated painting lines providing superior corrosion protection and aesthetic finish.',
+            icon: <Award className="w-12 h-12 text-red-500" />,
+            image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+            title: 'DIE MAKING',
+            desc: 'In-house design and manufacturing of high-precision dies and tooling.',
+            icon: <Shield className="w-12 h-12 text-orange-500" />,
             image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         }
     ];
@@ -65,7 +85,65 @@ export default function Home({ translations }) {
         }
     ];
 
+    const [[page, direction], setPage] = useState([0, 0]);
+    const [itemsPerPage, setItemsPerPage] = useState(3);
+
+    // Responsive Carousel Logic
+    React.useEffect(() => {
+        const handleResize = () => {
+            setItemsPerPage(window.innerWidth < 768 ? 1 : 3);
+        };
+        handleResize(); // Initial check
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const paginate = (newDirection) => {
+        setPage([page + newDirection, newDirection]);
+    };
+
+    const variants = {
+        enter: (direction) => ({
+            x: direction > 0 ? 1000 : -1000,
+            opacity: 0
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1
+        },
+        exit: (direction) => ({
+            zIndex: 0,
+            x: direction < 0 ? 1000 : -1000,
+            opacity: 0
+        })
+    };
+
+    // Calculate visible items based on infinite page count
+    const totalSlides = Math.ceil(capabilities.length / itemsPerPage);
+    const slideIndex = ((page % totalSlides) + totalSlides) % totalSlides;
+
+    const visibleCapabilities = capabilities.slice(
+        slideIndex * itemsPerPage,
+        (slideIndex + 1) * itemsPerPage
+    );
+
     const [showHistoryModal, setShowHistoryModal] = useState(false);
+    const [currentHero, setCurrentHero] = useState(0);
+
+    const heroImages = [
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920",
+        "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=1920", // Automotive Stamping
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920", // Welding
+        "https://images.unsplash.com/photo-1531297461136-82lw8e41f5e8?auto=format&fit=crop&q=80&w=1920", // Tech/Robotics
+    ];
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentHero((prev) => (prev + 1) % heroImages.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
 
     return (
         <MainLayout title={translations['Home'] || 'Home'}>
@@ -73,14 +151,21 @@ export default function Home({ translations }) {
             {/* --- HERO SECTION --- */}
             <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-900">
                 {/* Background Image/Video Placeholder */}
-                <div className="absolute inset-0 z-0">
-                    <img
-                        src="/img/hero-factory.png"
-                        alt="Factory Future"
-                        className="w-full h-full object-cover opacity-60 scale-105 animate-slow-zoom"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent"></div>
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
+                <div className="absolute inset-0 z-0 bg-slate-900">
+                    <AnimatePresence mode="popLayout">
+                        <motion.img
+                            key={currentHero}
+                            src={heroImages[currentHero]}
+                            alt="Factory Future"
+                            initial={{ opacity: 0, scale: 1.1 }}
+                            animate={{ opacity: 0.6, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 1.5 }}
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                    </AnimatePresence>
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/50 to-transparent z-10"></div>
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30 z-10"></div>
                 </div>
 
                 <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -138,11 +223,9 @@ export default function Home({ translations }) {
                         </div>
                     </motion.div>
                 </div>
-                {/* Gradient to White (About Section) */}
-                <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+
             </section>
 
-            {/* --- ABOUT US SECTION (History, Core Values) --- */}
             {/* --- ABOUT US SECTION (History, Core Values) --- */}
             <section id="about" className="min-h-screen flex items-center justify-center py-12 bg-white relative overflow-hidden">
                 <div className="container mx-auto px-6 h-full flex flex-col justify-center">
@@ -155,7 +238,7 @@ export default function Home({ translations }) {
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: false, amount: 0.2, margin: "-100px" }}
+                        viewport={{ once: true, amount: 0.2, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
                         className="mb-8 flex flex-col md:flex-row items-center gap-8 md:gap-16"
                     >
@@ -168,12 +251,12 @@ export default function Home({ translations }) {
                                 Operating from our strategic facilities in Karawang and Purwakarta, we deliver high-precision stamping and welding solutions that meet the rigorous standards of the industry.
                             </p>
 
-                            <button
-                                onClick={() => setShowHistoryModal(true)}
+                            <Link
+                                href="/about/vision-mission"
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all hover:gap-3 text-sm"
                             >
                                 Read More <ArrowRight size={16} />
-                            </button>
+                            </Link>
                         </div>
 
                         <div className="w-full md:w-1/2 relative order-1 md:order-2 flex justify-center">
@@ -223,31 +306,70 @@ export default function Home({ translations }) {
                         <h2 className="text-4xl font-bold text-slate-900 mt-2">Manufacturing Capabilities</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6">
-                        {capabilities.map((cap, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: false, amount: 0.2, margin: "-50px" }}
-                                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300"
-                            >
-                                <div className="h-48 lg:h-40 overflow-hidden">
-                                    <img src={cap.image} alt={cap.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                </div>
-                                <div className="p-8 lg:p-6 relative">
-                                    <div className="absolute -top-10 right-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center scale-90 lg:scale-100">
-                                        {cap.icon}
-                                    </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3">{cap.title}</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{cap.desc}</p>
-                                    <a href="#contact" className="text-blue-600 font-bold text-sm hover:underline flex items-center gap-1">
-                                        Learn more <ArrowRight size={14} />
-                                    </a>
-                                </div>
-                            </motion.div>
-                        ))}
+                    <div className="relative max-w-6xl mx-auto">
+                        <div className="overflow-visible">
+                            <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                                <motion.div
+                                    key={page}
+                                    custom={direction}
+                                    variants={variants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{
+                                        x: { type: "spring", stiffness: 300, damping: 30 },
+                                        opacity: { duration: 0.2 }
+                                    }}
+                                    className="flex gap-6 justify-center"
+                                >
+                                    {visibleCapabilities.map((cap, idx) => (
+                                        <div
+                                            key={`${slideIndex}-${idx}`}
+                                            className="w-full md:w-1/3 flex-shrink-0"
+                                        >
+                                            <div className="group bg-white rounded-3xl overflow-hidden shadow-[0_15px_30px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-5px_rgba(59,130,246,0.15)] transition-all duration-500 h-full border border-slate-100 hover:border-blue-100">
+                                                <div className="h-48 lg:h-40 overflow-hidden relative">
+                                                    <img src={cap.image} alt={cap.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                                                    <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-500"></div>
+                                                </div>
+                                                <div className="p-8 lg:p-6 relative">
+                                                    <div className="absolute -top-10 right-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center scale-90 lg:scale-100 border border-slate-50 group-hover:rotate-6 transition-transform duration-500">
+                                                        {cap.icon}
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-blue-600 transition-colors">{cap.title}</h3>
+                                                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{cap.desc}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <button
+                            onClick={() => paginate(-1)}
+                            className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-orange-500 hover:scale-110 transition-all z-10"
+                        >
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button
+                            onClick={() => paginate(1)}
+                            className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-orange-500 hover:scale-110 transition-all z-10"
+                        >
+                            <ChevronRight size={24} />
+                        </button>
+
+                        {/* Pagination Dots */}
+                        <div className="flex justify-center gap-2 mt-8">
+                            {Array.from({ length: Math.ceil(capabilities.length / itemsPerPage) }).map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setPage([idx, idx > slideIndex ? 1 : -1])}
+                                    className={`w-3 h-3 rounded-full transition-all ${slideIndex === idx ? 'bg-orange-500 w-8' : 'bg-slate-300'}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
