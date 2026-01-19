@@ -18,4 +18,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/capabilities/sales-growth', [PageController::class, 'salesGrowth'])->name('capabilities.sales-growth');
     Route::get('/capabilities/production-quality', [PageController::class, 'productionQuality'])->name('capabilities.production-quality');
     Route::get('/capabilities/loading-capacity', [PageController::class, 'loadingCapacity'])->name('capabilities.loading-capacity');
+
+    // Products
+    Route::get('/products', [PageController::class, 'products'])->name('products.index');
+    Route::get('/products/{id}', [PageController::class, 'productDetail'])->name('products.show');
 });

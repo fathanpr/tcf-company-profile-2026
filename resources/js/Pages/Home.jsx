@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home({ translations, customers }) {
+export default function Home({ translations, customers, products: dynamicProducts }) {
 
 
     // --- Data & State ---
@@ -57,12 +57,6 @@ export default function Home({ translations, customers }) {
         }
     ];
 
-    const products = [
-        { name: 'Chassis Components', image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=400' },
-        { name: 'Body Shell Parts', image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=400' },
-        { name: 'Suspension Systems', image: 'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=400' },
-        { name: 'Engine Brackets', image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=400' }
-    ];
 
     const news = [
         {
@@ -402,7 +396,7 @@ export default function Home({ translations, customers }) {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {products.map((prod, idx) => (
+                        {(dynamicProducts || []).map((prod, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0 }}
@@ -412,12 +406,25 @@ export default function Home({ translations, customers }) {
                                 whileHover={{ scale: 1.02 }}
                                 className="relative rounded-2xl overflow-hidden group aspect-square bg-slate-800"
                             >
-                                <img src={prod.image} alt={prod.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
-                                    <span className="font-bold text-white tracking-wide">{prod.name}</span>
-                                </div>
+                                <Link href={route('products.show', prod.encrypted_id)}>
+                                    <img src={prod.main_image?.startsWith('http') ? prod.main_image : `/${prod.main_image}`} alt={prod.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                                        <span className="font-bold text-white tracking-wide">{prod.name}</span>
+                                    </div>
+                                </Link>
                             </motion.div>
                         ))}
+                    </div>
+
+                    {/* View All Products Button */}
+                    <div className="mt-16 text-center">
+                        <Link
+                            href={route('products.index')}
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all shadow-xl hover:shadow-white/10 group"
+                        >
+                            View All Products
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
                     </div>
                 </div>
             </section>
