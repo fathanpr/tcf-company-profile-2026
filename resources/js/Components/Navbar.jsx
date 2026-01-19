@@ -28,6 +28,7 @@ export default function Navbar() {
                 { name: 'Vision & Mission', href: '/about/vision-mission' },
                 { name: 'Organization Structure', href: '/about/organization' },
                 { name: 'Facilities', href: '/about/facilities' },
+                { name: 'Customers', href: '/about/customers' },
             ]
         },
         {

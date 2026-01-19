@@ -12,6 +12,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about/vision-mission', [PageController::class, 'visionMission'])->name('about.vision-mission');
     Route::get('/about/organization', [PageController::class, 'organization'])->name('about.organization');
     Route::get('/about/facilities', [PageController::class, 'facilities'])->name('about.facilities');
+    Route::get('/about/customers', [PageController::class, 'customers'])->name('about.customers');
 
     // Capabilities Sub-pages
     Route::get('/capabilities/sales-growth', [PageController::class, 'salesGrowth'])->name('capabilities.sales-growth');

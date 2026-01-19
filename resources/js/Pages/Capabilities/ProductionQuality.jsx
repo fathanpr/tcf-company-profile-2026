@@ -1,8 +1,8 @@
 import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { Cpu, CheckCircle2, Factory, Users, Zap, ShieldCheck, Microscope, Layers, TrendingUp } from 'lucide-react';
+import { Cpu, CheckCircle2, Factory, Users, Zap, ShieldCheck, Microscope, Layers, TrendingUp, ArrowUpRight } from 'lucide-react';
 import Chart from 'react-apexcharts';
 
 export default function ProductionQuality() {
@@ -242,6 +242,24 @@ export default function ProductionQuality() {
                             </div>
                         </motion.div>
 
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
+                        <Link
+                            href={route('capabilities.sales-growth')}
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-lg group"
+                        >
+                            Sales Growth
+                            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </Link>
+                        <Link
+                            href={route('capabilities.loading-capacity')}
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-orange-600 hover:text-orange-600 transition-all shadow-sm group"
+                        >
+                            Loading Capacity
+                            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </Link>
                     </div>
                 </div>
             </section>

@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home({ translations }) {
+export default function Home({ translations, customers }) {
 
 
     // --- Data & State ---
@@ -372,12 +372,23 @@ export default function Home({ translations }) {
                                 />
                             ))}
                         </div>
+
+                        {/* View Detailed Capabilities Button */}
+                        <div className="mt-12 text-center">
+                            <Link
+                                href={route('capabilities.sales-growth')}
+                                className="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 text-white font-bold rounded-full hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-600/25 group"
+                            >
+                                View Performance & Growth
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* --- PRODUCT SECTION --- */}
-            <section id="product" className="min-h-screen flex items-center justify-center bg-slate-900 text-white relative overflow-hidden">
+            <section id="product" className="pt-24 pb-12 bg-slate-900 text-white relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="container mx-auto px-6 relative z-10 py-0">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-12">
@@ -385,7 +396,7 @@ export default function Home({ translations }) {
                             <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Our Output</span>
                             <h2 className="text-4xl font-bold mt-2">Quality Products</h2>
                         </div>
-                        <p className="text-slate-400 max-w-md text-sm mt-4 md:mt-0 text-center">
+                        <p className="text-slate-400 max-w-md text-sm mt-4 md:mt-0 text-center md:text-right">
                             Delivering high-precision components used by leading automotive manufacturers globally.
                         </p>
                     </div>
@@ -403,12 +414,63 @@ export default function Home({ translations }) {
                             >
                                 <img src={prod.image} alt={prod.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
-                                    <span className="font-bold text-white">{prod.name}</span>
+                                    <span className="font-bold text-white tracking-wide">{prod.name}</span>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
                 </div>
+            </section>
+
+            {/* --- INFINITY CUSTOMER SCROLL --- */}
+            <section className="py-20 bg-slate-900 relative overflow-hidden border-t border-white/5">
+                <div className="container mx-auto px-6 mb-10 text-center">
+                    <p className="text-blue-400 text-xs font-black uppercase tracking-[0.3em] mb-4">Strategic Partners</p>
+                </div>
+
+                <div className="relative w-full">
+                    {/* Fading Gradients */}
+                    <div className="absolute inset-y-0 left-0 w-24 md:w-64 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent z-20 pointer-events-none"></div>
+                    <div className="absolute inset-y-0 right-0 w-24 md:w-64 bg-gradient-to-l from-slate-900 via-slate-900/80 to-transparent z-20 pointer-events-none"></div>
+
+                    {/* Scrolling Container */}
+                    <div className="flex overflow-hidden scroll-wrapper">
+                        <div className="flex gap-8 md:gap-16 items-center whitespace-nowrap py-12 animate-scroll">
+                            {[...customers, ...customers, ...customers, ...customers].map((customer, idx) => (
+                                <div
+                                    key={idx}
+                                    className="w-32 md:w-44 h-24 md:h-32 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer group"
+                                >
+                                    <div className="relative flex items-center justify-center w-full h-full p-2">
+                                        <img
+                                            src={`/${customer.logo}`}
+                                            alt={customer.name}
+                                            className="max-w-full max-h-full object-contain filter drop-shadow-xl scale-110 group-hover:scale-125 transition-transform duration-500"
+                                        />
+                                        {/* Glow effect on hover */}
+                                        <div className="absolute -inset-8 bg-blue-500/0 group-hover:bg-blue-500/10 blur-2xl rounded-full transition-all duration-500 -z-10"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <style dangerouslySetInnerHTML={{
+                    __html: `
+                    @keyframes scroll {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-33.333%); }
+                    }
+                    .animate-scroll {
+                        display: flex;
+                        width: max-content;
+                        animation: scroll 40s linear infinite;
+                    }
+                    .scroll-wrapper:hover .animate-scroll {
+                        animation-play-state: paused;
+                    }
+                `}} />
             </section>
 
 
