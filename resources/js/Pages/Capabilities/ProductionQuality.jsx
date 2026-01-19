@@ -2,7 +2,8 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { Cpu, CheckCircle2, Factory, Users, Zap, ShieldCheck, Microscope, Layers } from 'lucide-react';
+import { Cpu, CheckCircle2, Factory, Users, Zap, ShieldCheck, Microscope, Layers, TrendingUp } from 'lucide-react';
+import Chart from 'react-apexcharts';
 
 export default function ProductionQuality() {
     const automationFeatures = [
@@ -32,6 +33,104 @@ export default function ProductionQuality() {
     const maxNCR = 450;
     const maxVol = 300;
     const maxMP = 1300;
+
+    // Efficiency Chart Config
+    const efficiencyOptions = {
+        chart: {
+            id: 'efficiency-chart',
+            toolbar: { show: false },
+            zoom: { enabled: false }
+        },
+        xaxis: {
+            categories: manpowerData.map(d => d.year),
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+                style: { colors: '#94a3b8', fontWeight: 700, fontSize: '11px' }
+            }
+        },
+        yaxis: [
+            {
+                title: { text: "Man Power", style: { color: "#eab308", fontWeight: 700 } },
+                labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+            },
+            {
+                opposite: true,
+                title: { text: "Volume (M)", style: { color: "#f97316", fontWeight: 700 } },
+                labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+            }
+        ],
+        grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
+        colors: ['#eab308', '#f97316'],
+        plotOptions: {
+            bar: { borderRadius: 4, columnWidth: '40%' }
+        },
+        dataLabels: { enabled: false },
+        stroke: { width: [0, 3], curve: 'smooth' },
+        markers: { size: [0, 4], strokeWidth: 2, strokeColors: '#fff' },
+        legend: {
+            show: true,
+            position: 'top',
+            horizontalAlign: 'right',
+            fontWeight: 700,
+            fontSize: '10px'
+        },
+        tooltip: {
+            theme: 'dark',
+            shared: true,
+            intersect: false
+        }
+    };
+
+    const efficiencySeries = [
+        { name: 'Man Power', type: 'bar', data: manpowerData.map(d => d.mp) },
+        { name: 'Production Volume', type: 'line', data: manpowerData.map(d => d.vol) }
+    ];
+
+    // Quality Chart Config
+    const qualityOptions = {
+        chart: {
+            id: 'quality-chart',
+            toolbar: { show: false },
+            zoom: { enabled: false }
+        },
+        xaxis: {
+            categories: qualityData.map(d => d.year),
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+                style: { colors: '#94a3b8', fontWeight: 700, fontSize: '11px' }
+            }
+        },
+        yaxis: {
+            labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
+        },
+        grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
+        colors: ['#f97316', '#ef4444'],
+        plotOptions: {
+            bar: { borderRadius: 4, columnWidth: '45%' }
+        },
+        dataLabels: { enabled: false },
+        stroke: { width: [0, 2], dashArray: [0, 5] },
+        markers: { size: [0, 4], strokeWidth: 2, strokeColors: '#fff' },
+        legend: {
+            show: true,
+            position: 'top',
+            horizontalAlign: 'right',
+            fontWeight: 700,
+            fontSize: '10px'
+        },
+        tooltip: {
+            theme: 'dark',
+            shared: true,
+            intersect: false
+        }
+    };
+
+    const qualitySeries = [
+        { name: 'NCR Cases', type: 'bar', data: qualityData.map(d => d.ncr) },
+        { name: 'Target NCR', type: 'line', data: qualityData.map(d => d.target) }
+    ];
 
     return (
         <MainLayout title="Production & Quality">
@@ -100,62 +199,15 @@ export default function ProductionQuality() {
                             viewport={{ once: true }}
                             className="bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100"
                         >
-                            <div className="flex justify-between items-start mb-10">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-slate-900">Efficiency Trend</h3>
-                                    <p className="text-slate-500 text-sm">Man Power vs Production Volume</p>
-                                </div>
-                                <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider">
-                                    <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-500"></span> MP</div>
-                                    <div className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-orange-400"></span> Vol</div>
-                                </div>
+                            <div className="min-h-[300px] w-full">
+                                <Chart
+                                    options={efficiencyOptions}
+                                    series={efficiencySeries}
+                                    type="line"
+                                    height={300}
+                                />
                             </div>
-
-                            <div className="h-[250px] flex items-end justify-between gap-2 md:gap-4 relative px-4">
-                                {/* SVG Line for Vol Production */}
-                                <svg
-                                    className="absolute inset-0 w-full h-full pointer-events-none z-30 overflow-visible"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                >
-                                    <motion.path
-                                        initial={{ pathLength: 0, opacity: 0 }}
-                                        whileInView={{ pathLength: 1, opacity: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                                        d={`M ${manpowerData.map((d, i) => `${(i / (manpowerData.length - 1)) * 100} ${100 - (d.vol / maxVol) * 100}`).join(' L ')}`}
-                                        fill="none"
-                                        stroke="#f97316"
-                                        strokeWidth="2"
-                                        vectorEffect="non-scaling-stroke"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    {manpowerData.map((d, i) => (
-                                        <circle
-                                            key={i}
-                                            cx={`${(i / (manpowerData.length - 1)) * 100}`}
-                                            cy={`${100 - (d.vol / maxVol) * 100}`}
-                                            r="1.5"
-                                            fill="#f97316"
-                                        />
-                                    ))}
-                                </svg>
-
-                                {manpowerData.map((d, idx) => (
-                                    <div key={idx} className="flex-1 flex flex-col items-center group relative z-10 h-full justify-end">
-                                        {/* MP Bar */}
-                                        <div
-                                            className="w-full max-w-[35px] rounded-t-sm bg-yellow-400 shadow-md relative z-10 border border-yellow-500/20"
-                                            style={{ height: `${(d.mp / maxMP) * 100}%` }}
-                                        >
-                                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-black text-slate-800 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 rounded shadow-sm border border-slate-100">{d.mp}</div>
-                                        </div>
-                                        <span className="mt-4 text-[10px] font-bold text-slate-600 uppercase tracking-tighter">{d.year}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="mt-8 text-xs text-slate-400 italic text-center">
+                            <p className="mt-4 text-[10px] text-slate-400 italic text-center">
                                 *In 2026, we aim for maximum output with optimized workforce through high-level automation.
                             </p>
                         </motion.div>
@@ -167,63 +219,13 @@ export default function ProductionQuality() {
                             viewport={{ once: true }}
                             className="bg-white p-8 md:p-10 rounded-[40px] shadow-sm border border-slate-100 relative"
                         >
-                            <div className="flex justify-between items-start mb-10 relative z-10">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-slate-900">Quality Performance</h3>
-                                    <p className="text-slate-500 text-sm">NCR Cases (Non-Conformance Reports)</p>
-                                </div>
-                                <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider">
-                                    <div className="flex items-center gap-1.5 text-slate-900"><span className="w-3 h-3 rounded-sm bg-orange-400"></span> NCR</div>
-                                    <div className="flex items-center gap-1.5 text-slate-900"><span className="w-3 h-3 rounded-full border-2 border-red-500 bg-white"></span> Target</div>
-                                </div>
-                            </div>
-
-                            <div className="h-[250px] flex items-end justify-between gap-2 md:gap-4 relative px-4 z-10">
-                                {/* SVG Line for Target NCR (Dotted Red) */}
-                                <svg
-                                    className="absolute inset-0 w-full h-full pointer-events-none z-30 overflow-visible"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                >
-                                    <motion.path
-                                        initial={{ pathLength: 0, opacity: 0 }}
-                                        whileInView={{ pathLength: 1, opacity: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 1.5 }}
-                                        d={`M ${qualityData.map((d, i) => `${(i / (qualityData.length - 1)) * 100} ${100 - (d.target / maxNCR) * 100}`).join(' L ')}`}
-                                        fill="none"
-                                        stroke="#ef4444"
-                                        strokeWidth="2"
-                                        strokeDasharray="4 4"
-                                        vectorEffect="non-scaling-stroke"
-                                    />
-                                    {qualityData.map((d, i) => (
-                                        <circle
-                                            key={i}
-                                            cx={`${(i / (qualityData.length - 1)) * 100}`}
-                                            cy={`${100 - (d.target / maxNCR) * 100}`}
-                                            r="1.5"
-                                            fill="#ef4444"
-                                        />
-                                    ))}
-                                </svg>
-
-                                {qualityData.map((d, idx) => (
-                                    <div key={idx} className="flex-1 flex flex-col items-center group relative h-full justify-end">
-                                        <div
-                                            className={`w-full max-w-[35px] rounded-t-lg transition-all duration-700 shadow-md ${d.ncr === 0 ? 'bg-emerald-500' : 'bg-orange-400 border border-orange-500/20'}`}
-                                            style={{ height: `${Math.max(2, (d.ncr / maxNCR) * 100)}%` }}
-                                        >
-                                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-black text-slate-800 opacity-0 group-hover:opacity-100 transition-opacity bg-white px-1 rounded shadow-sm border border-slate-100">{d.ncr}</div>
-                                            {d.ncr === 0 && (
-                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2">
-                                                    <CheckCircle2 className="text-emerald-500 w-5 h-5 drop-shadow-sm" />
-                                                </div>
-                                            )}
-                                        </div>
-                                        <span className="mt-4 text-[10px] font-bold text-slate-600 uppercase tracking-tighter">{d.year}</span>
-                                    </div>
-                                ))}
+                            <div className="min-h-[300px] w-full">
+                                <Chart
+                                    options={qualityOptions}
+                                    series={qualitySeries}
+                                    type="line"
+                                    height={300}
+                                />
                             </div>
 
                             <div className="mt-10 grid grid-cols-2 gap-4 relative z-10">

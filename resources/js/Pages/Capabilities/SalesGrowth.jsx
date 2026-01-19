@@ -7,12 +7,12 @@ import Chart from 'react-apexcharts';
 
 export default function SalesGrowth() {
     const milestones = [
-        { year: "2024", title: "Building up Manufacturing Infrastructure", icon: <Globe className="text-white w-6 h-6" />, color: "bg-blue-600", desc: "Strengthening our foundation with state-of-the-art facilities." },
-        { year: "2025", title: "2nd Tier with 1st Tier Standard Operation", icon: <Home className="text-white w-6 h-6" />, color: "bg-indigo-600", desc: "Elevating our operations to first-tier quality standards." },
-        { year: "2026", title: "Excellence Operation", icon: <Settings className="text-white w-6 h-6" />, color: "bg-orange-600", desc: "Achieving peak operational efficiency and reliability." },
-        { year: "2027", title: "Benchmark Factory in 2nd Tier", icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", desc: "Setting the industry standard for second-tier manufacturers." },
-        { year: "2028", title: "Building Focus Industry 4.0 and 5.0", icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", desc: "Integrating advanced robotics and smart technology." },
-        { year: "2029", title: "Irreplaceable Supplier", icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", desc: "Becoming a strategic, long-term partner for global leaders." },
+        { year: "2024", title: "Building up Manufacturing Infrastructure", icon: <Globe className="text-white w-6 h-6" />, color: "bg-blue-600", textColor: "text-blue-600", desc: "Strengthening our foundation with state-of-the-art facilities." },
+        { year: "2025", title: "2nd Tier with 1st Tier Standard Operation", icon: <Home className="text-white w-6 h-6" />, color: "bg-indigo-600", textColor: "text-indigo-600", desc: "Elevating our operations to first-tier quality standards." },
+        { year: "2026", title: "Excellence Operation", icon: <Settings className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: "Achieving peak operational efficiency and reliability." },
+        { year: "2027", title: "Benchmark Factory in 2nd Tier", icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", textColor: "text-red-600", desc: "Setting the industry standard for second-tier manufacturers." },
+        { year: "2028", title: "Building Focus Industry 4.0 and 5.0", icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", textColor: "text-purple-600", desc: "Integrating advanced robotics and smart technology." },
+        { year: "2029", title: "Irreplaceable Supplier", icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", textColor: "text-yellow-600", desc: "Becoming a strategic, long-term partner for global leaders." },
     ];
 
     const salesData = [
@@ -75,10 +75,18 @@ export default function SalesGrowth() {
             strokeWidth: 3,
             strokeColors: '#ffffff'
         },
-        legend: { show: false },
+        legend: {
+            show: true,
+            position: 'top',
+            horizontalAlign: 'right',
+            fontWeight: 700,
+            fontSize: '10px',
+            markers: { radius: 4 }
+        },
         tooltip: {
             theme: 'dark',
-            x: { show: true },
+            shared: true,
+            intersect: false,
             y: {
                 formatter: (val) => `IDR ${val} Billion`
             }
@@ -183,7 +191,7 @@ export default function SalesGrowth() {
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className={`text-xl font-black ${m.color.replace('bg-', 'text-')} opacity-80`}>{m.year}</span>
+                                        <span className={`text-xl font-black ${m.textColor} opacity-80`}>{m.year}</span>
                                         <div className="h-px flex-1 bg-slate-200"></div>
                                     </div>
                                     <h4 className="text-base font-black text-slate-900 mb-1 leading-tight">{m.title}</h4>
@@ -228,15 +236,11 @@ export default function SalesGrowth() {
                         </motion.div>
 
                         <div className="bg-white p-6 md:p-10 rounded-[40px] shadow-xl border border-slate-100 relative overflow-hidden">
-                            <div className="flex justify-between items-center mb-10">
+                            <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
                                     <TrendingUp className="text-blue-600 w-5 h-5" />
                                     Sales Performance Record
                                 </h3>
-                                <div className="flex gap-4 text-[10px] font-bold uppercase tracking-wider">
-                                    <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-blue-500"></span> Sales</div>
-                                    <div className="flex items-center gap-1.5"><span className="w-2.5 h-0.5 bg-orange-500"></span> Growth</div>
-                                </div>
                             </div>
 
                             <div className="min-h-[350px] w-full">

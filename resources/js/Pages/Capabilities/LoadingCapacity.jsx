@@ -1,8 +1,9 @@
 import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { BarChart3, LineChart, Package, Clock, Building2, ArrowUpRight, Maximize2 } from 'lucide-react';
+import Chart from 'react-apexcharts';
 
 export default function LoadingCapacity() {
     const plantsData = [
@@ -37,6 +38,127 @@ export default function LoadingCapacity() {
     ];
 
     const maxTotal = 300;
+
+    const getChartOptions = (plant) => ({
+        chart: {
+            stacked: true,
+            toolbar: { show: false },
+            zoom: { enabled: false },
+            background: 'transparent'
+        },
+        xaxis: {
+            categories: plant.years,
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+                style: {
+                    colors: '#64748b',
+                    fontWeight: 700,
+                    fontSize: '11px'
+                }
+            }
+        },
+        yaxis: {
+            max: maxTotal,
+            labels: {
+                formatter: (val) => `${val}M`,
+                style: {
+                    colors: '#94a3b8',
+                    fontWeight: 700
+                }
+            }
+        },
+        grid: {
+            borderColor: '#f1f5f9',
+            strokeDashArray: 4,
+            padding: { left: 10, right: 10 }
+        },
+        colors: ['#fbbf24', '#38bdf8', '#10b981', '#3b82f6', '#f97316', '#94a3b8'],
+        plotOptions: {
+            bar: {
+                borderRadius: 4,
+                columnWidth: '40%',
+                dataLabels: {
+                    position: 'top',
+                }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: (val, opts) => {
+                // Only show total label if it's the top bar (Big)
+                if (opts.seriesIndex === 2) {
+                    const total = plant.stats[opts.dataPointIndex].total;
+                    return `${total}M`;
+                }
+                return '';
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '10px',
+                colors: ["#334155"]
+            }
+        },
+        stroke: {
+            width: [0, 0, 0, 2, 2, 2],
+            curve: 'smooth',
+            dashArray: [0, 0, 0, 0, 0, 0]
+        },
+        legend: {
+            show: true,
+            position: 'bottom',
+            fontSize: '10px',
+            fontWeight: 700,
+            markers: { radius: 4 },
+            itemMargin: { horizontal: 10, vertical: 5 }
+        },
+        tooltip: {
+            theme: 'dark',
+            shared: true,
+            intersect: false,
+            y: {
+                formatter: (val) => `${val} Million Strokes`
+            }
+        },
+        markers: {
+            size: [0, 0, 0, 4, 4, 4],
+            strokeWidth: 2,
+            strokeColors: '#fff'
+        }
+    });
+
+    const getChartSeries = (plant) => [
+        {
+            name: 'Small Parts',
+            type: 'bar',
+            data: plant.stats.map(s => s.small)
+        },
+        {
+            name: 'Medium Parts',
+            type: 'bar',
+            data: plant.stats.map(s => s.medium)
+        },
+        {
+            name: 'Big Parts',
+            type: 'bar',
+            data: plant.stats.map(s => s.big)
+        },
+        {
+            name: 'Shift 1 Cap',
+            type: 'line',
+            data: Array(plant.years.length).fill(80)
+        },
+        {
+            name: 'Shift 2 Cap',
+            type: 'line',
+            data: Array(plant.years.length).fill(160)
+        },
+        {
+            name: 'Shift 3 Cap',
+            type: 'line',
+            data: Array(plant.years.length).fill(240)
+        }
+    ];
 
     return (
         <MainLayout title="Loading Capacity">
@@ -81,93 +203,13 @@ export default function LoadingCapacity() {
                                     <BarChart3 className={`${plant.color} opacity-20 w-12 h-12`} />
                                 </div>
 
-                                <div className="h-[300px] flex items-end justify-between gap-3 md:gap-6 relative px-4 z-10">
-                                    {/* Capacity Shift Lines */}
-                                    <svg
-                                        className="absolute inset-0 w-full h-full pointer-events-none z-30 overflow-visible"
-                                        viewBox="0 0 100 100"
-                                        preserveAspectRatio="none"
-                                    >
-                                        {/* Shift 1 (Blue) */}
-                                        <motion.path
-                                            initial={{ pathLength: 0 }}
-                                            whileInView={{ pathLength: 1 }}
-                                            transition={{ duration: 1.5 }}
-                                            d={`M ${plant.stats.map((s, i) => `${(i / (plant.stats.length - 1)) * 100} ${100 - (80 / maxTotal) * 100}`).join(' L ')}`}
-                                            fill="none"
-                                            stroke="#3b82f6"
-                                            strokeWidth="1.5"
-                                            vectorEffect="non-scaling-stroke"
-                                        />
-                                        {/* Shift 2 (Orange) */}
-                                        <motion.path
-                                            initial={{ pathLength: 0 }}
-                                            whileInView={{ pathLength: 1 }}
-                                            transition={{ duration: 1.5, delay: 0.2 }}
-                                            d={`M ${plant.stats.map((s, i) => `${(i / (plant.stats.length - 1)) * 100} ${100 - (160 / maxTotal) * 100}`).join(' L ')}`}
-                                            fill="none"
-                                            stroke="#f97316"
-                                            strokeWidth="1.5"
-                                            vectorEffect="non-scaling-stroke"
-                                        />
-                                        {/* Shift 3 (Grey) */}
-                                        <motion.path
-                                            initial={{ pathLength: 0 }}
-                                            whileInView={{ pathLength: 1 }}
-                                            transition={{ duration: 1.5, delay: 0.4 }}
-                                            d={`M ${plant.stats.map((s, i) => `${(i / (plant.stats.length - 1)) * 100} ${100 - (240 / maxTotal) * 100}`).join(' L ')}`}
-                                            fill="none"
-                                            stroke="#94a3b8"
-                                            strokeWidth="1.5"
-                                            vectorEffect="non-scaling-stroke"
-                                        />
-                                    </svg>
-
-                                    {plant.stats.map((s, idx) => (
-                                        <div key={idx} className="flex-1 flex flex-col items-center group/bar relative">
-                                            {/* Stacked Bar */}
-                                            <div className="w-full max-w-[40px] flex flex-col-reverse relative h-full justify-end">
-                                                {/* Big (Green as visual) */}
-                                                <div
-                                                    className="w-full bg-[#10b981] rounded-t-sm"
-                                                    style={{ height: `${(s.big / maxTotal) * 100}%` }}
-                                                    title={`Big: ${s.big}M`}
-                                                ></div>
-                                                {/* Medium (Light Blue as visual) */}
-                                                <div
-                                                    className="w-full bg-[#38bdf8] border-b border-white/20"
-                                                    style={{ height: `${(s.medium / maxTotal) * 100}%` }}
-                                                    title={`Medium: ${s.medium}M`}
-                                                ></div>
-                                                {/* Small (Yellow as visual) */}
-                                                <div
-                                                    className="w-full bg-[#fbbf24] rounded-b-md border-b border-white/20"
-                                                    style={{ height: `${(s.small / maxTotal) * 100}%` }}
-                                                    title={`Small: ${s.small}M`}
-                                                ></div>
-
-                                                {/* Total Tooltip */}
-                                                <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap z-40">
-                                                    Total: {s.total}M
-                                                </div>
-                                                {/* Label Angka Statis */}
-                                                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-[9px] font-black text-slate-700 whitespace-nowrap">
-                                                    {s.total}M
-                                                </div>
-                                            </div>
-                                            <span className="mt-4 text-[10px] font-bold text-slate-500">{plant.years[idx]}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Legend */}
-                                <div className="mt-12 flex flex-wrap gap-4 text-[9px] font-black uppercase tracking-widest relative z-10 border-t border-slate-200/50 pt-6">
-                                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#fbbf24]"></div><span>Small</span></div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#38bdf8]"></div><span>Medium</span></div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#10b981]"></div><span>Big</span></div>
-                                    <div className="flex items-center gap-1.5 ml-auto"><div className="w-2.5 h-0.5 bg-[#3b82f6]"></div><span>Shift 1</span></div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-0.5 bg-[#f97316]"></div><span>Shift 2</span></div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2.5 h-0.5 bg-[#94a3b8]"></div><span>Shift 3</span></div>
+                                <div className="min-h-[400px] w-full relative z-10">
+                                    <Chart
+                                        options={getChartOptions(plant)}
+                                        series={getChartSeries(plant)}
+                                        type="line"
+                                        height={400}
+                                    />
                                 </div>
                             </motion.div>
                         ))}
@@ -176,7 +218,7 @@ export default function LoadingCapacity() {
             </section>
 
             {/* Strategic Details */}
-            <section className="py-20 bg-slate-50">
+            <section className="pt-0 pb-20 bg-slate-50">
                 <div className="container mx-auto px-6">
                     <div className="max-w-4xl mx-auto">
                         <div className="bg-slate-900 rounded-[40px] p-10 md:p-16 text-white relative overflow-hidden shadow-2xl">
@@ -212,9 +254,12 @@ export default function LoadingCapacity() {
                                         <Package className="text-emerald-400 w-10 h-10 mb-4" />
                                         <h4 className="font-bold text-xl mb-2 text-white">Full Tonnage Range</h4>
                                         <p className="text-sm text-slate-400 leading-relaxed mb-6">Our capacity spans from small precision components to large structural parts using 1500T robotic transfer lines.</p>
-                                        <div className="flex items-center gap-2 text-emerald-400 font-black text-xs uppercase cursor-pointer group">
+                                        <Link
+                                            href={route('about.facilities')}
+                                            className="flex items-center gap-2 text-emerald-400 font-black text-xs uppercase cursor-pointer group hover:text-emerald-300 transition-colors"
+                                        >
                                             Explore Facilities <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
