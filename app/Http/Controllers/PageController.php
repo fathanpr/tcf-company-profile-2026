@@ -12,35 +12,7 @@ class PageController extends Controller
         return Inertia::render('Home');
     }
 
-    public function about()
-    {
-        return Inertia::render('About');
-    }
 
-    public function capabilities()
-    {
-        return Inertia::render('Capabilities');
-    }
-
-    public function plants()
-    {
-        return Inertia::render('Plants');
-    }
-
-    public function coreValues()
-    {
-        return Inertia::render('CoreValues');
-    }
-
-    public function news()
-    {
-        return Inertia::render('News');
-    }
-
-    public function contact()
-    {
-        return Inertia::render('Contact');
-    }
 
     public function setLanguage($locale)
     {

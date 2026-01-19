@@ -143,6 +143,7 @@ export default function Home({ translations }) {
             </section>
 
             {/* --- ABOUT US SECTION (History, Core Values) --- */}
+            {/* --- ABOUT US SECTION (History, Core Values) --- */}
             <section id="about" className="min-h-screen flex items-center justify-center py-12 bg-white relative overflow-hidden">
                 <div className="container mx-auto px-6 h-full flex flex-col justify-center">
                     <div className="text-center mb-8">
@@ -151,7 +152,13 @@ export default function Home({ translations }) {
                     </div>
 
                     {/* Company Brief & Image */}
-                    <div className="mb-8 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2, margin: "-100px" }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-8 flex flex-col md:flex-row items-center gap-8 md:gap-16"
+                    >
                         <div className="w-full md:w-1/2 order-2 md:order-1">
                             <h3 className="text-2xl font-bold text-slate-900 mb-4">Building Excellence Since 2017</h3>
                             <p className="text-slate-600 leading-relaxed mb-4 text-base">
@@ -179,7 +186,7 @@ export default function Home({ translations }) {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Core Values */}
                     <div className="bg-slate-900 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden">
@@ -191,6 +198,10 @@ export default function Home({ translations }) {
                             {values.map((val, idx) => (
                                 <motion.div
                                     key={idx}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: false, amount: 0.2 }}
+                                    transition={{ duration: 0.5, delay: idx * 0.1 }}
                                     whileHover={{ y: -5 }}
                                     className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center"
                                 >
@@ -214,7 +225,14 @@ export default function Home({ translations }) {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6">
                         {capabilities.map((cap, idx) => (
-                            <div key={idx} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300">
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: false, amount: 0.2, margin: "-50px" }}
+                                transition={{ duration: 0.6, delay: idx * 0.2 }}
+                                className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300"
+                            >
                                 <div className="h-48 lg:h-40 overflow-hidden">
                                     <img src={cap.image} alt={cap.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 </div>
@@ -228,7 +246,7 @@ export default function Home({ translations }) {
                                         Learn more <ArrowRight size={14} />
                                     </a>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -252,6 +270,10 @@ export default function Home({ translations }) {
                         {products.map((prod, idx) => (
                             <motion.div
                                 key={idx}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: false, amount: 0.2 }}
+                                transition={{ duration: 0.8, delay: idx * 0.1 }}
                                 whileHover={{ scale: 1.02 }}
                                 className="relative rounded-2xl overflow-hidden group aspect-square bg-slate-800"
                             >
@@ -270,14 +292,27 @@ export default function Home({ translations }) {
             {/* --- NEWS SECTION --- */}
             <section id="news" className="py-24 bg-white">
                 <div className="container mx-auto px-6">
-                    <div className="text-center mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-16"
+                    >
                         <span className="text-blue-500 font-bold tracking-widest uppercase text-sm">Latest Updates</span>
                         <h2 className="text-4xl font-bold text-slate-900 mt-2">Company News</h2>
-                    </div>
+                    </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {news.map((item, index) => (
-                            <div key={index} className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer">
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: false, amount: 0.2 }}
+                                transition={{ duration: 0.6, delay: index * 0.2 }}
+                                className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer"
+                            >
                                 <div className="h-48 overflow-hidden relative">
                                     <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
@@ -289,7 +324,7 @@ export default function Home({ translations }) {
                                     <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
                                     <span className="text-blue-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">Read Article <ArrowRight size={14} /></span>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                     <div className="mt-12 text-center">
@@ -304,11 +339,23 @@ export default function Home({ translations }) {
 
             {/* --- DOWNLOAD TRANSITION --- */}
             <section className="py-16 bg-gradient-to-r from-blue-900 to-slate-900 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 1 }}
+                    className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"
+                ></motion.div>
                 <div className="absolute right-0 top-0 h-full w-1/3 bg-white/5 skew-x-12 blur-3xl"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 0.8 }}
+                        className="flex flex-col md:flex-row items-center justify-between gap-8"
+                    >
                         <div className="text-center md:text-left">
                             <h3 className="text-2xl font-bold text-white mb-2">Want to know more about us?</h3>
                             <p className="text-blue-200">Download our detailed profile and view our certifications.</p>
@@ -323,7 +370,7 @@ export default function Home({ translations }) {
                                 <span>Certifications (ISO/IATF)</span>
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -331,7 +378,13 @@ export default function Home({ translations }) {
             <section id="location" className="relative py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('/img/map-pattern.png')] opacity-10 bg-center bg-cover"></div>
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: false, amount: 0.2 }}
+                        transition={{ duration: 1 }}
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+                    >
                         <div>
                             <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Get in Touch</span>
                             <h2 className="text-4xl font-bold mt-2 mb-6">Connect with Us</h2>
@@ -408,7 +461,7 @@ export default function Home({ translations }) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
                 {/* Gradient Fade to Footer */}
                 <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#020617] pointer-events-none"></div>
