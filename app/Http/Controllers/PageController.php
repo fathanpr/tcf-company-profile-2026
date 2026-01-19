@@ -28,6 +28,21 @@ class PageController extends Controller
     {
         return Inertia::render('About/Facilities');
     }
+
+    public function salesGrowth()
+    {
+        return Inertia::render('Capabilities/SalesGrowth');
+    }
+
+    public function productionQuality()
+    {
+        return Inertia::render('Capabilities/ProductionQuality');
+    }
+
+    public function loadingCapacity()
+    {
+        return Inertia::render('Capabilities/LoadingCapacity');
+    }
     public function setLanguage($locale)
     {
         if (in_array($locale, ['en', 'id', 'ja'])) {

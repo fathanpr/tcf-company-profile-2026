@@ -262,11 +262,13 @@ export default function Home({ translations }) {
                         <div className="w-full md:w-1/2 relative order-1 md:order-2 flex justify-center">
                             <div className="absolute -top-4 -right-4 w-64 h-64 bg-slate-100 rounded-full blur-3xl -z-10"></div>
                             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 h-64 md:h-80 w-full md:w-auto aspect-video">
-                                <img
-                                    src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
-                                    alt="TCF Facility"
-                                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-                                />
+                                <iframe
+                                    className="w-full h-full rounded-3xl"
+                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                                    title="Company Profile Video"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
                         </div>
                     </motion.div>

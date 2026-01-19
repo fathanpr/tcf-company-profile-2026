@@ -8,7 +8,7 @@ export default function Navbar() {
     const { translations, locale } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
     const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
 
     useEffect(() => {
@@ -30,7 +30,15 @@ export default function Navbar() {
                 { name: 'Facilities', href: '/about/facilities' },
             ]
         },
-        { name: translations['Capabilities'] || 'Capabilities', href: '/#capabilities', type: 'scroll' },
+        {
+            name: translations['Capabilities'] || 'Capabilities',
+            type: 'dropdown',
+            children: [
+                { name: 'Sales & Growth', href: '/capabilities/sales-growth' },
+                { name: 'Production & Quality', href: '/capabilities/production-quality' },
+                { name: 'Loading Capacity', href: '/capabilities/loading-capacity' },
+            ]
+        },
         { name: translations['Product'] || 'Product', href: '/#product', type: 'scroll' },
         { name: translations['News'] || 'News', href: '/#news', type: 'scroll' },
         { name: translations['Connect with Us'] || 'Connect with Us', href: '/#location', type: 'scroll' },
@@ -111,8 +119,8 @@ export default function Navbar() {
                                 <div
                                     key={link.name}
                                     className="relative"
-                                    onMouseEnter={() => setAboutDropdownOpen(true)}
-                                    onMouseLeave={() => setAboutDropdownOpen(false)}
+                                    onMouseEnter={() => setOpenDropdown(link.name)}
+                                    onMouseLeave={() => setOpenDropdown(null)}
                                 >
                                     <button
                                         className={`flex items-center gap-1 text-sm font-bold uppercase tracking-wider relative group ${scrolled ? 'text-white' : 'text-white'} hover:text-orange-500 transition-colors duration-300`}
@@ -122,7 +130,7 @@ export default function Navbar() {
                                     </button>
 
                                     <AnimatePresence>
-                                        {aboutDropdownOpen && (
+                                        {openDropdown === link.name && (
                                             <motion.div
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
