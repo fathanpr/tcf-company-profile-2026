@@ -22,4 +22,8 @@ Route::middleware(['web'])->group(function () {
     // Products
     Route::get('/products', [PageController::class, 'products'])->name('products.index');
     Route::get('/products/{id}', [PageController::class, 'productDetail'])->name('products.show');
+
+    // News
+    Route::get('/news', [PageController::class, 'news'])->name('news.index');
+    Route::get('/news/{slug}', [PageController::class, 'newsDetail'])->name('news.show');
 });

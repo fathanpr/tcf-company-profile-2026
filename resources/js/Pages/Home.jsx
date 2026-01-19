@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home({ translations, customers, products: dynamicProducts }) {
+export default function Home({ translations, customers, products, news }) {
 
 
     // --- Data & State ---
@@ -58,26 +58,6 @@ export default function Home({ translations, customers, products: dynamicProduct
     ];
 
 
-    const news = [
-        {
-            category: 'Corporate',
-            date: 'Oct 24, 2025',
-            title: 'TCF Expands Production Capacity with New 500T Press Line',
-            image: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=600'
-        },
-        {
-            category: 'Sustainability',
-            date: 'Sep 12, 2025',
-            title: 'Achieving ISO 14001: Green Manufacturing Milestones',
-            image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600'
-        },
-        {
-            category: 'Innovation',
-            date: 'Aug 05, 2025',
-            title: 'Integrating AI-Driven Quality Control Systems',
-            image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=600'
-        }
-    ];
 
     const [[page, direction], setPage] = useState([0, 0]);
     const [itemsPerPage, setItemsPerPage] = useState(3);
@@ -396,7 +376,7 @@ export default function Home({ translations, customers, products: dynamicProduct
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {(dynamicProducts || []).map((prod, idx) => (
+                        {(products || []).map((prod, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0 }}
@@ -504,26 +484,34 @@ export default function Home({ translations, customers, products: dynamicProduct
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: false, amount: 0.2 }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                                className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer"
+                                className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group pointer-events-auto"
                             >
-                                <div className="h-48 overflow-hidden relative">
-                                    <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
-                                        {item.category}
+                                <Link href={route('news.show', item.slug)} className="block">
+                                    <div className="h-48 overflow-hidden relative">
+                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
+                                            {item.category}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="p-6">
-                                    <p className="text-xs text-slate-400 font-medium mb-3">{item.date}</p>
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{item.title}</h3>
-                                    <span className="text-blue-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">Read Article <ArrowRight size={14} /></span>
-                                </div>
+                                    <div className="p-6">
+                                        <p className="text-xs text-slate-400 font-medium mb-3">
+                                            {new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        </p>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2 min-h-[3.5rem]">{item.title}</h3>
+                                        <span className="text-orange-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">Read Article <ArrowRight size={14} /></span>
+                                    </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>
                     <div className="mt-12 text-center">
-                        <a href="#" className="inline-block px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold transition-colors">
-                            View All News
-                        </a>
+                        <Link
+                            href={route('news.index')}
+                            className="inline-flex items-center gap-2 px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold transition-all group"
+                        >
+                            More News
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
                     </div>
                 </div>
                 {/* Gradient to Slate-900 (Connect Section) */}

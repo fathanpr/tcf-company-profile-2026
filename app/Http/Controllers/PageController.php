@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Services\CustomerService;
 use App\Services\ProductService;
+use App\Services\NewsService;
 
 class PageController extends Controller
 {
     protected $customerService;
     protected $productService;
+    protected $newsService;
 
     /**
      * PageController constructor.
@@ -18,20 +20,24 @@ class PageController extends Controller
      */
     public function __construct(
         CustomerService $customerService,
-        ProductService $productService
+        ProductService $productService,
+        NewsService $newsService
     ) {
         $this->customerService = $customerService;
         $this->productService = $productService;
+        $this->newsService = $newsService;
     }
 
     public function home()
     {
         $customers = $this->customerService->getCustomerList(10);
         $products = $this->productService->getProductList(8); // Display 8 products on home
+        $news = $this->newsService->getLatestNews(3); // Latest 3 news for homepage
 
         return Inertia::render('Home', [
             'customers' => $customers->items(),
-            'products' => $products->items()
+            'products' => $products->items(),
+            'news' => $news
         ]);
     }
 
@@ -88,6 +94,40 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * News List Page
+     * Generate by Antigravity
+     */
+    public function news(Request $request)
+    {
+        $news = $this->newsService->getNewsList(
+            8, // 8 items per page
+            $request->input('search'),
+            $request->input('category')
+        );
+
+        return Inertia::render('News/Index', [
+            'news' => $news,
+            'filters' => $request->only(['search', 'category'])
+        ]);
+    }
+
+    /**
+     * News Detail Page
+     * Generate by Antigravity
+     */
+    public function newsDetail($slug)
+    {
+        $article = $this->newsService->getNewsBySlug($slug);
+
+        if (!$article) {
+            abort(404);
+        }
+
+        return Inertia::render('News/Detail', [
+            'article' => $article
+        ]);
+    }
 
 
     public function visionMission()
