@@ -96,7 +96,7 @@ export default function Detail({ article }) {
                                         {article.content}
                                     </div>
 
-                                    {/* Placeholder for more dynamic content/sections */}
+                                    {/* Share Section */}
                                     <div className="mt-16 p-8 bg-slate-50 rounded-[32px] border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white">
@@ -108,9 +108,17 @@ export default function Detail({ article }) {
                                             </div>
                                         </div>
                                         <div className="flex gap-2">
-                                            {['LinkedIn', 'Twitter', 'WhatsApp'].map((platform) => (
-                                                <button key={platform} className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all">
-                                                    {platform}
+                                            {[
+                                                { name: 'LinkedIn', url: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+                                                { name: 'Twitter', url: (url, title) => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}` },
+                                                { name: 'WhatsApp', url: (url, title) => `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}` }
+                                            ].map((platform) => (
+                                                <button
+                                                    key={platform.name}
+                                                    onClick={() => window.open(platform.url(window.location.href, article.title), '_blank')}
+                                                    className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all active:scale-95"
+                                                >
+                                                    {platform.name}
                                                 </button>
                                             ))}
                                         </div>
