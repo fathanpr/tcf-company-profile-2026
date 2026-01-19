@@ -44,7 +44,7 @@ export default function Customers({ customers, filters }) {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -52,12 +52,12 @@ export default function Customers({ customers, filters }) {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
                             <UserCheck className="w-4 h-4" />
                             Trusted Partnership
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our Valued <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Customers</span>
+                            Our Valued <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Customers</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
                             We are proud to serve industry leaders across the automotive and manufacturing sectors,
@@ -129,8 +129,7 @@ export default function Customers({ customers, filters }) {
                         ) : (
                             <motion.div
                                 key="empty"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                transition={{ duration: 1 }}
                                 className="flex flex-col items-center justify-center py-20 text-center"
                             >
                                 <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-300">

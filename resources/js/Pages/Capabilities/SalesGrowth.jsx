@@ -7,9 +7,9 @@ import Chart from 'react-apexcharts';
 
 export default function SalesGrowth() {
     const milestones = [
-        { year: "2024", title: "Building up Manufacturing Infrastructure", icon: <Globe className="text-white w-6 h-6" />, color: "bg-blue-600", textColor: "text-blue-600", desc: "Strengthening our foundation with state-of-the-art facilities." },
-        { year: "2025", title: "2nd Tier with 1st Tier Standard Operation", icon: <Home className="text-white w-6 h-6" />, color: "bg-indigo-600", textColor: "text-indigo-600", desc: "Elevating our operations to first-tier quality standards." },
-        { year: "2026", title: "Excellence Operation", icon: <Settings className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: "Achieving peak operational efficiency and reliability." },
+        { year: "2024", title: "Building up Manufacturing Infrastructure", icon: <Globe className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: "Strengthening our foundation with state-of-the-art facilities." },
+        { year: "2025", title: "2nd Tier with 1st Tier Standard Operation", icon: <Home className="text-white w-6 h-6" />, color: "bg-amber-600", textColor: "text-amber-600", desc: "Elevating our operations to first-tier quality standards." },
+        { year: "2026", title: "Excellence Operation", icon: <Settings className="text-white w-6 h-6" />, color: "bg-orange-500", textColor: "text-orange-500", desc: "Achieving peak operational efficiency and reliability." },
         { year: "2027", title: "Benchmark Factory in 2nd Tier", icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", textColor: "text-red-600", desc: "Setting the industry standard for second-tier manufacturers." },
         { year: "2028", title: "Building Focus Industry 4.0 and 5.0", icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", textColor: "text-purple-600", desc: "Integrating advanced robotics and smart technology." },
         { year: "2029", title: "Irreplaceable Supplier", icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", textColor: "text-yellow-600", desc: "Becoming a strategic, long-term partner for global leaders." },
@@ -58,7 +58,7 @@ export default function SalesGrowth() {
             borderColor: '#f1f5f9',
             strokeDashArray: 4
         },
-        colors: ['#3b82f6', '#f97316'],
+        colors: ['#f97316', '#fbbf24'],
         plotOptions: {
             bar: {
                 borderRadius: 8,
@@ -111,16 +111,26 @@ export default function SalesGrowth() {
             <Head title="Sales & Growth - PT Tri Centrum Fortuna" />
 
             {/* Hero Section */}
-            <div className="relative pt-24 pb-12 bg-slate-900 text-white overflow-hidden">
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="container mx-auto px-6 relative z-10 text-center">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Sales & Growth</h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto">
-                            Driving sustainable growth through innovation and strategic expansion.
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <TrendingUp className="w-4 h-4" />
+                            Future Growth
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            Sales & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Growth</span>
+                        </h1>
+                        <p className="text-slate-400 text-lg leading-relaxed">
+                            Driving sustainable growth through innovation and strategic expansion,
+                            committed to becoming the irreplaceable partner in the automotive sector.
                         </p>
                     </motion.div>
                 </div>
@@ -130,9 +140,9 @@ export default function SalesGrowth() {
             <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="max-w-xl mx-auto text-center mb-20">
-                        <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Strategic Roadmap</span>
+                        <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">Strategic Roadmap</span>
                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Target & Milestones</h2>
-                        <div className="w-20 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+                        <div className="w-20 h-1.5 bg-orange-600 mx-auto mt-4 rounded-full"></div>
                     </div>
 
                     {/* Desktop View: Polished Staircase (visible on Large screens) */}

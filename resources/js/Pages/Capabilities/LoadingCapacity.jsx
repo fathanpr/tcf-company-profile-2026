@@ -31,9 +31,9 @@ export default function LoadingCapacity() {
                 { small: 140, medium: 25, big: 12, total: 177 },
                 { small: 150, medium: 30, big: 15, total: 195 },
             ],
-            color: "text-blue-600",
-            bg: "bg-blue-50",
-            border: "border-blue-100"
+            color: "text-orange-600",
+            bg: "bg-orange-50",
+            border: "border-orange-100"
         }
     ];
 
@@ -73,7 +73,7 @@ export default function LoadingCapacity() {
             strokeDashArray: 4,
             padding: { left: 10, right: 10 }
         },
-        colors: ['#fbbf24', '#38bdf8', '#10b981', '#3b82f6', '#f97316', '#94a3b8'],
+        colors: ['#fbbf24', '#f59e0b', '#f97316', '#ea580c', '#d97706', '#94a3b8'],
         plotOptions: {
             bar: {
                 borderRadius: 4,
@@ -165,16 +165,26 @@ export default function LoadingCapacity() {
             <Head title="Loading Capacity - PT Tri Centrum Fortuna" />
 
             {/* Hero Section */}
-            <div className="relative pt-24 pb-12 bg-slate-900 text-white overflow-hidden">
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="container mx-auto px-6 relative z-10 text-center">
+                <div className="absolute top-0 left-0 find w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Loading Capacity</h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto">
-                            Strategic capacity planning across our manufacturing facilities to ensure on-time delivery for complex automotive projects.
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <Clock className="w-4 h-4" />
+                            Reliable Output
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            Loading <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Capacity</span>
+                        </h1>
+                        <p className="text-slate-400 text-lg leading-relaxed">
+                            Strategic capacity planning across our manufacturing facilities
+                            to ensure on-time delivery for complex automotive projects.
                         </p>
                     </motion.div>
                 </div>

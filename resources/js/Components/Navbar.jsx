@@ -89,7 +89,7 @@ export default function Navbar() {
 
     return (
         <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 group ${scrolled || isOpen
-            ? 'bg-[#172554]/95 backdrop-blur-md shadow-lg py-2'
+            ? 'bg-slate-900/95 backdrop-blur-md shadow-lg py-2'
             : 'bg-transparent py-3'
             }`}>
             <div className={`absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white/10 to-transparent transition-opacity duration-1000 ${scrolled ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'}`}></div>
@@ -199,7 +199,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.98 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="md:hidden absolute top-[100%] left-0 right-0 mx-4 mt-2 bg-[#172554]/90 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl overflow-hidden ring-1 ring-white/10"
+                        className="md:hidden absolute top-[100%] left-0 right-0 mx-4 mt-2 bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl overflow-hidden ring-1 ring-white/10"
                     >
                         <div className="px-4 pt-4 pb-6 max-h-[80vh] overflow-y-auto overflow-x-hidden relative h-full">
                             <AnimatePresence initial={false} mode="popLayout">

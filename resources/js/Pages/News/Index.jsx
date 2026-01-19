@@ -57,24 +57,30 @@ export default function Index({ news, filters }) {
             </Head>
 
             {/* Hero Section */}
-            <section className="pt-32 pb-20 bg-slate-900 border-b border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/5 blur-[120px] rounded-full"></div>
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="max-w-3xl"
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        <span className="text-blue-400 font-bold tracking-widest uppercase text-sm">Media Center</span>
-                        <h1 className="text-4xl md:text-6xl font-black text-white mt-4 mb-6 leading-tight">
-                            News & Insights
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <Calendar className="w-4 h-4" />
+                            Media Center
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            News & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Insights</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Discover the latest developments in precision stamping, automotive technology, and our journey as a leading manufacturing partner in Indonesia.
+                            Discover the latest developments in precision stamping, automotive technology,
+                            and our journey as a leading manufacturing partner in Indonesia.
                         </p>
                     </motion.div>
                 </div>
-            </section>
+            </div>
 
             {/* Content Section */}
             <section className="py-20 bg-white">
@@ -189,7 +195,7 @@ export default function Index({ news, filters }) {
                             {/* Categories */}
                             <div className="p-8 bg-slate-50 rounded-[32px] border border-slate-100">
                                 <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
-                                    <Tag className="w-5 h-5 text-blue-500" />
+                                    <Tag className="w-5 h-5 text-orange-500" />
                                     Categories
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
@@ -198,8 +204,8 @@ export default function Index({ news, filters }) {
                                             key={cat}
                                             onClick={() => setCategory(cat)}
                                             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${category === cat
-                                                ? 'bg-blue-600 border-blue-600 text-white shadow-md'
-                                                : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300'
+                                                ? 'bg-orange-600 border-orange-600 text-white shadow-md'
+                                                : 'bg-white border-slate-200 text-slate-600 hover:border-orange-300'
                                                 }`}
                                         >
                                             {cat}
@@ -209,15 +215,15 @@ export default function Index({ news, filters }) {
                             </div>
 
                             {/* Featured Banner/CTA */}
-                            <div className="p-8 bg-blue-600 rounded-[32px] text-white overflow-hidden relative group">
+                            <div className="p-8 bg-orange-600 rounded-[32px] text-white overflow-hidden relative group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-700"></div>
                                 <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">Need a professional manufacturing partner?</h4>
-                                <p className="text-blue-100 text-xs mb-8 relative z-10 leading-relaxed">
+                                <p className="text-orange-100 text-xs mb-8 relative z-10 leading-relaxed">
                                     Check our production capabilities and see how we can support your business with high-precision components.
                                 </p>
                                 <Link
-                                    href="/capabilities"
-                                    className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-xl font-bold text-xs hover:bg-slate-100 transition-all relative z-10"
+                                    href={route('capabilities.sales-growth')}
+                                    className="inline-flex items-center gap-2 bg-white text-orange-600 px-6 py-3 rounded-xl font-bold text-xs hover:bg-slate-100 transition-all relative z-10"
                                 >
                                     Our Capabilities
                                     <ChevronRight className="w-4 h-4" />

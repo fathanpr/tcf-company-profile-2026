@@ -137,16 +137,26 @@ export default function ProductionQuality() {
             <Head title="Production & Quality - PT Tri Centrum Fortuna" />
 
             {/* Hero Section */}
-            <div className="relative pt-24 pb-12 bg-slate-900 text-white overflow-hidden">
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="container mx-auto px-6 relative z-10 text-center">
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">Production & Quality</h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto">
-                            Precision engineering driven by automation and a relentless pursuit of zero-defect quality standards.
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <ShieldCheck className="w-4 h-4" />
+                            Precision & Reliability
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            Production & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Quality</span>
+                        </h1>
+                        <p className="text-slate-400 text-lg leading-relaxed">
+                            Precision engineering driven by automation and a relentless
+                            pursuit of zero-defect quality standards.
                         </p>
                     </motion.div>
                 </div>
@@ -156,7 +166,7 @@ export default function ProductionQuality() {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Industrial 4.0</span>
+                        <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">Industrial 4.0</span>
                         <h2 className="text-3xl font-bold text-slate-900 mt-2">Robotic Process Automation</h2>
                     </div>
 

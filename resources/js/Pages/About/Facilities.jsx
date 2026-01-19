@@ -21,7 +21,7 @@ const facilityData = {
             },
             {
                 category: "Welding & Assembly",
-                icon: <Users className="w-5 h-5 text-blue-500" />,
+                icon: <Users className="w-5 h-5 text-orange-500" />,
                 items: [
                     { name: "Robot Welding", details: "Automated Cells", count: "27 Cells" },
                     { name: "Spot Welding", details: "35kVA - 110kVA", count: "25 Units" },
@@ -46,7 +46,7 @@ const facilityData = {
         machines: [
             {
                 category: "Stamping Press",
-                icon: <Building2 className="w-5 h-5 text-blue-500" />,
+                icon: <Building2 className="w-5 h-5 text-orange-500" />,
                 items: [
                     { name: "Transfer Machine 1500T", details: "High Tonnage Transfer", count: "1 Unit" },
                     { name: "Progressive 200T - 600T", details: "Coil Feed Lines", count: "8 Units" },
@@ -115,19 +115,29 @@ export default function Facilities() {
                 document.body
             )}
 
-            <div className="relative pt-24 pb-12 bg-slate-900 text-white overflow-hidden">
+            {/* Hero Section */}
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="container mx-auto px-6 relative z-10 text-center">
-                    <motion.h1
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
+                    <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold mb-4"
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        Our Facilities
-                    </motion.h1>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
-                        Operating from strategic locations to serve our partners efficiently.
-                    </p>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <Building2 className="w-4 h-4" />
+                            Production Excellence
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Facilities</span>
+                        </h1>
+                        <p className="text-slate-400 text-lg leading-relaxed">
+                            Operating from strategic locations to serve our partners efficiently,
+                            equipped with high-precision machinery and automated systems.
+                        </p>
+                    </motion.div>
                 </div>
             </div>
 

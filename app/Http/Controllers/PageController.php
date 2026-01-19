@@ -31,7 +31,7 @@ class PageController extends Controller
     public function home()
     {
         $customers = $this->customerService->getCustomerList(10);
-        $products = $this->productService->getProductList(8); // Display 8 products on home
+        $products = $this->productService->getProductList(4); // Display 8 products on home
         $news = $this->newsService->getLatestNews(3); // Latest 3 news for homepage
 
         return Inertia::render('Home', [

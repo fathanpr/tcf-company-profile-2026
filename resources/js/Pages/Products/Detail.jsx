@@ -50,6 +50,7 @@ export default function Detail({ product }) {
 
             {/* Product Section */}
             <section className="pb-20 bg-slate-900 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
                 <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-orange-600/10 blur-[120px] rounded-full"></div>
 
                 <div className="container mx-auto px-6 relative z-10">

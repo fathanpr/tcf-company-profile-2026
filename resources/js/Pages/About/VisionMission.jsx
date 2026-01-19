@@ -8,19 +8,29 @@ export default function VisionMission() {
         <MainLayout title="Vision & Mission">
             <Head title="Vision & Mission - PT Tri Centrum Fortuna" />
 
-            <div className="relative pt-24 pb-12 bg-slate-900 text-white overflow-hidden">
+            {/* Hero Section */}
+            <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="container mx-auto px-6 relative z-10 text-center">
-                    <motion.h1
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+
+                <div className="container mx-auto px-6 relative z-10">
+                    <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold mb-4"
+                        className="max-w-3xl mx-auto text-center"
                     >
-                        Vision & Mission
-                    </motion.h1>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
-                        Our guiding principles and long-term goals for success.
-                    </p>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                            <Building2 className="w-4 h-4" />
+                            Our Identity
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                            Vision & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Mission</span>
+                        </h1>
+                        <p className="text-slate-400 text-lg leading-relaxed">
+                            Our guiding principles and long-term goals for success,
+                            committed to excellence in every component we manufacture.
+                        </p>
+                    </motion.div>
                 </div>
             </div>
 
@@ -51,8 +61,8 @@ export default function VisionMission() {
                                 viewport={{ once: true }}
                                 className="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm"
                             >
-                                <h3 className="text-2xl font-bold text-blue-900 mb-4 flex items-center gap-3">
-                                    <span className="w-2 h-8 bg-blue-600 rounded-full"></span>
+                                <h3 className="text-2xl font-bold text-orange-900 mb-4 flex items-center gap-3">
+                                    <span className="w-2 h-8 bg-orange-600 rounded-full"></span>
                                     VISI
                                 </h3>
                                 <p className="text-slate-700 font-medium italic">
