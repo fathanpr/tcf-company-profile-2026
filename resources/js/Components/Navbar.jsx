@@ -163,14 +163,14 @@ export default function Navbar() {
                             )
                         ))}
 
-                        <button
+                        {/* <button
                             onClick={toggleLanguage}
                             className={`flex items-center space-x-1 text-sm font-medium transition-colors text-white/90 hover:text-orange-500`}
                         >
                             <Globe className="w-4 h-4" />
                             <span className="uppercase">{locale}</span>
                             <ChevronDown className="w-3 h-3" />
-                        </button>
+                        </button> */}
                     </div>
 
                     {/* Mobile Menu Button */}

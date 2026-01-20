@@ -238,7 +238,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 h-64 md:h-80 w-full md:w-auto aspect-video">
                                 <iframe
                                     className="w-full h-full rounded-3xl"
-                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                                    src="https://www.youtube.com/embed/lmXWn3plQyE?si=tZr_OBtfJ9lxOkEy"
                                     title="Company Profile Video"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
@@ -542,14 +542,14 @@ export default function Home({ translations = {}, customers = [], products = [],
                             <p className="text-orange-200">Download our detailed profile and view our certifications.</p>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center">
-                            <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-orange-500/25 group">
+                            <a href="/files/TCF_Company_Profile_2026.pdf" download="TCF_Company_Profile_2026.pdf" className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-orange-500/25 group">
                                 <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                <span>Company Profile</span>
+                                <span>Download</span>
                             </a>
-                            <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/30 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm group">
+                            {/* <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/30 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm group">
                                 <Award className="w-5 h-5 text-orange-300 group-hover:scale-110 transition-transform" />
                                 <span>Certifications (ISO/IATF)</span>
-                            </a>
+                            </a> */}
                         </div>
                     </motion.div>
                 </div>
