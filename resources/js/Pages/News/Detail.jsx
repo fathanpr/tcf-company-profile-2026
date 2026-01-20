@@ -9,7 +9,8 @@ import {
     Share2,
     Tag,
     ChevronRight,
-    MessageSquare
+    MessageSquare,
+    Hash
 } from 'lucide-react';
 
 /**
@@ -22,6 +23,7 @@ export default function Detail({ article }) {
             <Head>
                 <title>{article.meta_title || article.title}</title>
                 <meta name="description" content={article.meta_description || article.excerpt} />
+                <meta name="keywords" content={article.meta_keywords || ''} />
                 <meta property="og:title" content={article.meta_title || article.title} />
                 <meta property="og:description" content={article.meta_description || article.excerpt} />
                 <meta property="og:image" content={article.image} />
@@ -92,9 +94,15 @@ export default function Detail({ article }) {
                                         {article.excerpt}
                                     </p>
 
-                                    <div className="text-slate-700 leading-relaxed whitespace-pre-line text-lg">
-                                        {article.content}
-                                    </div>
+                                    <div
+                                        className="text-slate-700 leading-relaxed text-lg 
+                                            [&>p]:mb-6 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-slate-900 [&>h2]:mb-4 [&>h2]:mt-8
+                                            [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mb-3 [&>h3]:mt-6
+                                            [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-6 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-6
+                                            [&>li]:mb-2 [&>blockquote]:border-l-4 [&>blockquote]:border-orange-500 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:mb-6
+                                            [&>a]:text-orange-600 [&>a]:underline hover:[&>a]:text-orange-700"
+                                        dangerouslySetInnerHTML={{ __html: article.content }}
+                                    />
 
                                     {/* Share Section */}
                                     <div className="mt-16 p-8 bg-slate-50 rounded-[32px] border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -149,7 +157,7 @@ export default function Detail({ article }) {
                                         </div>
                                         <div>
                                             <p className="text-xs text-slate-400">Reading Time</p>
-                                            <p className="text-sm font-bold text-slate-900">Approx. 5-7 Minutes</p>
+                                            <p className="text-sm font-bold text-slate-900">{article.reading_time ? `${article.reading_time} Minutes` : 'Approx. 5-7 Minutes'}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -163,6 +171,26 @@ export default function Detail({ article }) {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Tags Section */}
+                            {article.tags && article.tags.length > 0 && (
+                                <div className="p-8 bg-white rounded-[32px] border border-slate-100 shadow-sm">
+                                    <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                                        <Hash className="w-4 h-4 text-orange-500" />
+                                        Related Tags
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {article.tags.split(',').map((tag, index) => (
+                                            <span
+                                                key={index}
+                                                className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-bold rounded-lg border border-slate-100 hover:border-orange-200 hover:text-orange-600 transition-colors cursor-default"
+                                            >
+                                                #{tag.trim()}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Related Links / CTA */}
                             <div className="p-8 bg-slate-900 rounded-[32px] text-white relative overflow-hidden group">
@@ -194,7 +222,7 @@ export default function Detail({ article }) {
 
                     </div>
                 </div>
-            </section>
-        </MainLayout>
+            </section >
+        </MainLayout >
     );
 }

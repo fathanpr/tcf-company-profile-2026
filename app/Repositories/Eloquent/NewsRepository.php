@@ -50,4 +50,50 @@ class NewsRepository implements NewsRepositoryInterface
     {
         return $this->model->published()->latest('published_at')->limit($limit)->get();
     }
+
+    /**
+     * Admin methods
+     * Generate by Antigravity
+     */
+    public function getAllPaginated($perPage = 10, $search = null)
+    {
+        $query = $this->model->latest();
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('excerpt', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->paginate($perPage)->withQueryString();
+    }
+
+    public function findById($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    public function create(array $data)
+    {
+        return $this->model->create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        $news = $this->findById($id);
+        $news->update($data);
+        return $news;
+    }
+
+    public function delete($id)
+    {
+        $news = $this->findById($id);
+        return $news->delete();
+    }
+
+    public function getCategories()
+    {
+        return $this->model->select('category')->distinct()->pluck('category');
+    }
 }

@@ -22,6 +22,9 @@ class News extends Model
         'image',
         'meta_title',
         'meta_description',
+        'meta_keywords',
+        'tags',
+        'reading_time',
         'is_published',
         'published_at',
     ];

@@ -196,7 +196,7 @@ export default function Customers({ customers, filters }) {
                                 </p>
                             </div>
                             <Link
-                                href="/contact"
+                                href="/#location"
                                 className="px-8 py-4 bg-white text-blue-600 font-black rounded-2xl hover:bg-blue-50 transition-colors shadow-xl"
                             >
                                 Contact Sales Team

@@ -4,8 +4,7 @@ import { Menu, X, Globe, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-r
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
-    const { props } = usePage();
-    const { translations, locale } = props;
+    const { translations = {}, locale } = usePage().props;
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);

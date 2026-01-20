@@ -2,6 +2,7 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { Users } from 'lucide-react';
 
 const OrgCard = ({ name, title, highlight = false, image }) => (
     <motion.div

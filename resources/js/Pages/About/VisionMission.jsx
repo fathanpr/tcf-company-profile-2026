@@ -2,6 +2,7 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { Building2 } from 'lucide-react';
 
 export default function VisionMission() {
     return (

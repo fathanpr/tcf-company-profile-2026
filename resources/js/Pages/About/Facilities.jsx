@@ -8,7 +8,7 @@ import Modal from '@/Components/Modal';
 
 const facilityData = {
     purwakarta: {
-        layout: '/img/facilities/purwakarta-layout.png',
+        layout: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1200',
         machines: [
             {
                 category: "Stamping Press",
@@ -42,7 +42,7 @@ const facilityData = {
         ]
     },
     karawang: {
-        layout: '/img/facilities/karawang-layout.png',
+        layout: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=1200',
         machines: [
             {
                 category: "Stamping Press",

@@ -32,6 +32,15 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
+     * Get paginated records.
+     * Generate by Antigravity
+     */
+    public function paginate($perPage = 10, $search = null)
+    {
+        return $this->model->latest()->paginate($perPage);
+    }
+
+    /**
      * Find a record by ID.
      * Generate by Antigravity
      */

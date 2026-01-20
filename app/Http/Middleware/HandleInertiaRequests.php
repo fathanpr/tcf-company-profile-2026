@@ -32,13 +32,17 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user() ? [
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    'roles' => $request->user()->getRoleNames(),
+                    'permissions' => $request->user()->getAllPermissions()->pluck('name'),
+                ] : null,
             ],
-            'locale' => app()->getLocale(),
-            'translations' => json_decode(file_get_contents(resource_path('lang/' . app()->getLocale() . '.json')), true) ?? [],
-            'ziggy' => fn() => [
-                ...(new \Tighten\Ziggy\Ziggy)->toArray(),
-                'location' => $request->url(),
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
             ],
         ];
     }

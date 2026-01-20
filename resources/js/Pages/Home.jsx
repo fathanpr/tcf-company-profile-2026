@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home({ translations, customers, products, news }) {
+export default function Home({ translations = {}, customers = [], products = [], news = [] }) {
 
 
     // --- Data & State ---
@@ -386,7 +386,7 @@ export default function Home({ translations, customers, products, news }) {
                                 whileHover={{ scale: 1.02 }}
                                 className="relative rounded-2xl overflow-hidden group aspect-square bg-slate-800"
                             >
-                                <Link href={route('products.show', prod.encrypted_id)}>
+                                <Link href={route('products.detail', prod.encrypted_id)}>
                                     <img src={prod.main_image?.startsWith('http') ? prod.main_image : `/${prod.main_image}`} alt={prod.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
                                         <span className="font-bold text-white tracking-wide">{prod.name}</span>
@@ -486,7 +486,7 @@ export default function Home({ translations, customers, products, news }) {
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
                                 className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group pointer-events-auto"
                             >
-                                <Link href={route('news.show', item.slug)} className="block">
+                                <Link href={route('news.detail', item.slug)} className="block">
                                     <div className="h-48 overflow-hidden relative">
                                         <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
@@ -557,13 +557,12 @@ export default function Home({ translations, customers, products, news }) {
 
             {/* --- LOCATION SECTION --- */}
             <section id="location" className="relative py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-900 text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/img/map-pattern.png')] opacity-10 bg-center bg-cover"></div>
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: false, amount: 0.2 }}
-                        transition={{ duration: 1 }}
                         transition={{ duration: 1 }}
                         className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
                     >

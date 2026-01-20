@@ -125,7 +125,7 @@ export default function Index({ news, filters }) {
                                                     </span>
                                                 </div>
 
-                                                <Link href={route('news.show', article.slug)}>
+                                                <Link href={route('news.detail', article.slug)}>
                                                     <h2 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight">
                                                         {article.title}
                                                     </h2>
@@ -136,7 +136,7 @@ export default function Index({ news, filters }) {
                                                 </p>
 
                                                 <Link
-                                                    href={route('news.show', article.slug)}
+                                                    href={route('news.detail', article.slug)}
                                                     className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:translate-x-2 transition-transform"
                                                 >
                                                     Read Full Article

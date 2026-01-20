@@ -2,8 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
-    const { props } = usePage();
-    const { translations } = props;
+    const { translations = {} } = usePage().props;
 
     return (
         <footer className="bg-[#020617] text-white pt-16 pb-8">

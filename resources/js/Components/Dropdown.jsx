@@ -4,11 +4,14 @@ import { createContext, useContext, useState } from 'react';
 
 const DropDownContext = createContext();
 
-const Dropdown = ({ children }) => {
-    const [open, setOpen] = useState(false);
+const Dropdown = ({ children, open: controlledOpen, setOpen: setControlledOpen }) => {
+    const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+
+    const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
+    const setOpen = setControlledOpen !== undefined ? setControlledOpen : setUncontrolledOpen;
 
     const toggleOpen = () => {
-        setOpen((previousState) => !previousState);
+        setOpen(!open);
     };
 
     return (
@@ -39,6 +42,7 @@ const Content = ({
     align = 'right',
     width = '48',
     contentClasses = 'py-1 bg-white',
+    direction = 'down', // 'up' or 'down'
     children,
 }) => {
     const { open, setOpen } = useContext(DropDownContext);
@@ -57,6 +61,17 @@ const Content = ({
         widthClasses = 'w-48';
     }
 
+    let directionClasses = 'mt-2';
+    if (direction === 'up') {
+        directionClasses = 'bottom-full mb-2 origin-bottom';
+        // Override alignment origin for up direction if needed, but usually origin-bottom is enough
+        if (align === 'left') {
+            alignmentClasses = 'ltr:origin-bottom-left rtl:origin-bottom-right start-0';
+        } else if (align === 'right') {
+            alignmentClasses = 'ltr:origin-bottom-right rtl:origin-bottom-left end-0';
+        }
+    }
+
     return (
         <>
             <Transition
@@ -69,7 +84,7 @@ const Content = ({
                 leaveTo="opacity-0 scale-95"
             >
                 <div
-                    className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
+                    className={`absolute z-50 rounded-md shadow-lg ${directionClasses} ${alignmentClasses} ${widthClasses}`}
                     onClick={() => setOpen(false)}
                 >
                     <div

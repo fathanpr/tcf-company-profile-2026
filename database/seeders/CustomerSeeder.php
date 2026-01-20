@@ -56,7 +56,7 @@ class CustomerSeeder extends Seeder
         foreach ($customers as $customer) {
             Customer::create([
                 'name' => $customer['name'],
-                'logo' => 'img/tcf-logo.png', // Default logo as requested
+                'logo' => '/img/tcf-logo.png', // Default logo as requested
                 'is_active' => true
             ]);
         }
