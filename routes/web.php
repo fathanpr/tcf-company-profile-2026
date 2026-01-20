@@ -23,7 +23,7 @@ Route::get('/capabilities/production-quality', fn() => Inertia::render('Capabili
 Route::get('/capabilities/loading-capacity', fn() => Inertia::render('Capabilities/LoadingCapacity'))->name('capabilities.loading-capacity');
 
 Route::get('/products', [PageController::class, 'products'])->name('products.index');
-Route::get('/products/{id}', [PageController::class, 'productDetail'])->name('products.detail');
+Route::get('/products/{slug}', [PageController::class, 'productDetail'])->name('products.detail');
 
 Route::get('/news', [PageController::class, 'news'])->name('news.index');
 Route::get('/news/{slug}', [PageController::class, 'newsDetail'])->name('news.detail');
@@ -46,6 +46,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('customers', CustomerController::class);
         Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
+
+        // API Documentation (Superuser only)
+        Route::get('api-docs', [\App\Http\Controllers\Admin\ApiDocsController::class, 'index'])
+            ->name('api-docs.index')
+            ->middleware('can:view api-docs');
     });
 });
 

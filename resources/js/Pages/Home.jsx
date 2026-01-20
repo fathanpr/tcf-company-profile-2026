@@ -386,7 +386,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                 whileHover={{ scale: 1.02 }}
                                 className="relative rounded-2xl overflow-hidden group aspect-square bg-slate-800"
                             >
-                                <Link href={route('products.detail', prod.encrypted_id)}>
+                                <Link href={route('products.detail', prod.slug)}>
                                     <img src={prod.main_image?.startsWith('http') ? prod.main_image : `/${prod.main_image}`} alt={prod.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
                                         <span className="font-bold text-white tracking-wide">{prod.name}</span>

@@ -46,4 +46,16 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         return $this->model->with(['customer', 'images'])->findOrFail($id);
     }
+
+    /**
+     * Get product by slug with full relations
+     * Generate by Antigravity
+     */
+    public function getBySlugWithRelations($slug)
+    {
+        return $this->model->where('slug', $slug)
+            ->active()
+            ->with(['customer', 'images'])
+            ->firstOrFail();
+    }
 }

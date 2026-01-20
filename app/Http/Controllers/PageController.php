@@ -75,15 +75,9 @@ class PageController extends Controller
      * Product Detail Page
      * Generate by Antigravity
      */
-    public function productDetail($id)
+    public function productDetail($slug)
     {
-        $realId = \App\Models\Product::decryptId($id);
-
-        if (!$realId) {
-            abort(404);
-        }
-
-        $product = $this->productService->getProductDetail($realId);
+        $product = $this->productService->getProductBySlug($slug);
 
         if (!$product) {
             abort(404);

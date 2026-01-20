@@ -42,10 +42,14 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:products,slug',
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
             'main_image' => 'nullable|string',
             'is_active' => 'boolean',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+            'meta_keywords' => 'nullable|string|max:255',
         ]);
 
         $this->service->createProduct($request->all());
@@ -66,10 +70,14 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:products,slug,' . $id,
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
             'main_image' => 'nullable|string',
             'is_active' => 'boolean',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+            'meta_keywords' => 'nullable|string|max:255',
         ]);
 
         $this->service->updateProduct($id, $request->all());

@@ -4,17 +4,61 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
     use HasFactory;
 
+    /**
+     * Boot the model.
+     * Generate by Antigravity
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            if (empty($product->slug)) {
+                $product->slug = static::generateUniqueSlug($product->name);
+            }
+        });
+
+        static::updating(function ($product) {
+            if ($product->isDirty('name') && empty($product->slug)) {
+                $product->slug = static::generateUniqueSlug($product->name);
+            }
+        });
+    }
+
+    /**
+     * Generate a unique slug for the product.
+     * Generate by Antigravity
+     */
+    public static function generateUniqueSlug($name)
+    {
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
+
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'customer_id',
         'main_image',
         'is_active',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
 
     /**

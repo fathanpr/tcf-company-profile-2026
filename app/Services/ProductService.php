@@ -41,6 +41,15 @@ class ProductService extends BaseService
     }
 
     /**
+     * Get product detail by slug
+     * Generate by Antigravity
+     */
+    public function getProductBySlug($slug)
+    {
+        return $this->repository->getBySlugWithRelations($slug);
+    }
+
+    /**
      * Admin methods
      * Generate by Antigravity
      */

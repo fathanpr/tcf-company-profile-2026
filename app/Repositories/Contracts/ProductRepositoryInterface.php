@@ -10,4 +10,5 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface
 {
     public function getPaginatedActive($limit = 10, $search = null);
     public function getByIdWithRelations($id);
+    public function getBySlugWithRelations($slug);
 }

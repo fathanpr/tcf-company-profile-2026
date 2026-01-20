@@ -33,7 +33,16 @@ export default function Detail({ product }) {
 
     return (
         <MainLayout title={product.name}>
-            <Head title={`${product.name} - PT Tri Centrum Fortuna`} />
+            <Head>
+                <title>{product.meta_title || `${product.name} - PT Tri Centrum Fortuna`}</title>
+                <meta name="description" content={product.meta_description || product.description} />
+                <meta name="keywords" content={product.meta_keywords || ''} />
+                <meta property="og:title" content={product.meta_title || product.name} />
+                <meta property="og:description" content={product.meta_description || product.description} />
+                <meta property="og:image" content={product.main_image} />
+                <meta property="og:type" content="product" />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Breadcrumb / Back Navigation */}
             <div className="pt-32 pb-6 bg-slate-900">

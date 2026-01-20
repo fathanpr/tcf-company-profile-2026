@@ -28,6 +28,7 @@ class RoleAndPermissionSeeder extends Seeder
             'manage products',
             'manage roles',
             'view logs',
+            'view api-docs',
         ];
 
         foreach ($permissions as $permission) {

@@ -144,7 +144,7 @@ export default function Index({ products, filters }) {
 
                                             <div className="mt-auto">
                                                 <Link
-                                                    href={route('products.detail', product.encrypted_id)}
+                                                    href={route('products.detail', product.slug)}
                                                     className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:text-orange-600 transition-all"
                                                 >
                                                     View Details

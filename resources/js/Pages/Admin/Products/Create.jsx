@@ -12,10 +12,14 @@ import SearchableSelect from '@/Components/SearchableSelect';
 export default function Create({ customers }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
+        slug: '',
         customer_id: '',
         description: '',
         main_image: '',
         is_active: true,
+        meta_title: '',
+        meta_description: '',
+        meta_keywords: '',
     });
 
     const submit = (e) => {
@@ -27,7 +31,6 @@ export default function Create({ customers }) {
 
     return (
         <AdminLayout title="Add New Product">
-// ... existing layout code ...
             <Head title="Add Product - Admin TCF" />
 
             <div className="max-w-2xl">
@@ -119,10 +122,76 @@ export default function Create({ customers }) {
                                     className="w-5 h-5 rounded text-orange-600 focus:ring-orange-500"
                                 />
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-700 font-bold">Active Status</span>
+                                    <span className="text-sm font-bold text-slate-700">Active Status</span>
                                     <span className="text-xs text-slate-500">Show this product on the public catalog.</span>
                                 </div>
                             </label>
+                        </div>
+
+                        {/* SEO Optimization */}
+                        <div className="pt-6 border-t border-slate-100 space-y-6">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+                                    <ChevronLeft className="w-5 h-5 rotate-180" />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-black text-slate-800 uppercase tracking-widest">SEO Optimization</h4>
+                                    <p className="text-[10px] text-slate-500 font-bold">Improve search engine visibility.</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Slug */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">URL Slug</label>
+                                    <input
+                                        type="text"
+                                        value={data.slug}
+                                        onChange={e => setData('slug', e.target.value)}
+                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.slug ? 'ring-2 ring-red-500' : ''}`}
+                                        placeholder="e.g. door-frame-component (Leave blank for auto)"
+                                    />
+                                    <p className="text-[10px] text-slate-400 font-bold italic">* Leave blank to automatically generate from product name</p>
+                                    {errors.slug && <p className="text-xs font-bold text-red-500 mt-1">{errors.slug}</p>}
+                                </div>
+
+                                {/* Meta Title */}
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Title</label>
+                                    <input
+                                        type="text"
+                                        value={data.meta_title}
+                                        onChange={e => setData('meta_title', e.target.value)}
+                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.meta_title ? 'ring-2 ring-red-500' : ''}`}
+                                        placeholder="SEO Title"
+                                    />
+                                    {errors.meta_title && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_title}</p>}
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Keywords</label>
+                                <input
+                                    type="text"
+                                    value={data.meta_keywords}
+                                    onChange={e => setData('meta_keywords', e.target.value)}
+                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.meta_keywords ? 'ring-2 ring-red-500' : ''}`}
+                                    placeholder="keyword1, keyword2, keyword3"
+                                />
+                                {errors.meta_keywords && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_keywords}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Description</label>
+                                <textarea
+                                    value={data.meta_description}
+                                    onChange={e => setData('meta_description', e.target.value)}
+                                    rows="2"
+                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all resize-none ${errors.meta_description ? 'ring-2 ring-red-500' : ''}`}
+                                    placeholder="Brief SEO description..."
+                                ></textarea>
+                                {errors.meta_description && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_description}</p>}
+                            </div>
                         </div>
 
                         <div className="pt-6">

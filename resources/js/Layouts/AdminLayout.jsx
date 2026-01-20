@@ -12,7 +12,8 @@ import {
     LogOut,
     User as UserIcon,
     ChevronRight,
-    Building2
+    Building2,
+    FileJson
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ModernAlert from '@/Components/ModernAlert';
@@ -102,11 +103,25 @@ export default function AdminLayout({ children, title }) {
             permission: 'view logs',
             active: route().current('admin.activity-logs.*')
         },
+        {
+            name: 'API Docs',
+            href: route('admin.api-docs.index'),
+            icon: FileJson,
+            permission: 'view api-docs',
+            active: route().current('admin.api-docs.*')
+        },
     ];
 
-    const filteredNavigation = navigation.filter(item =>
-        !item.permission || userPermissions.includes(item.permission)
-    );
+    const userRoles = auth.user.roles || [];
+
+    const filteredNavigation = navigation.filter(item => {
+        if (item.roles) {
+            return item.roles.some(role =>
+                userRoles.some(userRole => userRole.toLowerCase() === role.toLowerCase())
+            );
+        }
+        return !item.permission || userPermissions.includes(item.permission);
+    });
 
     return (
         <div className="min-h-screen bg-slate-50 flex overflow-hidden">
@@ -139,7 +154,7 @@ export default function AdminLayout({ children, title }) {
                     </div>
 
                     {/* Navigation */}
-                    <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+                    <nav className="flex-1 overflow-y-auto custom-scrollbar py-6 px-4 space-y-1">
                         {filteredNavigation.map((item) => (
                             <Link
                                 key={item.name}

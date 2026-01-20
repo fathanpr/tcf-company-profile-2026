@@ -253,7 +253,7 @@ export default function Facilities() {
                 </div>
             </section>
 
-            <Modal show={showModal} onClose={() => setShowModal(false)} maxWidth="7xl" closeable={!previewImage}>
+            <Modal show={showModal} onClose={() => setShowModal(false)} maxWidth="5xl" closeable={!previewImage}>
                 {currentData && (
                     <ContainerModal
                         activePlant={activePlant}
@@ -268,82 +268,87 @@ export default function Facilities() {
 }
 
 const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => (
-    <div className="p-4 md:p-8">
-        <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-6">
+    <div className="flex flex-col h-full h-screen">
+        {/* Sticky Header */}
+        <div className="flex justify-between items-center p-6 md:p-8 border-b border-slate-100 bg-white sticky top-0 z-20">
             <div>
-                <h3 className="text-3xl font-bold text-slate-900">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
                     {activePlant === 'purwakarta' ? 'Plant Purwakarta' : 'Plant Karawang'}
                 </h3>
-                <p className="text-slate-500 mt-1">Detailed Facility & Equipment Overview</p>
+                <p className="text-slate-500 text-sm mt-1">Detailed Facility & Equipment Overview</p>
             </div>
-            <button onClick={() => setShowModal(false)} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600">
+            <button
+                onClick={() => setShowModal(false)}
+                className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600 focus:outline-none"
+            >
                 <span className="sr-only">Close</span>
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="h-6 w-6" />
             </button>
         </div>
 
-        <div className="space-y-12">
-            {/* Layout Section */}
-            <div>
-                <h4 className={`font-bold text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
-                    <Building2 className="w-6 h-6" />
-                    Factory Layout
-                </h4>
-                <div
-                    className="bg-slate-50 rounded-2xl p-2 border border-slate-200 cursor-zoom-in group relative overflow-hidden transition-all hover:shadow-md hover:border-slate-300"
-                    onClick={() => onPreviewImage(data.layout)}
-                >
-                    <div className="h-48 md:h-64 overflow-hidden rounded-xl relative">
-                        <img
-                            src={data.layout}
-                            alt={`${activePlant} layout`}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
-                            <span className="bg-white/90 text-slate-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                <Maximize2 className="w-4 h-4" />
-                                View Full Screen
-                            </span>
+        {/* Scrollable Body */}
+        <div className="flex-grow overflow-y-auto p-6 md:p-8 custom-scrollbar">
+            <div className="space-y-12">
+                {/* Layout Section */}
+                <div>
+                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                        <Building2 className="w-6 h-6" />
+                        Factory Layout
+                    </h4>
+                    <div
+                        className="bg-slate-50 rounded-2xl p-2 border border-slate-200 cursor-zoom-in group relative overflow-hidden transition-all hover:shadow-md hover:border-slate-300"
+                        onClick={() => onPreviewImage(data.layout)}
+                    >
+                        <div className="h-48 md:h-64 overflow-hidden rounded-xl relative">
+                            <img
+                                src={data.layout}
+                                alt={`${activePlant} layout`}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
+                                <span className="bg-white/90 text-slate-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <Maximize2 className="w-4 h-4" />
+                                    View Full Screen
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Production Facilities Grid */}
-            <div>
-                <h4 className={`font-bold text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
-                    <Users className="w-6 h-6" />
-                    Production Facilities & Equipment
-                </h4>
+                {/* Production Facilities Grid */}
+                <div>
+                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                        <Users className="w-6 h-6" />
+                        Production Facilities & Equipment
+                    </h4>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {data.machines.map((category, idx) => (
-                        <div key={idx} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                            <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center gap-3">
-                                <div className="p-2 bg-white rounded-lg shadow-sm">
-                                    {category.icon}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {data.machines.map((category, idx) => (
+                            <div key={idx} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
+                                <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center gap-3">
+                                    <div className="p-2 bg-white rounded-lg shadow-sm">
+                                        {category.icon}
+                                    </div>
+                                    <h5 className="font-bold text-slate-800">{category.category}</h5>
                                 </div>
-                                <h5 className="font-bold text-slate-800">{category.category}</h5>
+                                <div className="p-6">
+                                    <ul className="space-y-4">
+                                        {category.items.map((item, i) => (
+                                            <li key={i} className="flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0">
+                                                <div>
+                                                    <p className="font-bold text-slate-900 text-sm">{item.name}</p>
+                                                    <p className="text-xs text-slate-500">{item.details}</p>
+                                                </div>
+                                                <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">
+                                                    {item.count}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
-                            <div className="p-6">
-                                <ul className="space-y-4">
-                                    {category.items.map((item, i) => (
-                                        <li key={i} className="flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0">
-                                            <div>
-                                                <p className="font-bold text-slate-900 text-sm">{item.name}</p>
-                                                <p className="text-xs text-slate-500">{item.details}</p>
-                                            </div>
-                                            <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">
-                                                {item.count}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

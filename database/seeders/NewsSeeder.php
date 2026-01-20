@@ -75,36 +75,6 @@ class NewsSeeder extends Seeder
                 'excerpt' => 'Understanding the integration of two core manufacturing methods for complex structural assemblies.',
                 'image' => 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop',
             ],
-            [
-                'title' => 'TCF Presence at International Manufacturing Expo',
-                'category' => 'Events',
-                'excerpt' => 'Showcasing our precision capabilities to global stakeholders at the annual industry summit.',
-                'image' => 'https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?q=80&w=2070&auto=format&fit=crop',
-            ],
-            [
-                'title' => 'Innovating for Safety: Structural Reinforcements',
-                'category' => 'Technical',
-                'excerpt' => 'How our stamped parts contribute to the 5-star crash test ratings of modern vehicles.',
-                'image' => 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070&auto=format&fit=crop',
-            ],
-            [
-                'title' => 'Manufacturing Resilience in the Post-Pandemic Era',
-                'category' => 'Business',
-                'excerpt' => 'Adapting supply chains and production schedules for better stability and reliability.',
-                'image' => 'https://images.unsplash.com/photo-1553034114-1681284d720b?q=80&w=2070&auto=format&fit=crop',
-            ],
-            [
-                'title' => 'Annual Community Health Day 2025',
-                'category' => 'CSR',
-                'excerpt' => 'TCF provides medical check-ups and nutritional support for 500 residents near our factory area.',
-                'image' => 'https://images.unsplash.com/photo-1505751172107-160682046481?q=80&w=2070&auto=format&fit=crop',
-            ],
-            [
-                'title' => 'Precision Die Maintenance: Ensuring Longevity',
-                'category' => 'Technical',
-                'excerpt' => 'The science behind maintaining stamping dies for consistent part quality over millions of cycles.',
-                'image' => 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2070&auto=format&fit=crop',
-            ],
         ];
 
         foreach ($news as $item) {
