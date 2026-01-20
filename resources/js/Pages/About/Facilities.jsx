@@ -8,7 +8,7 @@ import Modal from '@/Components/Modal';
 
 const facilityData = {
     purwakarta: {
-        layout: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1200',
+        layout: '/img/facilities/tcfsg-layout.png',
         machines: [
             {
                 category: "Stamping Press",
@@ -42,7 +42,7 @@ const facilityData = {
         ]
     },
     karawang: {
-        layout: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=1200',
+        layout: '/img/facilities/tcfkg-layout.png',
         machines: [
             {
                 category: "Stamping Press",
@@ -154,7 +154,7 @@ export default function Facilities() {
                         >
                             <div className="h-64 overflow-hidden relative flex-shrink-0">
                                 <img
-                                    src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
+                                    src="/img/plant/tcfsg.jpeg"
                                     alt="Plant Purwakarta"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
@@ -195,7 +195,7 @@ export default function Facilities() {
                         >
                             <div className="h-64 overflow-hidden relative flex-shrink-0">
                                 <img
-                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+                                    src="/img/plant/tcfkg.jpeg"
                                     alt="Plant Karawang"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 />

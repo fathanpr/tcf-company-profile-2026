@@ -106,10 +106,10 @@ export default function Home({ translations = {}, customers = [], products = [],
     const [currentHero, setCurrentHero] = useState(0);
 
     const heroImages = [
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920",
-        "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=1920", // Automotive Stamping
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1920", // Welding
-        "https://images.unsplash.com/photo-1531297461136-82lw8e41f5e8?auto=format&fit=crop&q=80&w=1920", // Tech/Robotics
+        "/img/plant/tcfkg.jpeg",
+        "/img/plant/tcfsg.jpeg", // Automotive Stamping
+        "/img/plant/tcfkg.jpeg",
+        "/img/plant/tcfsg.jpeg", // Automotive Stamping
     ];
 
     React.useEffect(() => {
@@ -570,7 +570,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                             <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Get in Touch</span>
                             <h2 className="text-4xl font-bold mt-2 mb-6">Connect with Us</h2>
                             <p className="text-slate-400 text-base mb-8 leading-relaxed">
-                                Strategically located in KIIC Karawang, our facility is equipped with modern infrastructure to support efficient logistics and production.
+                                Strategically located in KIM Karawang, our facility is equipped with modern infrastructure to support efficient logistics and production.
                             </p>
 
                             <div className="space-y-4">
@@ -581,7 +581,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Head Office & Factory</h4>
                                         <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
-                                            Jl. Harapan Raya Lot 6-8, Karawang International Industrial City (KIIC), Karawang 41361, West Java, Indonesia
+                                            Jl. Mitra Raya II Blok F-7-8, Kabupaten Karawang 41363
                                         </p>
                                     </div>
                                 </div>
@@ -591,7 +591,16 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Phone</h4>
-                                        <p className="text-slate-400 text-xs">+62 267 1234567</p>
+                                        <p className="text-slate-400 text-xs">(+62-264) 83891000</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                        <Phone className="text-orange-400 w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-white text-sm mb-1">Phone</h4>
+                                        <p className="text-slate-400 text-xs">(+62-267) 8638008</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
@@ -600,7 +609,16 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Email</h4>
-                                        <p className="text-slate-400 text-xs">info@tricentrumfortuna.com</p>
+                                        <p className="text-slate-400 text-xs">sales.kg@tricentrumfortuna.com</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                        <Mail className="text-green-400 w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-white text-sm mb-1">Email</h4>
+                                        <p className="text-slate-400 text-xs">sales.sg@tricentrumfortuna.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -617,6 +635,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     style={{ border: 0 }}
                                     allowFullScreen=""
                                     loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerPolicy="no-referrer-when-downgrade"
                                     className="grayscale hover:grayscale-0 transition-all duration-700"
                                 ></iframe>

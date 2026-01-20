@@ -66,7 +66,7 @@ export default function Organization() {
 
                         {/* Level 1: President Director */}
                         <div className="mb-8">
-                            <OrgCard name="Markus Maturo" title="President Director" highlight={true} />
+                            <OrgCard name="Markus Maturo" title="President Director" highlight={true} image={'/img/so/presdir.jpg'} />
                         </div>
 
                         {/* Connector Level 1 to 2 */}
@@ -79,7 +79,7 @@ export default function Organization() {
                         {/* Level 2: Directors */}
                         <div className="flex justify-between w-[60%] gap-8 mb-8 -mt-4">
                             <div className="flex flex-col items-center w-1/2">
-                                <OrgCard name="FX Kuncara" title="Operational Director" />
+                                <OrgCard name="FX Kuncara" title="Operational Director" image={'/img/so/user_dummy.png'} />
                                 <div className="w-0.5 h-8 bg-slate-300"></div>
                                 {/* Connector for Level 3 under Ops */}
                                 <div className="w-[80%] h-0.5 bg-slate-300 relative mb-4">
@@ -87,13 +87,13 @@ export default function Organization() {
                                     <div className="absolute right-0 top-0 w-0.5 h-4 bg-slate-300"></div>
                                 </div>
                                 <div className="flex gap-4 justify-center w-full">
-                                    <OrgCard name="Pujiono" title="Manufacturing" />
-                                    <OrgCard name="Rendy Aminda" title="Engineering" />
+                                    <OrgCard name="Pujiono" title="Manufacturing" image={'/img/so/user_dummy.png'} />
+                                    <OrgCard name="Rendy Aminda" title="Engineering" image={'/img/so/user_dummy.png'} />
                                 </div>
                             </div>
 
                             <div className="flex flex-col items-center w-1/2">
-                                <OrgCard name="Fauziah Fajrin" title="Administration Director" />
+                                <OrgCard name="Fauziah Fajrin" title="Administration Director" image={'/img/so/user_dummy.png'} />
                                 <div className="w-0.5 h-8 bg-slate-300"></div>
                                 {/* Connector for Level 3 under Admin */}
                                 <div className="w-[80%] h-0.5 bg-slate-300 relative mb-4">
@@ -101,8 +101,8 @@ export default function Organization() {
                                     <div className="absolute right-0 top-0 w-0.5 h-4 bg-slate-300"></div>
                                 </div>
                                 <div className="flex gap-4 justify-center w-full">
-                                    <OrgCard name="Yemima D Fortuna" title="Administration" />
-                                    <OrgCard name="Enos Impra Karambe" title="Cost Control" />
+                                    <OrgCard name="Yemima D Fortuna" title="Administration" image={'/img/so/user_dummy.png'} />
+                                    <OrgCard name="Enos Impra Karambe" title="Cost Control" image={'/img/so/user_dummy.png'} />
                                 </div>
                             </div>
                         </div>
