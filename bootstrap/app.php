@@ -19,10 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
 
-        $middleware->trustProxies(
-            at: '*',
-            headers: Request::HEADER_X_FORWARDED_ALL
-        );
+        $middleware->trustProxies(at: '*');
 
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
