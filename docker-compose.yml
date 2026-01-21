@@ -23,8 +23,10 @@ services:
     image: postgres:15-alpine
     container_name: tcf-db
     restart: always
-    env_file:
-      - .env
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-db_tcf_compro}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-nevergiveup}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
