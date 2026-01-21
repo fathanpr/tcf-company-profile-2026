@@ -1,43 +1,45 @@
-# Multi-stage build for Laravel + Vite
-FROM php:8.3-fpm-alpine as base
+FROM php:8.3-fpm-alpine
 
-# Install system dependencies
+# System dependencies
 RUN apk add --no-cache \
     postgresql-dev \
     libzip-dev \
-    zip \
-    unzip \
-    git \
-    curl \
+    zip unzip \
+    git curl \
     oniguruma-dev \
     libxml2-dev \
     icu-dev \
-    nodejs \
-    npm
+    nodejs npm
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_pgsql mbstring zip exif pcntl bcmath xml intl
+# PHP extensions
+RUN docker-php-ext-install \
+    pdo_pgsql \
+    mbstring \
+    zip \
+    exif \
+    pcntl \
+    bcmath \
+    xml \
+    intl
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# Copy application files
+# Copy project files
 COPY . .
 
 # Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install --no-dev --optimize-autoloader
 
-# Install Node dependencies and build assets
-RUN npm install && npm run build
+# Build frontend assets (Vite)
+RUN npm install \
+    && npm run build \
+    && rm -rf node_modules
 
-# Remove node_modules to keep image small
-RUN rm -rf node_modules
-
-# Set permissions
+# Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 9000
-
 CMD ["php-fpm"]
