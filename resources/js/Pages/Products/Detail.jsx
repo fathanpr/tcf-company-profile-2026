@@ -29,19 +29,33 @@ export default function Detail({ product }) {
         setActiveImage(product.main_image);
     }, [product.id]);
 
+    // Safe Absolute URL for Image
+    const getAbsoluteUrl = (path) => {
+        if (!path) return `${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`;
+        if (path.startsWith('http')) return path;
+        const origin = typeof window !== 'undefined' ? window.location.origin : '';
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        return `${origin}${cleanPath}`;
+    };
+
+    const absoluteImageUrl = String(getAbsoluteUrl(product.main_image));
+    const siteUrl = String(typeof window !== 'undefined' ? window.location.href : '');
+    const pageTitle = String(product.meta_title || `${product.name} - High-Precision Product`);
     const allImages = [product.main_image, ...(product.images || []).map(img => img.image_path)];
 
     return (
         <MainLayout title={product.name}>
             <Head>
-                <title>{product.meta_title || `${product.name} - PT Tri Centrum Fortuna`}</title>
-                <meta name="description" content={product.meta_description || product.description} />
-                <meta name="keywords" content={product.meta_keywords || ''} />
-                <meta property="og:title" content={product.meta_title || product.name} />
-                <meta property="og:description" content={product.meta_description || product.description} />
-                <meta property="og:image" content={product.main_image} />
+                <title>{`${pageTitle} | TCF`}</title>
+                <meta name="description" content={String(product.meta_description || product.description || '')} />
+                <meta name="keywords" content={String(product.meta_keywords || '')} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={String(product.meta_description || product.description || '')} />
+                <meta property="og:image" content={absoluteImageUrl} />
                 <meta property="og:type" content="product" />
+                <meta property="og:url" content={siteUrl} />
                 <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:image" content={absoluteImageUrl} />
             </Head>
 
             {/* Breadcrumb / Back Navigation */}

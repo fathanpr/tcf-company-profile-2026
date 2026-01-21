@@ -97,9 +97,10 @@ export default function Index({ customers, filters }) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center gap-1.5 text-xs text-orange-600 font-bold hover:underline"
+                                                title={customer.website}
                                             >
                                                 <Globe className="w-3.5 h-3.5" />
-                                                Visit Site
+                                                {customer.website.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}
                                             </a>
                                         ) : (
                                             <span className="text-xs text-slate-400">N/A</span>

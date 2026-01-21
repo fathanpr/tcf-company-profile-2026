@@ -4,6 +4,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { ChevronLeft, Box, Save, Building2, FileText, Image as ImageIcon, ToggleLeft } from 'lucide-react';
 import ImageInput from '@/Components/ImageInput';
 import SearchableSelect from '@/Components/SearchableSelect';
+import MultiImageInput from '@/Components/MultiImageInput';
 
 /**
  * Product Create Page
@@ -16,6 +17,7 @@ export default function Create({ customers }) {
         customer_id: '',
         description: '',
         main_image: '',
+        product_images: [],
         is_active: true,
         meta_title: '',
         meta_description: '',
@@ -109,6 +111,16 @@ export default function Create({ customers }) {
                                 value={data.main_image}
                                 onChange={(fileOrUrl) => setData('main_image', fileOrUrl)}
                                 error={errors.main_image}
+                            />
+                        </div>
+
+                        {/* Gallery Images */}
+                        <div className="pt-4 border-t border-slate-100">
+                            <MultiImageInput
+                                label="Product Gallery (Optional)"
+                                value={data.product_images}
+                                onChange={(images) => setData('product_images', images)}
+                                error={errors.product_images}
                             />
                         </div>
 

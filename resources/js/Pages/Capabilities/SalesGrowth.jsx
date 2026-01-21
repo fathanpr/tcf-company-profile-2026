@@ -107,8 +107,16 @@ export default function SalesGrowth() {
     ];
 
     return (
-        <MainLayout title="Sales & Growth">
-            <Head title="Sales & Growth - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>Sales & Market Growth - PT Tri Centrum Fortuna | Expanding Excellence</title>
+                <meta name="description" content="Witness TCF's consistent growth and expanding market share in the automotive industry. Our performance reflects our commitment to quality and partnership." />
+                <meta property="og:title" content="TCF Sales & Growth - A Proven Track Record of Success" />
+                <meta property="og:description" content="Consistent performance and strategic expansion in the Indonesian automotive manufacturing sector." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">

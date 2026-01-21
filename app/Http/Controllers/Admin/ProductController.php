@@ -50,6 +50,8 @@ class ProductController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:255',
+            'product_images' => 'nullable|array',
+            'product_images.*' => 'nullable', // Can be string or file
         ]);
 
         $this->service->createProduct($request->all());
@@ -78,6 +80,8 @@ class ProductController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:255',
+            'product_images' => 'nullable|array',
+            'product_images.*' => 'nullable', // Can be string or file
         ]);
 
         $this->service->updateProduct($id, $request->all());

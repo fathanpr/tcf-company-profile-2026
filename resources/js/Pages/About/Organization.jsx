@@ -31,8 +31,16 @@ const Connector = ({ vertical = false }) => (
 
 export default function Organization() {
     return (
-        <MainLayout title="Organization Structure">
-            <Head title="Organization Structure - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>Organization Structure - PT Tri Centrum Fortuna | Professional Leadership</title>
+                <meta name="description" content="Meet the professional leadership and structured organization behind PT Tri Centrum Fortuna's success in automotive manufacturing." />
+                <meta property="og:title" content="TCF Organization Structure - Professional Management Team" />
+                <meta property="og:description" content="Our structured approach ensures precision and quality across all TCF manufacturing operations." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">

@@ -70,6 +70,25 @@ class ProductService extends BaseService
 
             $product = $this->repository->create($data);
 
+            // Handle Gallery Images
+            if (isset($data['product_images']) && is_array($data['product_images'])) {
+                foreach ($data['product_images'] as $image) {
+                    if ($image instanceof \Illuminate\Http\UploadedFile) {
+                        $filename = time() . '_' . uniqid() . '_' . $image->getClientOriginalName();
+                        $path = $image->storeAs('products/gallery', $filename, 'public');
+                        $imagePath = '/storage/' . $path;
+                    } else if (is_string($image) && !empty($image)) {
+                        $imagePath = $image;
+                    } else {
+                        continue;
+                    }
+
+                    $product->images()->create([
+                        'image_path' => $imagePath
+                    ]);
+                }
+            }
+
             activity()
                 ->performedOn($product)
                 ->causedBy(auth()->user())
@@ -90,6 +109,28 @@ class ProductService extends BaseService
             }
 
             $product = $this->repository->update($id, $data);
+
+            // Handle Gallery Images Sync
+            if (isset($data['product_images']) && is_array($data['product_images'])) {
+                // Delete old images (Simpler approach for now)
+                $product->images()->delete();
+
+                foreach ($data['product_images'] as $image) {
+                    if ($image instanceof \Illuminate\Http\UploadedFile) {
+                        $filename = time() . '_' . uniqid() . '_' . $image->getClientOriginalName();
+                        $path = $image->storeAs('products/gallery', $filename, 'public');
+                        $imagePath = '/storage/' . $path;
+                    } else if (is_string($image) && !empty($image)) {
+                        $imagePath = $image;
+                    } else {
+                        continue;
+                    }
+
+                    $product->images()->create([
+                        'image_path' => $imagePath
+                    ]);
+                }
+            }
 
             activity()
                 ->performedOn($product)

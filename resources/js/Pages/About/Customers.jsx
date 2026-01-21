@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Users, ExternalLink, ChevronLeft, ChevronRight, Building2, UserCheck } from 'lucide-react';
+import { Search, Users, ExternalLink, ChevronLeft, ChevronRight, Building2, UserCheck, Globe } from 'lucide-react';
 
 export default function Customers({ customers, filters }) {
     const [search, setSearch] = useState(filters.search || '');
@@ -38,8 +38,16 @@ export default function Customers({ customers, filters }) {
     };
 
     return (
-        <MainLayout title="Our Valued Customers">
-            <Head title="Our Customers - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>Our Valued Customers - PT Tri Centrum Fortuna | Trusted Tier 2 Partner</title>
+                <meta name="description" content="TCF proudly serves leading automotive giants in Indonesia. Join our network of satisfied clients who trust us for high-precision components." />
+                <meta property="og:title" content="TCF Customers - Partnering with Industry Leaders" />
+                <meta property="og:description" content="Building long-term success with the world's most prominent automotive brands." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
@@ -105,7 +113,8 @@ export default function Customers({ customers, filters }) {
                                         key={customer.id}
                                         variants={item}
                                         whileHover={{ y: -5 }}
-                                        className="group bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
+                                        onClick={() => customer.website && window.open(customer.website, '_blank', 'noopener,noreferrer')}
+                                        className={`group bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center ${customer.website ? 'cursor-pointer' : ''}`}
                                     >
                                         <div className="w-24 h-24 mb-6 relative">
                                             <div className="absolute inset-0 bg-slate-100 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500"></div>
@@ -127,10 +136,11 @@ export default function Customers({ customers, filters }) {
                                                     href={customer.website}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-600 text-[10px] font-bold hover:bg-blue-50 hover:text-blue-600 transition-all border border-slate-100"
+                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-600 text-[10px] font-bold hover:bg-orange-50 hover:text-orange-600 transition-all border border-slate-100"
+                                                    title={customer.website}
                                                 >
-                                                    <ExternalLink className="w-3 h-3" />
-                                                    Visit Website
+                                                    <Globe className="w-3 h-3" />
+                                                    {customer.website.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}
                                                 </a>
                                             )}
                                         </div>

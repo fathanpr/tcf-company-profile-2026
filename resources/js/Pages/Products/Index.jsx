@@ -41,9 +41,27 @@ export default function Index({ products, filters }) {
         show: { opacity: 1, y: 0 }
     };
 
+    const getAbsoluteUrl = (path) => {
+        if (!path) return `${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`;
+        if (path.startsWith('http')) return path;
+        const origin = typeof window !== 'undefined' ? window.location.origin : '';
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        return `${origin}${cleanPath}`;
+    };
+
+    const firstProductImage = String(products.data.length > 0 ? getAbsoluteUrl(products.data[0].main_image) : getAbsoluteUrl(null));
+
     return (
-        <MainLayout title="Our Products">
-            <Head title="Our Products - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>High-Quality Automotive Products | PT Tri Centrum Fortuna</title>
+                <meta name="description" content="Explore TCF's range of high-precision automotive components. From stamping to robotic welding, we provide the best Tier 2 manufacturing solutions in Indonesia." />
+                <meta property="og:title" content="Our Products - Precision Automotive Components | TCF" />
+                <meta property="og:description" content="Discover our comprehensive range of high-quality automotive parts manufactured with robotic precision in Indonesia." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={firstProductImage} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
@@ -111,7 +129,10 @@ export default function Index({ products, filters }) {
                                         className="group bg-white rounded-[40px] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
                                     >
                                         {/* Image Container */}
-                                        <div className="aspect-[4/3] relative overflow-hidden bg-slate-100">
+                                        <Link
+                                            href={product.slug ? route('products.detail', product.slug) : '#'}
+                                            className="aspect-[4/3] relative overflow-hidden bg-slate-100 block"
+                                        >
                                             <img
                                                 src={product.main_image?.startsWith('http') ? product.main_image : `/${product.main_image}`}
                                                 alt={product.name}
@@ -120,14 +141,14 @@ export default function Index({ products, filters }) {
                                             {product.customer && (
                                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2 shadow-sm border border-slate-100">
                                                     <img
-                                                        src={`/${product.customer.logo}`}
+                                                        src={product.customer.logo?.startsWith('http') ? product.customer.logo : `/${product.customer.logo}`}
                                                         className="h-3 w-auto grayscale"
                                                         alt={product.customer.name}
                                                     />
                                                     <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">{product.customer.name}</span>
                                                 </div>
                                             )}
-                                        </div>
+                                        </Link>
 
                                         {/* Content */}
                                         <div className="p-8 flex flex-col flex-grow">
@@ -135,16 +156,18 @@ export default function Index({ products, filters }) {
                                                 <Tag className="w-3 h-3 text-orange-500" />
                                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Automotive Part</span>
                                             </div>
-                                            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-1">
-                                                {product.name}
-                                            </h3>
+                                            <Link href={product.slug ? route('products.detail', product.slug) : '#'}>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-1">
+                                                    {product.name}
+                                                </h3>
+                                            </Link>
                                             <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">
                                                 {product.description}
                                             </p>
 
                                             <div className="mt-auto">
                                                 <Link
-                                                    href={route('products.detail', product.slug)}
+                                                    href={product.slug ? route('products.detail', product.slug) : '#'}
                                                     className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:text-orange-600 transition-all"
                                                 >
                                                     View Details

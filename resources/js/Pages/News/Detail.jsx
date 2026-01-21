@@ -18,17 +18,34 @@ import {
  * Generate by Antigravity
  */
 export default function Detail({ article }) {
+    if (!article) return null;
+
+    // Safe Absolute URL for Image
+    const getAbsoluteUrl = (path) => {
+        if (!path) return `${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`;
+        if (path.startsWith('http')) return path;
+        const origin = typeof window !== 'undefined' ? window.location.origin : '';
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        return `${origin}${cleanPath}`;
+    };
+
+    const absoluteImageUrl = String(getAbsoluteUrl(article.image));
+    const siteUrl = String(typeof window !== 'undefined' ? window.location.href : '');
+    const pageTitle = String(article.meta_title || article.title || 'Insight');
+
     return (
         <MainLayout>
             <Head>
-                <title>{article.meta_title || article.title}</title>
-                <meta name="description" content={article.meta_description || article.excerpt} />
-                <meta name="keywords" content={article.meta_keywords || ''} />
-                <meta property="og:title" content={article.meta_title || article.title} />
-                <meta property="og:description" content={article.meta_description || article.excerpt} />
-                <meta property="og:image" content={article.image} />
+                <title>{`${pageTitle} | TCF News`}</title>
+                <meta name="description" content={String(article.meta_description || article.excerpt || '')} />
+                <meta name="keywords" content={String(article.meta_keywords || '')} />
+                <meta property="og:title" content={pageTitle} />
+                <meta property="og:description" content={String(article.meta_description || article.excerpt || '')} />
+                <meta property="og:image" content={absoluteImageUrl} />
                 <meta property="og:type" content="article" />
+                <meta property="og:url" content={siteUrl} />
                 <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:image" content={absoluteImageUrl} />
             </Head>
 
             {/* Breadcrumbs & Centered Hero */}

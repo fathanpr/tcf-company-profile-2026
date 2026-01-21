@@ -4,6 +4,7 @@ import { Head, Link, useForm, router } from '@inertiajs/react';
 import { ChevronLeft, Box, Save, Building2, FileText, Image as ImageIcon, RefreshCcw } from 'lucide-react';
 import ImageInput from '@/Components/ImageInput';
 import SearchableSelect from '@/Components/SearchableSelect';
+import MultiImageInput from '@/Components/MultiImageInput';
 
 /**
  * Product Edit Page
@@ -16,6 +17,7 @@ export default function Edit({ product, customers }) {
         customer_id: product.customer_id || '',
         description: product.description,
         main_image: product.main_image || '',
+        product_images: product.images ? product.images.map(img => img.image_path) : [],
         is_active: !!product.is_active,
         meta_title: product.meta_title || '',
         meta_description: product.meta_description || '',
@@ -26,7 +28,12 @@ export default function Edit({ product, customers }) {
 
     const submit = (e) => {
         e.preventDefault();
-        if (data.main_image instanceof File) {
+
+        // Check if any of the images (main or gallery) are files
+        const hasFiles = data.main_image instanceof File ||
+            data.product_images.some(img => img instanceof File);
+
+        if (hasFiles) {
             router.post(route('admin.products.update', product.id), {
                 _method: 'put',
                 ...data,
@@ -114,6 +121,16 @@ export default function Edit({ product, customers }) {
                                 value={data.main_image}
                                 onChange={(fileOrUrl) => setData('main_image', fileOrUrl)}
                                 error={errors.main_image}
+                            />
+                        </div>
+
+                        {/* Gallery Images */}
+                        <div className="pt-4 border-t border-slate-100">
+                            <MultiImageInput
+                                label="Product Gallery (Optional)"
+                                value={data.product_images}
+                                onChange={(images) => setData('product_images', images)}
+                                error={errors.product_images}
                             />
                         </div>
 

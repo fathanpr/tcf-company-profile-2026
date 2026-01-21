@@ -133,8 +133,16 @@ export default function ProductionQuality() {
     ];
 
     return (
-        <MainLayout title="Production & Quality">
-            <Head title="Production & Quality - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>Production Excellence & Quality Control - PT Tri Centrum Fortuna</title>
+                <meta name="description" content="Discover TCF's rigorous quality standards and efficient production processes. ISO certified manufacturing for the highest precision automotive parts." />
+                <meta property="og:title" content="TCF Production & Quality - Precision Engineering at Scale" />
+                <meta property="og:description" content="Strict quality control and advanced production technology for Indonesia's automotive industry." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">

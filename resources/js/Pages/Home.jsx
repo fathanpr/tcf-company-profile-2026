@@ -120,7 +120,38 @@ export default function Home({ translations = {}, customers = [], products = [],
     }, []);
 
     return (
-        <MainLayout title={translations['Home'] || 'Home'}>
+        <MainLayout>
+            <Head>
+                <title>PT Tri Centrum Fortuna - Leading Automotive Stamping & Welding Partner in Indonesia</title>
+                <meta name="description" content="PT Tri Centrum Fortuna (TCF) delivers excellence in automotive stamping and robotic welding. We are the preferred Tier 2 partner for major automotive industry leaders in Indonesia." />
+                <meta name="keywords" content="professional automotive manufacturing, stamping karawang, welding automotive indonesia, tier 2 manufacturing partner, tri centrum fortuna, tcf group" />
+
+                {/* Schema.org JSON-LD */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        "name": "PT Tri Centrum Fortuna",
+                        "alternateName": "TCF",
+                        "url": "https://tricentrumfortuna.com",
+                        "logo": "https://tricentrumfortuna.com/img/tcf-logo.png",
+                        "description": "Leading professional automotive manufacturing partner in Indonesia specializing in stamping and welding.",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Jl. Mitra Raya II Blok F-7-8, KIIC",
+                            "addressLocality": "Karawang",
+                            "addressRegion": "West Java",
+                            "postalCode": "41363",
+                            "addressCountry": "ID"
+                        },
+                        "contactPoint": {
+                            "@type": "ContactPoint",
+                            "telephone": "+62-267-8638008",
+                            "contactType": "customer service"
+                        }
+                    })}
+                </script>
+            </Head>
 
             {/* --- HERO SECTION --- */}
             <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-900">
@@ -153,7 +184,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                             <span className="text-orange-300 text-xs font-bold tracking-widest uppercase">Future Manufacturing</span>
                         </div>
                         <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
-                            Precision in <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Motion</span>
+                            Indonesia's Most Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Tier 2 Partner</span>
                         </h1>
                         <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
                             Advanced Welding & Stamping solutions for the automotive industry. We engineer the future with integrity and excellence.
@@ -175,7 +206,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         transition={{ duration: 1, delay: 0.2 }}
                         className="hidden lg:block relative"
                     >
-                        <div className="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl skew-y-3 hover:skew-y-2 transition-transform duration-500">
+                        <div className="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500">
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center">
                                     <Zap className="text-orange-400" />
@@ -217,7 +248,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         className="mb-8 flex flex-col md:flex-row items-center gap-8 md:gap-16"
                     >
                         <div className="w-full md:w-1/2 order-2 md:order-1">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4">Building Excellence Since 2017</h3>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-4">Leading Tier 2 Automotive Manufacturing Since 2017</h2>
                             <p className="text-slate-600 leading-relaxed mb-4 text-base">
                                 PT Tri Centrum Fortuna has grown from a visionary foundation into a key player in the automotive manufacturing sector. With a relentless focus on quality and innovation, we have expanded our operations to serve global automotive leaders.
                             </p>
@@ -279,7 +310,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16 lg:mb-10">
                         <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">What We Do</span>
-                        <h2 className="text-4xl font-bold text-slate-900 mt-2">Manufacturing Capabilities</h2>
+                        <h2 className="text-4xl font-bold text-slate-900 mt-2">Specialized Automotive Manufacturing Capabilities</h2>
                     </div>
 
                     <div className="relative max-w-6xl mx-auto">
@@ -368,7 +399,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                     <div className="flex flex-col md:flex-row justify-between items-center mb-12">
                         <div>
                             <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Our Output</span>
-                            <h2 className="text-4xl font-bold mt-2">Quality Products</h2>
+                            <h2 className="text-4xl font-bold mt-2">High-Precision Automotive Products</h2>
                         </div>
                         <p className="text-slate-400 max-w-md text-sm mt-4 md:mt-0 text-center md:text-right">
                             Delivering high-precision components used by leading automotive manufacturers globally.
@@ -473,7 +504,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         className="text-center mb-16"
                     >
                         <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Latest Updates</span>
-                        <h2 className="text-4xl font-bold text-slate-900 mt-2">Company News</h2>
+                        <h2 className="text-4xl font-bold text-slate-900 mt-2">Latest News & Industry Insights</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

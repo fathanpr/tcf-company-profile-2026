@@ -89,7 +89,15 @@ export default function Facilities() {
 
     return (
         <MainLayout title="Facilities">
-            <Head title="Our Facilities - PT Tri Centrum Fortuna" />
+            <Head>
+                <title>World-Class Manufacturing Facilities - PT Tri Centrum Fortuna</title>
+                <meta name="description" content="Take a look inside TCF's advanced manufacturing plants in Karawang and Purwakarta. Equipped with high-precision stamping and robotic welding technology." />
+                <meta property="og:title" content="TCF Facilities - State-of-the-Art Automotive Manufacturing" />
+                <meta property="og:description" content="Explore our high-capacity stamping and welding plants designed for automotive excellence." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Lightbox Overlay - Rendered in Portal to sit above Modal */}
             {previewImage && typeof document !== 'undefined' && createPortal(

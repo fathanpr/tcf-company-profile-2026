@@ -161,8 +161,16 @@ export default function LoadingCapacity() {
     ];
 
     return (
-        <MainLayout title="Loading Capacity">
-            <Head title="Loading Capacity - PT Tri Centrum Fortuna" />
+        <MainLayout>
+            <Head>
+                <title>Loading Capacity & Operational Scale - PT Tri Centrum Fortuna</title>
+                <meta name="description" content="Analyze TCF's production loading capacity and efficiency. Our scalable infrastructure is ready to meet high-volume automotive component demands." />
+                <meta property="og:title" content="TCF Loading Capacity - Scalable Manufacturing Powerhouse" />
+                <meta property="og:description" content="Optimized production lines and high-capacity facilities for Tier 1 and Tier 2 automotive partners." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Head>
 
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">

@@ -53,7 +53,12 @@ export default function Index({ news, filters }) {
         <MainLayout>
             <Head>
                 <title>News & Insights | PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Stay updated with the latest news, technological insights, and corporate updates from PT Tri Centrum Fortuna." />
+                <meta name="description" content="Stay updated with the latest news, technological insights, and corporate updates from PT Tri Centrum Fortuna - Indonesia's professional Tier 2 partner." />
+                <meta property="og:title" content="News & Insights | PT Tri Centrum Fortuna" />
+                <meta property="og:description" content="Latest developments in automotive manufacturing, precision stamping, and robotic welding from TCF Indonesia." />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={news.data.length > 0 ? (news.data[0].image.startsWith('https') ? news.data[0].image : `${typeof window !== 'undefined' ? window.location.origin : ''}${news.data[0].image}`) : `${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             {/* Hero Section */}
