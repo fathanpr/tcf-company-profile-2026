@@ -118,10 +118,21 @@ export default function Customers({ customers, filters }) {
                                         <h3 className="text-slate-900 font-bold text-sm leading-tight group-hover:text-blue-600 transition-colors">
                                             {customer.name}
                                         </h3>
-                                        <div className="mt-4 pt-4 border-t border-slate-50 w-full flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="mt-4 pt-4 border-t border-slate-50 w-full flex flex-col items-center gap-3">
                                             <div className="flex items-center gap-2 text-[10px] font-black text-blue-500 uppercase tracking-widest">
                                                 Active Partner <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                             </div>
+                                            {customer.website && (
+                                                <a
+                                                    href={customer.website}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-600 text-[10px] font-bold hover:bg-blue-50 hover:text-blue-600 transition-all border border-slate-100"
+                                                >
+                                                    <ExternalLink className="w-3 h-3" />
+                                                    Visit Website
+                                                </a>
+                                            )}
                                         </div>
                                     </motion.div>
                                 ))}
