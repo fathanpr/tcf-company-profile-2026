@@ -35,7 +35,7 @@ export default function Home({ translations = {}, customers = [], products = [],
             title: 'BENDING',
             desc: 'Precision bending services for complex geometries and structural requirements.',
             icon: <Shield className="w-12 h-12 text-green-500" />,
-            image: "https://images.unsplash.com/photo-1531297461136-82lw8e41f5e8?auto=format&fit=crop&q=80&w=800"
+            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'MACHINING',
