@@ -217,7 +217,7 @@ export default function Detail({ article }) {
                                     Request a technical consultation or a quote for your stamping and welding assembly needs.
                                 </p>
                                 <Link
-                                    href="/contact"
+                                    href={`${route('home')}#location`}
                                     className="w-full inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-6 py-4 rounded-2xl font-black text-xs hover:bg-orange-700 transition-all relative z-10 shadow-xl shadow-orange-600/20 uppercase tracking-widest"
                                 >
                                     Contact Sales

@@ -11,32 +11,103 @@ const facilityData = {
         layout: '/img/facilities/tcfsg-layout.png',
         machines: [
             {
-                category: "Stamping Press",
+                category: "Progressive Machine",
                 icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                showCount: true,
                 items: [
-                    { name: "Progressive 110T - 300T", details: "SC/DC Types", count: "14 Units" },
-                    { name: "Tandem 110T - 1000T", details: "Line Medium & High Tonnage", count: "48 Units" },
-                    { name: "Double Crank 200T - 500T", details: "High Precision", count: "8 Units" },
+                    { name: "110T SC", count: "3" },
+                    { name: "150T SC", count: "1" },
+                    { name: "200T SC", count: "6" },
+                    { name: "200T DC", count: "3" },
+                    { name: "250T SC", count: "1" },
+                    { name: "250T DC", count: "1" },
+                    { name: "300T DC", count: "1" },
+                    { name: "315T DC", count: "2" },
+                    { name: "350T DC", count: "1" },
+                    { name: "400T DC", count: "2" },
+                    { name: "500T SH", count: "1" },
+                    { name: "500T DH", count: "1" },
+                    { name: "600T DH", count: "1" },
                 ]
             },
             {
-                category: "Welding & Assembly",
+                category: "Tandem Machine",
+                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                showCount: true,
+                items: [
+                    { name: "110T SC", count: "14" },
+                    { name: "150T SC", count: "18" },
+                    { name: "150T DC", count: "2" },
+                    { name: "160T SC", count: "4" },
+                    { name: "200T SC", count: "9" },
+                    { name: "200T DC", count: "3" },
+                    { name: "250T SC", count: "5" },
+                    { name: "315T SC", count: "2" },
+                    { name: "400T DH", count: "1" },
+                    { name: "500T SH", count: "1" },
+                    { name: "1000T DH", count: "1" },
+                ]
+            },
+            {
+                category: "Welding Machine",
                 icon: <Users className="w-5 h-5 text-orange-500" />,
+                showCount: true,
                 items: [
-                    { name: "Robot Welding", details: "Automated Cells", count: "27 Cells" },
-                    { name: "Spot Welding", details: "35kVA - 110kVA", count: "25 Units" },
-                    { name: "Manual CO2 Welding", details: "Manual Stations", count: "9 Stations" },
-                    { name: "Rotary Welding", details: "Special Purpose", count: "3 Units" },
+                    { name: "Spot - 50kVA", count: "2" },
+                    { name: "Spot - 75kVA", count: "3" },
+                    { name: "Spot - 100kVA", count: "1" },
                 ]
             },
             {
-                category: "Tool Room & Support",
-                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                category: "Shearing Machine",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
                 items: [
-                    { name: "CNC Machining", details: "Milling & Lathe", count: "5 Units" },
-                    { name: "Wire Cut EDM", details: "High Precision", count: "2 Units" },
-                    { name: "Surface Grinding", details: "Various Sizes", count: "4 Units" },
-                    { name: "CMM & Measuring", details: "Quality Control Lab", count: "Complete" },
+                    { name: "Length", count: "830 cm" },
+                    { name: "Width", count: "160 cm" },
+                ]
+            },
+            {
+                category: "Design Software",
+                icon: <Building2 className="w-5 h-5 text-purple-500" />,
+                items: [
+                    { name: "ZWCAD & SOLIDWORKS" },
+                    { name: "SOLID EDGE & SIEMENS NX" },
+                    { name: "ZW3D & AUTODESK AutoCAD" },
+                ]
+            },
+            {
+                category: "Tool Making",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "Wire Cut" },
+                    { name: "Manual Milling" },
+                    { name: "CNC Lathe" },
+                    { name: "Cylindrical Grinding" },
+                    { name: "Manual Lathe" },
+                    { name: "Surface Grinding" },
+                    { name: "CNC Milling" },
+                    { name: "Radial Grinding" },
+                ]
+            },
+            {
+                category: "Measuring Equipments",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "CMM Portable" },
+                    { name: "Dial Depth Gauge" },
+                    { name: "Digital Torque Wrench" },
+                    { name: "Digital Microscope" },
+                    { name: "Digital Height Gauge" },
+                    { name: "Pin Gauge Set" },
+                    { name: "Profil Projector" },
+                    { name: "Dansa Gauge" },
+                    { name: "Ring Gauge" },
+                    { name: "Digital Micrometer" },
+                    { name: "Formtracer" },
+                    { name: "Radius Gauge" },
+                    { name: "Digital Caliper" },
                 ]
             }
         ]
@@ -45,30 +116,114 @@ const facilityData = {
         layout: '/img/facilities/tcfkg-layout.png',
         machines: [
             {
-                category: "Stamping Press",
+                category: "Progressive Machine",
                 icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                showCount: true,
                 items: [
-                    { name: "Transfer Machine 1500T", details: "High Tonnage Transfer", count: "1 Unit" },
-                    { name: "Progressive 200T - 600T", details: "Coil Feed Lines", count: "8 Units" },
-                    { name: "Tandem 300T - 1000T", details: "Robotic Transfer", count: "3 Lines" },
+                    { name: "110T SC", count: "13" },
+                    { name: "150T SC", count: "5" },
+                    { name: "160T SC", count: "12" },
+                    { name: "200T SC", count: "7" },
+                    { name: "200T DC", count: "2" },
+                    { name: "250T DC", count: "2" },
+                    { name: "250T SC", count: "1" },
+                    { name: "400T DH", count: "4" },
+                    { name: "600T DH", count: "3" },
+                    { name: "800T DH", count: "2" },
                 ]
             },
             {
-                category: "Welding & Assembly",
+                category: "Tandem Machine",
+                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                showCount: true,
+                items: [
+                    { name: "110T SC", count: "2" },
+                    { name: "160T SC", count: "3" },
+                    { name: "200T SC", count: "3" },
+                    { name: "250T DC", count: "1" },
+                    { name: "500T DH", count: "1" },
+                    { name: "800T DH", count: "1" },
+                    { name: "1000T DH", count: "1" },
+                ]
+            },
+            {
+                category: "Welding Machine",
                 icon: <Users className="w-5 h-5 text-orange-500" />,
+                showCount: true,
                 items: [
-                    { name: "Robot Welding", details: "Spot & Arc", count: "35 Cells" },
-                    { name: "Spot Welding", details: "Stationary & Gun", count: "40 Units" },
-                    { name: "Nut Runner / Tapping", details: "Assembly Support", count: "12 Units" },
+                    { name: "Manual Weld", count: "9" },
+                    { name: "Robot Weld", count: "27" },
+                    { name: "Tig Weld", count: "2" },
+                    { name: "Spot - 35kVA", count: "4" },
+                    { name: "Spot - 50kVA", count: "19" },
+                    { name: "Spot - 110kVA", count: "2" },
+                    { name: "Rotary Weld", count: "3" },
                 ]
             },
             {
-                category: "Tool Maintenance",
-                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                category: "Other Machines",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
                 items: [
-                    { name: "Overhead Crane", details: "5T - 30T Capacity", count: "12 Units" },
-                    { name: "Forklift", details: "Material Handling", count: "15 Units" },
-                    { name: "Die Maintenance", details: "Repair & Polishing", count: "Area Available" },
+                    { name: "Tapping & Drilling" },
+                    { name: "Rivet & Swaging Pipe" },
+                    { name: "Hamming Pipe" },
+                ]
+            },
+            {
+                category: "Pipe Bending",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
+                showCount: true,
+                items: [
+                    { name: "NC Bending Ø", count: "30" },
+                    { name: "CNC Bending Ø", count: "30" },
+                    { name: "CNC Bending Ø", count: "38" },
+                ]
+            },
+            {
+                category: "Design Software",
+                icon: <Building2 className="w-5 h-5 text-purple-500" />,
+                items: [
+                    { name: "ZWCAD & SOLIDWORKS" },
+                    { name: "SOLID EDGE & SIEMENS NX" },
+                    { name: "ZW3D & AUTODESK AutoCAD" },
+                ]
+            },
+            {
+                category: "Die Maintenance Facility",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "CNC Milling" },
+                    { name: "Cylindrical Grinding" },
+                    { name: "Manual Milling" },
+                    { name: "Surface Grinding" },
+                    { name: "Manual Lathe" },
+                    { name: "Radial Grinding" },
+                ]
+            },
+            {
+                category: "Measuring Equipments",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "Digital Caliper" },
+                    { name: "Push Test" },
+                    { name: "Digital Thickness Paint" },
+                    { name: "CMM Portable (FARO)" },
+                    { name: "Dial Depth Gauge" },
+                    { name: "Digital Torque Wrench" },
+                    { name: "Digital Microscope" },
+                    { name: "Digital Height Gauge" },
+                    { name: "Pin Gauge Set" },
+                    { name: "Profil Projector" },
+                    { name: "Dansa Gauge" },
+                    { name: "Ring Gauge" },
+                    { name: "Conductivity Meter" },
+                    { name: "Contracer" },
+                    { name: "Radius Gauge" },
+                    { name: "Digital Micrometer" },
+                    { name: "Formtracer" },
+                    { name: "Weighing Instruments" },
                 ]
             }
         ]
@@ -340,16 +495,18 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                                     <h5 className="font-bold text-slate-800">{category.category}</h5>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-4">
+                                    <ul className={`space-y-4 ${category.twoColumn ? 'grid grid-cols-2 gap-x-6 gap-y-2 space-y-0' : ''}`}>
                                         {category.items.map((item, i) => (
-                                            <li key={i} className="flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0">
+                                            <li key={i} className={`flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0 ${category.twoColumn ? 'border-0 pb-0' : ''}`}>
                                                 <div>
                                                     <p className="font-bold text-slate-900 text-sm">{item.name}</p>
-                                                    <p className="text-xs text-slate-500">{item.details}</p>
+                                                    {item.details && <p className="text-xs text-slate-500">{item.details}</p>}
                                                 </div>
-                                                <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">
-                                                    {item.count}
-                                                </span>
+                                                {item.count && (
+                                                    <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full whitespace-nowrap ml-2">
+                                                        {item.count}
+                                                    </span>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>

@@ -197,7 +197,7 @@ export default function Detail({ product }) {
 
                             <div className="space-y-4">
                                 <Link
-                                    href="/contact"
+                                    href={`${route('home')}#location`}
                                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-orange-600 text-white font-black rounded-2xl hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/20 group uppercase tracking-widest text-sm"
                                 >
                                     Inquiry for this Product

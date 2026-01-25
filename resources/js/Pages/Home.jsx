@@ -627,29 +627,11 @@ export default function Home({ translations = {}, customers = [], products = [],
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                                        <Phone className="text-orange-400 w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-white text-sm mb-1">Phone</h4>
-                                        <p className="text-slate-400 text-xs">(+62-267) 8638008</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
                                         <Mail className="text-green-400 w-5 h-5" />
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Email</h4>
                                         <p className="text-slate-400 text-xs">sales.kg@tricentrumfortuna.com</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                                        <Mail className="text-green-400 w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-white text-sm mb-1">Email</h4>
-                                        <p className="text-slate-400 text-xs">sales.sg@tricentrumfortuna.com</p>
                                     </div>
                                 </div>
                             </div>
