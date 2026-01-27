@@ -15,7 +15,7 @@ export default function Dashboard() {
     const stats = [
         { name: 'Total News', icon: Newspaper, count: '15', color: 'bg-blue-500' },
         { name: 'Total Users', icon: Users, count: '3', color: 'bg-emerald-500' },
-        { name: 'Total Products', icon: Box, count: '12', color: 'bg-orange-500' },
+        { name: 'Total Products', icon: Box, count: '12', color: 'bg-brand-primary' },
         { name: 'Active Customers', icon: Building2, count: '8', color: 'bg-purple-500' },
     ];
 
@@ -34,7 +34,7 @@ export default function Dashboard() {
                         </p>
                     </div>
                     {/* Abstract background elements */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-[100px] -translate-y-1/2 translate-x-1/2 rounded-full"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 blur-[100px] -translate-y-1/2 translate-x-1/2 rounded-full"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 blur-[80px] translate-y-1/2 -translate-x-1/2 rounded-full"></div>
                 </div>
 

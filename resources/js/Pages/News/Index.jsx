@@ -72,7 +72,7 @@ export default function Index({ news, filters }) {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Calendar className="w-4 h-4" />
                             Media Center
                         </div>
@@ -182,7 +182,7 @@ export default function Index({ news, filters }) {
                             <div className="p-8 bg-slate-900 rounded-[32px] border border-white/5 shadow-2xl relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                                 <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2 relative z-10">
-                                    <Search className="w-5 h-5 text-orange-500" />
+                                    <Search className="w-5 h-5 text-brand-primary" />
                                     Search Articles
                                 </h3>
                                 <div className="relative z-10">
@@ -191,16 +191,16 @@ export default function Index({ news, filters }) {
                                         value={search}
                                         onChange={(e) => setSearch(e.target.value)}
                                         placeholder="Search by keywords..."
-                                        className="w-full bg-white/5 border-white/10 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 rounded-2xl py-4 pl-6 pr-12 text-sm text-white placeholder:text-slate-500 transition-all backdrop-blur-sm"
+                                        className="w-full bg-white/5 border-white/10 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-2xl py-4 pl-6 pr-12 text-sm text-white placeholder:text-slate-500 transition-all backdrop-blur-sm"
                                     />
-                                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5 group-hover:text-orange-500 transition-colors" />
+                                    <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5 group-hover:text-brand-primary transition-colors" />
                                 </div>
                             </div>
 
                             {/* Categories */}
                             <div className="p-8 bg-slate-50 rounded-[32px] border border-slate-100">
                                 <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
-                                    <Tag className="w-5 h-5 text-orange-500" />
+                                    <Tag className="w-5 h-5 text-brand-primary" />
                                     Categories
                                 </h3>
                                 <div className="flex flex-wrap gap-2">

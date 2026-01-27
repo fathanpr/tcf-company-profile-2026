@@ -71,7 +71,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                     type="text"
                                     value={data.title}
                                     onChange={e => setData('title', e.target.value)}
-                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-lg font-bold transition-all ${errors.title ? 'ring-2 ring-red-500' : ''}`}
+                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-lg font-bold transition-all ${errors.title ? 'ring-2 ring-red-500' : ''}`}
                                     placeholder="Enter catching headline..."
                                     required
                                 />
@@ -88,7 +88,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                     value={data.excerpt}
                                     onChange={e => setData('excerpt', e.target.value)}
                                     rows="3"
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all resize-none"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none"
                                     placeholder="Briefly describe what this article is about..."
                                 ></textarea>
                             </div>
@@ -123,7 +123,7 @@ export default function Create({ categories: dbCategories = [] }) {
                         {/* SEO Settings */}
                         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 space-y-6">
                             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-                                <Globe className="w-5 h-5 text-orange-500" />
+                                <Globe className="w-5 h-5 text-brand-primary" />
                                 SEO Optimization
                             </h3>
 
@@ -133,7 +133,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                     type="text"
                                     value={data.meta_title}
                                     onChange={e => setData('meta_title', e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                     placeholder="Keywords for search engines..."
                                 />
                             </div>
@@ -144,7 +144,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                     value={data.meta_description}
                                     onChange={e => setData('meta_description', e.target.value)}
                                     rows="2"
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all resize-none"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none"
                                     placeholder="Article snippet for Google search results..."
                                 ></textarea>
                             </div>
@@ -159,7 +159,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                         type="text"
                                         value={data.meta_keywords}
                                         onChange={e => setData('meta_keywords', e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                         placeholder="news, update, event..."
                                     />
                                 </div>
@@ -172,7 +172,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                         type="text"
                                         value={data.tags}
                                         onChange={e => setData('tags', e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                         placeholder="Comma separated tags..."
                                     />
                                 </div>
@@ -187,7 +187,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                     type="number"
                                     value={data.reading_time}
                                     onChange={e => setData('reading_time', e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                     placeholder="e.g. 5"
                                 />
                             </div>
@@ -206,7 +206,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                         type="checkbox"
                                         checked={data.is_published}
                                         onChange={e => setData('is_published', e.target.checked)}
-                                        className="w-5 h-5 rounded text-orange-600 focus:ring-orange-500"
+                                        className="w-5 h-5 rounded text-brand-primary focus:ring-brand-primary"
                                     />
                                     <span className="text-sm font-bold text-slate-700">Publish Immediately</span>
                                 </label>
@@ -220,7 +220,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                         type="date"
                                         value={data.published_at}
                                         onChange={e => setData('published_at', e.target.value)}
-                                        className="w-full px-3 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-lg text-xs font-bold transition-all"
+                                        className="w-full px-3 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-lg text-xs font-bold transition-all"
                                     />
                                 </div>
                             </div>
@@ -252,12 +252,12 @@ export default function Create({ categories: dbCategories = [] }) {
                                             backgroundColor: '#f8fafc', // bg-slate-50
                                             boxShadow: 'none',
                                             '&:hover': {
-                                                borderColor: '#fdba74' // orange-300
+                                                borderColor: '#0ea5e9' // brand-primary
                                             }
                                         }),
                                         option: (base, state) => ({
                                             ...base,
-                                            backgroundColor: state.isFocused ? '#fff7ed' : 'white', // orange-50
+                                            backgroundColor: state.isFocused ? '#f0f9ff' : 'white', // sky-50
                                             color: '#334155', // slate-700
                                             fontWeight: 'bold',
                                         })
@@ -281,7 +281,7 @@ export default function Create({ categories: dbCategories = [] }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-orange-600 text-white rounded-xl text-sm font-black hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/20 disabled:opacity-50"
+                                    className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-primary text-white rounded-xl text-sm font-black hover:bg-brand-primary/90 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50"
                                 >
                                     <Send className="w-4 h-4" />
                                     {processing ? 'Saving...' : 'Save & Publish'}

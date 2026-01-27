@@ -51,17 +51,17 @@ export default function ProductionQuality() {
         },
         yaxis: [
             {
-                title: { text: "Man Power", style: { color: "#eab308", fontWeight: 700 } },
+                title: { text: "Man Power", style: { color: "#22d3ee", fontWeight: 700 } },
                 labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
             },
             {
                 opposite: true,
-                title: { text: "Volume (M)", style: { color: "#f97316", fontWeight: 700 } },
+                title: { text: "Volume (M)", style: { color: "#0ea5e9", fontWeight: 700 } },
                 labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
             }
         ],
         grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
-        colors: ['#eab308', '#f97316'],
+        colors: ['#22d3ee', '#0ea5e9'],
         plotOptions: {
             bar: { borderRadius: 4, columnWidth: '40%' }
         },
@@ -147,7 +147,7 @@ export default function ProductionQuality() {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -155,12 +155,12 @@ export default function ProductionQuality() {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <ShieldCheck className="w-4 h-4" />
                             Precision & Reliability
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Production & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Quality</span>
+                            Production & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Quality</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
                             Precision engineering driven by automation and a relentless
@@ -174,7 +174,7 @@ export default function ProductionQuality() {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">Industrial 4.0</span>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">Industrial 4.0</span>
                         <h2 className="text-3xl font-bold text-slate-900 mt-2">Robotic Process Automation</h2>
                     </div>
 
@@ -192,7 +192,7 @@ export default function ProductionQuality() {
                                     <img src={f.img} alt={f.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
                                     <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                                        <div className="p-2 bg-orange-600 rounded-lg text-white shadow-lg">
+                                        <div className="p-2 bg-brand-primary rounded-lg text-white shadow-lg">
                                             {f.icon}
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@ export default function ProductionQuality() {
                                 <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-3xl shadow-inner">
                                     <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Status</span>
                                     <span className="text-xs font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2">
-                                        World Class <Zap className="w-3 h-3 text-orange-500 animate-pulse" />
+                                        World Class <Zap className="w-3 h-3 text-brand-primary animate-pulse" />
                                     </span>
                                 </div>
                             </div>
@@ -266,14 +266,14 @@ export default function ProductionQuality() {
                     <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
                         <Link
                             href={route('capabilities.sales-growth')}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-lg group"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-brand-primary transition-all shadow-lg group"
                         >
                             Sales Growth
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                         <Link
                             href={route('capabilities.loading-capacity')}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-orange-600 hover:text-orange-600 transition-all shadow-sm group"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm group"
                         >
                             Loading Capacity
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

@@ -47,7 +47,7 @@ export default function Index({ customers, filters }) {
                             placeholder="Search customers..."
                             defaultValue={filters.search}
                             onBlur={(e) => router.get(route('admin.customers.index'), { search: e.target.value }, { preserveState: true })}
-                            className="w-full pl-10 pr-4 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                            className="w-full pl-10 pr-4 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                         />
                     </div>
 
@@ -123,7 +123,7 @@ export default function Index({ customers, filters }) {
                                         <div className="flex justify-center gap-2">
                                             <Link
                                                 href={route('admin.customers.edit', customer.id)}
-                                                className="p-2 text-slate-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
+                                                className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
                                             >
                                                 <Edit2 className="w-4 h-4" />
                                             </Link>
@@ -152,8 +152,8 @@ export default function Index({ customers, filters }) {
                                         key={i}
                                         href={link.url}
                                         className={`px-3 py-1.5 rounded-lg border transition-all ${link.active
-                                            ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                                            : 'bg-white border-slate-200 text-slate-600 hover:border-orange-500 hover:text-orange-500'
+                                            ? 'bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20'
+                                            : 'bg-white border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary'
                                             }`}
                                         dangerouslySetInnerHTML={{ __html: link.label }}
                                     />

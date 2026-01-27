@@ -160,11 +160,11 @@ export default function AdminLayout({ children, title }) {
                                 key={item.name}
                                 href={item.href}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${item.active
-                                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20'
+                                    ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20'
                                     : 'text-slate-400 hover:bg-slate-800 hover:text-white'
                                     }`}
                             >
-                                <item.icon className={`w-5 h-5 ${item.active ? 'text-white' : 'group-hover:text-orange-400 text-slate-500'}`} />
+                                <item.icon className={`w-5 h-5 ${item.active ? 'text-white' : 'group-hover:text-brand-secondary text-slate-500'}`} />
                                 <span className="text-sm font-bold tracking-wide">{item.name}</span>
                                 {item.active && (
                                     <motion.div
@@ -181,8 +181,8 @@ export default function AdminLayout({ children, title }) {
                     {/* User Profile Summary */}
                     <div className="p-4 bg-slate-950/30 m-4 rounded-2xl border border-slate-800">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
-                                <UserIcon className="w-5 h-5 text-orange-500" />
+                            <div className="w-10 h-10 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center">
+                                <UserIcon className="w-5 h-5 text-brand-primary" />
                             </div>
                             <div className="overflow-hidden text-ellipsis">
                                 <p className="text-sm font-bold truncate">{auth.user.name}</p>
@@ -218,8 +218,8 @@ export default function AdminLayout({ children, title }) {
 
                     <div className="flex items-center gap-4">
                         {/* Status / Notifications placeholder */}
-                        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-orange-700 border border-orange-100 text-xs font-bold">
-                            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20 text-xs font-bold">
+                            <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
                             System Live
                         </div>
                     </div>

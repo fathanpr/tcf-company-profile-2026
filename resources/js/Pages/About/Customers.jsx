@@ -60,12 +60,12 @@ export default function Customers({ customers, filters }) {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <UserCheck className="w-4 h-4" />
                             Trusted Partnership
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our Valued <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Customers</span>
+                            Our Valued <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Customers</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
                             We are proud to serve industry leaders across the automotive and manufacturing sectors,
@@ -124,11 +124,11 @@ export default function Customers({ customers, filters }) {
                                                 className="w-full h-full object-contain relative z-10 p-4 drop-shadow-sm grayscale group-hover:grayscale-0 transition-all duration-300"
                                             />
                                         </div>
-                                        <h3 className="text-slate-900 font-bold text-sm leading-tight group-hover:text-blue-600 transition-colors">
+                                        <h3 className="text-slate-900 font-bold text-sm leading-tight group-hover:text-brand-primary transition-colors">
                                             {customer.name}
                                         </h3>
                                         <div className="mt-4 pt-4 border-t border-slate-50 w-full flex flex-col items-center gap-3">
-                                            <div className="flex items-center gap-2 text-[10px] font-black text-blue-500 uppercase tracking-widest">
+                                            <div className="flex items-center gap-2 text-[10px] font-black text-brand-primary uppercase tracking-widest">
                                                 Active Partner <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                             </div>
                                             {customer.website && (
@@ -136,7 +136,7 @@ export default function Customers({ customers, filters }) {
                                                     href={customer.website}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-600 text-[10px] font-bold hover:bg-orange-50 hover:text-orange-600 transition-all border border-slate-100"
+                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-50 text-slate-600 text-[10px] font-bold hover:bg-brand-primary/10 hover:text-brand-primary transition-all border border-slate-100"
                                                     title={customer.website}
                                                 >
                                                     <Globe className="w-3 h-3" />

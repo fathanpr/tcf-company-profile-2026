@@ -16,20 +16,20 @@ export default function SearchableSelect({
         control: (base, state) => ({
             ...base,
             backgroundColor: '#f8fafc', // slate-50
-            borderColor: state.isFocused ? '#f97316' : '#e2e8f0', // orange-500 : slate-200
+            borderColor: state.isFocused ? '#0ea5e9' : '#e2e8f0', // brand-primary : slate-200
             padding: '4px',
             borderRadius: '0.75rem', // rounded-xl
             boxShadow: 'none',
             '&:hover': {
-                borderColor: state.isFocused ? '#f97316' : '#cbd5e1', // slate-300
+                borderColor: state.isFocused ? '#0ea5e9' : '#cbd5e1', // slate-300
             }
         }),
         option: (base, state) => ({
             ...base,
             backgroundColor: state.isSelected
-                ? '#f97316' // orange-500
+                ? '#0ea5e9' // brand-primary
                 : state.isFocused
-                    ? '#fff7ed' // orange-50
+                    ? '#f0f9ff' // sky-50
                     : 'white',
             color: state.isSelected ? 'white' : '#1e293b', // slate-800
             cursor: 'pointer',
@@ -48,21 +48,21 @@ export default function SearchableSelect({
         }),
         multiValue: (base) => ({
             ...base,
-            backgroundColor: '#ffedd5', // orange-100
+            backgroundColor: '#e0f2fe', // sky-100
             borderRadius: '0.375rem',
         }),
         multiValueLabel: (base) => ({
             ...base,
-            color: '#c2410c', // orange-700
+            color: '#0369a1', // sky-700
             fontWeight: '700',
             fontSize: '0.75rem',
         }),
         multiValueRemove: (base) => ({
             ...base,
-            color: '#c2410c',
+            color: '#0369a1',
             ':hover': {
-                backgroundColor: '#fed7aa', // orange-200
-                color: '#9a3412', // orange-800
+                backgroundColor: '#bae6fd', // sky-200
+                color: '#075985', // sky-800
             },
         }),
         menu: (base) => ({

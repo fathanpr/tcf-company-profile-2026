@@ -81,7 +81,7 @@ const FloatingActions = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-14 h-14 ${isOpen ? 'bg-slate-800' : 'bg-orange-600'} text-white rounded-2xl shadow-2xl flex items-center justify-center transition-all duration-300 relative group overflow-hidden`}
+                className={`w-14 h-14 ${isOpen ? 'bg-brand-primary' : 'bg-brand-primary'} text-white rounded-2xl shadow-2xl flex items-center justify-center transition-all duration-300 relative group overflow-hidden`}
             >
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 

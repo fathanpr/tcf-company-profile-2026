@@ -123,7 +123,7 @@ export default function Navbar() {
                                     onMouseLeave={() => setOpenDropdown(null)}
                                 >
                                     <button
-                                        className={`flex items-center gap-1 text-sm font-bold uppercase tracking-wider relative group ${scrolled ? 'text-white' : 'text-white'} hover:text-orange-500 transition-colors duration-300`}
+                                        className={`flex items-center gap-1 text-sm font-bold uppercase tracking-wider relative group ${scrolled ? 'text-white' : 'text-white'} hover:text-brand-primary-500 transition-colors duration-300`}
                                     >
                                         {link.name}
                                         <ChevronDown className="w-4 h-4" />
@@ -142,7 +142,7 @@ export default function Navbar() {
                                                     <Link
                                                         key={child.name}
                                                         href={child.href}
-                                                        className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-orange-600 transition-colors"
+                                                        className="block px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 hover:text-brand-primary transition-colors"
                                                     >
                                                         {child.name}
                                                     </Link>
@@ -156,7 +156,7 @@ export default function Navbar() {
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => handleNavClick(e, link)}
-                                    className={`text-sm font-bold uppercase tracking-wider relative group ${scrolled ? 'text-white' : 'text-white'} hover:text-orange-500 transition-colors duration-300`}
+                                    className={`text-sm font-bold uppercase tracking-wider relative group ${scrolled ? 'text-white' : 'text-white'} hover:text-brand-primary transition-colors duration-300`}
                                 >
                                     {link.name}
                                 </Link>
@@ -165,7 +165,7 @@ export default function Navbar() {
 
                         {/* <button
                             onClick={toggleLanguage}
-                            className={`flex items-center space-x-1 text-sm font-medium transition-colors text-white/90 hover:text-orange-500`}
+                            className={`flex items-center space-x-1 text-sm font-medium transition-colors text-white/90 hover:text-brand-primary-500`}
                         >
                             <Globe className="w-4 h-4" />
                             <span className="uppercase">{locale}</span>
@@ -178,7 +178,7 @@ export default function Navbar() {
                         <motion.button
                             whileTap={{ scale: 0.9 }}
                             onClick={() => setIsOpen(!isOpen)}
-                            className={`text-white hover:text-orange-500 transition-colors pointer-events-auto`}
+                            className={`text-white hover:text-brand-primary transition-colors pointer-events-auto`}
                         >
                             <motion.div
                                 animate={{ rotate: isOpen ? 90 : 0 }}

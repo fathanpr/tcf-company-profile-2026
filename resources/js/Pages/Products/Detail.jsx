@@ -63,7 +63,7 @@ export default function Detail({ product }) {
                 <div className="container mx-auto px-6">
                     <Link
                         href={route('products.index')}
-                        className="inline-flex items-center gap-2 text-slate-400 hover:text-orange-400 transition-colors text-sm font-bold"
+                        className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors text-sm font-bold"
                     >
                         <ChevronLeft className="w-4 h-4" />
                         Back to Products
@@ -74,7 +74,7 @@ export default function Detail({ product }) {
             {/* Product Section */}
             <section className="pb-20 bg-slate-900 text-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-orange-600/10 blur-[120px] rounded-full"></div>
+                <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-brand-primary/10 blur-[120px] rounded-full"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-12 items-start">
@@ -106,7 +106,7 @@ export default function Detail({ product }) {
                                         <button
                                             key={idx}
                                             onClick={() => setActiveImage(img)}
-                                            className={`aspect-square rounded-xl overflow-hidden border-2 transition-all relative group ${activeImage === img ? 'border-orange-500 ring-4 ring-orange-500/20' : 'border-slate-700 hover:border-slate-500'}`}
+                                            className={`aspect-square rounded-xl overflow-hidden border-2 transition-all relative group ${activeImage === img ? 'border-blue-500 ring-4 ring-blue-500/20' : 'border-slate-700 hover:border-slate-500'}`}
                                         >
                                             <img
                                                 src={img?.startsWith('http') ? img : `/${img}`}
@@ -114,8 +114,8 @@ export default function Detail({ product }) {
                                                 alt=""
                                             />
                                             {activeImage === img && (
-                                                <div className="absolute inset-0 bg-orange-500/10 flex items-center justify-center">
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
+                                                <div className="absolute inset-0 bg-blue-500/10 flex items-center justify-center">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
                                                 </div>
                                             )}
                                         </button>
@@ -132,13 +132,13 @@ export default function Detail({ product }) {
                         >
                             <div className="mb-6">
                                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-black uppercase tracking-widest">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest">
                                         <Box className="w-3 h-3" />
                                         Active Production
                                     </div>
                                     {product.customer && (
                                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
-                                            <Users className="w-3 h-3 text-orange-500" />
+                                            <Users className="w-3 h-3 text-blue-500" />
                                             <span className="text-[10px] font-bold uppercase tracking-wider">{product.customer.name}</span>
                                         </div>
                                     )}
@@ -148,7 +148,7 @@ export default function Detail({ product }) {
                                     {product.name}
                                 </h1>
 
-                                <div className="h-1 w-20 bg-orange-500 mb-6 rounded-full"></div>
+                                <div className="h-1 w-20 bg-blue-500 mb-6 rounded-full"></div>
 
                                 <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
                                     {product.description}
@@ -157,7 +157,7 @@ export default function Detail({ product }) {
                                 {/* Technical Specs Grid - Optimized for density */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                                     <div className="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-xl bg-orange-600/20 flex items-center justify-center text-orange-400 flex-shrink-0">
+                                        <div className="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-blue-400 flex-shrink-0">
                                             <Layers className="w-5 h-5" />
                                         </div>
                                         <div>
@@ -198,7 +198,7 @@ export default function Detail({ product }) {
                             <div className="space-y-4">
                                 <Link
                                     href={`${route('home')}#location`}
-                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-orange-600 text-white font-black rounded-2xl hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/20 group uppercase tracking-widest text-sm"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-brand-primary text-white font-black rounded-2xl hover:bg-brand-primary transition-all shadow-xl shadow-brand-primary/20 group uppercase tracking-widest text-sm"
                                 >
                                     Inquiry for this Product
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -223,7 +223,7 @@ export default function Detail({ product }) {
 
                         <div className="grid md:grid-cols-3 gap-12">
                             <div className="text-center">
-                                <div className="w-16 h-16 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-orange-600 border border-slate-100">
+                                <div className="w-16 h-16 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-brand-primary border border-slate-100">
                                     <Settings className="w-8 h-8" />
                                 </div>
                                 <h4 className="font-bold text-slate-900 mb-3 text-lg">High Precision</h4>

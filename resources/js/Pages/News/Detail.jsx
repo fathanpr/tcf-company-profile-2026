@@ -51,7 +51,7 @@ export default function Detail({ article }) {
             {/* Breadcrumbs & Centered Hero */}
             <section className="pt-32 pb-20 bg-slate-900 border-b border-white/5 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-orange-600/5 blur-[120px] rounded-full"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-blue-600/5 blur-[120px] rounded-full"></div>
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -60,7 +60,7 @@ export default function Detail({ article }) {
                     >
                         <Link
                             href={route('news.index')}
-                            className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-orange-400 transition-colors group"
+                            className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-blue-400 transition-colors group"
                         >
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                             Back to News
@@ -68,7 +68,7 @@ export default function Detail({ article }) {
 
                         <div className="space-y-4 max-w-4xl">
                             <div className="flex items-center justify-center gap-3">
-                                <span className="px-3 py-1 rounded-lg bg-orange-500/10 text-orange-400 text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                                <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
                                     {article.category}
                                 </span>
                                 <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
@@ -107,7 +107,7 @@ export default function Detail({ article }) {
 
                                 {/* Rich Text Content Area */}
                                 <div className="prose prose-lg prose-slate max-w-none">
-                                    <p className="text-xl text-slate-600 leading-relaxed font-medium mb-10 italic border-l-4 border-orange-500 pl-8">
+                                    <p className="text-xl text-slate-600 leading-relaxed font-medium mb-10 italic border-l-4 border-blue-500 pl-8">
                                         {article.excerpt}
                                     </p>
 
@@ -116,15 +116,15 @@ export default function Detail({ article }) {
                                             [&>p]:mb-6 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-slate-900 [&>h2]:mb-4 [&>h2]:mt-8
                                             [&>h3]:text-xl [&>h3]:font-bold [&>h3]:text-slate-900 [&>h3]:mb-3 [&>h3]:mt-6
                                             [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-6 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-6
-                                            [&>li]:mb-2 [&>blockquote]:border-l-4 [&>blockquote]:border-orange-500 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:mb-6
-                                            [&>a]:text-orange-600 [&>a]:underline hover:[&>a]:text-orange-700"
+                                            [&>li]:mb-2 [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:mb-6
+                                            [&>a]:text-blue-600 [&>a]:underline hover:[&>a]:text-blue-700"
                                         dangerouslySetInnerHTML={{ __html: article.content }}
                                     />
 
                                     {/* Share Section */}
                                     <div className="mt-16 p-8 bg-slate-50 rounded-[32px] border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-full bg-orange-600 flex items-center justify-center text-white">
+                                            <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white">
                                                 <Share2 className="w-5 h-5" />
                                             </div>
                                             <div>
@@ -141,7 +141,7 @@ export default function Detail({ article }) {
                                                 <button
                                                     key={platform.name}
                                                     onClick={() => window.open(platform.url(window.location.href, article.title), '_blank')}
-                                                    className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-orange-500 hover:text-orange-600 transition-all active:scale-95"
+                                                    className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all active:scale-95"
                                                 >
                                                     {platform.name}
                                                 </button>
@@ -170,7 +170,7 @@ export default function Detail({ article }) {
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-                                            <Clock className="w-5 h-5 text-orange-500" />
+                                            <Clock className="w-5 h-5 text-blue-500" />
                                         </div>
                                         <div>
                                             <p className="text-xs text-slate-400">Reading Time</p>
@@ -179,7 +179,7 @@ export default function Detail({ article }) {
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
-                                            <Tag className="w-5 h-5 text-orange-500" />
+                                            <Tag className="w-5 h-5 text-blue-500" />
                                         </div>
                                         <div>
                                             <p className="text-xs text-slate-400">Category Tag</p>
@@ -193,14 +193,14 @@ export default function Detail({ article }) {
                             {article.tags && article.tags.length > 0 && (
                                 <div className="p-8 bg-white rounded-[32px] border border-slate-100 shadow-sm">
                                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                                        <Hash className="w-4 h-4 text-orange-500" />
+                                        <Hash className="w-4 h-4 text-blue-500" />
                                         Related Tags
                                     </h3>
                                     <div className="flex flex-wrap gap-2">
                                         {article.tags.split(',').map((tag, index) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-bold rounded-lg border border-slate-100 hover:border-orange-200 hover:text-orange-600 transition-colors cursor-default"
+                                                className="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-bold rounded-lg border border-slate-100 hover:border-blue-200 hover:text-blue-600 transition-colors cursor-default"
                                             >
                                                 #{tag.trim()}
                                             </span>
@@ -211,14 +211,14 @@ export default function Detail({ article }) {
 
                             {/* Related Links / CTA */}
                             <div className="p-8 bg-slate-900 rounded-[32px] text-white relative overflow-hidden group">
-                                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-600/20 to-transparent"></div>
+                                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/20 to-transparent"></div>
                                 <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">Interested in our services?</h4>
                                 <p className="text-slate-400 text-xs mb-8 relative z-10 leading-relaxed">
                                     Request a technical consultation or a quote for your stamping and welding assembly needs.
                                 </p>
                                 <Link
                                     href={`${route('home')}#location`}
-                                    className="w-full inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-6 py-4 rounded-2xl font-black text-xs hover:bg-orange-700 transition-all relative z-10 shadow-xl shadow-orange-600/20 uppercase tracking-widest"
+                                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-2xl font-black text-xs hover:bg-blue-700 transition-all relative z-10 shadow-xl shadow-blue-600/20 uppercase tracking-widest"
                                 >
                                     Contact Sales
                                     <ChevronRight className="w-4 h-4" />
@@ -232,7 +232,7 @@ export default function Detail({ article }) {
                                 </div>
                                 <h3 className="text-lg font-black text-slate-900 mb-2">Have a question?</h3>
                                 <p className="text-sm text-slate-500 mb-6">Feel free to message our team for any inquiries about our manufacturing process.</p>
-                                <a href="mailto:info@tricentrumfortuna.com" className="text-orange-600 font-bold hover:underline">info@tricentrumfortuna.com</a>
+                                <a href="mailto:info@tricentrumfortuna.com" className="text-blue-600 font-bold hover:underline">info@tricentrumfortuna.com</a>
                             </div>
 
                         </aside>

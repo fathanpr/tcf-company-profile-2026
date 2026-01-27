@@ -22,37 +22,37 @@ export default function Home({ translations = {}, customers = [], products = [],
         {
             title: 'STAMPING',
             desc: 'High-tonnage press capabilities delivering intricate automotive components with micron-level accuracy.',
-            icon: <Award className="w-12 h-12 text-orange-500" />,
+            icon: <Award className="w-12 h-12 text-brand-primary" />,
             image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'WELDING',
             desc: 'State-of-the-art automated welding lines ensuring structural integrity and consistent quality.',
-            icon: <Zap className="w-12 h-12 text-orange-500" />,
+            icon: <Zap className="w-12 h-12 text-brand-primary" />,
             image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'BENDING',
             desc: 'Precision bending services for complex geometries and structural requirements.',
-            icon: <Shield className="w-12 h-12 text-green-500" />,
+            icon: <Shield className="w-12 h-12 text-brand-secondary" />,
             image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'MACHINING',
             desc: 'Advanced CNC machining for tight tolerances and high-quality surface finishes.',
-            icon: <Zap className="w-12 h-12 text-purple-500" />,
+            icon: <Zap className="w-12 h-12 text-brand-secondary" />,
             image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'PAINTING',
             desc: 'Automated painting lines providing superior corrosion protection and aesthetic finish.',
-            icon: <Award className="w-12 h-12 text-red-500" />,
+            icon: <Award className="w-12 h-12 text-brand-secondary" />,
             image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: 'DIE MAKING',
             desc: 'In-house design and manufacturing of high-precision dies and tooling.',
-            icon: <Shield className="w-12 h-12 text-orange-500" />,
+            icon: <Shield className="w-12 h-12 text-brand-primary" />,
             image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
         }
     ];
@@ -179,18 +179,18 @@ export default function Home({ translations = {}, customers = [], products = [],
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-md mb-6">
-                            <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
-                            <span className="text-orange-300 text-xs font-bold tracking-widest uppercase">Future Manufacturing</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/10 backdrop-blur-md mb-6">
+                            <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse"></span>
+                            <span className="text-brand-primary text-xs font-bold tracking-widest uppercase">Future Manufacturing</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
-                            Indonesia's Most Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Tier 2 Partner</span>
+                        <h1 className="text-4xl md:text-6xl font-display font-black text-white leading-tight mb-6">
+                            Indonesia's Most Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Tier 2 Partner</span>
                         </h1>
                         <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
                             Advanced Welding & Stamping solutions for the automotive industry. We engineer the future with integrity and excellence.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <a href="#capabilities" className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-orange-500/25 flex items-center gap-2">
+                            <a href="#capabilities" className="px-8 py-4 bg-brand-primary hover:bg-brand-primary/90 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-brand-primary/25 flex items-center gap-2">
                                 Our Capabilities <ArrowRight size={18} />
                             </a>
                             <a href="#about" className="px-8 py-4 border border-white/20 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm">
@@ -208,8 +208,8 @@ export default function Home({ translations = {}, customers = [], products = [],
                     >
                         <div className="relative z-10 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center">
-                                    <Zap className="text-orange-400" />
+                                <div className="w-12 h-12 rounded-full bg-brand-primary/20 flex items-center justify-center">
+                                    <Zap className="text-brand-secondary" />
                                 </div>
                                 <div>
                                     <h3 className="text-white font-bold text-lg">Smart Factory</h3>
@@ -217,8 +217,8 @@ export default function Home({ translations = {}, customers = [], products = [],
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center">
-                                    <Shield className="text-orange-400" />
+                                <div className="w-12 h-12 rounded-full bg-brand-primary/20 flex items-center justify-center">
+                                    <Shield className="text-brand-secondary" />
                                 </div>
                                 <div>
                                     <h3 className="text-white font-bold text-lg">ISO Certified</h3>
@@ -235,7 +235,7 @@ export default function Home({ translations = {}, customers = [], products = [],
             <section id="about" className="min-h-screen flex items-center justify-center py-12 bg-white relative overflow-hidden">
                 <div className="container mx-auto px-6 h-full flex flex-col justify-center">
                     <div className="text-center mb-8">
-                        <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">About Us</span>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">About Us</span>
                         <h2 className="text-3xl font-bold text-slate-900 mt-2">Our Journey & Values</h2>
                     </div>
 
@@ -280,9 +280,9 @@ export default function Home({ translations = {}, customers = [], products = [],
 
                     {/* Core Values */}
                     <div className="bg-slate-900 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/20 rounded-full blur-[100px]"></div>
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/20 rounded-full blur-[100px]"></div>
                         <div className="relative z-10 text-center mb-6">
-                            <h3 className="text-2xl font-bold mb-2">Our Core Values: <span className="text-orange-500">EXIST</span></h3>
+                            <h3 className="text-2xl font-display font-bold mb-2">Our Core Values: <span className="text-brand-primary">EXIST</span></h3>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 relative z-10">
                             {values.map((val, idx) => (
@@ -295,7 +295,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     whileHover={{ y: -5 }}
                                     className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center"
                                 >
-                                    <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-orange-400 to-yellow-400 mb-1">{val.letter}</div>
+                                    <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-primary to-brand-secondary mb-1">{val.letter}</div>
                                     <h4 className="font-bold text-sm mb-1">{val.title}</h4>
                                     <p className="text-[10px] text-slate-300 leading-relaxed hidden lg:block">{val.desc}</p>
                                 </motion.div>
@@ -309,7 +309,7 @@ export default function Home({ translations = {}, customers = [], products = [],
             <section id="capabilities" className="py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-50 relative">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16 lg:mb-10">
-                        <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">What We Do</span>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">What We Do</span>
                         <h2 className="text-4xl font-bold text-slate-900 mt-2">Specialized Automotive Manufacturing Capabilities</h2>
                     </div>
 
@@ -334,7 +334,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                             key={`${slideIndex}-${idx}`}
                                             className="w-full md:w-1/3 flex-shrink-0"
                                         >
-                                            <div className="group bg-white rounded-3xl overflow-hidden shadow-[0_15px_30px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-5px_rgba(249,115,22,0.15)] transition-all duration-500 h-full border border-slate-100 hover:border-orange-100">
+                                            <div className="group bg-white rounded-3xl overflow-hidden shadow-[0_15px_30px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-5px_rgba(14,165,233,0.15)] transition-all duration-500 h-full border border-slate-100 hover:border-brand-primary/30">
                                                 <div className="h-48 lg:h-40 overflow-hidden relative">
                                                     <img src={cap.image} alt={cap.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
                                                     <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-500"></div>
@@ -343,7 +343,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                                     <div className="absolute -top-10 right-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center scale-90 lg:scale-100 border border-slate-50 group-hover:rotate-6 transition-transform duration-500">
                                                         {cap.icon}
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-orange-600 transition-colors">{cap.title}</h3>
+                                                    <h3 className="text-xl font-display font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-brand-primary transition-colors">{cap.title}</h3>
                                                     <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{cap.desc}</p>
                                                 </div>
                                             </div>
@@ -356,13 +356,13 @@ export default function Home({ translations = {}, customers = [], products = [],
                         {/* Navigation Buttons */}
                         <button
                             onClick={() => paginate(-1)}
-                            className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-orange-500 hover:scale-110 transition-all z-10"
+                            className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-brand-primary hover:scale-110 transition-all z-10"
                         >
                             <ChevronLeft size={24} />
                         </button>
                         <button
                             onClick={() => paginate(1)}
-                            className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-orange-500 hover:scale-110 transition-all z-10"
+                            className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:text-blue-500 hover:scale-110 transition-all z-10"
                         >
                             <ChevronRight size={24} />
                         </button>
@@ -373,7 +373,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                 <button
                                     key={idx}
                                     onClick={() => setPage([idx, idx > slideIndex ? 1 : -1])}
-                                    className={`w-3 h-3 rounded-full transition-all ${slideIndex === idx ? 'bg-orange-500 w-8' : 'bg-slate-300'}`}
+                                    className={`w-3 h-3 rounded-full transition-all ${slideIndex === idx ? 'bg-brand-primary w-8' : 'bg-slate-300'}`}
                                 />
                             ))}
                         </div>
@@ -382,7 +382,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         <div className="mt-12 text-center">
                             <Link
                                 href={route('capabilities.sales-growth')}
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 text-white font-bold rounded-full hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-600/25 group"
+                                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-bold rounded-full hover:bg-brand-primary/90 transition-all shadow-lg hover:shadow-brand-primary/25 group"
                             >
                                 View Performance & Growth
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -398,7 +398,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                 <div className="container mx-auto px-6 relative z-10 py-0">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-12">
                         <div>
-                            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Our Output</span>
+                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">Our Output</span>
                             <h2 className="text-4xl font-bold mt-2">High-Precision Automotive Products</h2>
                         </div>
                         <p className="text-slate-400 max-w-md text-sm mt-4 md:mt-0 text-center md:text-right">
@@ -443,7 +443,7 @@ export default function Home({ translations = {}, customers = [], products = [],
             {/* --- INFINITY CUSTOMER SCROLL --- */}
             < section className="py-20 bg-slate-900 relative overflow-hidden border-t border-white/5" >
                 <div className="container mx-auto px-6 mb-10 text-center">
-                    <p className="text-orange-400 text-xs font-black uppercase tracking-[0.3em] mb-4">Strategic Partners</p>
+                    <p className="text-brand-secondary text-xs font-black uppercase tracking-[0.3em] mb-4">Strategic Partners</p>
                 </div>
 
                 <div className="relative w-full">
@@ -466,7 +466,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                             className="max-w-full max-h-full object-contain filter drop-shadow-xl scale-110 group-hover:scale-125 transition-transform duration-500"
                                         />
                                         {/* Glow effect on hover */}
-                                        <div className="absolute -inset-8 bg-orange-500/0 group-hover:bg-orange-500/10 blur-2xl rounded-full transition-all duration-500 -z-10"></div>
+                                        <div className="absolute -inset-8 bg-brand-primary/0 group-hover:bg-brand-primary/10 blur-2xl rounded-full transition-all duration-500 -z-10"></div>
                                     </div>
                                 </div>
                             ))}
@@ -503,7 +503,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         transition={{ duration: 0.8 }}
                         className="text-center mb-16"
                     >
-                        <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Latest Updates</span>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">Latest Updates</span>
                         <h2 className="text-4xl font-bold text-slate-900 mt-2">Latest News & Industry Insights</h2>
                     </motion.div>
 
@@ -528,8 +528,8 @@ export default function Home({ translations = {}, customers = [], products = [],
                                         <p className="text-xs text-slate-400 font-medium mb-3">
                                             {new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                                         </p>
-                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2 min-h-[3.5rem]">{item.title}</h3>
-                                        <span className="text-orange-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">Read Article <ArrowRight size={14} /></span>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 min-h-[3.5rem]">{item.title}</h3>
+                                        <span className="text-blue-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">Read Article <ArrowRight size={14} /></span>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -550,7 +550,7 @@ export default function Home({ translations = {}, customers = [], products = [],
             </section>
 
             {/* --- DOWNLOAD TRANSITION --- */}
-            <section className="py-16 bg-gradient-to-r from-orange-900 to-slate-900 relative overflow-hidden">
+            <section className="py-16 bg-gradient-to-r from-brand-primary to-slate-900 relative overflow-hidden">
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -570,15 +570,15 @@ export default function Home({ translations = {}, customers = [], products = [],
                     >
                         <div className="text-center md:text-left">
                             <h3 className="text-2xl font-bold text-white mb-2">Want to know more about us?</h3>
-                            <p className="text-orange-200">Download our detailed profile and view our certifications.</p>
+                            <p className="text-blue-200">Download our detailed profile and view our certifications.</p>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center">
-                            <a href="/files/TCF_Company_Profile_2026.pdf" download="TCF_Company_Profile_2026.pdf" className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-orange-500/25 group">
+                            <a href="/files/TCF_Company_Profile_2026.pdf" download="TCF_Company_Profile_2026.pdf" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-blue-500/25 group">
                                 <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                 <span>Download</span>
                             </a>
                             {/* <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/30 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm group">
-                                <Award className="w-5 h-5 text-orange-300 group-hover:scale-110 transition-transform" />
+                                <Award className="w-5 h-5 text-blue-300 group-hover:scale-110 transition-transform" />
                                 <span>Certifications (ISO/IATF)</span>
                             </a> */}
                         </div>
@@ -598,7 +598,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                         className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
                     >
                         <div>
-                            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm">Get in Touch</span>
+                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">Get in Touch</span>
                             <h2 className="text-4xl font-bold mt-2 mb-6">Connect with Us</h2>
                             <p className="text-slate-400 text-base mb-8 leading-relaxed">
                                 Strategically located in KIM Karawang, our facility is equipped with modern infrastructure to support efficient logistics and production.
@@ -607,7 +607,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                             <div className="space-y-4">
                                 <div className="flex items-start gap-4">
                                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                                        <MapPin className="text-orange-400 w-5 h-5" />
+                                        <MapPin className="text-blue-400 w-5 h-5" />
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Head Office & Factory</h4>
@@ -618,7 +618,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                 </div>
                                 <div className="flex items-start gap-4">
                                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                                        <Phone className="text-orange-400 w-5 h-5" />
+                                        <Phone className="text-blue-400 w-5 h-5" />
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-white text-sm mb-1">Phone</h4>
@@ -652,7 +652,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     referrerPolicy="no-referrer-when-downgrade"
                                     className="grayscale hover:grayscale-0 transition-all duration-700"
                                 ></iframe>
-                                <div className="absolute bottom-3 left-3 bg-orange-600 text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
+                                <div className="absolute bottom-3 left-3 bg-brand-primary text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
                                     Plant Purwakarta
                                 </div>
                             </div>
@@ -669,7 +669,7 @@ export default function Home({ translations = {}, customers = [], products = [],
                                     referrerPolicy="no-referrer-when-downgrade"
                                     className="grayscale hover:grayscale-0 transition-all duration-700"
                                 ></iframe>
-                                <div className="absolute bottom-3 left-3 bg-orange-600 text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
+                                <div className="absolute bottom-3 left-3 bg-blue-600 text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
                                     Plant Karawang
                                 </div>
                             </div>

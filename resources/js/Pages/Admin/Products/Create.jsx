@@ -47,7 +47,7 @@ export default function Create({ customers }) {
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div className="p-8 border-b border-slate-100 bg-slate-50/50">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
+                            <div className="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
                                 <Box className="w-6 h-6" />
                             </div>
                             <div>
@@ -68,7 +68,7 @@ export default function Create({ customers }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
                                 placeholder="E.g. Front Door Hinge"
                                 required
                             />
@@ -97,7 +97,7 @@ export default function Create({ customers }) {
                                 value={data.description}
                                 onChange={e => setData('description', e.target.value)}
                                 rows="4"
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all resize-none ${errors.description ? 'ring-2 ring-red-500' : ''}`}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none ${errors.description ? 'ring-2 ring-red-500' : ''}`}
                                 placeholder="Technical specifications, materials, etc..."
                                 required
                             ></textarea>
@@ -131,7 +131,7 @@ export default function Create({ customers }) {
                                     type="checkbox"
                                     checked={data.is_active}
                                     onChange={e => setData('is_active', e.target.checked)}
-                                    className="w-5 h-5 rounded text-orange-600 focus:ring-orange-500"
+                                    className="w-5 h-5 rounded text-brand-primary focus:ring-brand-primary"
                                 />
                                 <div className="flex flex-col">
                                     <span className="text-sm font-bold text-slate-700">Active Status</span>
@@ -210,7 +210,7 @@ export default function Create({ customers }) {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-orange-600 text-white rounded-xl text-base font-black hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/20 disabled:opacity-50"
+                                className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-brand-primary text-white rounded-xl text-base font-black hover:bg-brand-primary/90 transition-all shadow-xl shadow-brand-primary/20 disabled:opacity-50"
                             >
                                 <Save className="w-5 h-5" />
                                 {processing ? 'Creating Product...' : 'Create Product'}

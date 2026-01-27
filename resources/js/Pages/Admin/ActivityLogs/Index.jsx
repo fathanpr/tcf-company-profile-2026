@@ -92,8 +92,8 @@ export default function Index({ logs }) {
                                         key={i}
                                         href={link.url}
                                         className={`px-3 py-1.5 rounded-lg border transition-all ${link.active
-                                            ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                                            : 'bg-white border-slate-200 text-slate-600 hover:border-orange-500 hover:text-orange-500'
+                                            ? 'bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20'
+                                            : 'bg-white border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary'
                                             }`}
                                         dangerouslySetInnerHTML={{ __html: link.label }}
                                     />

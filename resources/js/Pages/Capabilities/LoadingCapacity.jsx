@@ -175,7 +175,7 @@ export default function LoadingCapacity() {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 find w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 find w-full h-full bg-gradient-to-b from-brand-primary via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -183,12 +183,12 @@ export default function LoadingCapacity() {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Clock className="w-4 h-4" />
                             Reliable Output
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Loading <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Capacity</span>
+                            Loading <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Capacity</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
                             Strategic capacity planning across our manufacturing facilities
@@ -241,11 +241,11 @@ export default function LoadingCapacity() {
                     <div className="max-w-4xl mx-auto">
                         <div className="bg-slate-900 rounded-[40px] p-10 md:p-16 text-white relative overflow-hidden shadow-2xl">
                             <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px]"></div>
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-600/10 rounded-full blur-[100px]"></div>
+                            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-[100px]"></div>
 
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                                    Operational Strategy <LineChart className="text-orange-500" />
+                                    Operational Strategy <LineChart className="text-brand-primary" />
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-12">
                                     <div className="space-y-6">

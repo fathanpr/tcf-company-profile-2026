@@ -12,7 +12,7 @@ const facilityData = {
         machines: [
             {
                 category: "Progressive Machine",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "110T SC", count: "3" },
@@ -32,7 +32,7 @@ const facilityData = {
             },
             {
                 category: "Tandem Machine",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "110T SC", count: "14" },
@@ -50,7 +50,7 @@ const facilityData = {
             },
             {
                 category: "Welding Machine",
-                icon: <Users className="w-5 h-5 text-orange-500" />,
+                icon: <Users className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "Spot - 50kVA", count: "2" },
@@ -117,7 +117,7 @@ const facilityData = {
         machines: [
             {
                 category: "Progressive Machine",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "110T SC", count: "13" },
@@ -134,7 +134,7 @@ const facilityData = {
             },
             {
                 category: "Tandem Machine",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "110T SC", count: "2" },
@@ -148,7 +148,7 @@ const facilityData = {
             },
             {
                 category: "Welding Machine",
-                icon: <Users className="w-5 h-5 text-orange-500" />,
+                icon: <Users className="w-5 h-5 text-brand-primary" />,
                 showCount: true,
                 items: [
                     { name: "Manual Weld", count: "9" },
@@ -281,7 +281,7 @@ export default function Facilities() {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary/10 via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -289,12 +289,12 @@ export default function Facilities() {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Building2 className="w-4 h-4" />
                             Production Excellence
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Facilities</span>
+                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Facilities</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
                             Operating from strategic locations to serve our partners efficiently,
@@ -321,13 +321,13 @@ export default function Facilities() {
                                     alt="Plant Purwakarta"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute top-4 left-4 bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                                     PURWAKARTA
                                 </div>
                             </div>
                             <div className="p-8 flex flex-col flex-grow">
                                 <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                                    <Building2 className="text-orange-500" />
+                                    <Building2 className="text-brand-primary" />
                                     PLANT – PURWAKARTA
                                 </h2>
                                 <div className="flex items-start gap-4 text-slate-600 mb-auto">
@@ -341,7 +341,7 @@ export default function Facilities() {
 
                                 <button
                                     onClick={() => openModal('purwakarta')}
-                                    className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2"
+                                    className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                 >
                                     View Plant Details
                                 </button>
@@ -391,8 +391,8 @@ export default function Facilities() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">
-                                                <Users className="text-orange-500 w-5 h-5" />
+                                            <div className="w-10 h-10 rounded-full bg-brand-primaryflex items-center justify-center">
+                                                <Users className="text-brand-primary w-5 h-5" />
                                             </div>
                                             <div>
                                                 <p className="text-xs text-slate-400">Total Workforce</p>
@@ -404,7 +404,7 @@ export default function Facilities() {
 
                                     <button
                                         onClick={() => openModal('karawang')}
-                                        className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2"
+                                        className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                     >
                                         View Plant Details
                                     </button>
@@ -454,7 +454,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
             <div className="space-y-12">
                 {/* Layout Section */}
                 <div>
-                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                    <h4 className={`font-display font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-brand-secondary'}`}>
                         <Building2 className="w-6 h-6" />
                         Factory Layout
                     </h4>
@@ -480,7 +480,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
 
                 {/* Production Facilities Grid */}
                 <div>
-                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-blue-600'}`}>
                         <Users className="w-6 h-6" />
                         Production Facilities & Equipment
                     </h4>
