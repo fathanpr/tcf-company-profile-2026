@@ -4,11 +4,14 @@ import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { BarChart3, LineChart, Package, Clock, Building2, ArrowUpRight, Maximize2 } from 'lucide-react';
 import Chart from 'react-apexcharts';
+import { useLocalic, useTranslation } from '@/helpers';
 
 export default function LoadingCapacity() {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const plantsData = [
         {
-            name: "Purwakarta Plant",
+            name: __("Purwakarta Plant"),
             id: "purwakarta",
             years: ["2025", "2026", "2027", "2028"],
             stats: [
@@ -22,7 +25,7 @@ export default function LoadingCapacity() {
             border: "border-orange-100"
         },
         {
-            name: "Karawang Plant",
+            name: __("Karawang Plant"),
             id: "karawang",
             years: ["2025", "2026", "2027", "2028"],
             stats: [
@@ -117,7 +120,7 @@ export default function LoadingCapacity() {
             shared: true,
             intersect: false,
             y: {
-                formatter: (val) => `${val} Million Strokes`
+                formatter: (val) => `${val} ${__('Million Strokes')}`
             }
         },
         markers: {
@@ -129,32 +132,32 @@ export default function LoadingCapacity() {
 
     const getChartSeries = (plant) => [
         {
-            name: 'Small Parts',
+            name: __('Small Parts'),
             type: 'bar',
             data: plant.stats.map(s => s.small)
         },
         {
-            name: 'Medium Parts',
+            name: __('Medium Parts'),
             type: 'bar',
             data: plant.stats.map(s => s.medium)
         },
         {
-            name: 'Big Parts',
+            name: __('Big Parts'),
             type: 'bar',
             data: plant.stats.map(s => s.big)
         },
         {
-            name: 'Shift 1 Cap',
+            name: __('Shift 1 Cap'),
             type: 'line',
             data: Array(plant.years.length).fill(80)
         },
         {
-            name: 'Shift 2 Cap',
+            name: __('Shift 2 Cap'),
             type: 'line',
             data: Array(plant.years.length).fill(160)
         },
         {
-            name: 'Shift 3 Cap',
+            name: __('Shift 3 Cap'),
             type: 'line',
             data: Array(plant.years.length).fill(240)
         }
@@ -163,10 +166,10 @@ export default function LoadingCapacity() {
     return (
         <MainLayout>
             <Head>
-                <title>Loading Capacity & Operational Scale - PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Analyze TCF's production loading capacity and efficiency. Our scalable infrastructure is ready to meet high-volume automotive component demands." />
-                <meta property="og:title" content="TCF Loading Capacity - Scalable Manufacturing Powerhouse" />
-                <meta property="og:description" content="Optimized production lines and high-capacity facilities for Tier 1 and Tier 2 automotive partners." />
+                <title>{__('Loading Capacity & Operational Scale - PT Tri Centrum Fortuna')}</title>
+                <meta name="description" content={__('Analyze TCF\'s production loading capacity and efficiency. Our scalable infrastructure is ready to meet high-volume automotive component demands.')} />
+                <meta property="og:title" content={__('TCF Loading Capacity - Scalable Manufacturing Powerhouse')} />
+                <meta property="og:description" content={__('Optimized production lines and high-capacity facilities for Tier 1 and Tier 2 automotive partners.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -185,14 +188,13 @@ export default function LoadingCapacity() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Clock className="w-4 h-4" />
-                            Reliable Output
+                            {__('Reliable Output')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Loading <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Capacity</span>
+                            {__('Loading')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Capacity')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Strategic capacity planning across our manufacturing facilities
-                            to ensure on-time delivery for complex automotive projects.
+                            {__('Strategic capacity planning across our manufacturing facilities to ensure on-time delivery for complex automotive projects.')}
                         </p>
                     </motion.div>
                 </div>
@@ -216,7 +218,7 @@ export default function LoadingCapacity() {
                                             <Building2 className={`${plant.color} w-6 h-6`} />
                                             <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight">{plant.name}</h3>
                                         </div>
-                                        <p className="text-slate-500 text-sm">Projected Output (Millions of Strokes)</p>
+                                        <p className="text-slate-500 text-sm">{__('Projected Output (Millions of Strokes)')}</p>
                                     </div>
                                     <BarChart3 className={`${plant.color} opacity-20 w-12 h-12`} />
                                 </div>
@@ -245,7 +247,7 @@ export default function LoadingCapacity() {
 
                             <div className="relative z-10">
                                 <h3 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                                    Operational Strategy <LineChart className="text-brand-primary" />
+                                    {__('Operational Strategy')} <LineChart className="text-brand-primary" />
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-12">
                                     <div className="space-y-6">
@@ -254,8 +256,8 @@ export default function LoadingCapacity() {
                                                 <Clock className="text-blue-400 w-6 h-6" />
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-xl mb-1 text-blue-400">3-Shift System</h4>
-                                                <p className="text-slate-400 text-sm leading-relaxed">Full utilization of capacity with a structured three-shift rotation to 24/7 ensure continuous production cycles.</p>
+                                                <h4 className="font-bold text-xl mb-1 text-blue-400">{__('3-Shift System')}</h4>
+                                                <p className="text-slate-400 text-sm leading-relaxed">{__('Full utilization of capacity with a structured three-shift rotation to 24/7 ensure continuous production cycles.')}</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-4">
@@ -263,20 +265,20 @@ export default function LoadingCapacity() {
                                                 <Maximize2 className="text-orange-400 w-6 h-6" />
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-xl mb-1 text-orange-400">Scalable Infrastructure</h4>
-                                                <p className="text-slate-400 text-sm leading-relaxed">Proactive expansion projects planned from 2025 to 2028 to maintain 20%+ annual growth in strokes.</p>
+                                                <h4 className="font-bold text-xl mb-1 text-orange-400">{__('Scalable Infrastructure')}</h4>
+                                                <p className="text-slate-400 text-sm leading-relaxed">{__('Proactive expansion projects planned from 2025 to 2028 to maintain 20%+ annual growth in strokes.')}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="bg-white/5 border border-white/10 p-8 rounded-3xl h-full flex flex-col justify-center">
                                         <Package className="text-emerald-400 w-10 h-10 mb-4" />
-                                        <h4 className="font-bold text-xl mb-2 text-white">Full Tonnage Range</h4>
-                                        <p className="text-sm text-slate-400 leading-relaxed mb-6">Our capacity spans from small precision components to large structural parts using 1500T robotic transfer lines.</p>
+                                        <h4 className="font-bold text-xl mb-2 text-white">{__('Full Tonnage Range')}</h4>
+                                        <p className="text-sm text-slate-400 leading-relaxed mb-6">{__('Our capacity spans from small precision components to large structural parts using 1500T robotic transfer lines.')}</p>
                                         <Link
-                                            href={route('about.facilities')}
+                                            href={lRoute('about.facilities')}
                                             className="flex items-center gap-2 text-emerald-400 font-black text-xs uppercase cursor-pointer group hover:text-emerald-300 transition-colors"
                                         >
-                                            Explore Facilities <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                            {__('Explore Facilities')} <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                         </Link>
                                     </div>
                                 </div>
@@ -287,17 +289,17 @@ export default function LoadingCapacity() {
                     {/* Navigation Buttons */}
                     <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
                         <Link
-                            href={route('capabilities.sales-growth')}
+                            href={lRoute('capabilities.sales-growth')}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-lg group"
                         >
-                            Sales Growth
+                            {__('Sales Growth')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                         <Link
-                            href={route('capabilities.production-quality')}
+                            href={lRoute('capabilities.production-quality')}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-orange-600 hover:text-orange-600 transition-all shadow-sm group"
                         >
-                            Production & Quality
+                            {__('Production & Quality')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                     </div>

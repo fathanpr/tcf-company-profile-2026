@@ -2,6 +2,7 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, usePage, Link } from '@inertiajs/react';
 import { Newspaper, Users, Box, Building2, ShieldCheck, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * Admin Dashboard
@@ -9,14 +10,16 @@ import { motion } from 'framer-motion';
  */
 export default function Dashboard() {
     const { auth } = usePage().props;
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const userPermissions = auth.user.permissions || [];
     const canViewLogs = userPermissions.includes('view logs');
 
     const stats = [
-        { name: 'Total News', icon: Newspaper, count: '15', color: 'bg-blue-500' },
-        { name: 'Total Users', icon: Users, count: '3', color: 'bg-emerald-500' },
-        { name: 'Total Products', icon: Box, count: '12', color: 'bg-brand-primary' },
-        { name: 'Active Customers', icon: Building2, count: '8', color: 'bg-purple-500' },
+        { name: __('Total News'), icon: Newspaper, count: '15', color: 'bg-blue-500' },
+        { name: __('Total Users'), icon: Users, count: '3', color: 'bg-emerald-500' },
+        { name: __('Total Products'), icon: Box, count: '12', color: 'bg-brand-primary' },
+        { name: __('Active Customers'), icon: Building2, count: '8', color: 'bg-purple-500' },
     ];
 
     return (
@@ -27,10 +30,10 @@ export default function Dashboard() {
                 {/* Welcome Hero */}
                 <div className="relative overflow-hidden bg-slate-900 rounded-3xl p-10 text-white shadow-2xl shadow-slate-900/20">
                     <div className="relative z-10 max-w-2xl">
-                        <h1 className="text-3xl font-black mb-4">Good Day, {auth.user.name.split(' ')[0]}! 👋</h1>
+                        <h1 className="text-3xl font-black mb-4">{__('Good Day')}, {auth.user.name.split(' ')[0]}! 👋</h1>
                         <p className="text-slate-400 font-medium leading-relaxed">
-                            Welcome to the PT Tri Centrum Fortuna administrative dashboard.
-                            From here, you can manage your corporate content, users, and digital assets with full audit tracking.
+                            {__('Welcome to the PT Tri Centrum Fortuna administrative dashboard.')}
+                            {__('From here, you can manage your corporate content, users, and digital assets with full audit tracking.')}
                         </p>
                     </div>
                     {/* Abstract background elements */}
@@ -52,7 +55,7 @@ export default function Dashboard() {
                                 <div className={`p-3 rounded-xl text-white ${stat.color} shadow-lg shadow-${stat.color.split('-')[1]}-500/20 group-hover:scale-110 transition-transform`}>
                                     <stat.icon className="w-6 h-6" />
                                 </div>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Inventory</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">{__('Inventory')}</span>
                             </div>
                             <h3 className="text-2xl font-black text-slate-800">{stat.count}</h3>
                             <p className="text-sm font-bold text-slate-500 uppercase tracking-tight">{stat.name}</p>
@@ -67,17 +70,17 @@ export default function Dashboard() {
                             <ShieldCheck className="w-6 h-6" />
                         </div>
                         <div>
-                            <h4 className="font-black uppercase tracking-tight">Security Protocol Active</h4>
-                            <p className="text-sm font-medium opacity-80">Your session is encrypted and all actions are being logged to the audit trail.</p>
+                            <h4 className="font-black uppercase tracking-tight">{__('Security Protocol Active')}</h4>
+                            <p className="text-sm font-medium opacity-80">{__('Your session is encrypted and all actions are being logged to the audit trail.')}</p>
                         </div>
                     </div>
                     <div className="flex gap-4">
                         {canViewLogs && (
                             <Link
-                                href={route('admin.activity-logs.index')}
+                                href={lRoute('admin.activity-logs.index')}
                                 className="px-6 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-black hover:bg-emerald-700 transition-all flex items-center gap-2"
                             >
-                                Review Logs
+                                {__('Review Logs')}
                                 <ChevronRight className="w-4 h-4" />
                             </Link>
                         )}

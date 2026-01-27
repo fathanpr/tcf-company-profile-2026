@@ -6,22 +6,33 @@ import ImageInput from '@/Components/ImageInput';
 import SearchableSelect from '@/Components/SearchableSelect';
 import MultiImageInput from '@/Components/MultiImageInput';
 
+import { useTranslation } from '@/helpers';
+
 /**
  * Product Create Page
  * Generate by Antigravity
  */
 export default function Create({ customers }) {
+    const [activeTab, setActiveTab] = React.useState('en');
+    const { __ } = useTranslation();
+
     const { data, setData, post, processing, errors } = useForm({
         name: '',
+        name_id: '',
         slug: '',
+        slug_id: '',
         customer_id: '',
         description: '',
+        description_id: '',
         main_image: '',
         product_images: [],
         is_active: true,
         meta_title: '',
+        meta_title_id: '',
         meta_description: '',
+        meta_description_id: '',
         meta_keywords: '',
+        meta_keywords_id: '',
     });
 
     const submit = (e) => {
@@ -45,15 +56,33 @@ export default function Create({ customers }) {
                 </Link>
 
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div className="p-8 border-b border-slate-100 bg-slate-50/50">
+                    <div className="p-8 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
                                 <Box className="w-6 h-6" />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-slate-900">Product Specification</h3>
-                                <p className="text-sm text-slate-500">Define product details and associate with a customer.</p>
+                                <p className="text-sm text-slate-500">Define details in multiple languages.</p>
                             </div>
+                        </div>
+
+                        {/* Language Switcher Tabs */}
+                        <div className="flex bg-slate-200/50 p-1 rounded-xl border border-slate-200">
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab('en')}
+                                className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${activeTab === 'en' ? 'bg-white text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                EN
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab('id')}
+                                className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${activeTab === 'id' ? 'bg-white text-brand-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                ID
+                            </button>
                         </div>
                     </div>
 
@@ -62,17 +91,18 @@ export default function Create({ customers }) {
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
                                 <Box className="w-4 h-4 text-slate-400" />
-                                Product Name
+                                {activeTab === 'en' ? 'Product Name (EN)' : 'Nama Produk (ID)'}
                             </label>
                             <input
                                 type="text"
-                                value={data.name}
-                                onChange={e => setData('name', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
-                                placeholder="E.g. Front Door Hinge"
-                                required
+                                value={activeTab === 'en' ? data.name : data.name_id}
+                                onChange={e => setData(activeTab === 'en' ? 'name' : 'name_id', e.target.value)}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${(activeTab === 'en' ? errors.name : errors.name_id) ? 'ring-2 ring-red-500' : ''}`}
+                                placeholder={activeTab === 'en' ? "E.g. Front Door Hinge" : "Misal: Engsel Pintu Depan"}
+                                required={activeTab === 'en'}
                             />
                             {errors.name && <p className="text-xs font-bold text-red-500 mt-1">{errors.name}</p>}
+                            {errors.name_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.name_id}</p>}
                         </div>
 
                         {/* Customer */}
@@ -91,17 +121,18 @@ export default function Create({ customers }) {
                         <div className="space-y-2">
                             <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
                                 <FileText className="w-4 h-4 text-slate-400" />
-                                Product Description
+                                {activeTab === 'en' ? 'Product Description (EN)' : 'Deskripsi Produk (ID)'}
                             </label>
                             <textarea
-                                value={data.description}
-                                onChange={e => setData('description', e.target.value)}
+                                value={activeTab === 'en' ? data.description : data.description_id}
+                                onChange={e => setData(activeTab === 'en' ? 'description' : 'description_id', e.target.value)}
                                 rows="4"
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none ${errors.description ? 'ring-2 ring-red-500' : ''}`}
-                                placeholder="Technical specifications, materials, etc..."
-                                required
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none ${(activeTab === 'en' ? errors.description : errors.description_id) ? 'ring-2 ring-red-500' : ''}`}
+                                placeholder={activeTab === 'en' ? "Technical specifications, materials, etc..." : "Spesifikasi teknis, material, dll..."}
+                                required={activeTab === 'en'}
                             ></textarea>
                             {errors.description && <p className="text-xs font-bold text-red-500 mt-1">{errors.description}</p>}
+                            {errors.description_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.description_id}</p>}
                         </div>
 
                         {/* Image */}
@@ -155,54 +186,54 @@ export default function Create({ customers }) {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Slug */}
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">URL Slug</label>
+                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">URL Slug ({activeTab.toUpperCase()})</label>
                                     <input
                                         type="text"
-                                        value={data.slug}
-                                        onChange={e => setData('slug', e.target.value)}
-                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.slug ? 'ring-2 ring-red-500' : ''}`}
-                                        placeholder="e.g. door-frame-component (Leave blank for auto)"
+                                        value={activeTab === 'en' ? data.slug : data.slug_id}
+                                        onChange={e => setData(activeTab === 'en' ? 'slug' : 'slug_id', e.target.value)}
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all"
+                                        placeholder="e.g. door-frame-component"
                                     />
-                                    <p className="text-[10px] text-slate-400 font-bold italic">* Leave blank to automatically generate from product name</p>
+                                    <p className="text-[10px] text-slate-400 font-bold italic">* Leave blank to automatically generate from name</p>
                                     {errors.slug && <p className="text-xs font-bold text-red-500 mt-1">{errors.slug}</p>}
+                                    {errors.slug_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.slug_id}</p>}
                                 </div>
 
                                 {/* Meta Title */}
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Title</label>
+                                    <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Title ({activeTab.toUpperCase()})</label>
                                     <input
                                         type="text"
-                                        value={data.meta_title}
-                                        onChange={e => setData('meta_title', e.target.value)}
-                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.meta_title ? 'ring-2 ring-red-500' : ''}`}
+                                        value={activeTab === 'en' ? data.meta_title : data.meta_title_id}
+                                        onChange={e => setData(activeTab === 'en' ? 'meta_title' : 'meta_title_id', e.target.value)}
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all"
                                         placeholder="SEO Title"
                                     />
                                     {errors.meta_title && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_title}</p>}
+                                    {errors.meta_title_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_title_id}</p>}
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Keywords</label>
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Keywords ({activeTab.toUpperCase()})</label>
                                 <input
                                     type="text"
-                                    value={data.meta_keywords}
-                                    onChange={e => setData('meta_keywords', e.target.value)}
-                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all ${errors.meta_keywords ? 'ring-2 ring-red-500' : ''}`}
+                                    value={activeTab === 'en' ? data.meta_keywords : data.meta_keywords_id}
+                                    onChange={e => setData(activeTab === 'en' ? 'meta_keywords' : 'meta_keywords_id', e.target.value)}
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all"
                                     placeholder="keyword1, keyword2, keyword3"
                                 />
-                                {errors.meta_keywords && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_keywords}</p>}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Description</label>
+                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Meta Description ({activeTab.toUpperCase()})</label>
                                 <textarea
-                                    value={data.meta_description}
-                                    onChange={e => setData('meta_description', e.target.value)}
+                                    value={activeTab === 'en' ? data.meta_description : data.meta_description_id}
+                                    onChange={e => setData(activeTab === 'en' ? 'meta_description' : 'meta_description_id', e.target.value)}
                                     rows="2"
-                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all resize-none ${errors.meta_description ? 'ring-2 ring-red-500' : ''}`}
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-emerald-500 rounded-xl text-sm transition-all resize-none"
                                     placeholder="Brief SEO description..."
                                 ></textarea>
-                                {errors.meta_description && <p className="text-xs font-bold text-red-500 mt-1">{errors.meta_description}</p>}
                             </div>
                         </div>
 

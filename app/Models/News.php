@@ -15,14 +15,21 @@ class News extends Model
      */
     protected $fillable = [
         'title',
+        'title_id',
         'slug',
+        'slug_id',
         'category',
         'content',
+        'content_id',
         'excerpt',
+        'excerpt_id',
         'image',
         'meta_title',
+        'meta_title_id',
         'meta_description',
+        'meta_description_id',
         'meta_keywords',
+        'meta_keywords_id',
         'tags',
         'reading_time',
         'is_published',
@@ -49,6 +56,15 @@ class News extends Model
             if (empty($news->slug)) {
                 $news->slug = Str::slug($news->title);
             }
+            if (!empty($news->title_id) && empty($news->slug_id)) {
+                $news->slug_id = Str::slug($news->title_id);
+            }
+        });
+
+        static::updating(function ($news) {
+            if ($news->isDirty('title_id') && empty($news->slug_id)) {
+                $news->slug_id = Str::slug($news->title_id);
+            }
         });
     }
 
@@ -61,4 +77,59 @@ class News extends Model
         return $query->where('is_published', true)
             ->where('published_at', '<=', now());
     }
+
+    /**
+     * Get localized attribute
+     * Generate by Antigravity
+     */
+    public function getLocalized($field)
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'id') {
+            return $this->{$field . '_id'} ?? $this->{$field};
+        }
+        return $this->{$field};
+    }
+
+    /**
+     * Accessors for common fields
+     * Generate by Antigravity
+     */
+    public function getTranslatedTitleAttribute()
+    {
+        return $this->getLocalized('title');
+    }
+    public function getTranslatedContentAttribute()
+    {
+        return $this->getLocalized('content');
+    }
+    public function getTranslatedExcerptAttribute()
+    {
+        return $this->getLocalized('excerpt');
+    }
+    public function getTranslatedMetaTitleAttribute()
+    {
+        return $this->getLocalized('meta_title');
+    }
+    public function getTranslatedMetaDescriptionAttribute()
+    {
+        return $this->getLocalized('meta_description');
+    }
+    public function getTranslatedMetaKeywordsAttribute()
+    {
+        return $this->getLocalized('meta_keywords');
+    }
+
+    /**
+     * Set appends for serialization
+     * Generate by Antigravity
+     */
+    protected $appends = [
+        'translated_title',
+        'translated_content',
+        'translated_excerpt',
+        'translated_meta_title',
+        'translated_meta_description',
+        'translated_meta_keywords'
+    ];
 }

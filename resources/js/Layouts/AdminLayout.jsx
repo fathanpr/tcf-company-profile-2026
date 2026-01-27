@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import ModernAlert from '@/Components/ModernAlert';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import { useLocalic } from '@/helpers';
 
 /**
  * Admin Layout
@@ -25,6 +26,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
  */
 export default function AdminLayout({ children, title }) {
     const { auth, flash } = usePage().props;
+    const { lRoute } = useLocalic();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [localFlash, setLocalFlash] = useState({ success: null, error: null });
 
@@ -57,55 +59,55 @@ export default function AdminLayout({ children, title }) {
     const navigation = [
         {
             name: 'Dashboard',
-            href: route('dashboard'),
+            href: lRoute('dashboard'),
             icon: LayoutDashboard,
             active: route().current('dashboard')
         },
         {
             name: 'User Management',
-            href: route('admin.users.index'),
+            href: lRoute('admin.users.index'),
             icon: Users,
             permission: 'manage users',
             active: route().current('admin.users.*')
         },
         {
             name: 'Customer Management',
-            href: route('admin.customers.index'),
+            href: lRoute('admin.customers.index'),
             icon: Building2,
             permission: 'manage customers',
             active: route().current('admin.customers.*')
         },
         {
             name: 'News Management',
-            href: route('admin.news.index'),
+            href: lRoute('admin.news.index'),
             icon: Newspaper,
             permission: 'manage news',
             active: route().current('admin.news.*')
         },
         {
             name: 'Product Management',
-            href: route('admin.products.index'),
+            href: lRoute('admin.products.index'),
             icon: Box,
             permission: 'manage products',
             active: route().current('admin.products.*')
         },
         {
             name: 'Role & Permission',
-            href: route('admin.roles.index'),
+            href: lRoute('admin.roles.index'),
             icon: ShieldCheck,
             permission: 'manage roles',
             active: route().current('admin.roles.*')
         },
         {
             name: 'Activity Logs',
-            href: route('admin.activity-logs.index'),
+            href: lRoute('admin.activity-logs.index'),
             icon: History,
             permission: 'view logs',
             active: route().current('admin.activity-logs.*')
         },
         {
             name: 'API Docs',
-            href: route('admin.api-docs.index'),
+            href: lRoute('admin.api-docs.index'),
             icon: FileJson,
             permission: 'view api-docs',
             active: route().current('admin.api-docs.*')

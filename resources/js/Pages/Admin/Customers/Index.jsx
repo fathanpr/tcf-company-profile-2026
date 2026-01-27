@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Plus, Edit2, Trash2, Search, Building2, CheckCircle2, XCircle, Globe } from 'lucide-react';
 import ConfirmationModal from '@/Components/ConfirmationModal';
-import { useState } from 'react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * Customer Management Index
  * Generate by Antigravity
  */
 export default function Index({ customers, filters }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);
     const [deletionId, setDeletionId] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -52,11 +54,11 @@ export default function Index({ customers, filters }) {
                     </div>
 
                     <Link
-                        href={route('admin.customers.create')}
+                        href={lRoute('admin.customers.create')}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10"
                     >
                         <Plus className="w-4 h-4" />
-                        Add New Customer
+                        {__('Add New Customer')}
                     </Link>
                 </div>
 
@@ -65,10 +67,10 @@ export default function Index({ customers, filters }) {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50">
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Customer</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Website</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Status</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-center text-[10px]">Actions</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Customer')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Website')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Status')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-center text-[10px]">{__('Actions')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -110,19 +112,19 @@ export default function Index({ customers, filters }) {
                                         {customer.is_active ? (
                                             <div className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-black uppercase tracking-wider">
                                                 <CheckCircle2 className="w-3.5 h-3.5" />
-                                                Active
+                                                {__('Active')}
                                             </div>
                                         ) : (
                                             <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-black uppercase tracking-wider">
                                                 <XCircle className="w-3.5 h-3.5" />
-                                                Inactive
+                                                {__('Inactive')}
                                             </div>
                                         )}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex justify-center gap-2">
                                             <Link
-                                                href={route('admin.customers.edit', customer.id)}
+                                                href={lRoute('admin.customers.edit', customer.id)}
                                                 className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
                                             >
                                                 <Edit2 className="w-4 h-4" />

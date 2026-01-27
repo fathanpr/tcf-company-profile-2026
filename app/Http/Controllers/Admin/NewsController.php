@@ -40,19 +40,26 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
             'category' => 'required|string',
             'content' => 'required|string',
+            'content_id' => 'nullable|string',
             'excerpt' => 'nullable|string|max:500',
+            'excerpt_id' => 'nullable|string|max:500',
             'image' => 'nullable|string',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
             'meta_keywords' => 'nullable|string',
+            'meta_keywords_id' => 'nullable|string',
             'tags' => 'nullable|string',
             'reading_time' => 'nullable|integer',
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
+        if (!empty($data['title_id'])) {
+            $data['slug_id'] = Str::slug($data['title_id']);
+        }
 
         if ($data['is_published'] && !$data['published_at']) {
             $data['published_at'] = now();
@@ -76,19 +83,26 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'title_id' => 'nullable|string|max:255',
             'category' => 'required|string',
             'content' => 'required|string',
+            'content_id' => 'nullable|string',
             'excerpt' => 'nullable|string|max:500',
+            'excerpt_id' => 'nullable|string|max:500',
             'image' => 'nullable|string',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
             'meta_keywords' => 'nullable|string',
+            'meta_keywords_id' => 'nullable|string',
             'tags' => 'nullable|string',
             'reading_time' => 'nullable|integer',
         ]);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
+        if (!empty($data['title_id'])) {
+            $data['slug_id'] = Str::slug($data['title_id']);
+        }
 
         $this->service->updateNews($id, $data);
 

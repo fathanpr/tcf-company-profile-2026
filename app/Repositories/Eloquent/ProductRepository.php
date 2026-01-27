@@ -31,7 +31,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('description', 'like', '%' . $search . '%');
+                    ->orWhere('name_id', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('description_id', 'like', '%' . $search . '%');
             });
         }
 
@@ -53,7 +55,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      */
     public function getBySlugWithRelations($slug)
     {
-        return $this->model->where('slug', $slug)
+        return $this->model->where(function ($query) use ($slug) {
+            $query->where('slug', $slug)
+                ->orWhere('slug_id', $slug);
+        })
             ->active()
             ->with(['customer', 'images'])
             ->firstOrFail();

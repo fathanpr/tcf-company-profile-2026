@@ -3,15 +3,19 @@ import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Building2 } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 export default function VisionMission() {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
+
     return (
         <MainLayout>
             <Head>
-                <title>Vision & Mission - PT Tri Centrum Fortuna | TCF Identity</title>
-                <meta name="description" content="Discover TCF's vision to be the first-choice Tier 2 automotive partner in Indonesia. Our mission focuses on high-quality manufacturing and operational excellence." />
-                <meta property="og:title" content="TCF Vision & Mission - Engineering the Future" />
-                <meta property="og:description" content="Guided by excellence, integrity, and innovation. Learn more about PT Tri Centrum Fortuna's core identity." />
+                <title>{__('Vision & Mission - PT Tri Centrum Fortuna | TCF Identity')}</title>
+                <meta name="description" content={__('Discover TCF\'s vision to be the first-choice Tier 2 automotive partner in Indonesia. Our mission focuses on high-quality manufacturing and operational excellence.')} />
+                <meta property="og:title" content={__('TCF Vision & Mission - Engineering the Future')} />
+                <meta property="og:description" content={__('Guided by excellence, integrity, and innovation. Learn more about PT Tri Centrum Fortuna\'s core identity.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -30,14 +34,13 @@ export default function VisionMission() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Building2 className="w-4 h-4" />
-                            Our Identity
+                            {__('Our Identity')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-display font-black mb-6 tracking-tight">
-                            Vision & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Mission</span>
+                            {__('Vision')} & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Mission')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Our guiding principles and long-term goals for success,
-                            committed to excellence in every component we manufacture.
+                            {__('Our guiding principles and long-term goals for success, committed to excellence in every component we manufacture.')}
                         </p>
                     </motion.div>
                 </div>
@@ -53,12 +56,12 @@ export default function VisionMission() {
                             viewport={{ once: true }}
                             className="mb-12 text-slate-700 leading-relaxed text-lg"
                         >
-                            <h2 className="text-3xl font-display font-bold text-slate-900 mb-6 border-b-2 border-brand-primary inline-block">TRI CENTRUM FORTUNA</h2>
+                            <h2 className="text-3xl font-display font-bold text-slate-900 mb-6 border-b-2 border-brand-primary inline-block">{__('TRI CENTRUM FORTUNA')}</h2>
                             <p className="mb-6">
-                                Tri Centrum Fortuna began its operations in 2017 as a company specializing in stamping, welding, painting, and machining of high-precision parts used primarily in the automotive industry and other sectors.
+                                {__('Tri Centrum Fortuna began its operations in 2017 as a company specializing in stamping, welding, painting, and machining of high-precision parts used primarily in the automotive industry and other sectors.')}
                             </p>
                             <p>
-                                PT Tri Centrum Fortuna is fully committed to prioritizing customer satisfaction by delivering orders on time, with the right quality and quantity, accompanied by a spirit of persistence and dedication.
+                                {__('PT Tri Centrum Fortuna is fully committed to prioritizing customer satisfaction by delivering orders on time, with the right quality and quantity, accompanied by a spirit of persistence and dedication.')}
                             </p>
                         </motion.div>
 
@@ -72,10 +75,10 @@ export default function VisionMission() {
                             >
                                 <h3 className="text-2xl font-display font-bold text-brand-primary mb-4 flex items-center gap-3">
                                     <span className="w-2 h-8 bg-brand-primary rounded-full"></span>
-                                    VISION
+                                    {__('VISION')}
                                 </h3>
                                 <p className="text-slate-700 font-medium italic">
-                                    "Striving to be the first-choice second-tier metal parts manufacturing company and the best partner by fostering cooperation, continuous improvement, and innovation."
+                                    {__('"Striving to be the first-choice second-tier metal parts manufacturing company and the best partner by fostering cooperation, continuous improvement, and innovation."')}
                                 </p>
                             </motion.div>
 
@@ -88,16 +91,16 @@ export default function VisionMission() {
                             >
                                 <h3 className="text-2xl font-display font-bold text-brand-primary mb-4 flex items-center gap-3">
                                     <span className="w-2 h-8 bg-brand-primary rounded-full"></span>
-                                    MISSION
+                                    {__('MISSION')}
                                 </h3>
                                 <ul className="space-y-4 text-slate-700">
                                     <li className="flex gap-3">
                                         <span className="w-1.5 h-1.5 bg-brand-primary rounded-full mt-2.5 flex-shrink-0"></span>
-                                        <span>Manufacturing high-quality components in a safe and comfortable working environment to meet the expectations and satisfaction of our partners.</span>
+                                        <span>{__('Manufacturing high-quality components in a safe and comfortable working environment to meet the expectations and satisfaction of our partners.')}</span>
                                     </li>
                                     <li className="flex gap-3">
                                         <span className="w-1.5 h-1.5 bg-brand-primary rounded-full mt-2.5 flex-shrink-0"></span>
-                                        <span>Building effective and efficient organizational management by aligning and developing human resources in terms of skills, work ethic, and welfare to achieve superior corporate governance, operational sustainability, and profitability.</span>
+                                        <span>{__('Building effective and efficient organizational management by aligning and developing human resources in terms of skills, work ethic, and welfare to achieve superior corporate governance, operational sustainability, and profitability.')}</span>
                                     </li>
                                 </ul>
                             </motion.div>

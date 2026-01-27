@@ -42,14 +42,20 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'name_id' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:products,slug',
+            'slug_id' => 'nullable|string|max:255|unique:products,slug_id',
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
+            'description_id' => 'nullable|string',
             'main_image' => 'nullable|string',
             'is_active' => 'boolean',
             'meta_title' => 'nullable|string|max:255',
+            'meta_title_id' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
+            'meta_description_id' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:255',
+            'meta_keywords_id' => 'nullable|string|max:255',
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable', // Can be string or file
         ]);
@@ -72,14 +78,20 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'name_id' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:products,slug,' . $id,
+            'slug_id' => 'nullable|string|max:255|unique:products,slug_id,' . $id,
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
+            'description_id' => 'nullable|string',
             'main_image' => 'nullable|string',
             'is_active' => 'boolean',
             'meta_title' => 'nullable|string|max:255',
+            'meta_title_id' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
+            'meta_description_id' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:255',
+            'meta_keywords_id' => 'nullable|string|max:255',
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable', // Can be string or file
         ]);

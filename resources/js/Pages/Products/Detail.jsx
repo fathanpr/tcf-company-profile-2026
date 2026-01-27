@@ -2,25 +2,28 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
     ChevronLeft,
     Box,
-    Tag,
+    Users,
     Layers,
     ShieldCheck,
     Settings,
+    Tag,
     ArrowRight,
-    Users,
     X,
     Maximize2
 } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * Product Detail Page
  * Generate by Antigravity
  */
 export default function Detail({ product }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const [activeImage, setActiveImage] = React.useState(product.main_image);
     const [previewImage, setPreviewImage] = useState(null);
 
@@ -40,17 +43,17 @@ export default function Detail({ product }) {
 
     const absoluteImageUrl = String(getAbsoluteUrl(product.main_image));
     const siteUrl = String(typeof window !== 'undefined' ? window.location.href : '');
-    const pageTitle = String(product.meta_title || `${product.name} - High-Precision Product`);
+    const pageTitle = String(product.translated_meta_title || `${product.translated_name} - High-Precision Product`);
     const allImages = [product.main_image, ...(product.images || []).map(img => img.image_path)];
 
     return (
         <MainLayout title={product.name}>
             <Head>
                 <title>{`${pageTitle} | TCF`}</title>
-                <meta name="description" content={String(product.meta_description || product.description || '')} />
-                <meta name="keywords" content={String(product.meta_keywords || '')} />
+                <meta name="description" content={String(product.translated_meta_description || product.translated_description || '')} />
+                <meta name="keywords" content={String(product.translated_meta_keywords || '')} />
                 <meta property="og:title" content={pageTitle} />
-                <meta property="og:description" content={String(product.meta_description || product.description || '')} />
+                <meta property="og:description" content={String(product.translated_meta_description || product.translated_description || '')} />
                 <meta property="og:image" content={absoluteImageUrl} />
                 <meta property="og:type" content="product" />
                 <meta property="og:url" content={siteUrl} />
@@ -62,11 +65,11 @@ export default function Detail({ product }) {
             <div className="pt-32 pb-6 bg-slate-900">
                 <div className="container mx-auto px-6">
                     <Link
-                        href={route('products.index')}
+                        href={lRoute('products.index')}
                         className="inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors text-sm font-bold"
                     >
                         <ChevronLeft className="w-4 h-4" />
-                        Back to Products
+                        {__('Back to Products')}
                     </Link>
                 </div>
             </div>
@@ -95,7 +98,7 @@ export default function Detail({ product }) {
                                 <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
                                     <span className="bg-white/90 text-slate-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                         <Maximize2 className="w-4 h-4" />
-                                        Click to Preview
+                                        {__('Click to Preview')}
                                     </span>
                                 </div>
                             </motion.div>
@@ -134,7 +137,7 @@ export default function Detail({ product }) {
                                 <div className="flex flex-wrap items-center gap-3 mb-4">
                                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest">
                                         <Box className="w-3 h-3" />
-                                        Active Production
+                                        {__('Active Production')}
                                     </div>
                                     {product.customer && (
                                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
@@ -145,13 +148,13 @@ export default function Detail({ product }) {
                                 </div>
 
                                 <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight leading-tight">
-                                    {product.name}
+                                    {product.translated_name}
                                 </h1>
 
                                 <div className="h-1 w-20 bg-blue-500 mb-6 rounded-full"></div>
 
                                 <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-                                    {product.description}
+                                    {product.translated_description}
                                 </p>
 
                                 {/* Technical Specs Grid - Optimized for density */}
@@ -161,8 +164,8 @@ export default function Detail({ product }) {
                                             <Layers className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">Material Process</h4>
-                                            <p className="text-sm font-bold text-slate-100">Cold Stamping & Welding</p>
+                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">{__('Material Process')}</h4>
+                                            <p className="text-sm font-bold text-slate-100">{__('Cold Stamping & Welding')}</p>
                                         </div>
                                     </div>
                                     <div className="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl flex items-center gap-4">
@@ -170,7 +173,7 @@ export default function Detail({ product }) {
                                             <ShieldCheck className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">Quality Standard</h4>
+                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">{__('Quality Standard')}</h4>
                                             <p className="text-sm font-bold text-slate-100">ISO 9001 & IATF 16949</p>
                                         </div>
                                     </div>
@@ -179,8 +182,8 @@ export default function Detail({ product }) {
                                             <Settings className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">Precision level</h4>
-                                            <p className="text-sm font-bold text-slate-100">Up to 0.01mm Tolerance</p>
+                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">{__('Precision level')}</h4>
+                                            <p className="text-sm font-bold text-slate-100">{__('Up to 0.01mm Tolerance')}</p>
                                         </div>
                                     </div>
                                     <div className="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl flex items-center gap-4">
@@ -188,8 +191,8 @@ export default function Detail({ product }) {
                                             <Tag className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">Category</h4>
-                                            <p className="text-sm font-bold text-slate-100">Automotive Tier-1 Parts</p>
+                                            <h4 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-0.5">{__('Category')}</h4>
+                                            <p className="text-sm font-bold text-slate-100">{__('Automotive Tier-1 Parts')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -197,14 +200,14 @@ export default function Detail({ product }) {
 
                             <div className="space-y-4">
                                 <Link
-                                    href={`${route('home')}#location`}
+                                    href={`${lRoute('home')}#location`}
                                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-brand-primary text-white font-black rounded-2xl hover:bg-brand-primary transition-all shadow-xl shadow-brand-primary/20 group uppercase tracking-widest text-sm"
                                 >
-                                    Inquiry for this Product
+                                    {__('Inquiry for this Product')}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest italic">
-                                    *Subject to technical verification and volume agreement
+                                    {__('*Subject to technical verification and volume agreement')}
                                 </p>
                             </div>
                         </motion.div>
@@ -217,8 +220,8 @@ export default function Detail({ product }) {
                 <div className="container mx-auto px-6">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl font-black text-slate-900 mb-4">Technical Excellence</h2>
-                            <p className="text-slate-500">How we ensure the highest standards for every part.</p>
+                            <h2 className="text-3xl font-black text-slate-900 mb-4">{__('Technical Excellence')}</h2>
+                            <p className="text-slate-500">{__('How we ensure the highest standards for every part.')}</p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-12">
@@ -226,27 +229,27 @@ export default function Detail({ product }) {
                                 <div className="w-16 h-16 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-brand-primary border border-slate-100">
                                     <Settings className="w-8 h-8" />
                                 </div>
-                                <h4 className="font-bold text-slate-900 mb-3 text-lg">High Precision</h4>
+                                <h4 className="font-bold text-slate-900 mb-3 text-lg">{__('High Precision')}</h4>
                                 <p className="text-sm text-slate-500 leading-relaxed">
-                                    Utilizing the latest robotic technology to maintain tolerances up to 0.01mm.
+                                    {__('Utilizing the latest robotic technology to maintain tolerances up to 0.01mm.')}
                                 </p>
                             </div>
                             <div className="text-center">
                                 <div className="w-16 h-16 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-amber-600 border border-slate-100">
                                     <Box className="w-8 h-8" />
                                 </div>
-                                <h4 className="font-bold text-slate-900 mb-3 text-lg">Mass Production</h4>
+                                <h4 className="font-bold text-slate-900 mb-3 text-lg">{__('Mass Production')}</h4>
                                 <p className="text-sm text-slate-500 leading-relaxed">
-                                    Capable of high-volume output with consistent quality across millions of strokes.
+                                    {__('Capable of high-volume output with consistent quality across millions of strokes.')}
                                 </p>
                             </div>
                             <div className="text-center">
                                 <div className="w-16 h-16 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-emerald-600 border border-slate-100">
                                     <ShieldCheck className="w-8 h-8" />
                                 </div>
-                                <h4 className="font-bold text-slate-900 mb-3 text-lg">Strict Quality</h4>
+                                <h4 className="font-bold text-slate-900 mb-3 text-lg">{__('Strict Quality')}</h4>
                                 <p className="text-sm text-slate-500 leading-relaxed">
-                                    Every component undergoes rigorous testing using CMM and manual inspection.
+                                    {__('Every component undergoes rigorous testing using CMM and manual inspection.')}
                                 </p>
                             </div>
                         </div>

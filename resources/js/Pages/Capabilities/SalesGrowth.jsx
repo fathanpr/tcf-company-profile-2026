@@ -4,15 +4,17 @@ import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { TrendingUp, Milestone, Target, Award, Rocket, Trophy, Globe, Home, Settings, Flag, Medal, ArrowUpRight } from 'lucide-react';
 import Chart from 'react-apexcharts';
-
+import { useLocalic, useTranslation } from '@/helpers';
 export default function SalesGrowth() {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const milestones = [
-        { year: "2024", title: "Building up Manufacturing Infrastructure", icon: <Globe className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: "Strengthening our foundation with state-of-the-art facilities." },
-        { year: "2025", title: "2nd Tier with 1st Tier Standard Operation", icon: <Home className="text-white w-6 h-6" />, color: "bg-amber-600", textColor: "text-amber-600", desc: "Elevating our operations to first-tier quality standards." },
-        { year: "2026", title: "Excellence Operation", icon: <Settings className="text-white w-6 h-6" />, color: "bg-brand-primary", textColor: "text-brand-primary", desc: "Achieving peak operational efficiency and reliability." },
-        { year: "2027", title: "Benchmark Factory in 2nd Tier", icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", textColor: "text-red-600", desc: "Setting the industry standard for second-tier manufacturers." },
-        { year: "2028", title: "Building Focus Industry 4.0 and 5.0", icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", textColor: "text-purple-600", desc: "Integrating advanced robotics and smart technology." },
-        { year: "2029", title: "Irreplaceable Supplier", icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", textColor: "text-yellow-600", desc: "Becoming a strategic, long-term partner for global leaders." },
+        { year: "2024", title: __("Building up Manufacturing Infrastructure"), icon: <Globe className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: __("Strengthening our foundation with state-of-the-art facilities.") },
+        { year: "2025", title: __("2nd Tier with 1st Tier Standard Operation"), icon: <Home className="text-white w-6 h-6" />, color: "bg-amber-600", textColor: "text-amber-600", desc: __("Elevating our operations to first-tier quality standards.") },
+        { year: "2026", title: __("Excellence Operation"), icon: <Settings className="text-white w-6 h-6" />, color: "bg-brand-primary", textColor: "text-brand-primary", desc: __("Achieving peak operational efficiency and reliability.") },
+        { year: "2027", title: __("Benchmark Factory in 2nd Tier"), icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", textColor: "text-red-600", desc: __("Setting the industry standard for second-tier manufacturers.") },
+        { year: "2028", title: __("Building Focus Industry 4.0 and 5.0"), icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", textColor: "text-purple-600", desc: __("Integrating advanced robotics and smart technology.") },
+        { year: "2029", title: __("Irreplaceable Supplier"), icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", textColor: "text-yellow-600", desc: __("Becoming a strategic, long-term partner for global leaders.") },
     ];
 
     const salesData = [
@@ -109,10 +111,10 @@ export default function SalesGrowth() {
     return (
         <MainLayout>
             <Head>
-                <title>Sales & Market Growth - PT Tri Centrum Fortuna | Expanding Excellence</title>
-                <meta name="description" content="Witness TCF's consistent growth and expanding market share in the automotive industry. Our performance reflects our commitment to quality and partnership." />
-                <meta property="og:title" content="TCF Sales & Growth - A Proven Track Record of Success" />
-                <meta property="og:description" content="Consistent performance and strategic expansion in the Indonesian automotive manufacturing sector." />
+                <title>{__('Sales & Market Growth - PT Tri Centrum Fortuna | Expanding Excellence')}</title>
+                <meta name="description" content={__('Witness TCF\'s consistent growth and expanding market share in the automotive industry. Our performance reflects our commitment to quality and partnership.')} />
+                <meta property="og:title" content={__('TCF Sales & Growth - A Proven Track Record of Success')} />
+                <meta property="og:description" content={__('Consistent performance and strategic expansion in the Indonesian automotive manufacturing sector.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -131,14 +133,13 @@ export default function SalesGrowth() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <TrendingUp className="w-4 h-4" />
-                            Future Growth
+                            {__('Future Growth')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Sales & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Growth</span>
+                            {__('Sales')} & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Growth')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Driving sustainable growth through innovation and strategic expansion,
-                            committed to becoming the irreplaceable partner in the automotive sector.
+                            {__('Driving sustainable growth through innovation and strategic expansion, committed to becoming the irreplaceable partner in the automotive sector.')}
                         </p>
                     </motion.div>
                 </div>
@@ -148,8 +149,8 @@ export default function SalesGrowth() {
             <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="max-w-xl mx-auto text-center mb-20">
-                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">Strategic Roadmap</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">Target & Milestones</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Strategic Roadmap')}</span>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">{__('Target & Milestones')}</h2>
                         <div className="w-20 h-1.5 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
 
@@ -230,23 +231,23 @@ export default function SalesGrowth() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Financial Report</span>
-                            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-6">Sales & Growth Analysis</h2>
+                            <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">{__('Financial Report')}</span>
+                            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-6">{__('Sales & Growth Analysis')}</h2>
                             <p className="text-slate-600 mb-8 leading-relaxed">
-                                Our performance reflects the trust of our partners. We recorded significant growth starting from 2022, with a target to reach IDR 826 Billion by 2026 through operational excellence and capacity expansion.
+                                {__('Our performance reflects the trust of our partners. We recorded significant growth starting from 2022, with a target to reach IDR 826 Billion by 2026 through operational excellence and capacity expansion.')}
                             </p>
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                        <span className="text-slate-500 text-sm font-bold uppercase">Sales (Billion)</span>
+                                        <span className="text-slate-500 text-sm font-bold uppercase">{__('Sales (Billion)')}</span>
                                     </div>
                                     <p className="text-3xl font-black text-slate-900">826<span className="text-sm font-normal text-slate-400 ml-1">TRG</span></p>
                                 </div>
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="w-3 h-3 rounded-full bg-brand-primary"></div>
-                                        <span className="text-slate-500 text-sm font-bold uppercase">Growth Trend</span>
+                                        <span className="text-slate-500 text-sm font-bold uppercase">{__('Growth Trend')}</span>
                                     </div>
                                     <p className="text-3xl font-black text-slate-900">+45%<span className="text-sm font-normal text-slate-400 ml-1">AVG</span></p>
                                 </div>
@@ -257,7 +258,7 @@ export default function SalesGrowth() {
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
                                     <TrendingUp className="text-blue-600 w-5 h-5" />
-                                    Sales Performance Record
+                                    {__('Sales Performance Record')}
                                 </h3>
                             </div>
 
@@ -275,17 +276,17 @@ export default function SalesGrowth() {
                     {/* Navigation Buttons */}
                     <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
                         <Link
-                            href={route('capabilities.production-quality')}
+                            href={lRoute('capabilities.production-quality')}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-brand-primary transition-all shadow-lg group"
                         >
-                            Production & Quality
+                            {__('Production & Quality')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                         <Link
-                            href={route('capabilities.loading-capacity')}
+                            href={lRoute('capabilities.loading-capacity')}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm group"
                         >
-                            Loading Capacity
+                            {__('Loading Capacity')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                     </div>

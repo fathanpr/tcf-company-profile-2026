@@ -12,12 +12,15 @@ import {
     MessageSquare,
     Hash
 } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * News Detail Page
  * Generate by Antigravity
  */
 export default function Detail({ article }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     if (!article) return null;
 
     // Safe Absolute URL for Image
@@ -31,16 +34,16 @@ export default function Detail({ article }) {
 
     const absoluteImageUrl = String(getAbsoluteUrl(article.image));
     const siteUrl = String(typeof window !== 'undefined' ? window.location.href : '');
-    const pageTitle = String(article.meta_title || article.title || 'Insight');
+    const pageTitle = String(article.translated_meta_title || article.translated_title || 'Insight');
 
     return (
         <MainLayout>
             <Head>
                 <title>{`${pageTitle} | TCF News`}</title>
-                <meta name="description" content={String(article.meta_description || article.excerpt || '')} />
-                <meta name="keywords" content={String(article.meta_keywords || '')} />
+                <meta name="description" content={String(article.translated_meta_description || article.translated_excerpt || '')} />
+                <meta name="keywords" content={String(article.translated_meta_keywords || '')} />
                 <meta property="og:title" content={pageTitle} />
-                <meta property="og:description" content={String(article.meta_description || article.excerpt || '')} />
+                <meta property="og:description" content={String(article.translated_meta_description || article.translated_excerpt || '')} />
                 <meta property="og:image" content={absoluteImageUrl} />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={siteUrl} />
@@ -59,17 +62,17 @@ export default function Detail({ article }) {
                         className="flex flex-col items-center text-center gap-6"
                     >
                         <Link
-                            href={route('news.index')}
+                            href={lRoute('news.index')}
                             className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-blue-400 transition-colors group"
                         >
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                            Back to News
+                            {__('Back to News')}
                         </Link>
 
                         <div className="space-y-4 max-w-4xl">
                             <div className="flex items-center justify-center gap-3">
                                 <span className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
-                                    {article.category}
+                                    {__(article.category)}
                                 </span>
                                 <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
                                     <Calendar className="w-3.5 h-3.5" />
@@ -77,7 +80,7 @@ export default function Detail({ article }) {
                                 </div>
                             </div>
                             <h1 className="text-3xl md:text-5xl font-black text-white leading-tight">
-                                {article.title}
+                                {article.translated_title}
                             </h1>
                         </div>
                     </motion.div>
@@ -108,7 +111,7 @@ export default function Detail({ article }) {
                                 {/* Rich Text Content Area */}
                                 <div className="prose prose-lg prose-slate max-w-none">
                                     <p className="text-xl text-slate-600 leading-relaxed font-medium mb-10 italic border-l-4 border-blue-500 pl-8">
-                                        {article.excerpt}
+                                        {article.translated_excerpt}
                                     </p>
 
                                     <div
@@ -118,7 +121,7 @@ export default function Detail({ article }) {
                                             [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-6 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-6
                                             [&>li]:mb-2 [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:mb-6
                                             [&>a]:text-blue-600 [&>a]:underline hover:[&>a]:text-blue-700"
-                                        dangerouslySetInnerHTML={{ __html: article.content }}
+                                        dangerouslySetInnerHTML={{ __html: article.translated_content }}
                                     />
 
                                     {/* Share Section */}
@@ -128,19 +131,19 @@ export default function Detail({ article }) {
                                                 <Share2 className="w-5 h-5" />
                                             </div>
                                             <div>
-                                                <p className="text-sm font-black text-slate-900 uppercase tracking-widest">Share this Insight</p>
-                                                <p className="text-xs text-slate-500">Help others discover our manufacturing updates</p>
+                                                <p className="text-sm font-black text-slate-900 uppercase tracking-widest">{__('Share this Insight')}</p>
+                                                <p className="text-xs text-slate-500">{__('Help others discover our manufacturing updates')}</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-2">
                                             {[
-                                                { name: 'LinkedIn', url: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
-                                                { name: 'Twitter', url: (url, title) => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}` },
-                                                { name: 'WhatsApp', url: (url, title) => `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}` }
+                                                { name: __('LinkedIn'), url: (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+                                                { name: __('Twitter'), url: (url, title) => `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}` },
+                                                { name: __('WhatsApp'), url: (url, title) => `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}` }
                                             ].map((platform) => (
                                                 <button
                                                     key={platform.name}
-                                                    onClick={() => window.open(platform.url(window.location.href, article.title), '_blank')}
+                                                    onClick={() => window.open(platform.url(typeof window !== 'undefined' ? window.location.href : '', article.translated_title), '_blank')}
                                                     className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:border-blue-500 hover:text-blue-600 transition-all active:scale-95"
                                                 >
                                                     {platform.name}
@@ -157,15 +160,15 @@ export default function Detail({ article }) {
 
                             {/* Author/Source Info */}
                             <div className="p-8 bg-slate-50 rounded-[32px] border border-slate-100">
-                                <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6">Article Info</h3>
+                                <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6">{__('Article Info')}</h3>
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-4">
                                         <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
                                             <img src="/img/tcf-logo.png" alt="TCF" className="w-full h-full object-contain p-1" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-slate-400">Published By</p>
-                                            <p className="text-sm font-bold text-slate-900">TCF Media Team</p>
+                                            <p className="text-xs text-slate-400">{__('Published By')}</p>
+                                            <p className="text-sm font-bold text-slate-900">{__('TCF Media Team')}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -173,8 +176,8 @@ export default function Detail({ article }) {
                                             <Clock className="w-5 h-5 text-blue-500" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-slate-400">Reading Time</p>
-                                            <p className="text-sm font-bold text-slate-900">{article.reading_time ? `${article.reading_time} Minutes` : 'Approx. 5-7 Minutes'}</p>
+                                            <p className="text-xs text-slate-400">{__('Reading Time')}</p>
+                                            <p className="text-sm font-bold text-slate-900">{article.reading_time ? `${article.reading_time} ${__('Minutes')}` : __('Approx. 5-7 Minutes')}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -182,8 +185,8 @@ export default function Detail({ article }) {
                                             <Tag className="w-5 h-5 text-blue-500" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-slate-400">Category Tag</p>
-                                            <p className="text-sm font-bold text-slate-900">{article.category} Insights</p>
+                                            <p className="text-xs text-slate-400">{__('Category Tag')}</p>
+                                            <p className="text-sm font-bold text-slate-900">{__(article.category)} {__('Insights')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +197,7 @@ export default function Detail({ article }) {
                                 <div className="p-8 bg-white rounded-[32px] border border-slate-100 shadow-sm">
                                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                                         <Hash className="w-4 h-4 text-blue-500" />
-                                        Related Tags
+                                        {__('Related Tags')}
                                     </h3>
                                     <div className="flex flex-wrap gap-2">
                                         {article.tags.split(',').map((tag, index) => (
@@ -212,15 +215,15 @@ export default function Detail({ article }) {
                             {/* Related Links / CTA */}
                             <div className="p-8 bg-slate-900 rounded-[32px] text-white relative overflow-hidden group">
                                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-600/20 to-transparent"></div>
-                                <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">Interested in our services?</h4>
+                                <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">{__('Interested in our services?')}</h4>
                                 <p className="text-slate-400 text-xs mb-8 relative z-10 leading-relaxed">
-                                    Request a technical consultation or a quote for your stamping and welding assembly needs.
+                                    {__('Request a technical consultation or a quote for your stamping and welding assembly needs.')}
                                 </p>
                                 <Link
-                                    href={`${route('home')}#location`}
+                                    href={`${lRoute('home')}#location`}
                                     className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-2xl font-black text-xs hover:bg-blue-700 transition-all relative z-10 shadow-xl shadow-blue-600/20 uppercase tracking-widest"
                                 >
-                                    Contact Sales
+                                    {__('Contact Sales')}
                                     <ChevronRight className="w-4 h-4" />
                                 </Link>
                             </div>
@@ -230,8 +233,8 @@ export default function Detail({ article }) {
                                 <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mb-6">
                                     <MessageSquare className="w-6 h-6 text-slate-400" />
                                 </div>
-                                <h3 className="text-lg font-black text-slate-900 mb-2">Have a question?</h3>
-                                <p className="text-sm text-slate-500 mb-6">Feel free to message our team for any inquiries about our manufacturing process.</p>
+                                <h3 className="text-lg font-black text-slate-900 mb-2">{__('Have a question?')}</h3>
+                                <p className="text-sm text-slate-500 mb-6">{__('Feel free to message our team for any inquiries about our manufacturing process.')}</p>
                                 <a href="mailto:info@tricentrumfortuna.com" className="text-blue-600 font-bold hover:underline">info@tricentrumfortuna.com</a>
                             </div>
 

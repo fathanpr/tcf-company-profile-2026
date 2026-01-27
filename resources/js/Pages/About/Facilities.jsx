@@ -3,8 +3,9 @@ import { createPortal } from 'react-dom';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { MapPin, Users, Calendar, Building2, X, Maximize2 } from 'lucide-react';
+import { Building2, Users, Calendar, MapPin, X, Maximize2 } from 'lucide-react';
 import Modal from '@/Components/Modal';
+import { useLocalic, useTranslation } from '@/helpers';
 
 const facilityData = {
     purwakarta: {
@@ -234,6 +235,7 @@ export default function Facilities() {
     const [showModal, setShowModal] = useState(false);
     const [activePlant, setActivePlant] = useState('purwakarta');
     const [previewImage, setPreviewImage] = useState(null);
+    const { __ } = useTranslation();
 
     const openModal = (plant) => {
         setActivePlant(plant);
@@ -243,12 +245,12 @@ export default function Facilities() {
     const currentData = facilityData[activePlant];
 
     return (
-        <MainLayout title="Facilities">
+        <MainLayout title={__('Facilities')}>
             <Head>
-                <title>World-Class Manufacturing Facilities - PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Take a look inside TCF's advanced manufacturing plants in Karawang and Purwakarta. Equipped with high-precision stamping and robotic welding technology." />
-                <meta property="og:title" content="TCF Facilities - State-of-the-Art Automotive Manufacturing" />
-                <meta property="og:description" content="Explore our high-capacity stamping and welding plants designed for automotive excellence." />
+                <title>{__('World-Class Manufacturing Facilities - PT Tri Centrum Fortuna')}</title>
+                <meta name="description" content={__('Take a look inside TCF\'s advanced manufacturing plants in Karawang and Purwakarta. Equipped with high-precision stamping and robotic welding technology.')} />
+                <meta property="og:title" content={__('TCF Facilities - State-of-the-Art Automotive Manufacturing')} />
+                <meta property="og:description" content={__('Explore our high-capacity stamping and welding plants designed for automotive excellence.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -291,14 +293,13 @@ export default function Facilities() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Building2 className="w-4 h-4" />
-                            Production Excellence
+                            {__('Production Excellence')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Facilities</span>
+                            {__('Our')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Facilities')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Operating from strategic locations to serve our partners efficiently,
-                            equipped with high-precision machinery and automated systems.
+                            {__('Operating from strategic locations to serve our partners efficiently, equipped with high-precision machinery and automated systems.')}
                         </p>
                     </motion.div>
                 </div>
@@ -328,7 +329,7 @@ export default function Facilities() {
                             <div className="p-8 flex flex-col flex-grow">
                                 <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                                     <Building2 className="text-brand-primary" />
-                                    PLANT – PURWAKARTA
+                                    {__('PLANT – PURWAKARTA')}
                                 </h2>
                                 <div className="flex items-start gap-4 text-slate-600 mb-auto">
                                     <MapPin className="w-6 h-6 text-slate-400 mt-1 flex-shrink-0" />
@@ -343,7 +344,7 @@ export default function Facilities() {
                                     onClick={() => openModal('purwakarta')}
                                     className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                 >
-                                    View Plant Details
+                                    {__('View Plant Details')}
                                 </button>
                             </div>
                         </motion.div>
@@ -369,7 +370,7 @@ export default function Facilities() {
                             <div className="p-8 flex flex-col flex-grow">
                                 <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                                     <Building2 className="text-blue-500" />
-                                    PLANT – KARAWANG
+                                    {__('PLANT – KARAWANG')}
                                 </h2>
                                 <div className="space-y-4 mb-auto">
                                     <div className="flex items-start gap-4 text-slate-600">
@@ -406,7 +407,7 @@ export default function Facilities() {
                                         onClick={() => openModal('karawang')}
                                         className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                     >
-                                        View Plant Details
+                                        {__('View Plant Details')}
                                     </button>
                                 </div>
                             </div>
@@ -423,6 +424,7 @@ export default function Facilities() {
                         data={currentData}
                         setShowModal={setShowModal}
                         onPreviewImage={setPreviewImage}
+                        __={__}
                     />
                 )}
             </Modal>
@@ -430,21 +432,21 @@ export default function Facilities() {
     );
 }
 
-const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => (
+const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage, __ }) => (
     <div className="flex flex-col h-full h-screen">
         {/* Sticky Header */}
         <div className="flex justify-between items-center p-6 md:p-8 border-b border-slate-100 bg-white sticky top-0 z-20">
             <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-                    {activePlant === 'purwakarta' ? 'Plant Purwakarta' : 'Plant Karawang'}
+                    {activePlant === 'purwakarta' ? __('Plant Purwakarta') : __('Plant Karawang')}
                 </h3>
-                <p className="text-slate-500 text-sm mt-1">Detailed Facility & Equipment Overview</p>
+                <p className="text-slate-500 text-sm mt-1">{__('Detailed Facility & Equipment Overview')}</p>
             </div>
             <button
                 onClick={() => setShowModal(false)}
                 className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600 focus:outline-none"
             >
-                <span className="sr-only">Close</span>
+                <span className="sr-only">{__('Close')}</span>
                 <X className="h-6 w-6" />
             </button>
         </div>
@@ -456,7 +458,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                 <div>
                     <h4 className={`font-display font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-brand-secondary'}`}>
                         <Building2 className="w-6 h-6" />
-                        Factory Layout
+                        {__('Factory Layout')}
                     </h4>
                     <div
                         className="bg-slate-50 rounded-2xl p-2 border border-slate-200 cursor-zoom-in group relative overflow-hidden transition-all hover:shadow-md hover:border-slate-300"
@@ -471,7 +473,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                             <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
                                 <span className="bg-white/90 text-slate-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                     <Maximize2 className="w-4 h-4" />
-                                    View Full Screen
+                                    {__('View Full Screen')}
                                 </span>
                             </div>
                         </div>
@@ -482,7 +484,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                 <div>
                     <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-blue-600'}`}>
                         <Users className="w-6 h-6" />
-                        Production Facilities & Equipment
+                        {__('Production Facilities & Equipment')}
                     </h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -492,7 +494,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                                     <div className="p-2 bg-white rounded-lg shadow-sm">
                                         {category.icon}
                                     </div>
-                                    <h5 className="font-bold text-slate-800">{category.category}</h5>
+                                    <h5 className="font-bold text-slate-800">{__(category.category)}</h5>
                                 </div>
                                 <div className="p-6">
                                     <ul className={`space-y-4 ${category.twoColumn ? 'grid grid-cols-2 gap-x-6 gap-y-2 space-y-0' : ''}`}>

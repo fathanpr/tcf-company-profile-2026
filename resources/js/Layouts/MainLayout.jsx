@@ -19,6 +19,11 @@ export default function MainLayout({ children, title }) {
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={siteLogo} />
                 <meta name="robots" content="index, follow" />
+
+                {/* SEO Multi-language */}
+                <link rel="alternate" href={`${window.location.origin}/en${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="en" />
+                <link rel="alternate" href={`${window.location.origin}/id${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="id" />
+                <link rel="alternate" href={`${window.location.origin}/en${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="x-default" />
             </Head>
             <Navbar />
 

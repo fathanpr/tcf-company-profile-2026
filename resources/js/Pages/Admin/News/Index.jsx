@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { Plus, Edit2, Trash2, Search, Newspaper, CheckCircle2, XCircle, Calendar, Tag, MoreVertical, Eye } from 'lucide-react';
 import ConfirmationModal from '@/Components/ConfirmationModal';
 import Dropdown from '@/Components/Dropdown';
-import { useState } from 'react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * News Management Index
  * Generate by Antigravity
  */
 export default function Index({ news, filters }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const [confirmingDeletion, setConfirmingDeletion] = useState(false);
     const [deletionId, setDeletionId] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -53,11 +55,11 @@ export default function Index({ news, filters }) {
                     </div>
 
                     <Link
-                        href={route('admin.news.create')}
+                        href={lRoute('admin.news.create')}
                         className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10"
                     >
                         <Plus className="w-4 h-4" />
-                        Write Article
+                        {__('Write Article')}
                     </Link>
                 </div>
 
@@ -66,11 +68,11 @@ export default function Index({ news, filters }) {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50">
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Article</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Category</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Status</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">Published</th>
-                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-center text-[10px]">Actions</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Article')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Category')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Status')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-[10px]">{__('Published')}</th>
+                                <th className="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-widest text-center text-[10px]">{__('Actions')}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
@@ -103,12 +105,12 @@ export default function Index({ news, filters }) {
                                         {article.is_published ? (
                                             <div className="flex items-center gap-1.5 text-emerald-600 text-[10px] font-black uppercase tracking-wider">
                                                 <CheckCircle2 className="w-3.5 h-3.5" />
-                                                Published
+                                                {__('Published')}
                                             </div>
                                         ) : (
                                             <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-black uppercase tracking-wider">
                                                 <XCircle className="w-3.5 h-3.5" />
-                                                Draft
+                                                {__('Draft')}
                                             </div>
                                         )}
                                     </td>
@@ -129,9 +131,9 @@ export default function Index({ news, filters }) {
                                                 <Eye className="w-4 h-4" />
                                             </a>
                                             <Link
-                                                href={route('admin.news.edit', article.id)}
+                                                href={lRoute('admin.news.edit', article.id)}
                                                 className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
-                                                title="Edit Article"
+                                                title={__('Edit Article')}
                                             >
                                                 <Edit2 className="w-4 h-4" />
                                             </Link>

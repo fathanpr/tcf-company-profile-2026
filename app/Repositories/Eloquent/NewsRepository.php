@@ -24,7 +24,9 @@ class NewsRepository implements NewsRepositoryInterface
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('content', 'like', "%{$search}%");
+                    ->orWhere('title_id', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%")
+                    ->orWhere('content_id', 'like', "%{$search}%");
             });
         }
 
@@ -40,7 +42,12 @@ class NewsRepository implements NewsRepositoryInterface
      */
     public function getBySlug($slug)
     {
-        return $this->model->published()->where('slug', $slug)->first();
+        return $this->model->published()
+            ->where(function ($query) use ($slug) {
+                $query->where('slug', $slug)
+                    ->orWhere('slug_id', $slug);
+            })
+            ->first();
     }
 
     /**

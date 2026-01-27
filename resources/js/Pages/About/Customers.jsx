@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Users, ExternalLink, ChevronLeft, ChevronRight, Building2, UserCheck, Globe } from 'lucide-react';
+import { Search, Users, ChevronLeft, ChevronRight, UserCheck, Globe } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 export default function Customers({ customers, filters }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const [search, setSearch] = useState(filters.search || '');
 
     // Handle Search with debounce or simple effect
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             if (search !== (filters.search || '')) {
-                router.get(route('about.customers'), { search }, {
+                router.get(lRoute('about.customers'), { search }, {
                     preserveState: true,
                     replace: true,
                     preserveScroll: true
@@ -40,10 +43,10 @@ export default function Customers({ customers, filters }) {
     return (
         <MainLayout>
             <Head>
-                <title>Our Valued Customers - PT Tri Centrum Fortuna | Trusted Tier 2 Partner</title>
-                <meta name="description" content="TCF proudly serves leading automotive giants in Indonesia. Join our network of satisfied clients who trust us for high-precision components." />
-                <meta property="og:title" content="TCF Customers - Partnering with Industry Leaders" />
-                <meta property="og:description" content="Building long-term success with the world's most prominent automotive brands." />
+                <title>{__('Our Valued Customers - PT Tri Centrum Fortuna | Trusted Tier 2 Partner')}</title>
+                <meta name="description" content={__('TCF proudly serves leading automotive giants in Indonesia. Join our network of satisfied clients who trust us for high-precision components.')} />
+                <meta property="og:title" content={__('TCF Customers - Partnering with Industry Leaders')} />
+                <meta property="og:description" content={__('Building long-term success with the world\'s most prominent automotive brands.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -62,14 +65,13 @@ export default function Customers({ customers, filters }) {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <UserCheck className="w-4 h-4" />
-                            Trusted Partnership
+                            {__('Trusted Partnership')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our Valued <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">Customers</span>
+                            {__('Our Valued')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Customers')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            We are proud to serve industry leaders across the automotive and manufacturing sectors,
-                            building long-term relationships through quality and reliability.
+                            {__('We are proud to serve industry leaders across the automotive and manufacturing sectors, building long-term relationships through quality and reliability.')}
                         </p>
                     </motion.div>
                 </div>
@@ -91,7 +93,7 @@ export default function Customers({ customers, filters }) {
                             <input
                                 type="text"
                                 className="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
-                                placeholder="Search our customer base..."
+                                placeholder={__('Search our customer base...')}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -129,7 +131,7 @@ export default function Customers({ customers, filters }) {
                                         </h3>
                                         <div className="mt-4 pt-4 border-t border-slate-50 w-full flex flex-col items-center gap-3">
                                             <div className="flex items-center gap-2 text-[10px] font-black text-brand-primary uppercase tracking-widest">
-                                                Active Partner <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                                                {__('Active Partner')} <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                             </div>
                                             {customer.website && (
                                                 <a
@@ -156,8 +158,8 @@ export default function Customers({ customers, filters }) {
                                 <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-300">
                                     <Users className="w-10 h-10" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">No customers found</h3>
-                                <p className="text-slate-500">Try adjusting your search criteria</p>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">{__('No customers found')}</h3>
+                                <p className="text-slate-500">{__('Try adjusting your search criteria')}</p>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -211,16 +213,16 @@ export default function Customers({ customers, filters }) {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
                         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="text-center md:text-left">
-                                <h2 className="text-3xl font-black mb-4">Interested in Partnering with Us?</h2>
+                                <h2 className="text-3xl font-black mb-4">{__('Interested in Partnering with Us?')}</h2>
                                 <p className="text-blue-100 max-w-xl">
-                                    Join our growing network of industry leaders. Let's discuss how we can support your manufacturing needs with our expertise.
+                                    {__('Join our growing network of industry leaders. Let\'s discuss how we can support your manufacturing needs with our expertise.')}
                                 </p>
                             </div>
                             <Link
-                                href="/#location"
+                                href={lRoute('home') + "#location"}
                                 className="px-8 py-4 bg-white text-blue-600 font-black rounded-2xl hover:bg-blue-50 transition-colors shadow-xl"
                             >
-                                Contact Sales Team
+                                {__('Contact Sales Team')}
                             </Link>
                         </div>
                     </div>

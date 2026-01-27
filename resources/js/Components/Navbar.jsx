@@ -2,13 +2,17 @@ import { Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { Menu, X, Globe, ChevronDown, ChevronRight, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation, useLocalic } from '@/helpers';
 
 export default function Navbar() {
-    const { translations = {}, locale } = usePage().props;
+    const { locale } = usePage().props;
+    const { __ } = useTranslation();
+    const { lRoute } = useLocalic();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
     const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
+    const [openLangDropdown, setOpenLangDropdown] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,34 +23,37 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
-        { name: translations['Home'] || 'Home', href: '/', type: 'link' },
+        { name: __('Home'), href: lRoute('home'), type: 'link' },
         {
-            name: translations['About Us'] || 'About Us',
+            name: __('About Us'),
             type: 'dropdown',
             children: [
-                { name: 'Vision & Mission', href: '/about/vision-mission' },
-                { name: 'Organization Structure', href: '/about/organization' },
-                { name: 'Facilities', href: '/about/facilities' },
-                { name: 'Customers', href: '/about/customers' },
+                { name: __('Vision & Mission'), href: lRoute('about.vision-mission') },
+                { name: __('Organization'), href: lRoute('about.organization') },
+                { name: __('Facilities'), href: lRoute('about.facilities') },
+                { name: __('Customers'), href: lRoute('about.customers') },
             ]
         },
         {
-            name: translations['Capabilities'] || 'Capabilities',
+            name: __('Capabilities'),
             type: 'dropdown',
             children: [
-                { name: 'Sales & Growth', href: '/capabilities/sales-growth' },
-                { name: 'Production & Quality', href: '/capabilities/production-quality' },
-                { name: 'Loading Capacity', href: '/capabilities/loading-capacity' },
+                { name: __('Sales Growth'), href: lRoute('capabilities.sales-growth') },
+                { name: __('Production Quality'), href: lRoute('capabilities.production-quality') },
+                { name: __('Loading Capacity'), href: lRoute('capabilities.loading-capacity') },
             ]
         },
-        { name: translations['Product'] || 'Product', href: '/#product', type: 'scroll' },
-        { name: translations['News'] || 'News', href: '/#news', type: 'scroll' },
-        { name: translations['Connect with Us'] || 'Connect with Us', href: '/#location', type: 'scroll' },
+        { name: __('Products'), href: `${lRoute('home')}#product`, type: 'scroll' },
+        { name: __('News'), href: `${lRoute('home')}#news`, type: 'scroll' },
+        { name: __('Contact'), href: `${lRoute('home')}#location`, type: 'scroll' },
     ];
 
-    const toggleLanguage = () => {
-        const nextLocale = locale === 'en' ? 'id' : (locale === 'id' ? 'ja' : 'en');
-        window.location.href = `/lang/${nextLocale}`;
+    const switchLanguage = (newLocale) => {
+        const path = window.location.pathname;
+        const segments = path.split('/');
+        // Assuming locale is always the first segment due to prefix
+        segments[1] = newLocale;
+        window.location.href = segments.join('/');
     };
 
     const handleNavClick = (e, link) => {
@@ -98,7 +105,7 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-14">
                     <div className="flex-shrink-0 flex items-center">
                         <Link
-                            href="/"
+                            href={lRoute('home')}
                             className="flex items-center gap-3 group border-none outline-none ring-0 cursor-pointer"
                         >
                             <img
@@ -163,14 +170,42 @@ export default function Navbar() {
                             )
                         ))}
 
-                        {/* <button
-                            onClick={toggleLanguage}
-                            className={`flex items-center space-x-1 text-sm font-medium transition-colors text-white/90 hover:text-brand-primary-500`}
+                        {/* Language Switcher */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setOpenLangDropdown(true)}
+                            onMouseLeave={() => setOpenLangDropdown(false)}
                         >
-                            <Globe className="w-4 h-4" />
-                            <span className="uppercase">{locale}</span>
-                            <ChevronDown className="w-3 h-3" />
-                        </button> */}
+                            <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/70 hover:text-brand-primary transition-all">
+                                <Globe className="w-4 h-4" />
+                                {locale}
+                                <ChevronDown className="w-3 h-3" />
+                            </button>
+
+                            <AnimatePresence>
+                                {openLangDropdown && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        className="absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl overflow-hidden py-1 ring-1 ring-black/5"
+                                    >
+                                        <button
+                                            onClick={() => switchLanguage('en')}
+                                            className={`w-full text-left px-4 py-2 text-xs font-bold transition-colors ${locale === 'en' ? 'bg-brand-primary/10 text-brand-primary' : 'text-slate-600 hover:bg-slate-50'}`}
+                                        >
+                                            English
+                                        </button>
+                                        <button
+                                            onClick={() => switchLanguage('id')}
+                                            className={`w-full text-left px-4 py-2 text-xs font-bold transition-colors ${locale === 'id' ? 'bg-brand-primary/10 text-brand-primary' : 'text-slate-600 hover:bg-slate-50'}`}
+                                        >
+                                            Indonesia
+                                        </button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -234,11 +269,11 @@ export default function Navbar() {
                                         ))}
                                         <div className="border-t border-white/10 my-2 pt-2">
                                             <button
-                                                onClick={toggleLanguage}
+                                                onClick={() => switchLanguage(locale === 'en' ? 'id' : 'en')}
                                                 className="w-full justify-start flex items-center gap-2 px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:bg-white/5 hover:text-white"
                                             >
                                                 <Globe className="w-4 h-4" />
-                                                Change Language ({locale})
+                                                {__('Change Language')} ({locale === 'en' ? 'ID' : 'EN'})
                                             </button>
                                         </div>
                                     </motion.div>
