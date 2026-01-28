@@ -6,6 +6,7 @@ import { usePage } from '@inertiajs/react';
  */
 export const useTranslation = () => {
     const { translations = {} } = usePage().props;
+    console.log('useTranslation translations:', translations);
 
     const __ = (key, replace = {}) => {
         let translation = translations[key] || key;

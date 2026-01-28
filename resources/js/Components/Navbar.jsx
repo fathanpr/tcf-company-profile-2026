@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation, useLocalic } from '@/helpers';
 
 export default function Navbar() {
-    const { locale } = usePage().props;
+    const { locale, translations } = usePage().props;
     const { __ } = useTranslation();
     const { lRoute } = useLocalic();
     const [isOpen, setIsOpen] = useState(false);
@@ -291,7 +291,7 @@ export default function Navbar() {
                                             className="w-full flex items-center gap-2 px-4 py-3 mb-2 rounded-xl text-sm font-bold text-white/60 hover:text-white hover:bg-white/10 transition-all"
                                         >
                                             <ChevronLeft className="w-5 h-5" />
-                                            Back to Menu
+                                            {__('Back to Menu')}
                                         </button>
 
                                         <div className="px-4 py-2 text-white/50 text-xs font-bold uppercase tracking-widest border-b border-white/10 mb-2">

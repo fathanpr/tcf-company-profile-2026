@@ -45,18 +45,40 @@ class HandleInertiaRequests extends Middleware
                 'error' => $request->session()->get('error'),
             ],
             'locale' => app()->getLocale(),
-            'translations' => cache()->rememberForever("translations_" . app()->getLocale(), function () {
-                $phpPath = lang_path(app()->getLocale());
-                $jsonPath = lang_path(app()->getLocale() . '.json');
+            'translations' => (function () {
+                $locale = app()->getLocale();
+                $jsonPath = base_path("lang/{$locale}.json");
+
+                // Fallback for newer Laravel versions that might use resources/lang
+                if (!file_exists($jsonPath)) {
+                    $jsonPath = lang_path("{$locale}.json");
+                }
 
                 $translations = [];
-
                 if (file_exists($jsonPath)) {
-                    $translations = json_decode(file_get_contents($jsonPath), true);
+                    $content = file_get_contents($jsonPath);
+                    $decoded = json_decode($content, true);
+
+                    if (json_last_error() === JSON_ERROR_NONE) {
+                        $translations = $decoded;
+                        // Add some debug info (will be visible in JS console)
+                        $translations['_debug'] = [
+                            'locale' => $locale,
+                            'source' => $jsonPath,
+                            'count' => count($translations),
+                            'loaded_at' => date('Y-m-d H:i:s')
+                        ];
+                    } else {
+                        \Log::error("Failed to decode translation file: {$jsonPath}. Error: " . json_last_error_msg());
+                        $translations['_debug_error'] = json_last_error_msg();
+                    }
+                } else {
+                    \Log::warning("Translation file not found: {$jsonPath}");
+                    $translations['_debug_not_found'] = $jsonPath;
                 }
 
                 return $translations;
-            }),
+            })(),
         ];
     }
 }
