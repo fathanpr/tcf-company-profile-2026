@@ -124,7 +124,7 @@ export default function Index({ customers, filters }) {
                                     <td className="px-6 py-4">
                                         <div className="flex justify-center gap-2">
                                             <Link
-                                                href={lRoute('admin.customers.edit', customer.id)}
+                                                href={lRoute('admin.customers.edit', { customer: customer.id })}
                                                 className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
                                             >
                                                 <Edit2 className="w-4 h-4" />

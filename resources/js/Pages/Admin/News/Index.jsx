@@ -131,7 +131,7 @@ export default function Index({ news, filters }) {
                                                 <Eye className="w-4 h-4" />
                                             </a>
                                             <Link
-                                                href={lRoute('admin.news.edit', article.id)}
+                                                href={lRoute('admin.news.edit', { news: article.id })}
                                                 className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
                                                 title={__('Edit Article')}
                                             >
