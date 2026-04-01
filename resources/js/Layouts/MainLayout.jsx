@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import Navbar from '@/Components/Navbar';
 import Footer from '@/Components/Footer';
+import FloatingActions from '@/Components/FloatingActions';
 
 export default function MainLayout({ children, title }) {
     const siteTitle = String(title ? `${title} - PT Tri Centrum Fortuna` : 'PT Tri Centrum Fortuna - Premium Automotive Manufacturing Partner');
@@ -18,6 +19,11 @@ export default function MainLayout({ children, title }) {
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={siteLogo} />
                 <meta name="robots" content="index, follow" />
+
+                {/* SEO Multi-language */}
+                <link rel="alternate" href={`${window.location.origin}/en${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="en" />
+                <link rel="alternate" href={`${window.location.origin}/id${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="id" />
+                <link rel="alternate" href={`${window.location.origin}/en${window.location.pathname.replace(/^\/(en|id)/, '')}`} hreflang="x-default" />
             </Head>
             <Navbar />
 
@@ -26,6 +32,8 @@ export default function MainLayout({ children, title }) {
             </main>
 
             <Footer />
+
+            <FloatingActions />
 
             {/* Background elements for glassmorphism vibes */}
             <div className="fixed top-0 left-0 w-full h-full -z-50 overflow-hidden pointer-events-none">

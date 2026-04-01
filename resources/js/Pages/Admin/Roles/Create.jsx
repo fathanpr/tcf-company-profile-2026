@@ -44,7 +44,7 @@ export default function Create({ permissions }) {
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div className="p-8 border-b border-slate-100 bg-slate-50/50">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
+                            <div className="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
                                 <Shield className="w-6 h-6" />
                             </div>
                             <div>
@@ -65,7 +65,7 @@ export default function Create({ permissions }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
                                 placeholder="E.g. Content Manager"
                                 required
                             />
@@ -76,7 +76,7 @@ export default function Create({ permissions }) {
                         <div className="space-y-4">
                             <div className="flex items-center justify-between">
                                 <label className="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-                                    <Shield className="w-4 h-4 text-orange-500" />
+                                    <Shield className="w-4 h-4 text-brand-primary" />
                                     Assign Permissions
                                 </label>
                                 <span className="text-xs text-slate-400 font-bold">{data.permissions.length} selected</span>
@@ -89,11 +89,11 @@ export default function Create({ permissions }) {
                                         type="button"
                                         onClick={() => handlePermissionChange(perm.name)}
                                         className={`flex items-center p-4 rounded-xl border-2 transition-all text-left ${data.permissions.includes(perm.name)
-                                                ? 'bg-orange-50 border-orange-500 shadow-md shadow-orange-500/5'
+                                                ? 'bg-orange-50 border-brand-primary shadow-md shadow-brand-primary/5'
                                                 : 'bg-white border-slate-100 hover:border-slate-200'
                                             }`}
                                     >
-                                        <div className={`w-6 h-6 rounded flex items-center justify-center mr-3 shrink-0 transition-colors ${data.permissions.includes(perm.name) ? 'bg-orange-500 text-white' : 'bg-slate-100 text-transparent'
+                                        <div className={`w-6 h-6 rounded flex items-center justify-center mr-3 shrink-0 transition-colors ${data.permissions.includes(perm.name) ? 'bg-brand-primary text-white' : 'bg-slate-100 text-transparent'
                                             }`}>
                                             <CheckCircle2 className="w-4 h-4 shadow-sm" />
                                         </div>

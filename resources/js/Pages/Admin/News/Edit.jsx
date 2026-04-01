@@ -6,23 +6,34 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import CreatableSelect from 'react-select/creatable';
 import ImageInput from '@/Components/ImageInput';
+import { useTranslation } from '@/helpers';
 
 /**
  * News Edit Page
  * Generate by Antigravity
  */
 export default function Edit({ news, categories: dbCategories = [] }) {
+    const [activeTab, setActiveTab] = React.useState('en');
+    const { __ } = useTranslation();
+
     const { data, setData, put, processing, errors } = useForm({
         title: news.title,
+        title_id: news.title_id || '',
         category: news.category,
         content: news.content,
+        content_id: news.content_id || '',
         excerpt: news.excerpt || '',
+        excerpt_id: news.excerpt_id || '',
         image: news.image || '',
         is_published: !!news.is_published,
         published_at: news.published_at ? news.published_at.split('T')[0] : '',
         meta_title: news.meta_title || '',
+        meta_title_id: news.meta_title_id || '',
         meta_description: news.meta_description || '',
+        meta_description_id: news.meta_description_id || '',
         meta_keywords: news.meta_keywords || '',
+        meta_keywords_id: news.meta_keywords_id || '',
+        slug_id: news.slug_id || '',
         tags: news.tags || '',
         reading_time: news.reading_time || '',
     });
@@ -56,13 +67,33 @@ export default function Edit({ news, categories: dbCategories = [] }) {
             <Head title={`Edit ${news.title} - Admin TCF`} />
 
             <div className="max-w-4xl">
-                <Link
-                    href={route('admin.news.index')}
-                    className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-6 text-sm font-bold"
-                >
-                    <ChevronLeft className="w-4 h-4" />
-                    Back to News List
-                </Link>
+                <div className="flex items-center justify-between mb-6">
+                    <Link
+                        href={route('admin.news.index')}
+                        className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors text-sm font-bold"
+                    >
+                        <ChevronLeft className="w-4 h-4" />
+                        Back to News List
+                    </Link>
+
+                    {/* Language Switcher Tabs */}
+                    <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
+                        <button
+                            type="button"
+                            onClick={() => setActiveTab('en')}
+                            className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${activeTab === 'en' ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                        >
+                            ENGLISH
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setActiveTab('id')}
+                            className={`px-4 py-1.5 rounded-lg text-xs font-black transition-all ${activeTab === 'id' ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                        >
+                            INDONESIA
+                        </button>
+                    </div>
+                </div>
 
                 <form onSubmit={submit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Main Content */}
@@ -71,32 +102,43 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                             {/* Title */}
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                                    <Newspaper className="w-4 h-4 text-slate-400" />
-                                    Article Title
+                                    <Globe className="w-4 h-4 text-slate-400" />
+                                    {activeTab === 'en' ? 'Article Title (EN)' : 'Judul Artikel (ID)'}
                                 </label>
-                                <input
-                                    type="text"
-                                    value={data.title}
-                                    onChange={e => setData('title', e.target.value)}
-                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-lg font-bold transition-all ${errors.title ? 'ring-2 ring-red-500' : ''}`}
-                                    placeholder="Enter catching headline..."
-                                    required
-                                />
+                                {activeTab === 'en' ? (
+                                    <input
+                                        type="text"
+                                        value={data.title}
+                                        onChange={e => setData('title', e.target.value)}
+                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-lg font-bold transition-all ${errors.title ? 'ring-2 ring-red-500' : ''}`}
+                                        placeholder="Enter catching headline in English..."
+                                        required
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        value={data.title_id}
+                                        onChange={e => setData('title_id', e.target.value)}
+                                        className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-lg font-bold transition-all ${errors.title_id ? 'ring-2 ring-red-500' : ''}`}
+                                        placeholder="Masukkan judul dalam Bahasa Indonesia..."
+                                    />
+                                )}
                                 {errors.title && <p className="text-xs font-bold text-red-500 mt-1">{errors.title}</p>}
+                                {errors.title_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.title_id}</p>}
                             </div>
 
                             {/* Excerpt */}
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
                                     <FileText className="w-4 h-4 text-slate-400" />
-                                    Short Summary (Excerpt)
+                                    {activeTab === 'en' ? 'Short Summary (EN)' : 'Ringkasan Pendek (ID)'}
                                 </label>
                                 <textarea
-                                    value={data.excerpt}
-                                    onChange={e => setData('excerpt', e.target.value)}
+                                    value={activeTab === 'en' ? data.excerpt : data.excerpt_id}
+                                    onChange={e => setData(activeTab === 'en' ? 'excerpt' : 'excerpt_id', e.target.value)}
                                     rows="3"
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all resize-none"
-                                    placeholder="Briefly describe what this article is about..."
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none"
+                                    placeholder={activeTab === 'en' ? "Brief summary in English..." : "Ringkasan singkat dalam Bahasa Indonesia..."}
                                 ></textarea>
                             </div>
 
@@ -104,13 +146,13 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
                                     <FileText className="w-4 h-4 text-slate-400" />
-                                    Main Content
+                                    {activeTab === 'en' ? 'Main Content (EN)' : 'Konten Utama (ID)'}
                                 </label>
                                 <div className="bg-slate-50 rounded-xl overflow-hidden">
                                     <ReactQuill
                                         theme="snow"
-                                        value={data.content}
-                                        onChange={value => setData('content', value)}
+                                        value={activeTab === 'en' ? data.content : data.content_id}
+                                        onChange={value => setData(activeTab === 'en' ? 'content' : 'content_id', value)}
                                         className="h-96 mb-12"
                                         modules={{
                                             toolbar: [
@@ -124,33 +166,34 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                     />
                                 </div>
                                 {errors.content && <p className="text-xs font-bold text-red-500 mt-1">{errors.content}</p>}
+                                {errors.content_id && <p className="text-xs font-bold text-red-500 mt-1">{errors.content_id}</p>}
                             </div>
                         </div>
 
                         {/* SEO Settings */}
                         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 space-y-6">
                             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-                                <Globe className="w-5 h-5 text-orange-500" />
+                                <Globe className="w-5 h-5 text-brand-primary" />
                                 SEO Optimization
                             </h3>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-700">Meta Title</label>
+                                <label className="text-sm font-bold text-slate-700">Meta Title ({activeTab.toUpperCase()})</label>
                                 <input
                                     type="text"
-                                    value={data.meta_title}
-                                    onChange={e => setData('meta_title', e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                    value={activeTab === 'en' ? data.meta_title : data.meta_title_id}
+                                    onChange={e => setData(activeTab === 'en' ? 'meta_title' : 'meta_title_id', e.target.value)}
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-slate-700">Meta Description</label>
+                                <label className="text-sm font-bold text-slate-700">Meta Description ({activeTab.toUpperCase()})</label>
                                 <textarea
-                                    value={data.meta_description}
-                                    onChange={e => setData('meta_description', e.target.value)}
+                                    value={activeTab === 'en' ? data.meta_description : data.meta_description_id}
+                                    onChange={e => setData(activeTab === 'en' ? 'meta_description' : 'meta_description_id', e.target.value)}
                                     rows="2"
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all resize-none"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all resize-none"
                                 ></textarea>
                             </div>
 
@@ -162,9 +205,9 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                     </label>
                                     <input
                                         type="text"
-                                        value={data.meta_keywords}
-                                        onChange={e => setData('meta_keywords', e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                        value={activeTab === 'en' ? data.meta_keywords : data.meta_keywords_id}
+                                        onChange={e => setData(activeTab === 'en' ? 'meta_keywords' : 'meta_keywords_id', e.target.value)}
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                         placeholder="news, update, event..."
                                     />
                                 </div>
@@ -177,7 +220,7 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                         type="text"
                                         value={data.tags}
                                         onChange={e => setData('tags', e.target.value)}
-                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                        className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                         placeholder="Comma separated tags..."
                                     />
                                 </div>
@@ -192,7 +235,7 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                     type="number"
                                     value={data.reading_time}
                                     onChange={e => setData('reading_time', e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                     placeholder="e.g. 5"
                                 />
                             </div>
@@ -211,7 +254,7 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                         type="checkbox"
                                         checked={data.is_published}
                                         onChange={e => setData('is_published', e.target.checked)}
-                                        className="w-5 h-5 rounded text-orange-600 focus:ring-orange-500"
+                                        className="w-5 h-5 rounded text-orange-600 focus:ring-brand-primary"
                                     />
                                     <span className="text-sm font-bold text-slate-700">Published Status</span>
                                 </label>
@@ -225,7 +268,7 @@ export default function Edit({ news, categories: dbCategories = [] }) {
                                         type="date"
                                         value={data.published_at}
                                         onChange={e => setData('published_at', e.target.value)}
-                                        className="w-full px-3 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-lg text-xs font-bold transition-all"
+                                        className="w-full px-3 py-2 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-lg text-xs font-bold transition-all"
                                     />
                                 </div>
                             </div>

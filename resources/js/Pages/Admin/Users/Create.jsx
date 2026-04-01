@@ -47,7 +47,7 @@ export default function Create({ roles }) {
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div className="p-8 border-b border-slate-100 bg-slate-50/50">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/20">
+                            <div className="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
                                 <UserPlus className="w-6 h-6" />
                             </div>
                             <div>
@@ -68,7 +68,7 @@ export default function Create({ roles }) {
                                 type="text"
                                 value={data.name}
                                 onChange={e => setData('name', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
                                 placeholder="John Doe"
                                 required
                             />
@@ -85,7 +85,7 @@ export default function Create({ roles }) {
                                 type="email"
                                 value={data.email}
                                 onChange={e => setData('email', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all ${errors.email ? 'ring-2 ring-red-500' : ''}`}
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.email ? 'ring-2 ring-red-500' : ''}`}
                                 placeholder="john@example.com"
                                 required
                             />
@@ -103,7 +103,7 @@ export default function Create({ roles }) {
                                     type="password"
                                     value={data.password}
                                     onChange={e => setData('password', e.target.value)}
-                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all ${errors.password ? 'ring-2 ring-red-500' : ''}`}
+                                    className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.password ? 'ring-2 ring-red-500' : ''}`}
                                     required
                                 />
                                 {errors.password && <p className="text-xs font-bold text-red-500 mt-1">{errors.password}</p>}
@@ -119,7 +119,7 @@ export default function Create({ roles }) {
                                     type="password"
                                     value={data.password_confirmation}
                                     onChange={e => setData('password_confirmation', e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                                    className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
                                     required
                                 />
                             </div>
@@ -138,11 +138,11 @@ export default function Create({ roles }) {
                                         type="button"
                                         onClick={() => handleRoleChange(role.name)}
                                         className={`flex items-center p-4 rounded-xl border-2 transition-all text-left group ${data.roles.includes(role.name)
-                                                ? 'bg-orange-50 border-orange-500'
+                                                ? 'bg-orange-50 border-brand-primary'
                                                 : 'bg-white border-slate-100 hover:border-slate-200'
                                             }`}
                                     >
-                                        <div className={`w-5 h-5 rounded flex items-center justify-center mr-3 transition-colors ${data.roles.includes(role.name) ? 'bg-orange-500 text-white' : 'bg-slate-100 text-transparent'
+                                        <div className={`w-5 h-5 rounded flex items-center justify-center mr-3 transition-colors ${data.roles.includes(role.name) ? 'bg-brand-primary text-white' : 'bg-slate-100 text-transparent'
                                             }`}>
                                             <Save className="w-3 h-3" />
                                         </div>

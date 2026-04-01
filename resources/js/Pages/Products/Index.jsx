@@ -3,19 +3,22 @@ import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Package, ExternalLink, ChevronLeft, ChevronRight, Box, ArrowRight, Tag } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * Product Index Page
  * Generate by Antigravity
  */
 export default function Index({ products, filters }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const [search, setSearch] = useState(filters.search || '');
 
     // Handle Search with debounce
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             if (search !== (filters.search || '')) {
-                router.get(route('products.index'), { search }, {
+                router.get(lRoute('products.index'), { search }, {
                     preserveState: true,
                     replace: true,
                     preserveScroll: true
@@ -54,10 +57,10 @@ export default function Index({ products, filters }) {
     return (
         <MainLayout>
             <Head>
-                <title>High-Quality Automotive Products | PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Explore TCF's range of high-precision automotive components. From stamping to robotic welding, we provide the best Tier 2 manufacturing solutions in Indonesia." />
-                <meta property="og:title" content="Our Products - Precision Automotive Components | TCF" />
-                <meta property="og:description" content="Discover our comprehensive range of high-quality automotive parts manufactured with robotic precision in Indonesia." />
+                <title>{__('High-Quality Automotive Products | PT Tri Centrum Fortuna')}</title>
+                <meta name="description" content={__('Explore TCF\'s range of high-precision automotive components. From stamping to robotic welding, we provide the best Tier 2 manufacturing solutions in Indonesia.')} />
+                <meta property="og:title" content={__('Our Products - Precision Automotive Components | TCF')} />
+                <meta property="og:description" content={__('Discover our comprehensive range of high-quality automotive parts manufactured with robotic precision in Indonesia.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={firstProductImage} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -66,7 +69,7 @@ export default function Index({ products, filters }) {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -74,16 +77,15 @@ export default function Index({ products, filters }) {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Package className="w-4 h-4" />
-                            Precision Manufacturing
+                            {__('Precision Manufacturing')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our High-Quality <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">Products</span>
+                            {__('Our High-Quality')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Products')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Explore our comprehensive range of stamped and welded components,
-                            engineered for durability and manufactured to world-class standards.
+                            {__('Explore our comprehensive range of stamped and welded components, engineered for durability and manufactured to world-class standards.')}
                         </p>
                     </motion.div>
                 </div>
@@ -92,7 +94,7 @@ export default function Index({ products, filters }) {
             {/* Search & List Section */}
             <section className="py-20 bg-slate-50 min-h-[600px] relative">
                 {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-orange-500/5 blur-[120px] rounded-full"></div>
+                <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/5 blur-[120px] rounded-full"></div>
                 <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-amber-500/5 blur-[120px] rounded-full"></div>
 
                 <div className="container mx-auto px-6">
@@ -100,12 +102,12 @@ export default function Index({ products, filters }) {
                     <div className="max-w-2xl mx-auto mb-16">
                         <div className="relative group">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <Search className="h-5 w-5 text-slate-400 group-focus-within:text-orange-500 transition-colors" />
+                                <Search className="h-5 w-5 text-slate-400 group-focus-within:text-brand-primary transition-colors" />
                             </div>
                             <input
                                 type="text"
-                                className="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all shadow-sm"
-                                placeholder="Search our products..."
+                                className="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all shadow-sm"
+                                placeholder={__('Search our products...')}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -130,12 +132,12 @@ export default function Index({ products, filters }) {
                                     >
                                         {/* Image Container */}
                                         <Link
-                                            href={product.slug ? route('products.detail', product.slug) : '#'}
+                                            href={product.slug ? lRoute('products.detail', { slug: product.slug }) : '#'}
                                             className="aspect-[4/3] relative overflow-hidden bg-slate-100 block"
                                         >
                                             <img
                                                 src={product.main_image?.startsWith('http') ? product.main_image : `/${product.main_image}`}
-                                                alt={product.name}
+                                                alt={product.translated_name}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                             />
                                             {product.customer && (
@@ -153,24 +155,24 @@ export default function Index({ products, filters }) {
                                         {/* Content */}
                                         <div className="p-8 flex flex-col flex-grow">
                                             <div className="flex items-center gap-2 mb-3">
-                                                <Tag className="w-3 h-3 text-orange-500" />
-                                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Automotive Part</span>
+                                                <Tag className="w-3 h-3 text-brand-primary" />
+                                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{__('Automotive Part')}</span>
                                             </div>
-                                            <Link href={product.slug ? route('products.detail', product.slug) : '#'}>
-                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-1">
-                                                    {product.name}
+                                            <Link href={product.slug ? lRoute('products.detail', { slug: product.slug }) : '#'}>
+                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                                    {product.translated_name}
                                                 </h3>
                                             </Link>
                                             <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">
-                                                {product.description}
+                                                {product.translated_description}
                                             </p>
 
                                             <div className="mt-auto">
                                                 <Link
-                                                    href={product.slug ? route('products.detail', product.slug) : '#'}
-                                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:text-orange-600 transition-all"
+                                                    href={product.slug ? lRoute('products.detail', { slug: product.slug }) : '#'}
+                                                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-all"
                                                 >
-                                                    View Details
+                                                    {__('View Details')}
                                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                                 </Link>
                                             </div>
@@ -188,8 +190,8 @@ export default function Index({ products, filters }) {
                                 <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-300">
                                     <Box className="w-10 h-10" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">No products found</h3>
-                                <p className="text-slate-500">Try adjusting your search criteria</p>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">{__('No products found')}</h3>
+                                <p className="text-slate-500">{__('Try adjusting your search criteria')}</p>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -204,7 +206,7 @@ export default function Index({ products, filters }) {
                                             <Link
                                                 key={idx}
                                                 href={link.url || '#'}
-                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-orange-600'}`}
+                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'}`}
                                             >
                                                 <ChevronLeft className="w-5 h-5" />
                                             </Link>
@@ -215,7 +217,7 @@ export default function Index({ products, filters }) {
                                             <Link
                                                 key={idx}
                                                 href={link.url || '#'}
-                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-orange-600'}`}
+                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'}`}
                                             >
                                                 <ChevronRight className="w-5 h-5" />
                                             </Link>
@@ -225,7 +227,7 @@ export default function Index({ products, filters }) {
                                         <Link
                                             key={idx}
                                             href={link.url || '#'}
-                                            className={`min-w-[40px] h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${link.active ? 'bg-orange-600 text-white shadow-lg shadow-orange-500/30' : 'text-slate-600 hover:bg-slate-50 hover:text-orange-600'}`}
+                                            className={`min-w-[40px] h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${link.active ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/30' : 'text-slate-600 hover:bg-slate-50 hover:text-brand-primary'}`}
                                             dangerouslySetInnerHTML={{ __html: link.label }}
                                         />
                                     );

@@ -1,8 +1,16 @@
-import { Link, usePage } from '@inertiajs/react';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import {
+    Facebook,
+    Instagram,
+    Twitter,
+    Mail,
+    Phone,
+    MapPin,
+} from "lucide-react";
+import { useTranslation, useLocalic } from "@/helpers";
 
 export default function Footer() {
-    const { translations = {} } = usePage().props;
+    const { __ } = useTranslation();
+    const { lRoute } = useLocalic();
 
     return (
         <footer className="bg-[#020617] text-white pt-16 pb-8">
@@ -11,21 +19,34 @@ export default function Footer() {
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <div className="flex items-center space-x-2">
-                            <h2 className="text-3xl font-bold text-white">TCF</h2>
+                            <h2 className="text-3xl font-bold text-white">
+                                TCF
+                            </h2>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             PT Tri Centrum Fortuna
                             <br />
-                            A leading automotive spare parts manufacturer committed to Empowerment, Excellence, Integrity, Service, and Tenacity.
+                            {__(
+                                "A leading automotive spare parts manufacturer committed to Empowerment, Excellence, Integrity, Service, and Tenacity.",
+                            )}
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-orange-600 transition-colors">
+                            <a
+                                href="#"
+                                className="p-2 bg-gray-800 rounded-full hover:bg-brand-primary transition-colors"
+                            >
                                 <Facebook className="w-5 h-5 text-gray-300" />
                             </a>
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-orange-600 transition-colors">
+                            <a
+                                href="#"
+                                className="p-2 bg-gray-800 rounded-full hover:bg-brand-primary transition-colors"
+                            >
                                 <Instagram className="w-5 h-5 text-gray-300" />
                             </a>
-                            <a href="#" className="p-2 bg-gray-800 rounded-full hover:bg-orange-600 transition-colors">
+                            <a
+                                href="#"
+                                className="p-2 bg-gray-800 rounded-full hover:bg-brand-primary transition-colors"
+                            >
                                 <Twitter className="w-5 h-5 text-gray-300" />
                             </a>
                         </div>
@@ -33,40 +54,114 @@ export default function Footer() {
 
                     {/* Quick Link 1 */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-orange-400">{translations['Our Capabilities'] || 'Our Capabilities'}</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-brand-secondary">
+                            {__("Our Capabilities")}
+                        </h3>
                         <ul className="space-y-2 text-gray-400 text-sm">
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">Stamping</a></li>
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">Welding</a></li>
-                            <li><a href="#capabilities" className="hover:text-white transition-colors">Tooling</a></li>
-                            <li><a href="#location" className="hover:text-white transition-colors">Our Plants</a></li>
+                            <li>
+                                <a
+                                    href={`${lRoute("home")}#capabilities`}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Stamping")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={`${lRoute("home")}#capabilities`}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Welding")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={`${lRoute("home")}#capabilities`}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Bending")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={lRoute("about.facilities")}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Our Plants")}
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
                     {/* Quick Link 2 */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-orange-400">Company</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-brand-secondary">
+                            {__("Company")}
+                        </h3>
                         <ul className="space-y-2 text-gray-400 text-sm">
-                            <li><a href="#about" className="hover:text-white transition-colors">{translations['About Us'] || 'About Us'}</a></li>
-                            <li><a href="#about" className="hover:text-white transition-colors">{translations['Core Values'] || 'Core Values'}</a></li>
-                            <li><a href="#news" className="hover:text-white transition-colors">{translations['News'] || 'News'}</a></li>
-                            <li><a href="#location" className="hover:text-white transition-colors">{translations['Contact Us'] || 'Contact Us'}</a></li>
+                            <li>
+                                <a
+                                    href={lRoute("about.vision-mission")}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("About Us")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={`${lRoute("home")}#about`}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Core Values")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={lRoute("news.index")}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("News")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={lRoute("gallery.index")}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Gallery")}
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={`${lRoute("home")}#location`}
+                                    className="hover:text-white transition-colors"
+                                >
+                                    {__("Contact Us")}
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
                     {/* Contact Info */}
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-orange-400">Contact</h3>
+                        <h3 className="text-lg font-semibold mb-4 text-brand-secondary">
+                            {__("Contact")}
+                        </h3>
                         <ul className="space-y-4 text-gray-400 text-sm">
                             <li className="flex items-start space-x-3">
-                                <MapPin className="w-5 h-5 text-orange-500 mt-0.5" />
-                                <span>Jl. Harapan Raya Lot 6-8, Karawang International Industrial City (KIIC), Karawang 41361, West Java, Indonesia</span>
+                                <MapPin className="w-5 h-5 text-brand-primary mt-0.5" />
+                                <span>
+                                    Jl. Harapan Raya Lot 6-8, Karawang
+                                    International Industrial City (KIIC),
+                                    Karawang 41361, West Java, Indonesia
+                                </span>
                             </li>
                             <li className="flex items-center space-x-3">
-                                <Phone className="w-5 h-5 text-orange-500" />
+                                <Phone className="w-5 h-5 text-brand-primary" />
                                 <span>+62 267 1234567</span>
                             </li>
                             <li className="flex items-center space-x-3">
-                                <Mail className="w-5 h-5 text-orange-500" />
+                                <Mail className="w-5 h-5 text-brand-primary" />
                                 <span>info@tricentrumfortuna.com</span>
                             </li>
                         </ul>

@@ -22,13 +22,20 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
 
         $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
         $middleware->redirectTo(
-            guests: '/login',
-            users: '/dashboard'
+            guests: function (Request $request) {
+                $locale = session()->get('locale', config('app.locale'));
+                return route('login', ['locale' => $locale]);
+            },
+            users: function (Request $request) {
+                $locale = session()->get('locale', config('app.locale'));
+                return route('dashboard', ['locale' => $locale]);
+            }
         );
     })
     ->withExceptions(function (Exceptions $exceptions): void {

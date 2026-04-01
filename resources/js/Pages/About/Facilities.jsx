@@ -3,40 +3,112 @@ import { createPortal } from 'react-dom';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { MapPin, Users, Calendar, Building2, X, Maximize2 } from 'lucide-react';
+import { Building2, Users, Calendar, MapPin, X, Maximize2 } from 'lucide-react';
 import Modal from '@/Components/Modal';
+import { useLocalic, useTranslation } from '@/helpers';
 
 const facilityData = {
     purwakarta: {
         layout: '/img/facilities/tcfsg-layout.png',
         machines: [
             {
-                category: "Stamping Press",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                category: "Progressive Machine",
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
                 items: [
-                    { name: "Progressive 110T - 300T", details: "SC/DC Types", count: "14 Units" },
-                    { name: "Tandem 110T - 1000T", details: "Line Medium & High Tonnage", count: "48 Units" },
-                    { name: "Double Crank 200T - 500T", details: "High Precision", count: "8 Units" },
+                    { name: "110T SC", count: "3" },
+                    { name: "150T SC", count: "1" },
+                    { name: "200T SC", count: "6" },
+                    { name: "200T DC", count: "3" },
+                    { name: "250T SC", count: "1" },
+                    { name: "250T DC", count: "1" },
+                    { name: "300T DC", count: "1" },
+                    { name: "315T DC", count: "2" },
+                    { name: "350T DC", count: "1" },
+                    { name: "400T DC", count: "2" },
+                    { name: "500T SH", count: "1" },
+                    { name: "500T DH", count: "1" },
+                    { name: "600T DH", count: "1" },
                 ]
             },
             {
-                category: "Welding & Assembly",
-                icon: <Users className="w-5 h-5 text-orange-500" />,
+                category: "Tandem Machine",
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
                 items: [
-                    { name: "Robot Welding", details: "Automated Cells", count: "27 Cells" },
-                    { name: "Spot Welding", details: "35kVA - 110kVA", count: "25 Units" },
-                    { name: "Manual CO2 Welding", details: "Manual Stations", count: "9 Stations" },
-                    { name: "Rotary Welding", details: "Special Purpose", count: "3 Units" },
+                    { name: "110T SC", count: "14" },
+                    { name: "150T SC", count: "18" },
+                    { name: "150T DC", count: "2" },
+                    { name: "160T SC", count: "4" },
+                    { name: "200T SC", count: "9" },
+                    { name: "200T DC", count: "3" },
+                    { name: "250T SC", count: "5" },
+                    { name: "315T SC", count: "2" },
+                    { name: "400T DH", count: "1" },
+                    { name: "500T SH", count: "1" },
+                    { name: "1000T DH", count: "1" },
                 ]
             },
             {
-                category: "Tool Room & Support",
+                category: "Welding Machine",
+                icon: <Users className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
+                items: [
+                    { name: "Spot - 50kVA", count: "2" },
+                    { name: "Spot - 75kVA", count: "3" },
+                    { name: "Spot - 100kVA", count: "1" },
+                ]
+            },
+            {
+                category: "Shearing Machine",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
+                items: [
+                    { name: "Length", count: "830 cm" },
+                    { name: "Width", count: "160 cm" },
+                ]
+            },
+            {
+                category: "Design Software",
+                icon: <Building2 className="w-5 h-5 text-purple-500" />,
+                items: [
+                    { name: "ZWCAD & SOLIDWORKS" },
+                    { name: "SOLID EDGE & SIEMENS NX" },
+                    { name: "ZW3D & AUTODESK AutoCAD" },
+                ]
+            },
+            {
+                category: "Tool Making",
                 icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
                 items: [
-                    { name: "CNC Machining", details: "Milling & Lathe", count: "5 Units" },
-                    { name: "Wire Cut EDM", details: "High Precision", count: "2 Units" },
-                    { name: "Surface Grinding", details: "Various Sizes", count: "4 Units" },
-                    { name: "CMM & Measuring", details: "Quality Control Lab", count: "Complete" },
+                    { name: "Wire Cut" },
+                    { name: "Manual Milling" },
+                    { name: "CNC Lathe" },
+                    { name: "Cylindrical Grinding" },
+                    { name: "Manual Lathe" },
+                    { name: "Surface Grinding" },
+                    { name: "CNC Milling" },
+                    { name: "Radial Grinding" },
+                ]
+            },
+            {
+                category: "Measuring Equipments",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "CMM Portable" },
+                    { name: "Dial Depth Gauge" },
+                    { name: "Digital Torque Wrench" },
+                    { name: "Digital Microscope" },
+                    { name: "Digital Height Gauge" },
+                    { name: "Pin Gauge Set" },
+                    { name: "Profil Projector" },
+                    { name: "Dansa Gauge" },
+                    { name: "Ring Gauge" },
+                    { name: "Digital Micrometer" },
+                    { name: "Formtracer" },
+                    { name: "Radius Gauge" },
+                    { name: "Digital Caliper" },
                 ]
             }
         ]
@@ -45,30 +117,114 @@ const facilityData = {
         layout: '/img/facilities/tcfkg-layout.png',
         machines: [
             {
-                category: "Stamping Press",
-                icon: <Building2 className="w-5 h-5 text-orange-500" />,
+                category: "Progressive Machine",
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
                 items: [
-                    { name: "Transfer Machine 1500T", details: "High Tonnage Transfer", count: "1 Unit" },
-                    { name: "Progressive 200T - 600T", details: "Coil Feed Lines", count: "8 Units" },
-                    { name: "Tandem 300T - 1000T", details: "Robotic Transfer", count: "3 Lines" },
+                    { name: "110T SC", count: "13" },
+                    { name: "150T SC", count: "5" },
+                    { name: "160T SC", count: "12" },
+                    { name: "200T SC", count: "7" },
+                    { name: "200T DC", count: "2" },
+                    { name: "250T DC", count: "2" },
+                    { name: "250T SC", count: "1" },
+                    { name: "400T DH", count: "4" },
+                    { name: "600T DH", count: "3" },
+                    { name: "800T DH", count: "2" },
                 ]
             },
             {
-                category: "Welding & Assembly",
-                icon: <Users className="w-5 h-5 text-orange-500" />,
+                category: "Tandem Machine",
+                icon: <Building2 className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
                 items: [
-                    { name: "Robot Welding", details: "Spot & Arc", count: "35 Cells" },
-                    { name: "Spot Welding", details: "Stationary & Gun", count: "40 Units" },
-                    { name: "Nut Runner / Tapping", details: "Assembly Support", count: "12 Units" },
+                    { name: "110T SC", count: "2" },
+                    { name: "160T SC", count: "3" },
+                    { name: "200T SC", count: "3" },
+                    { name: "250T DC", count: "1" },
+                    { name: "500T DH", count: "1" },
+                    { name: "800T DH", count: "1" },
+                    { name: "1000T DH", count: "1" },
                 ]
             },
             {
-                category: "Tool Maintenance",
+                category: "Welding Machine",
+                icon: <Users className="w-5 h-5 text-brand-primary" />,
+                showCount: true,
+                items: [
+                    { name: "Manual Weld", count: "9" },
+                    { name: "Robot Weld", count: "27" },
+                    { name: "Tig Weld", count: "2" },
+                    { name: "Spot - 35kVA", count: "4" },
+                    { name: "Spot - 50kVA", count: "19" },
+                    { name: "Spot - 110kVA", count: "2" },
+                    { name: "Rotary Weld", count: "3" },
+                ]
+            },
+            {
+                category: "Other Machines",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
+                items: [
+                    { name: "Tapping & Drilling" },
+                    { name: "Rivet & Swaging Pipe" },
+                    { name: "Hamming Pipe" },
+                ]
+            },
+            {
+                category: "Pipe Bending",
+                icon: <Building2 className="w-5 h-5 text-blue-500" />,
+                showCount: true,
+                items: [
+                    { name: "NC Bending Ø", count: "30" },
+                    { name: "CNC Bending Ø", count: "30" },
+                    { name: "CNC Bending Ø", count: "38" },
+                ]
+            },
+            {
+                category: "Design Software",
+                icon: <Building2 className="w-5 h-5 text-purple-500" />,
+                items: [
+                    { name: "ZWCAD & SOLIDWORKS" },
+                    { name: "SOLID EDGE & SIEMENS NX" },
+                    { name: "ZW3D & AUTODESK AutoCAD" },
+                ]
+            },
+            {
+                category: "Die Maintenance Facility",
                 icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
                 items: [
-                    { name: "Overhead Crane", details: "5T - 30T Capacity", count: "12 Units" },
-                    { name: "Forklift", details: "Material Handling", count: "15 Units" },
-                    { name: "Die Maintenance", details: "Repair & Polishing", count: "Area Available" },
+                    { name: "CNC Milling" },
+                    { name: "Cylindrical Grinding" },
+                    { name: "Manual Milling" },
+                    { name: "Surface Grinding" },
+                    { name: "Manual Lathe" },
+                    { name: "Radial Grinding" },
+                ]
+            },
+            {
+                category: "Measuring Equipments",
+                icon: <Calendar className="w-5 h-5 text-emerald-500" />,
+                twoColumn: true,
+                items: [
+                    { name: "Digital Caliper" },
+                    { name: "Push Test" },
+                    { name: "Digital Thickness Paint" },
+                    { name: "CMM Portable (FARO)" },
+                    { name: "Dial Depth Gauge" },
+                    { name: "Digital Torque Wrench" },
+                    { name: "Digital Microscope" },
+                    { name: "Digital Height Gauge" },
+                    { name: "Pin Gauge Set" },
+                    { name: "Profil Projector" },
+                    { name: "Dansa Gauge" },
+                    { name: "Ring Gauge" },
+                    { name: "Conductivity Meter" },
+                    { name: "Contracer" },
+                    { name: "Radius Gauge" },
+                    { name: "Digital Micrometer" },
+                    { name: "Formtracer" },
+                    { name: "Weighing Instruments" },
                 ]
             }
         ]
@@ -79,6 +235,7 @@ export default function Facilities() {
     const [showModal, setShowModal] = useState(false);
     const [activePlant, setActivePlant] = useState('purwakarta');
     const [previewImage, setPreviewImage] = useState(null);
+    const { __ } = useTranslation();
 
     const openModal = (plant) => {
         setActivePlant(plant);
@@ -88,12 +245,12 @@ export default function Facilities() {
     const currentData = facilityData[activePlant];
 
     return (
-        <MainLayout title="Facilities">
+        <MainLayout title={__('Facilities')}>
             <Head>
-                <title>World-Class Manufacturing Facilities - PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Take a look inside TCF's advanced manufacturing plants in Karawang and Purwakarta. Equipped with high-precision stamping and robotic welding technology." />
-                <meta property="og:title" content="TCF Facilities - State-of-the-Art Automotive Manufacturing" />
-                <meta property="og:description" content="Explore our high-capacity stamping and welding plants designed for automotive excellence." />
+                <title>{__('World-Class Manufacturing Facilities - PT Tri Centrum Fortuna')}</title>
+                <meta name="description" content={__('Take a look inside TCF\'s advanced manufacturing plants in Karawang and Purwakarta. Equipped with high-precision stamping and robotic welding technology.')} />
+                <meta property="og:title" content={__('TCF Facilities - State-of-the-Art Automotive Manufacturing')} />
+                <meta property="og:description" content={__('Explore our high-capacity stamping and welding plants designed for automotive excellence.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -126,7 +283,7 @@ export default function Facilities() {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary/10 via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -134,16 +291,15 @@ export default function Facilities() {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Building2 className="w-4 h-4" />
-                            Production Excellence
+                            {__('Production Excellence')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Facilities</span>
+                            {__('Our')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Facilities')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Operating from strategic locations to serve our partners efficiently,
-                            equipped with high-precision machinery and automated systems.
+                            {__('Operating from strategic locations to serve our partners efficiently, equipped with high-precision machinery and automated systems.')}
                         </p>
                     </motion.div>
                 </div>
@@ -166,14 +322,14 @@ export default function Facilities() {
                                     alt="Plant Purwakarta"
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute top-4 left-4 bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                                     PURWAKARTA
                                 </div>
                             </div>
                             <div className="p-8 flex flex-col flex-grow">
                                 <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                                    <Building2 className="text-orange-500" />
-                                    PLANT – PURWAKARTA
+                                    <Building2 className="text-brand-primary" />
+                                    {__('PLANT – PURWAKARTA')}
                                 </h2>
                                 <div className="flex items-start gap-4 text-slate-600 mb-auto">
                                     <MapPin className="w-6 h-6 text-slate-400 mt-1 flex-shrink-0" />
@@ -186,9 +342,9 @@ export default function Facilities() {
 
                                 <button
                                     onClick={() => openModal('purwakarta')}
-                                    className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2"
+                                    className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                 >
-                                    View Plant Details
+                                    {__('View Plant Details')}
                                 </button>
                             </div>
                         </motion.div>
@@ -214,7 +370,7 @@ export default function Facilities() {
                             <div className="p-8 flex flex-col flex-grow">
                                 <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                                     <Building2 className="text-blue-500" />
-                                    PLANT – KARAWANG
+                                    {__('PLANT – KARAWANG')}
                                 </h2>
                                 <div className="space-y-4 mb-auto">
                                     <div className="flex items-start gap-4 text-slate-600">
@@ -236,8 +392,8 @@ export default function Facilities() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">
-                                                <Users className="text-orange-500 w-5 h-5" />
+                                            <div className="w-10 h-10 rounded-full bg-brand-primaryflex items-center justify-center">
+                                                <Users className="text-brand-primary w-5 h-5" />
                                             </div>
                                             <div>
                                                 <p className="text-xs text-slate-400">Total Workforce</p>
@@ -249,9 +405,9 @@ export default function Facilities() {
 
                                     <button
                                         onClick={() => openModal('karawang')}
-                                        className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2"
+                                        className="w-full mt-6 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-brand-primary transition-colors flex items-center justify-center gap-2"
                                     >
-                                        View Plant Details
+                                        {__('View Plant Details')}
                                     </button>
                                 </div>
                             </div>
@@ -268,6 +424,7 @@ export default function Facilities() {
                         data={currentData}
                         setShowModal={setShowModal}
                         onPreviewImage={setPreviewImage}
+                        __={__}
                     />
                 )}
             </Modal>
@@ -275,21 +432,21 @@ export default function Facilities() {
     );
 }
 
-const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => (
+const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage, __ }) => (
     <div className="flex flex-col h-full h-screen">
         {/* Sticky Header */}
         <div className="flex justify-between items-center p-6 md:p-8 border-b border-slate-100 bg-white sticky top-0 z-20">
             <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-                    {activePlant === 'purwakarta' ? 'Plant Purwakarta' : 'Plant Karawang'}
+                    {activePlant === 'purwakarta' ? __('Plant Purwakarta') : __('Plant Karawang')}
                 </h3>
-                <p className="text-slate-500 text-sm mt-1">Detailed Facility & Equipment Overview</p>
+                <p className="text-slate-500 text-sm mt-1">{__('Detailed Facility & Equipment Overview')}</p>
             </div>
             <button
                 onClick={() => setShowModal(false)}
                 className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600 focus:outline-none"
             >
-                <span className="sr-only">Close</span>
+                <span className="sr-only">{__('Close')}</span>
                 <X className="h-6 w-6" />
             </button>
         </div>
@@ -299,9 +456,9 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
             <div className="space-y-12">
                 {/* Layout Section */}
                 <div>
-                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                    <h4 className={`font-display font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-brand-secondary'}`}>
                         <Building2 className="w-6 h-6" />
-                        Factory Layout
+                        {__('Factory Layout')}
                     </h4>
                     <div
                         className="bg-slate-50 rounded-2xl p-2 border border-slate-200 cursor-zoom-in group relative overflow-hidden transition-all hover:shadow-md hover:border-slate-300"
@@ -316,7 +473,7 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                             <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
                                 <span className="bg-white/90 text-slate-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                     <Maximize2 className="w-4 h-4" />
-                                    View Full Screen
+                                    {__('View Full Screen')}
                                 </span>
                             </div>
                         </div>
@@ -325,9 +482,9 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
 
                 {/* Production Facilities Grid */}
                 <div>
-                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-orange-600' : 'text-blue-600'}`}>
+                    <h4 className={`font-bold text-lg md:text-xl mb-6 flex items-center gap-2 ${activePlant === 'purwakarta' ? 'text-brand-primary' : 'text-blue-600'}`}>
                         <Users className="w-6 h-6" />
-                        Production Facilities & Equipment
+                        {__('Production Facilities & Equipment')}
                     </h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -337,19 +494,21 @@ const ContainerModal = ({ activePlant, data, setShowModal, onPreviewImage }) => 
                                     <div className="p-2 bg-white rounded-lg shadow-sm">
                                         {category.icon}
                                     </div>
-                                    <h5 className="font-bold text-slate-800">{category.category}</h5>
+                                    <h5 className="font-bold text-slate-800">{__(category.category)}</h5>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-4">
+                                    <ul className={`space-y-4 ${category.twoColumn ? 'grid grid-cols-2 gap-x-6 gap-y-2 space-y-0' : ''}`}>
                                         {category.items.map((item, i) => (
-                                            <li key={i} className="flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0">
+                                            <li key={i} className={`flex justify-between items-start border-b last:border-0 border-slate-50 pb-3 last:pb-0 ${category.twoColumn ? 'border-0 pb-0' : ''}`}>
                                                 <div>
                                                     <p className="font-bold text-slate-900 text-sm">{item.name}</p>
-                                                    <p className="text-xs text-slate-500">{item.details}</p>
+                                                    {item.details && <p className="text-xs text-slate-500">{item.details}</p>}
                                                 </div>
-                                                <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">
-                                                    {item.count}
-                                                </span>
+                                                {item.count && (
+                                                    <span className="text-xs font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-full whitespace-nowrap ml-2">
+                                                        {item.count}
+                                                    </span>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>

@@ -7,12 +7,14 @@ use Inertia\Inertia;
 use App\Services\CustomerService;
 use App\Services\ProductService;
 use App\Services\NewsService;
+use App\Services\GalleryService;
 
 class PageController extends Controller
 {
     protected $customerService;
     protected $productService;
     protected $newsService;
+    protected $galleryService;
 
     /**
      * PageController constructor.
@@ -21,14 +23,16 @@ class PageController extends Controller
     public function __construct(
         CustomerService $customerService,
         ProductService $productService,
-        NewsService $newsService
+        NewsService $newsService,
+        GalleryService $galleryService
     ) {
         $this->customerService = $customerService;
         $this->productService = $productService;
         $this->newsService = $newsService;
+        $this->galleryService = $galleryService;
     }
 
-    public function home()
+    public function home($locale)
     {
         $customers = $this->customerService->getCustomerList(10);
         $products = $this->productService->getProductList(4); // Display 8 products on home
@@ -41,7 +45,7 @@ class PageController extends Controller
         ]);
     }
 
-    public function customers(Request $request)
+    public function customers(Request $request, $locale)
     {
         $customers = $this->customerService->getCustomerList(
             10,
@@ -58,7 +62,7 @@ class PageController extends Controller
      * Product List Page
      * Generate by Antigravity
      */
-    public function products(Request $request)
+    public function products(Request $request, $locale)
     {
         $products = $this->productService->getProductList(
             12, // 12 items per page for product grid
@@ -75,7 +79,7 @@ class PageController extends Controller
      * Product Detail Page
      * Generate by Antigravity
      */
-    public function productDetail($slug)
+    public function productDetail($locale, $slug)
     {
         $product = $this->productService->getProductBySlug($slug);
 
@@ -92,7 +96,7 @@ class PageController extends Controller
      * News List Page
      * Generate by Antigravity
      */
-    public function news(Request $request)
+    public function news(Request $request, $locale)
     {
         $news = $this->newsService->getNewsList(
             8, // 8 items per page
@@ -110,7 +114,7 @@ class PageController extends Controller
      * News Detail Page
      * Generate by Antigravity
      */
-    public function newsDetail($slug)
+    public function newsDetail($locale, $slug)
     {
         $article = $this->newsService->getNewsBySlug($slug);
 
@@ -120,6 +124,21 @@ class PageController extends Controller
 
         return Inertia::render('News/Detail', [
             'article' => $article
+        ]);
+    }
+
+    public function gallery(Request $request, $locale)
+    {
+        $galleries = $this->galleryService->getGalleryList(
+            12,
+            $request->input('search'),
+            $request->input('category')
+        );
+
+        return Inertia::render('Gallery/Index', [
+            'galleries' => $galleries,
+            'categories' => $this->galleryService->getCategoryList(),
+            'filters' => $request->only(['search', 'category'])
         ]);
     }
 

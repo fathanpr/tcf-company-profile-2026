@@ -2,14 +2,17 @@ import React from 'react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { Cpu, CheckCircle2, Factory, Users, Zap, ShieldCheck, Microscope, Layers, TrendingUp, ArrowUpRight } from 'lucide-react';
+import { ShieldCheck, Cpu, Layers, Factory, Zap, ArrowUpRight } from 'lucide-react';
 import Chart from 'react-apexcharts';
+import { useLocalic, useTranslation } from '@/helpers';
 
 export default function ProductionQuality() {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const automationFeatures = [
-        { title: "CNC Machine Automation", desc: "Robotic arm integration for high-precision CNC milling and turning operations.", icon: <Cpu />, img: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=600" },
-        { title: "Transfer Line System", desc: "Automated transfer lines with robotic handlers to optimize production flow.", icon: <Layers />, img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
-        { title: "Stamping Robotization", desc: "Full automation for high-tonnage stamping presses using industrial robots.", icon: <Factory />, img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
+        { title: __("CNC Machine Automation"), desc: __("Robotic arm integration for high-precision CNC milling and turning operations."), icon: <Cpu />, img: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=600" },
+        { title: __("Transfer Line System"), desc: __("Automated transfer lines with robotic handlers to optimize production flow."), icon: <Layers />, img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
+        { title: __("Stamping Robotization"), desc: __("Full automation for high-tonnage stamping presses using industrial robots."), icon: <Factory />, img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600" },
     ];
 
     const manpowerData = [
@@ -51,17 +54,17 @@ export default function ProductionQuality() {
         },
         yaxis: [
             {
-                title: { text: "Man Power", style: { color: "#eab308", fontWeight: 700 } },
+                title: { text: "Man Power", style: { color: "#22d3ee", fontWeight: 700 } },
                 labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
             },
             {
                 opposite: true,
-                title: { text: "Volume (M)", style: { color: "#f97316", fontWeight: 700 } },
+                title: { text: "Volume (M)", style: { color: "#0ea5e9", fontWeight: 700 } },
                 labels: { style: { colors: '#94a3b8', fontWeight: 700 } }
             }
         ],
         grid: { borderColor: '#f1f5f9', strokeDashArray: 4 },
-        colors: ['#eab308', '#f97316'],
+        colors: ['#22d3ee', '#0ea5e9'],
         plotOptions: {
             bar: { borderRadius: 4, columnWidth: '40%' }
         },
@@ -135,10 +138,10 @@ export default function ProductionQuality() {
     return (
         <MainLayout>
             <Head>
-                <title>Production Excellence & Quality Control - PT Tri Centrum Fortuna</title>
-                <meta name="description" content="Discover TCF's rigorous quality standards and efficient production processes. ISO certified manufacturing for the highest precision automotive parts." />
-                <meta property="og:title" content="TCF Production & Quality - Precision Engineering at Scale" />
-                <meta property="og:description" content="Strict quality control and advanced production technology for Indonesia's automotive industry." />
+                <title>{__('Production Excellence & Quality Control - PT Tri Centrum Fortuna')}</title>
+                <meta name="description" content={__('Discover TCF\'s rigorous quality standards and efficient production processes. ISO certified manufacturing for the highest precision automotive parts.')} />
+                <meta property="og:title" content={__('TCF Production & Quality - Precision Engineering at Scale')} />
+                <meta property="og:description" content={__('Strict quality control and advanced production technology for Indonesia\'s automotive industry.')} />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -147,7 +150,7 @@ export default function ProductionQuality() {
             {/* Hero Section */}
             <div className="relative pt-32 pb-20 bg-slate-900 text-white overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-slate-900"></div>
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary via-transparent to-slate-900"></div>
 
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -155,16 +158,15 @@ export default function ProductionQuality() {
                         animate={{ opacity: 1, y: 0 }}
                         className="max-w-3xl mx-auto text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <ShieldCheck className="w-4 h-4" />
-                            Precision & Reliability
+                            {__('Precision & Reliability')}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            Production & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Quality</span>
+                            {__('Production')} & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Quality')}</span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            Precision engineering driven by automation and a relentless
-                            pursuit of zero-defect quality standards.
+                            {__('Precision engineering driven by automation and a relentless pursuit of zero-defect quality standards.')}
                         </p>
                     </motion.div>
                 </div>
@@ -174,8 +176,8 @@ export default function ProductionQuality() {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <span className="text-orange-600 font-bold tracking-widest uppercase text-sm">Industrial 4.0</span>
-                        <h2 className="text-3xl font-bold text-slate-900 mt-2">Robotic Process Automation</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Industrial 4.0')}</span>
+                        <h2 className="text-3xl font-bold text-slate-900 mt-2">{__('Robotic Process Automation')}</h2>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -192,7 +194,7 @@ export default function ProductionQuality() {
                                     <img src={f.img} alt={f.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
                                     <div className="absolute bottom-6 left-6 flex items-center gap-3">
-                                        <div className="p-2 bg-orange-600 rounded-lg text-white shadow-lg">
+                                        <div className="p-2 bg-brand-primary rounded-lg text-white shadow-lg">
                                             {f.icon}
                                         </div>
                                     </div>
@@ -226,7 +228,7 @@ export default function ProductionQuality() {
                                 />
                             </div>
                             <p className="mt-4 text-[10px] text-slate-400 italic text-center">
-                                *In 2026, we aim for maximum output with optimized workforce through high-level automation.
+                                {__('*In 2026, we aim for maximum output with optimized workforce through high-level automation.')}
                             </p>
                         </motion.div>
 
@@ -248,13 +250,13 @@ export default function ProductionQuality() {
 
                             <div className="mt-10 grid grid-cols-2 gap-4 relative z-10">
                                 <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-3xl shadow-inner">
-                                    <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Target NCR 2026</span>
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">{__('Target NCR 2026')}</span>
                                     <span className="text-2xl font-black text-emerald-600">0.00</span>
                                 </div>
                                 <div className="bg-slate-50 border border-slate-200/60 p-4 rounded-3xl shadow-inner">
-                                    <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">Status</span>
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase block mb-1">{__('Status')}</span>
                                     <span className="text-xs font-bold text-slate-900 uppercase tracking-widest flex items-center gap-2">
-                                        World Class <Zap className="w-3 h-3 text-orange-500 animate-pulse" />
+                                        {__('World Class')} <Zap className="w-3 h-3 text-brand-primary animate-pulse" />
                                     </span>
                                 </div>
                             </div>
@@ -265,17 +267,17 @@ export default function ProductionQuality() {
                     {/* Navigation Buttons */}
                     <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
                         <Link
-                            href={route('capabilities.sales-growth')}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-orange-600 transition-all shadow-lg group"
+                            href={lRoute('capabilities.sales-growth')}
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-brand-primary transition-all shadow-lg group"
                         >
-                            Sales Growth
+                            {__('Sales Growth')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                         <Link
-                            href={route('capabilities.loading-capacity')}
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-orange-600 hover:text-orange-600 transition-all shadow-sm group"
+                            href={lRoute('capabilities.loading-capacity')}
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm group"
                         >
-                            Loading Capacity
+                            {__('Loading Capacity')}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                     </div>

@@ -14,6 +14,19 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                display: ['Outfit', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                brand: {
+                    primary: 'var(--brand-primary)',
+                    secondary: 'var(--brand-secondary)',
+                    accent: 'var(--brand-accent)',
+                    surface: 'var(--brand-surface)',
+                    'surface-soft': 'var(--brand-surface-soft)',
+                    text: 'var(--brand-text)',
+                    'text-muted': 'var(--brand-text-muted)',
+                    border: 'var(--brand-border)',
+                },
             },
         },
     },

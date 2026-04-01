@@ -2,12 +2,15 @@ import React from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link } from '@inertiajs/react';
 import { History, User, Activity, Clock, Database, ChevronRight } from 'lucide-react';
+import { useLocalic, useTranslation } from '@/helpers';
 
 /**
  * Activity Log Index
  * Generate by Antigravity
  */
 export default function Index({ logs }) {
+    const { lRoute } = useLocalic();
+    const { __ } = useTranslation();
     const getActionColor = (description) => {
         if (description.includes('created')) return 'text-emerald-600 bg-emerald-50 border-emerald-100';
         if (description.includes('updated')) return 'text-blue-600 bg-blue-50 border-blue-100';
@@ -25,8 +28,8 @@ export default function Index({ logs }) {
                         <History className="w-6 h-6" />
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-slate-900">Audit Trail</h3>
-                        <p className="text-sm text-slate-500">Chronological record of all administrative actions performed in the system.</p>
+                        <h3 className="text-xl font-bold text-slate-900">{__('Audit Trail')}</h3>
+                        <p className="text-sm text-slate-500">{__('Chronological record of all administrative actions performed in the system.')}</p>
                     </div>
                 </div>
 
@@ -92,8 +95,8 @@ export default function Index({ logs }) {
                                         key={i}
                                         href={link.url}
                                         className={`px-3 py-1.5 rounded-lg border transition-all ${link.active
-                                            ? 'bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20'
-                                            : 'bg-white border-slate-200 text-slate-600 hover:border-orange-500 hover:text-orange-500'
+                                            ? 'bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20'
+                                            : 'bg-white border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary'
                                             }`}
                                         dangerouslySetInnerHTML={{ __html: link.label }}
                                     />

@@ -62,15 +62,15 @@ export default function Index({ roles }) {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
                     {roles.map((role) => (
-                        <div key={role.id} className="group p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 transition-all">
+                        <div key={role.id} className="group p-6 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-orange-200 hover:shadow-xl hover:shadow-brand-primary/5 transition-all">
                             <div className="flex justify-between items-start mb-4">
-                                <div className="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                                <div className="p-3 rounded-xl bg-orange-50 text-orange-600 group-hover:bg-brand-primary group-hover:text-white transition-colors">
                                     <Shield className="w-6 h-6" />
                                 </div>
                                 <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <Link
                                         href={route('admin.roles.edit', role.id)}
-                                        className="p-2 text-slate-400 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
+                                        className="p-2 text-slate-400 hover:text-brand-primary hover:bg-orange-50 rounded-lg transition-all"
                                     >
                                         <Edit2 className="w-4 h-4" />
                                     </Link>

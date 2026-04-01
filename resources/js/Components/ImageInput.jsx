@@ -90,8 +90,8 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-xs file:font-semibold
-                                file:bg-orange-50 file:text-orange-700
-                                hover:file:bg-orange-100
+                                file:bg-sky-50 file:text-sky-700
+                                hover:file:bg-sky-100
                                 cursor-pointer file:cursor-pointer"
                         />
                         <p className="mt-2 text-xs text-slate-400 font-medium">* Maximum file size: 2MB</p>
@@ -103,7 +103,7 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
                             value={urlInput}
                             onChange={handleUrlChange}
                             placeholder="https://example.com/image.jpg"
-                            className="w-full px-4 py-3 bg-slate-50 border-slate-200 focus:border-orange-500 focus:ring-orange-500 rounded-xl text-sm transition-all"
+                            className="w-full px-4 py-3 bg-slate-50 border-slate-200 focus:border-brand-primary focus:ring-brand-primary rounded-xl text-sm transition-all"
                         />
                     </div>
                 )}

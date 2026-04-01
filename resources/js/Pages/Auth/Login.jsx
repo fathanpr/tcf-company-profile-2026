@@ -28,7 +28,7 @@ export default function Login({ status, canResetPassword }) {
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-orange-600/20 text-orange-500 mb-3 shadow-inner"
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/20 text-blue-500 mb-3 shadow-inner"
                 >
                     <LogIn className="w-6 h-6" />
                 </motion.div>
@@ -52,12 +52,12 @@ export default function Login({ status, canResetPassword }) {
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1 mb-1.5 block">Email Address</label>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <Mail className="h-4 w-4 text-slate-500 group-focus-within:text-orange-500 transition-colors" />
+                            <Mail className="h-4 w-4 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
                         </div>
                         <input
                             type="email"
                             value={data.email}
-                            className="block w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-white/5 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+                            className="block w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-white/5 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                             placeholder="name@company.com"
                             onChange={(e) => setData('email', e.target.value)}
                             required
@@ -78,7 +78,7 @@ export default function Login({ status, canResetPassword }) {
                         {canResetPassword && (
                             <Link
                                 href={route('password.request')}
-                                className="text-[10px] text-orange-500 hover:text-orange-400 font-bold transition-colors"
+                                className="text-[10px] text-blue-500 hover:text-blue-400 font-bold transition-colors"
                             >
                                 Forgot?
                             </Link>
@@ -86,12 +86,12 @@ export default function Login({ status, canResetPassword }) {
                     </div>
                     <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <Lock className="h-4 w-4 text-slate-500 group-focus-within:text-orange-500 transition-colors" />
+                            <Lock className="h-4 w-4 text-slate-500 group-focus-within:text-blue-500 transition-colors" />
                         </div>
                         <input
                             type="password"
                             value={data.password}
-                            className="block w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-white/5 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+                            className="block w-full pl-11 pr-4 py-3 bg-slate-800/50 border border-white/5 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
                             placeholder="••••••••"
                             onChange={(e) => setData('password', e.target.value)}
                             required
@@ -112,7 +112,7 @@ export default function Login({ status, canResetPassword }) {
                             name="remember"
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
-                            className="rounded border-white/10 bg-slate-800 text-orange-600 shadow-sm focus:ring-orange-500 focus:ring-offset-slate-900"
+                            className="rounded border-white/10 bg-slate-800 text-blue-600 shadow-sm focus:ring-blue-500 focus:ring-offset-slate-900"
                         />
                         <span className="ms-2 text-xs text-slate-400 group-hover:text-slate-300 transition-colors">
                             Remember me
@@ -129,7 +129,7 @@ export default function Login({ status, canResetPassword }) {
                     <button
                         type="submit"
                         disabled={processing}
-                        className="w-full py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 text-white text-sm font-black rounded-xl hover:from-orange-500 hover:to-amber-500 transition-all shadow-xl shadow-orange-900/20 flex items-center justify-center gap-2 group disabled:opacity-50"
+                        className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-sky-600 text-white text-sm font-black rounded-xl hover:from-blue-500 hover:to-sky-500 transition-all shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 group disabled:opacity-50"
                     >
                         {processing ? (
                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>

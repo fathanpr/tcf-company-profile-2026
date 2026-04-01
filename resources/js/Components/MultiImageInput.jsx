@@ -37,7 +37,7 @@ export default function MultiImageInput({ value = [], onChange, error, label = "
                 <button
                     type="button"
                     onClick={addImage}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-50 text-orange-600 rounded-lg text-xs font-black hover:bg-orange-100 transition-all border border-orange-100"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-sky-50 text-brand-primary rounded-lg text-xs font-black hover:bg-sky-100 transition-all border border-sky-100"
                 >
                     <Plus className="w-3 h-3" />
                     Add Image
@@ -47,10 +47,10 @@ export default function MultiImageInput({ value = [], onChange, error, label = "
             {images.length === 0 ? (
                 <div
                     onClick={addImage}
-                    className="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center cursor-pointer hover:border-orange-300 hover:bg-orange-50/30 transition-all group"
+                    className="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center cursor-pointer hover:border-brand-primary/50 hover:bg-sky-50/30 transition-all group"
                 >
-                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-orange-100 transition-colors">
-                        <Plus className="w-6 h-6 text-slate-400 group-hover:text-orange-500" />
+                    <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-sky-100 transition-colors">
+                        <Plus className="w-6 h-6 text-slate-400 group-hover:text-brand-primary" />
                     </div>
                     <p className="text-sm font-bold text-slate-500">No additional images added</p>
                     <p className="text-xs text-slate-400 mt-1">Click to add product gallery images</p>
@@ -58,7 +58,7 @@ export default function MultiImageInput({ value = [], onChange, error, label = "
             ) : (
                 <div className="grid grid-cols-1 gap-4">
                     {images.map((image, index) => (
-                        <div key={index} className="relative bg-slate-50/50 p-4 rounded-2xl border border-slate-100 group transition-all hover:border-orange-200 hover:bg-white shadow-sm hover:shadow-md">
+                        <div key={index} className="relative bg-slate-50/50 p-4 rounded-2xl border border-slate-100 group transition-all hover:border-brand-primary/30 hover:bg-white shadow-sm hover:shadow-md">
                             <div className="absolute top-4 right-4 z-10">
                                 <button
                                     type="button"

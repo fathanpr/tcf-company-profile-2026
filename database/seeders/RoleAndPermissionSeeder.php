@@ -26,6 +26,7 @@ class RoleAndPermissionSeeder extends Seeder
             'manage customers',
             'manage news',
             'manage products',
+            'manage galleries',
             'manage roles',
             'view logs',
             'view api-docs',
@@ -47,6 +48,7 @@ class RoleAndPermissionSeeder extends Seeder
             'manage news',
             'manage customers',
             'manage products',
+            'manage galleries',
         ]);
 
         // Create Default Users

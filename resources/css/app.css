@@ -1,3 +1,23 @@
+@layer base {
+    :root {
+        --brand-primary: #0ea5e9;
+        /* sky-500 */
+        --brand-secondary: #22d3ee;
+        /* cyan-400 */
+        --brand-accent: #60a5fa;
+        /* blue-400 */
+        --brand-surface: #020617;
+        /* slate-950 */
+        --brand-surface-soft: #0f172a;
+        /* slate-900 */
+        --brand-text: #f8fafc;
+        /* slate-50 */
+        --brand-text-muted: #94a3b8;
+        /* slate-400 */
+        --brand-border: rgba(255, 255, 255, 0.1);
+    }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,11 +32,11 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--brand-border);
     border-radius: 10px;
     transition: all 0.3s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #f97316; /* orange-500 */
+    background: var(--brand-primary);
 }
