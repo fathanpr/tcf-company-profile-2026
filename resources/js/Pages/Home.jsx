@@ -110,8 +110,8 @@ export default function Home({ customers = [], products = [], news = [] }) {
     const heroImages = [
         "/img/plant/tcfkg.jpeg",
         "/img/plant/tcfsg.jpeg", // Automotive Stamping
-        "/img/plant/tcfkg.jpeg",
-        "/img/plant/tcfsg.jpeg", // Automotive Stamping
+        "/img/assets/assets-4.JPG", // Painting Line
+        "/img/assets/assets-16.JPG", // Welding
     ];
 
     React.useEffect(() => {
