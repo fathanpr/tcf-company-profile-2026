@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
-import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import { ArrowRight, CheckCircle, MapPin, Phone, Mail, Globe, Award, Zap, Shield, Download, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation, useLocalic } from '@/helpers';
+import React, { useState } from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import { Head, Link } from "@inertiajs/react";
+import Modal from "@/Components/Modal";
+import SecondaryButton from "@/Components/SecondaryButton";
+import {
+    ArrowRight,
+    CheckCircle,
+    MapPin,
+    Phone,
+    Mail,
+    Globe,
+    Award,
+    Zap,
+    Shield,
+    Download,
+    FileText,
+    ChevronLeft,
+    ChevronRight,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation, useLocalic } from "@/helpers";
 
 export default function Home({ customers = [], products = [], news = [] }) {
     const { __ } = useTranslation();
@@ -13,53 +27,93 @@ export default function Home({ customers = [], products = [], news = [] }) {
 
     // --- Data & State ---
     const values = [
-        { letter: 'E', title: __('Empowerment'), desc: __('Giving our people the strength and confidence to achieve more.') },
-        { letter: 'X', title: __('Excellence'), desc: __('Striving for highest quality and distinction in everything we do.') },
-        { letter: 'I', title: __('Integrity'), desc: __('Upholding honesty and strong moral principles in our business.') },
-        { letter: 'S', title: __('Service'), desc: __('Dedication to meeting customer needs with superior service.') },
-        { letter: 'T', title: __('Tenacity'), desc: __('Persistent determination to overcome challenges and succeed.') }
+        {
+            letter: "E",
+            title: __("Empowerment"),
+            desc: __(
+                "Giving our people the strength and confidence to achieve more.",
+            ),
+        },
+        {
+            letter: "X",
+            title: __("Excellence"),
+            desc: __(
+                "Striving for highest quality and distinction in everything we do.",
+            ),
+        },
+        {
+            letter: "I",
+            title: __("Integrity"),
+            desc: __(
+                "Upholding honesty and strong moral principles in our business.",
+            ),
+        },
+        {
+            letter: "S",
+            title: __("Service"),
+            desc: __(
+                "Dedication to meeting customer needs with superior service.",
+            ),
+        },
+        {
+            letter: "T",
+            title: __("Tenacity"),
+            desc: __(
+                "Persistent determination to overcome challenges and succeed.",
+            ),
+        },
     ];
 
     const capabilities = [
         {
-            title: __('STAMPING'),
-            desc: __('High-tonnage press capabilities delivering intricate automotive components with micron-level accuracy.'),
+            title: __("STAMPING"),
+            desc: __(
+                "High-tonnage press capabilities delivering intricate automotive components with micron-level accuracy.",
+            ),
             icon: <Award className="w-12 h-12 text-brand-primary" />,
-            image: "/img/assets/assets-14.JPG"
+            image: "/img/assets/assets-14.jpg",
         },
         {
-            title: __('WELDING'),
-            desc: __('State-of-the-art automated welding lines ensuring structural integrity and consistent quality.'),
+            title: __("WELDING"),
+            desc: __(
+                "State-of-the-art automated welding lines ensuring structural integrity and consistent quality.",
+            ),
             icon: <Zap className="w-12 h-12 text-brand-primary" />,
-            image: "/img/assets/assets-16.JPG"
+            image: "/img/assets/assets-16.jpg",
         },
         {
-            title: __('BENDING'),
-            desc: __('Precision bending services for complex geometries and structural requirements.'),
+            title: __("BENDING"),
+            desc: __(
+                "Precision bending services for complex geometries and structural requirements.",
+            ),
             icon: <Shield className="w-12 h-12 text-brand-secondary" />,
-            image: "/img/assets/assets-7.JPG"
+            image: "/img/assets/assets-7.jpg",
         },
         {
-            title: __('MACHINING'),
-            desc: __('Advanced CNC machining for tight tolerances and high-quality surface finishes.'),
+            title: __("MACHINING"),
+            desc: __(
+                "Advanced CNC machining for tight tolerances and high-quality surface finishes.",
+            ),
             icon: <Zap className="w-12 h-12 text-brand-secondary" />,
-            image: "/img/assets/assets-5.JPG"
+            image: "/img/assets/assets-5.jpg",
         },
         {
-            title: __('PAINTING'),
-            desc: __('Automated painting lines providing superior corrosion protection and aesthetic finish.'),
+            title: __("PAINTING"),
+            desc: __(
+                "Automated painting lines providing superior corrosion protection and aesthetic finish.",
+            ),
             icon: <Award className="w-12 h-12 text-brand-secondary" />,
-            image: "/img/assets/assets-4.JPG"
+            image: "/img/assets/assets-4.jpg",
         },
         {
-            title: __('DIE MAKING'),
-            desc: __('In-house design and manufacturing of high-precision dies and tooling.'),
+            title: __("DIE MAKING"),
+            desc: __(
+                "In-house design and manufacturing of high-precision dies and tooling.",
+            ),
             icon: <Shield className="w-12 h-12 text-brand-primary" />,
-            image: "/img/assets/assets-12.JPG"
-        }
+            image: "/img/assets/assets-12.jpg",
+        },
     ];
-
-
 
     const [[page, direction], setPage] = useState([0, 0]);
     const [itemsPerPage, setItemsPerPage] = useState(3);
@@ -70,8 +124,8 @@ export default function Home({ customers = [], products = [], news = [] }) {
             setItemsPerPage(window.innerWidth < 768 ? 1 : 3);
         };
         handleResize(); // Initial check
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const paginate = (newDirection) => {
@@ -81,18 +135,18 @@ export default function Home({ customers = [], products = [], news = [] }) {
     const variants = {
         enter: (direction) => ({
             x: direction > 0 ? 1000 : -1000,
-            opacity: 0
+            opacity: 0,
         }),
         center: {
             zIndex: 1,
             x: 0,
-            opacity: 1
+            opacity: 1,
         },
         exit: (direction) => ({
             zIndex: 0,
             x: direction < 0 ? 1000 : -1000,
-            opacity: 0
-        })
+            opacity: 0,
+        }),
     };
 
     // Calculate visible items based on infinite page count
@@ -101,7 +155,7 @@ export default function Home({ customers = [], products = [], news = [] }) {
 
     const visibleCapabilities = capabilities.slice(
         slideIndex * itemsPerPage,
-        (slideIndex + 1) * itemsPerPage
+        (slideIndex + 1) * itemsPerPage,
     );
 
     const [showHistoryModal, setShowHistoryModal] = useState(false);
@@ -110,8 +164,8 @@ export default function Home({ customers = [], products = [], news = [] }) {
     const heroImages = [
         "/img/plant/tcfkg.jpeg",
         "/img/plant/tcfsg.jpeg", // Automotive Stamping
-        "/img/assets/assets-4.JPG", // Painting Line
-        "/img/assets/assets-16.JPG", // Welding
+        "/img/assets/assets-4.jpg", // Painting Line
+        "/img/assets/assets-16.jpg", // Welding
     ];
 
     React.useEffect(() => {
@@ -124,39 +178,58 @@ export default function Home({ customers = [], products = [], news = [] }) {
     return (
         <MainLayout>
             <Head>
-                <title>{__('PT Tri Centrum Fortuna - Leading Automotive Stamping & Welding Partner in Indonesia')}</title>
-                <meta name="description" content={__('PT Tri Centrum Fortuna (TCF) delivers excellence in automotive stamping and robotic welding. We are the preferred Tier 2 partner for major automotive industry leaders in Indonesia.')} />
-                <meta name="keywords" content={__('professional automotive manufacturing, stamping karawang, welding automotive indonesia, tier 2 manufacturing partner, tri centrum fortuna, tcf group')} />
+                <title>
+                    {__(
+                        "PT Tri Centrum Fortuna - Leading Automotive Stamping & Welding Partner in Indonesia",
+                    )}
+                </title>
+                <meta
+                    name="description"
+                    content={__(
+                        "PT Tri Centrum Fortuna (TCF) delivers excellence in automotive stamping and robotic welding. We are the preferred Tier 2 partner for major automotive industry leaders in Indonesia.",
+                    )}
+                />
+                <meta
+                    name="keywords"
+                    content={__(
+                        "professional automotive manufacturing, stamping karawang, welding automotive indonesia, tier 2 manufacturing partner, tri centrum fortuna, tcf group",
+                    )}
+                />
 
                 {/* Schema.org JSON-LD */}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "Organization",
-                        "name": "PT Tri Centrum Fortuna",
-                        "alternateName": "TCF",
-                        "url": "https://tricentrumfortuna.com",
-                        "logo": "https://tricentrumfortuna.com/img/tcf-logo.png",
-                        "description": __("Leading professional automotive manufacturing partner in Indonesia specializing in stamping and welding."),
-                        "address": {
+                        name: "PT Tri Centrum Fortuna",
+                        alternateName: "TCF",
+                        url: "https://tricentrumfortuna.com",
+                        logo: "https://tricentrumfortuna.com/img/tcf-logo.png",
+                        description: __(
+                            "Leading professional automotive manufacturing partner in Indonesia specializing in stamping and welding.",
+                        ),
+                        address: {
                             "@type": "PostalAddress",
-                            "streetAddress": "Jl. Mitra Raya II Blok F-7-8, KIIC",
-                            "addressLocality": "Karawang",
-                            "addressRegion": "West Java",
-                            "postalCode": "41363",
-                            "addressCountry": "ID"
+                            streetAddress: "Jl. Mitra Raya II Blok F-7-8, KIIC",
+                            addressLocality: "Karawang",
+                            addressRegion: "West Java",
+                            postalCode: "41363",
+                            addressCountry: "ID",
                         },
-                        "contactPoint": {
+                        contactPoint: {
                             "@type": "ContactPoint",
-                            "telephone": "+62-267-8638008",
-                            "contactType": "customer service"
-                        }
+                            telephone: "+62-267-8638008",
+                            contactType: "customer service",
+                        },
                     })}
                 </script>
             </Head>
 
             {/* --- HERO SECTION --- */}
-            <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-900">
+            <section
+                id="hero"
+                className="relative h-screen flex items-center justify-center overflow-hidden bg-slate-900"
+            >
                 {/* Background Image/Video Placeholder */}
                 <div className="absolute inset-0 z-0 bg-slate-900">
                     <AnimatePresence mode="popLayout">
@@ -183,20 +256,34 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/10 backdrop-blur-md mb-6">
                             <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse"></span>
-                            <span className="text-brand-primary text-xs font-bold tracking-widest uppercase">{__('Future Manufacturing')}</span>
+                            <span className="text-brand-primary text-xs font-bold tracking-widest uppercase">
+                                {__("Future Manufacturing")}
+                            </span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-display font-black text-white leading-tight mb-6">
-                            {__("Indonesia's Most Professional")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__("Tier 2 Partner")}</span>
+                            {__("Indonesia's Most Professional")}{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+                                {__("Tier 2 Partner")}
+                            </span>
                         </h1>
                         <p className="text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-                            {__('Advanced Welding & Stamping solutions for the automotive industry. We engineer the future with integrity and excellence.')}
+                            {__(
+                                "Advanced Welding & Stamping solutions for the automotive industry. We engineer the future with integrity and excellence.",
+                            )}
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <a href="#capabilities" className="px-8 py-4 bg-brand-primary hover:bg-brand-primary/90 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-brand-primary/25 flex items-center gap-2">
-                                {__('Our Capabilities')} <ArrowRight size={18} />
+                            <a
+                                href="#capabilities"
+                                className="px-8 py-4 bg-brand-primary hover:bg-brand-primary/90 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-brand-primary/25 flex items-center gap-2"
+                            >
+                                {__("Our Capabilities")}{" "}
+                                <ArrowRight size={18} />
                             </a>
-                            <a href="#about" className="px-8 py-4 border border-white/20 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm">
-                                {__('Explore TCF')}
+                            <a
+                                href="#about"
+                                className="px-8 py-4 border border-white/20 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm"
+                            >
+                                {__("Explore TCF")}
                             </a>
                         </div>
                     </motion.div>
@@ -214,8 +301,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     <Zap className="text-brand-secondary" />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-bold text-lg">{__('Smart Factory')}</h3>
-                                    <p className="text-slate-400 text-xs">{__('Industry 4.0 Ready')}</p>
+                                    <h3 className="text-white font-bold text-lg">
+                                        {__("Smart Factory")}
+                                    </h3>
+                                    <p className="text-slate-400 text-xs">
+                                        {__("Industry 4.0 Ready")}
+                                    </p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
@@ -223,22 +314,32 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     <Shield className="text-brand-secondary" />
                                 </div>
                                 <div>
-                                    <h3 className="text-white font-bold text-lg">{__('ISO Certified')}</h3>
-                                    <p className="text-slate-400 text-xs">{__('Global Quality Standards')}</p>
+                                    <h3 className="text-white font-bold text-lg">
+                                        {__("ISO Certified")}
+                                    </h3>
+                                    <p className="text-slate-400 text-xs">
+                                        {__("Global Quality Standards")}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </motion.div>
                 </div>
-
             </section>
 
             {/* --- ABOUT US SECTION (History, Core Values) --- */}
-            <section id="about" className="min-h-screen flex items-center justify-center py-12 bg-white relative overflow-hidden">
+            <section
+                id="about"
+                className="min-h-screen flex items-center justify-center py-12 bg-white relative overflow-hidden"
+            >
                 <div className="container mx-auto px-6 h-full flex flex-col justify-center">
                     <div className="text-center mb-8">
-                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('About Us')}</span>
-                        <h2 className="text-3xl font-bold text-slate-900 mt-2">{__('Our Journey & Values')}</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                            {__("About Us")}
+                        </span>
+                        <h2 className="text-3xl font-bold text-slate-900 mt-2">
+                            {__("Our Journey & Values")}
+                        </h2>
                     </div>
 
                     {/* Company Brief & Image */}
@@ -250,19 +351,27 @@ export default function Home({ customers = [], products = [], news = [] }) {
                         className="mb-8 flex flex-col md:flex-row items-center gap-8 md:gap-16"
                     >
                         <div className="w-full md:w-1/2 order-2 md:order-1">
-                            <h2 className="text-2xl font-bold text-slate-900 mb-4">{__('Leading Tier 2 Automotive Manufacturing Since 2017')}</h2>
+                            <h2 className="text-2xl font-bold text-slate-900 mb-4">
+                                {__(
+                                    "Leading Tier 2 Automotive Manufacturing Since 2017",
+                                )}
+                            </h2>
                             <p className="text-slate-600 leading-relaxed mb-4 text-base">
-                                {__('PT Tri Centrum Fortuna has grown from a visionary foundation into a key player in the automotive manufacturing sector. With a relentless focus on quality and innovation, we have expanded our operations to serve global automotive leaders.')}
+                                {__(
+                                    "PT Tri Centrum Fortuna has grown from a visionary foundation into a key player in the automotive manufacturing sector. With a relentless focus on quality and innovation, we have expanded our operations to serve global automotive leaders.",
+                                )}
                             </p>
                             <p className="text-slate-600 leading-relaxed mb-6 text-sm">
-                                {__('Operating from our strategic facilities in Karawang and Purwakarta, we deliver high-precision stamping and welding solutions that meet the rigorous standards of the industry.')}
+                                {__(
+                                    "Operating from our strategic facilities in Karawang and Purwakarta, we deliver high-precision stamping and welding solutions that meet the rigorous standards of the industry.",
+                                )}
                             </p>
 
                             <Link
-                                href={lRoute('about.vision-mission')}
+                                href={lRoute("about.vision-mission")}
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all hover:gap-3 text-sm"
                             >
-                                {__('Read More')} <ArrowRight size={16} />
+                                {__("Read More")} <ArrowRight size={16} />
                             </Link>
                         </div>
 
@@ -284,7 +393,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     <div className="bg-slate-900 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary/20 rounded-full blur-[100px]"></div>
                         <div className="relative z-10 text-center mb-6">
-                            <h3 className="text-2xl font-display font-bold mb-2">{__('Our Core Values')}: <span className="text-brand-primary">EXIST</span></h3>
+                            <h3 className="text-2xl font-display font-bold mb-2">
+                                {__("Our Core Values")}:{" "}
+                                <span className="text-brand-primary">
+                                    EXIST
+                                </span>
+                            </h3>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 relative z-10">
                             {values.map((val, idx) => (
@@ -293,13 +407,22 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: false, amount: 0.2 }}
-                                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: idx * 0.1,
+                                    }}
                                     whileHover={{ y: -5 }}
                                     className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center"
                                 >
-                                    <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-primary to-brand-secondary mb-1">{val.letter}</div>
-                                    <h4 className="font-bold text-sm mb-1">{val.title}</h4>
-                                    <p className="text-[10px] text-slate-300 leading-relaxed hidden lg:block">{val.desc}</p>
+                                    <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-brand-primary to-brand-secondary mb-1">
+                                        {val.letter}
+                                    </div>
+                                    <h4 className="font-bold text-sm mb-1">
+                                        {val.title}
+                                    </h4>
+                                    <p className="text-[10px] text-slate-300 leading-relaxed hidden lg:block">
+                                        {val.desc}
+                                    </p>
                                 </motion.div>
                             ))}
                         </div>
@@ -308,16 +431,29 @@ export default function Home({ customers = [], products = [], news = [] }) {
             </section>
 
             {/* --- OUR CAPABILITIES SECTION --- */}
-            <section id="capabilities" className="py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-50 relative">
+            <section
+                id="capabilities"
+                className="py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-50 relative"
+            >
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16 lg:mb-10">
-                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('What We Do')}</span>
-                        <h2 className="text-4xl font-bold text-slate-900 mt-2">{__('Specialized Automotive Manufacturing Capabilities')}</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                            {__("What We Do")}
+                        </span>
+                        <h2 className="text-4xl font-bold text-slate-900 mt-2">
+                            {__(
+                                "Specialized Automotive Manufacturing Capabilities",
+                            )}
+                        </h2>
                     </div>
 
                     <div className="relative max-w-6xl mx-auto">
                         <div className="overflow-visible">
-                            <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                            <AnimatePresence
+                                initial={false}
+                                custom={direction}
+                                mode="popLayout"
+                            >
                                 <motion.div
                                     key={page}
                                     custom={direction}
@@ -326,8 +462,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     animate="center"
                                     exit="exit"
                                     transition={{
-                                        x: { type: "spring", stiffness: 300, damping: 30 },
-                                        opacity: { duration: 0.2 }
+                                        x: {
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 30,
+                                        },
+                                        opacity: { duration: 0.2 },
                                     }}
                                     className="flex gap-6 justify-center"
                                 >
@@ -338,15 +478,23 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                         >
                                             <div className="group bg-white rounded-3xl overflow-hidden shadow-[0_15px_30px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-5px_rgba(14,165,233,0.15)] transition-all duration-500 h-full border border-slate-100 hover:border-brand-primary/30">
                                                 <div className="h-48 lg:h-40 overflow-hidden relative">
-                                                    <img src={cap.image} alt={cap.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
+                                                    <img
+                                                        src={cap.image}
+                                                        alt={cap.title}
+                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                                                    />
                                                     <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-500"></div>
                                                 </div>
                                                 <div className="p-8 lg:p-6 relative">
                                                     <div className="absolute -top-10 right-8 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center scale-90 lg:scale-100 border border-slate-50 group-hover:rotate-6 transition-transform duration-500">
                                                         {cap.icon}
                                                     </div>
-                                                    <h3 className="text-xl font-display font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-brand-primary transition-colors">{cap.title}</h3>
-                                                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">{cap.desc}</p>
+                                                    <h3 className="text-xl font-display font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-brand-primary transition-colors">
+                                                        {cap.title}
+                                                    </h3>
+                                                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
+                                                        {cap.desc}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -371,11 +519,20 @@ export default function Home({ customers = [], products = [], news = [] }) {
 
                         {/* Pagination Dots */}
                         <div className="flex justify-center gap-2 mt-8">
-                            {Array.from({ length: Math.ceil(capabilities.length / itemsPerPage) }).map((_, idx) => (
+                            {Array.from({
+                                length: Math.ceil(
+                                    capabilities.length / itemsPerPage,
+                                ),
+                            }).map((_, idx) => (
                                 <button
                                     key={idx}
-                                    onClick={() => setPage([idx, idx > slideIndex ? 1 : -1])}
-                                    className={`w-3 h-3 rounded-full transition-all ${slideIndex === idx ? 'bg-brand-primary w-8' : 'bg-slate-300'}`}
+                                    onClick={() =>
+                                        setPage([
+                                            idx,
+                                            idx > slideIndex ? 1 : -1,
+                                        ])
+                                    }
+                                    className={`w-3 h-3 rounded-full transition-all ${slideIndex === idx ? "bg-brand-primary w-8" : "bg-slate-300"}`}
                                 />
                             ))}
                         </div>
@@ -383,28 +540,37 @@ export default function Home({ customers = [], products = [], news = [] }) {
                         {/* View Detailed Capabilities Button */}
                         <div className="mt-12 text-center">
                             <Link
-                                href={lRoute('capabilities.sales-growth')}
+                                href={lRoute("capabilities.sales-growth")}
                                 className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white font-bold rounded-full hover:bg-brand-primary/90 transition-all shadow-lg hover:shadow-brand-primary/25 group"
                             >
-                                {__('View Performance & Growth')}
+                                {__("View Performance & Growth")}
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
                     </div>
-                </div >
-            </section >
+                </div>
+            </section>
 
             {/* --- PRODUCT SECTION --- */}
-            < section id="product" className="pt-24 pb-12 bg-slate-900 text-white relative overflow-hidden" >
+            <section
+                id="product"
+                className="pt-24 pb-12 bg-slate-900 text-white relative overflow-hidden"
+            >
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="container mx-auto px-6 relative z-10 py-0">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-12">
                         <div>
-                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Our Output')}</span>
-                            <h2 className="text-4xl font-bold mt-2">{__('High-Precision Automotive Products')}</h2>
+                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                                {__("Our Output")}
+                            </span>
+                            <h2 className="text-4xl font-bold mt-2">
+                                {__("High-Precision Automotive Products")}
+                            </h2>
                         </div>
                         <p className="text-slate-400 max-w-md text-sm mt-4 md:mt-0 text-center md:text-right">
-                            {__('Delivering high-precision components used by leading automotive manufacturers globally.')}
+                            {__(
+                                "Delivering high-precision components used by leading automotive manufacturers globally.",
+                            )}
                         </p>
                     </div>
 
@@ -419,10 +585,24 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                 whileHover={{ scale: 1.02 }}
                                 className="relative rounded-2xl overflow-hidden group aspect-square bg-slate-800"
                             >
-                                <Link href={lRoute('products.detail', { slug: prod.slug })}>
-                                    <img src={prod.main_image?.startsWith('http') ? prod.main_image : `/${prod.main_image}`} alt={prod.translated_name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                <Link
+                                    href={lRoute("products.detail", {
+                                        slug: prod.slug,
+                                    })}
+                                >
+                                    <img
+                                        src={
+                                            prod.main_image?.startsWith("http")
+                                                ? prod.main_image
+                                                : `/${prod.main_image}`
+                                        }
+                                        alt={prod.translated_name}
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                                    />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
-                                        <span className="font-bold text-white tracking-wide">{prod.translated_name}</span>
+                                        <span className="font-bold text-white tracking-wide">
+                                            {prod.translated_name}
+                                        </span>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -432,20 +612,22 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     {/* View All Products Button */}
                     <div className="mt-16 text-center">
                         <Link
-                            href={lRoute('products.index')}
+                            href={lRoute("products.index")}
                             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-slate-100 transition-all shadow-xl hover:shadow-white/10 group"
                         >
-                            {__('View All Products')}
+                            {__("View All Products")}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* --- INFINITY CUSTOMER SCROLL --- */}
-            < section className="py-20 bg-slate-900 relative overflow-hidden border-t border-white/5" >
+            <section className="py-20 bg-slate-900 relative overflow-hidden border-t border-white/5">
                 <div className="container mx-auto px-6 mb-10 text-center">
-                    <p className="text-brand-secondary text-xs font-black uppercase tracking-[0.3em] mb-4">{__('Strategic Partners')}</p>
+                    <p className="text-brand-secondary text-xs font-black uppercase tracking-[0.3em] mb-4">
+                        {__("Strategic Partners")}
+                    </p>
                 </div>
 
                 <div className="relative w-full">
@@ -456,7 +638,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     {/* Scrolling Container */}
                     <div className="flex overflow-hidden scroll-wrapper">
                         <div className="flex gap-8 md:gap-16 items-center whitespace-nowrap py-12 animate-scroll">
-                            {[...customers, ...customers, ...customers, ...customers].map((customer, idx) => (
+                            {[
+                                ...customers,
+                                ...customers,
+                                ...customers,
+                                ...customers,
+                            ].map((customer, idx) => (
                                 <div
                                     key={idx}
                                     className="w-32 md:w-44 h-24 md:h-32 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer group"
@@ -476,8 +663,9 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     </div>
                 </div>
 
-                <style dangerouslySetInnerHTML={{
-                    __html: `
+                <style
+                    dangerouslySetInnerHTML={{
+                        __html: `
                     @keyframes scroll {
                         0% { transform: translateX(0); }
                         100% { transform: translateX(-33.333%); }
@@ -490,13 +678,13 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     .scroll-wrapper:hover .animate-scroll {
                         animation-play-state: paused;
                     }
-                `}} />
-            </section >
-
-
+                `,
+                    }}
+                />
+            </section>
 
             {/* --- NEWS SECTION --- */}
-            < section id="news" className="py-24 bg-white" >
+            <section id="news" className="py-24 bg-white">
                 <div className="container mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -505,8 +693,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                         transition={{ duration: 0.8 }}
                         className="text-center mb-16"
                     >
-                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Latest Updates')}</span>
-                        <h2 className="text-4xl font-bold text-slate-900 mt-2">{__('Latest News & Industry Insights')}</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                            {__("Latest Updates")}
+                        </span>
+                        <h2 className="text-4xl font-bold text-slate-900 mt-2">
+                            {__("Latest News & Industry Insights")}
+                        </h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -516,22 +708,45 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: false, amount: 0.2 }}
-                                transition={{ duration: 0.6, delay: index * 0.2 }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.2,
+                                }}
                                 className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all group pointer-events-auto"
                             >
-                                <Link href={lRoute('news.detail', { slug: item.slug })} className="block">
+                                <Link
+                                    href={lRoute("news.detail", {
+                                        slug: item.slug,
+                                    })}
+                                    className="block"
+                                >
                                     <div className="h-48 overflow-hidden relative">
-                                        <img src={item.image} alt={item.translated_title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        <img
+                                            src={item.image}
+                                            alt={item.translated_title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
                                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
                                             {item.category}
                                         </div>
                                     </div>
                                     <div className="p-6">
                                         <p className="text-xs text-slate-400 font-medium mb-3">
-                                            {new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                            {new Date(
+                                                item.published_at,
+                                            ).toLocaleDateString("id-ID", {
+                                                day: "numeric",
+                                                month: "long",
+                                                year: "numeric",
+                                            })}
                                         </p>
-                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 min-h-[3.5rem]">{item.translated_title}</h3>
-                                        <span className="text-blue-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">{__('Read Article')} <ArrowRight size={14} /></span>
+                                        <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 min-h-[3.5rem]">
+                                            {item.translated_title}
+                                        </h3>
+                                        <span className="text-blue-500 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                                            {__("Read Article")}{" "}
+                                            <ArrowRight size={14} />
+                                        </span>
                                     </div>
                                 </Link>
                             </motion.div>
@@ -539,10 +754,10 @@ export default function Home({ customers = [], products = [], news = [] }) {
                     </div>
                     <div className="mt-12 text-center">
                         <Link
-                            href={lRoute('news.index')}
+                            href={lRoute("news.index")}
                             className="inline-flex items-center gap-2 px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-bold transition-all group"
                         >
-                            {__('More News')}
+                            {__("More News")}
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>
@@ -571,13 +786,23 @@ export default function Home({ customers = [], products = [], news = [] }) {
                         className="flex flex-col md:flex-row items-center justify-between gap-8"
                     >
                         <div className="text-center md:text-left">
-                            <h3 className="text-2xl font-bold text-white mb-2">{__('Want to know more about us?')}</h3>
-                            <p className="text-blue-200">{__('Download our detailed profile and view our certifications.')}</p>
+                            <h3 className="text-2xl font-bold text-white mb-2">
+                                {__("Want to know more about us?")}
+                            </h3>
+                            <p className="text-blue-200">
+                                {__(
+                                    "Download our detailed profile and view our certifications.",
+                                )}
+                            </p>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center">
-                            <a href="/files/TCF_Company_Profile_2026.pdf" download="TCF_Company_Profile_2026.pdf" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-blue-500/25 group">
+                            <a
+                                href="/files/TCF_Company_Profile_2026.pdf"
+                                download="TCF_Company_Profile_2026.pdf"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-blue-500/25 group"
+                            >
                                 <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                <span>{__('Download')}</span>
+                                <span>{__("Download")}</span>
                             </a>
                             {/* <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/30 hover:bg-white/10 text-white rounded-full font-bold transition-all backdrop-blur-sm group">
                                 <Award className="w-5 h-5 text-blue-300 group-hover:scale-110 transition-transform" />
@@ -589,7 +814,10 @@ export default function Home({ customers = [], products = [], news = [] }) {
             </section>
 
             {/* --- LOCATION SECTION --- */}
-            <section id="location" className="relative py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-900 text-white overflow-hidden">
+            <section
+                id="location"
+                className="relative py-24 lg:py-0 lg:min-h-screen flex items-center bg-slate-900 text-white overflow-hidden"
+            >
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                 <div className="container mx-auto px-6 relative z-10">
                     <motion.div
@@ -600,10 +828,16 @@ export default function Home({ customers = [], products = [], news = [] }) {
                         className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
                     >
                         <div>
-                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Get in Touch')}</span>
-                            <h2 className="text-4xl font-bold mt-2 mb-6">{__('Connect with Us')}</h2>
+                            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                                {__("Get in Touch")}
+                            </span>
+                            <h2 className="text-4xl font-bold mt-2 mb-6">
+                                {__("Connect with Us")}
+                            </h2>
                             <p className="text-slate-400 text-base mb-8 leading-relaxed">
-                                {__('Strategically located in KIM Karawang, our facility is equipped with modern infrastructure to support efficient logistics and production.')}
+                                {__(
+                                    "Strategically located in KIM Karawang, our facility is equipped with modern infrastructure to support efficient logistics and production.",
+                                )}
                             </p>
 
                             <div className="space-y-4">
@@ -612,9 +846,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                         <MapPin className="text-blue-400 w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white text-sm mb-1">{__('Head Office & Factory')}</h4>
+                                        <h4 className="font-bold text-white text-sm mb-1">
+                                            {__("Head Office & Factory")}
+                                        </h4>
                                         <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
-                                            Jl. Mitra Raya II Blok F-7-8, Kabupaten Karawang 41363
+                                            Jl. Mitra Raya II Blok F-7-8,
+                                            Kabupaten Karawang 41363
                                         </p>
                                     </div>
                                 </div>
@@ -623,8 +860,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                         <Phone className="text-blue-400 w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white text-sm mb-1">{__('Phone')}</h4>
-                                        <p className="text-slate-400 text-xs">(+62-264) 83891000</p>
+                                        <h4 className="font-bold text-white text-sm mb-1">
+                                            {__("Phone")}
+                                        </h4>
+                                        <p className="text-slate-400 text-xs">
+                                            (+62-264) 83891000
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
@@ -632,8 +873,12 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                         <Mail className="text-green-400 w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white text-sm mb-1">{__('Email')}</h4>
-                                        <p className="text-slate-400 text-xs">sales.kg@tricentrumfortuna.com</p>
+                                        <h4 className="font-bold text-white text-sm mb-1">
+                                            {__("Email")}
+                                        </h4>
+                                        <p className="text-slate-400 text-xs">
+                                            sales.kg@tricentrumfortuna.com
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -655,7 +900,7 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     className="grayscale hover:grayscale-0 transition-all duration-700"
                                 ></iframe>
                                 <div className="absolute bottom-3 left-3 bg-brand-primary text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
-                                    {__('Plant Purwakarta')}
+                                    {__("Plant Purwakarta")}
                                 </div>
                             </div>
 
@@ -672,7 +917,7 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     className="grayscale hover:grayscale-0 transition-all duration-700"
                                 ></iframe>
                                 <div className="absolute bottom-3 left-3 bg-blue-600 text-white px-3 py-1.5 rounded-lg font-bold shadow-lg pointer-events-none text-xs">
-                                    {__('Plant Karawang')}
+                                    {__("Plant Karawang")}
                                 </div>
                             </div>
                         </div>
@@ -680,37 +925,58 @@ export default function Home({ customers = [], products = [], news = [] }) {
                 </div>
                 {/* Gradient Fade to Footer */}
                 <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#020617] pointer-events-none"></div>
-            </section >
+            </section>
 
             {/* History Modal */}
-            < Modal show={showHistoryModal} onClose={() => setShowHistoryModal(false)
-            }>
+            <Modal
+                show={showHistoryModal}
+                onClose={() => setShowHistoryModal(false)}
+            >
                 <div className="p-8">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">{__('Our History')}</h2>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-4">
+                        {__("Our History")}
+                    </h2>
                     <div className="space-y-4 text-slate-600 leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
                         <p>
-                            <strong>{__('2017:')}</strong> {__('PT Tri Centrum Fortuna was founded with a clear vision to support the growing automotive industry in Indonesia. Starting with a small facility in Karawang, we focused on precision stamping for 2-wheelers.')}
+                            <strong>{__("2017:")}</strong>{" "}
+                            {__(
+                                "PT Tri Centrum Fortuna was founded with a clear vision to support the growing automotive industry in Indonesia. Starting with a small facility in Karawang, we focused on precision stamping for 2-wheelers.",
+                            )}
                         </p>
                         <p>
-                            <strong>{__('2019:')}</strong> {__('Expanded capabilities to include Robotic Welding, securing our first major contract with a Tier-1 automotive supplier.')}
+                            <strong>{__("2019:")}</strong>{" "}
+                            {__(
+                                "Expanded capabilities to include Robotic Welding, securing our first major contract with a Tier-1 automotive supplier.",
+                            )}
                         </p>
                         <p>
-                            <strong>{__('2021:')}</strong> {__('Despite global challenges, we prepared for major expansion, designing our modern facilities for high-volume production.')}
+                            <strong>{__("2021:")}</strong>{" "}
+                            {__(
+                                "Despite global challenges, we prepared for major expansion, designing our modern facilities for high-volume production.",
+                            )}
                         </p>
                         <p>
-                            <strong>{__('2024:')}</strong> {__('To meet increasing demand, we established **Plant Karawang** (Headquarters). This expansion allowed us to diversify into heavier stamping parts and improve our logistics network across West Java.')}
+                            <strong>{__("2024:")}</strong>{" "}
+                            {__(
+                                "To meet increasing demand, we established **Plant Karawang** (Headquarters). This expansion allowed us to diversify into heavier stamping parts and improve our logistics network across West Java.",
+                            )}
                         </p>
                         <p>
-                            <strong>{__('2026:')}</strong> {__('Today, TCF stands as a beacon of manufacturing excellence, employing over 500 skilled professionals and serving as a trusted partner to major automotive brands.')}
+                            <strong>{__("2026:")}</strong>{" "}
+                            {__(
+                                "Today, TCF stands as a beacon of manufacturing excellence, employing over 500 skilled professionals and serving as a trusted partner to major automotive brands.",
+                            )}
                         </p>
                     </div>
                     <div className="mt-8 flex justify-end">
-                        <SecondaryButton onClick={() => setShowHistoryModal(false)}>
-                            {__('Close')}
+                        <SecondaryButton
+                            onClick={() => setShowHistoryModal(false)}
+                        >
+                            {__("Close")}
                         </SecondaryButton>
                     </div>
                 </div>
-            </Modal >
-        </MainLayout >
+            </Modal>
+        </MainLayout>
     );
 }
