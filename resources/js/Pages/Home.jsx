@@ -650,9 +650,14 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                 >
                                     <div className="relative flex items-center justify-center w-full h-full p-2">
                                         <img
-                                            src={`/${customer.logo}`}
+                                            src={customer.logo}
                                             alt={customer.name}
                                             className="max-w-full max-h-full object-contain filter drop-shadow-xl scale-110 group-hover:scale-125 transition-transform duration-500"
+                                            onError={(e) => {
+                                                e.currentTarget.onerror = null;
+                                                e.currentTarget.src =
+                                                    "/img/tcf-logo.png";
+                                            }}
                                         />
                                         {/* Glow effect on hover */}
                                         <div className="absolute -inset-8 bg-brand-primary/0 group-hover:bg-brand-primary/10 blur-2xl rounded-full transition-all duration-500 -z-10"></div>

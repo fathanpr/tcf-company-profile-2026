@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Upload, Link as LinkIcon, Image as ImageIcon, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Upload, Link as LinkIcon, Image as ImageIcon, X } from "lucide-react";
 
-export default function ImageInput({ value, onChange, error, label = "Image", className = "" }) {
-    const [mode, setMode] = useState('upload'); // 'upload' or 'url'
+export default function ImageInput({
+    value,
+    onChange,
+    error,
+    label = "Image",
+    className = "",
+}) {
+    const [mode, setMode] = useState("upload"); // 'upload' or 'url'
     const [preview, setPreview] = useState(null);
-    const [urlInput, setUrlInput] = useState('');
+    const [urlInput, setUrlInput] = useState("");
     const [localError, setLocalError] = useState(null);
 
     useEffect(() => {
         // Determine initial mode and preview based on value
         if (value instanceof File) {
-            setMode('upload');
+            setMode("upload");
             setPreview(URL.createObjectURL(value));
-        } else if (typeof value === 'string' && value.length > 0) {
-            setMode('url');
+        } else if (typeof value === "string" && value.length > 0) {
+            setMode("url");
             setUrlInput(value);
             setPreview(value);
         } else {
             setPreview(null);
-            setUrlInput('');
+            setUrlInput("");
         }
     }, [value]);
 
@@ -27,12 +33,13 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
         setLocalError(null);
 
         if (file) {
-            if (file.size > 2 * 1024 * 1024) { // 2MB
-                setLocalError('File size exceeds 2MB limit.');
+            if (file.size > 2 * 1024 * 1024) {
+                // 2MB
+                setLocalError("File size exceeds 2MB limit.");
                 return;
             }
-            if (!file.type.startsWith('image/')) {
-                setLocalError('Please upload a valid image file.');
+            if (!file.type.startsWith("image/")) {
+                setLocalError("Please upload a valid image file.");
                 return;
             }
             onChange(file);
@@ -47,10 +54,17 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
         setPreview(url); // Optimistic preview
     };
 
+    const previewSrc = preview
+        ? typeof preview === "string" &&
+          !(preview.startsWith("http") || preview.startsWith("/"))
+            ? `/${preview}`
+            : preview
+        : null;
+
     const clearImage = () => {
         onChange(null);
         setPreview(null);
-        setUrlInput('');
+        setUrlInput("");
         setLocalError(null);
         // Reset file input value if needed via ref, simpler to just rely on re-render
     };
@@ -58,20 +72,28 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
     return (
         <div className={`space-y-4 ${className}`}>
             <div className="flex items-center justify-between">
-                <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">{label}</label>
+                <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
+                    {label}
+                </label>
                 <div className="flex bg-slate-100 p-1 rounded-lg">
                     <button
                         type="button"
-                        onClick={() => { setMode('upload'); setLocalError(null); }}
-                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all flex items-center gap-2 ${mode === 'upload' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                        onClick={() => {
+                            setMode("upload");
+                            setLocalError(null);
+                        }}
+                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all flex items-center gap-2 ${mode === "upload" ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
                     >
                         <Upload className="w-3 h-3" />
                         <span className="hidden sm:inline">Upload</span>
                     </button>
                     <button
                         type="button"
-                        onClick={() => { setMode('url'); setLocalError(null); }}
-                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all flex items-center gap-2 ${mode === 'url' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                        onClick={() => {
+                            setMode("url");
+                            setLocalError(null);
+                        }}
+                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all flex items-center gap-2 ${mode === "url" ? "bg-white text-slate-800 shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
                     >
                         <LinkIcon className="w-3 h-3" />
                         <span className="hidden sm:inline">Via URL</span>
@@ -80,7 +102,7 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
             </div>
 
             <div className="relative group">
-                {mode === 'upload' ? (
+                {mode === "upload" ? (
                     <div className="relative">
                         <input
                             type="file"
@@ -94,15 +116,17 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
                                 hover:file:bg-sky-100
                                 cursor-pointer file:cursor-pointer"
                         />
-                        <p className="mt-2 text-xs text-slate-400 font-medium">* Maximum file size: 2MB</p>
+                        <p className="mt-2 text-xs text-slate-400 font-medium">
+                            * Maximum file size: 2MB
+                        </p>
                     </div>
                 ) : (
                     <div className="relative">
                         <input
-                            type="url"
+                            type="text"
                             value={urlInput}
                             onChange={handleUrlChange}
-                            placeholder="https://example.com/image.jpg"
+                            placeholder="https://example.com/image.jpg atau img/logo.png"
                             className="w-full px-4 py-3 bg-slate-50 border-slate-200 focus:border-brand-primary focus:ring-brand-primary rounded-xl text-sm transition-all"
                         />
                     </div>
@@ -111,19 +135,22 @@ export default function ImageInput({ value, onChange, error, label = "Image", cl
 
             {/* Error Message */}
             {(error || localError) && (
-                <p className="text-sm text-red-600 font-bold">{error || localError}</p>
+                <p className="text-sm text-red-600 font-bold">
+                    {error || localError}
+                </p>
             )}
 
             {/* Preview Section */}
             {preview && (
                 <div className="relative mt-4 w-full aspect-video rounded-xl overflow-hidden bg-slate-100 border border-slate-200 group">
                     <img
-                        src={preview}
+                        src={previewSrc}
                         alt="Preview"
                         className="w-full h-full object-cover"
                         onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = 'https://via.placeholder.com/400x300?text=Invalid+Image+URL';
+                            e.target.src =
+                                "https://via.placeholder.com/400x300?text=Invalid+Image+URL";
                         }}
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

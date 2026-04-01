@@ -47,6 +47,8 @@ class CustomerService extends BaseService
     public function createCustomer(array $data)
     {
         return DB::transaction(function () use ($data) {
+            $data = $this->handleLogoInput($data);
+
             $customer = $this->repository->create($data);
 
             activity()
@@ -61,6 +63,8 @@ class CustomerService extends BaseService
     public function updateCustomer($id, array $data)
     {
         return DB::transaction(function () use ($id, $data) {
+            $data = $this->handleLogoInput($data);
+
             $customer = $this->repository->update($id, $data);
 
             activity()
@@ -86,5 +90,30 @@ class CustomerService extends BaseService
 
             return true;
         });
+    }
+
+    private function handleLogoInput(array $data): array
+    {
+        if (isset($data['logo']) && is_string($data['logo'])) {
+            $logo = trim($data['logo']);
+            $logo = preg_replace('/^[\\\\\/]+(https?:\\/\\/)/i', '$1', $logo);
+            $data['logo'] = $logo;
+        }
+
+        if (!isset($data['logo']) || !($data['logo'] instanceof \Illuminate\Http\UploadedFile)) {
+            return $data;
+        }
+
+        $directory = public_path('img/customers');
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filename = time() . '_' . uniqid() . '_' . $data['logo']->getClientOriginalName();
+        $data['logo']->move($directory, $filename);
+        $data['logo'] = 'img/customers/' . $filename;
+
+        return $data;
     }
 }
