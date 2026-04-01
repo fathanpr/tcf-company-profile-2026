@@ -7,12 +7,14 @@ use Inertia\Inertia;
 use App\Services\CustomerService;
 use App\Services\ProductService;
 use App\Services\NewsService;
+use App\Services\GalleryService;
 
 class PageController extends Controller
 {
     protected $customerService;
     protected $productService;
     protected $newsService;
+    protected $galleryService;
 
     /**
      * PageController constructor.
@@ -21,11 +23,13 @@ class PageController extends Controller
     public function __construct(
         CustomerService $customerService,
         ProductService $productService,
-        NewsService $newsService
+        NewsService $newsService,
+        GalleryService $galleryService
     ) {
         $this->customerService = $customerService;
         $this->productService = $productService;
         $this->newsService = $newsService;
+        $this->galleryService = $galleryService;
     }
 
     public function home($locale)
@@ -120,6 +124,21 @@ class PageController extends Controller
 
         return Inertia::render('News/Detail', [
             'article' => $article
+        ]);
+    }
+
+    public function gallery(Request $request, $locale)
+    {
+        $galleries = $this->galleryService->getGalleryList(
+            12,
+            $request->input('search'),
+            $request->input('category')
+        );
+
+        return Inertia::render('Gallery/Index', [
+            'galleries' => $galleries,
+            'categories' => $this->galleryService->getCategoryList(),
+            'filters' => $request->only(['search', 'category'])
         ]);
     }
 

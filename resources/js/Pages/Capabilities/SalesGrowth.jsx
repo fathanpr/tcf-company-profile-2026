@@ -1,20 +1,83 @@
-import React from 'react';
-import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link } from '@inertiajs/react';
-import { motion } from 'framer-motion';
-import { TrendingUp, Milestone, Target, Award, Rocket, Trophy, Globe, Home, Settings, Flag, Medal, ArrowUpRight } from 'lucide-react';
-import Chart from 'react-apexcharts';
-import { useLocalic, useTranslation } from '@/helpers';
+import React from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import { Head, Link } from "@inertiajs/react";
+import { motion } from "framer-motion";
+import {
+    TrendingUp,
+    Milestone,
+    Target,
+    Award,
+    Rocket,
+    Trophy,
+    Globe,
+    Home,
+    Settings,
+    Flag,
+    Medal,
+    ArrowUpRight,
+} from "lucide-react";
+import Chart from "react-apexcharts";
+import { useLocalic, useTranslation } from "@/helpers";
 export default function SalesGrowth() {
     const { lRoute } = useLocalic();
     const { __ } = useTranslation();
     const milestones = [
-        { year: "2024", title: __("Building up Manufacturing Infrastructure"), icon: <Globe className="text-white w-6 h-6" />, color: "bg-orange-600", textColor: "text-orange-600", desc: __("Strengthening our foundation with state-of-the-art facilities.") },
-        { year: "2025", title: __("2nd Tier with 1st Tier Standard Operation"), icon: <Home className="text-white w-6 h-6" />, color: "bg-amber-600", textColor: "text-amber-600", desc: __("Elevating our operations to first-tier quality standards.") },
-        { year: "2026", title: __("Excellence Operation"), icon: <Settings className="text-white w-6 h-6" />, color: "bg-brand-primary", textColor: "text-brand-primary", desc: __("Achieving peak operational efficiency and reliability.") },
-        { year: "2027", title: __("Benchmark Factory in 2nd Tier"), icon: <Flag className="text-white w-6 h-6" />, color: "bg-red-600", textColor: "text-red-600", desc: __("Setting the industry standard for second-tier manufacturers.") },
-        { year: "2028", title: __("Building Focus Industry 4.0 and 5.0"), icon: <Medal className="text-white w-6 h-6" />, color: "bg-purple-600", textColor: "text-purple-600", desc: __("Integrating advanced robotics and smart technology.") },
-        { year: "2029", title: __("Irreplaceable Supplier"), icon: <Trophy className="text-white w-6 h-6" />, color: "bg-yellow-600", textColor: "text-yellow-600", desc: __("Becoming a strategic, long-term partner for global leaders.") },
+        {
+            year: "2024",
+            title: __("Building up Manufacturing Infrastructure"),
+            icon: <Globe className="text-white w-6 h-6" />,
+            color: "bg-orange-600",
+            textColor: "text-orange-600",
+            desc: __(
+                "Strengthening our foundation with state-of-the-art facilities.",
+            ),
+        },
+        {
+            year: "2025",
+            title: __("2nd Tier with 1st Tier Standard Operation"),
+            icon: <Home className="text-white w-6 h-6" />,
+            color: "bg-amber-600",
+            textColor: "text-amber-600",
+            desc: __(
+                "Elevating our operations to first-tier quality standards.",
+            ),
+        },
+        {
+            year: "2026",
+            title: __("Excellence Operation"),
+            icon: <Settings className="text-white w-6 h-6" />,
+            color: "bg-brand-primary",
+            textColor: "text-brand-primary",
+            desc: __("Achieving peak operational efficiency and reliability."),
+        },
+        {
+            year: "2027",
+            title: __("Benchmark Factory in 2nd Tier"),
+            icon: <Flag className="text-white w-6 h-6" />,
+            color: "bg-red-600",
+            textColor: "text-red-600",
+            desc: __(
+                "Setting the industry standard for second-tier manufacturers.",
+            ),
+        },
+        {
+            year: "2028",
+            title: __("Building Focus Industry 4.0 and 5.0"),
+            icon: <Medal className="text-white w-6 h-6" />,
+            color: "bg-purple-600",
+            textColor: "text-purple-600",
+            desc: __("Integrating advanced robotics and smart technology."),
+        },
+        {
+            year: "2029",
+            title: __("Irreplaceable Supplier"),
+            icon: <Trophy className="text-white w-6 h-6" />,
+            color: "bg-yellow-600",
+            textColor: "text-yellow-600",
+            desc: __(
+                "Becoming a strategic, long-term partner for global leaders.",
+            ),
+        },
     ];
 
     const salesData = [
@@ -23,100 +86,142 @@ export default function SalesGrowth() {
         { year: "2023", value: 651.91 },
         { year: "2024", value: 406.12 },
         { year: "2025", value: 526.18 },
-        { year: "2026", value: 826.00, projected: true },
+        { year: "2026", value: 826.0, projected: true },
     ];
 
-    const maxValue = Math.max(...salesData.map(d => d.value));
+    const growthPercentData = salesData.map((item, index) => {
+        if (index === 0) {
+            return { year: item.year, value: 0, projected: item.projected };
+        }
+
+        const prev = salesData[index - 1].value;
+        const growth = ((item.value - prev) / prev) * 100;
+
+        return {
+            year: item.year,
+            value: Number(growth.toFixed(2)),
+            projected: item.projected,
+        };
+    });
+
+    const maxGrowth = Math.max(...growthPercentData.map((d) => d.value));
+    const avgGrowth =
+        growthPercentData.slice(1).reduce((sum, d) => sum + d.value, 0) /
+        (growthPercentData.length - 1);
+    const projectedGrowth =
+        growthPercentData[growthPercentData.length - 1]?.value ?? 0;
 
     // ApexCharts Config
     const chartOptions = {
         chart: {
-            id: 'sales-growth-chart',
+            id: "sales-growth-chart",
             toolbar: { show: false },
-            zoom: { enabled: false }
+            zoom: { enabled: false },
         },
         xaxis: {
-            categories: salesData.map(d => d.year),
+            categories: growthPercentData.map((d) => d.year),
             axisBorder: { show: false },
             axisTicks: { show: false },
             labels: {
                 style: {
-                    colors: '#94a3b8',
+                    colors: "#94a3b8",
                     fontWeight: 700,
-                    fontSize: '11px'
-                }
-            }
+                    fontSize: "11px",
+                },
+            },
         },
         yaxis: {
             labels: {
-                formatter: (val) => `${val}B`,
+                formatter: (val) => `${Number(val).toFixed(0)}%`,
                 style: {
-                    colors: '#94a3b8',
-                    fontWeight: 700
-                }
-            }
+                    colors: "#94a3b8",
+                    fontWeight: 700,
+                },
+            },
         },
         grid: {
-            borderColor: '#f1f5f9',
-            strokeDashArray: 4
+            borderColor: "#f1f5f9",
+            strokeDashArray: 4,
         },
-        colors: ['#0ea5e9', '#22d3ee'],
+        colors: ["#0ea5e9", "#22d3ee"],
         plotOptions: {
             bar: {
                 borderRadius: 8,
-                columnWidth: '40%',
-            }
+                columnWidth: "40%",
+            },
         },
         dataLabels: { enabled: false },
         stroke: {
             width: [0, 4],
-            curve: 'smooth'
+            curve: "smooth",
         },
         markers: {
             size: 5,
             strokeWidth: 3,
-            strokeColors: '#ffffff'
+            strokeColors: "#ffffff",
         },
         legend: {
             show: true,
-            position: 'top',
-            horizontalAlign: 'right',
+            position: "top",
+            horizontalAlign: "right",
             fontWeight: 700,
-            fontSize: '10px',
-            markers: { radius: 4 }
+            fontSize: "10px",
+            markers: { radius: 4 },
         },
         tooltip: {
-            theme: 'dark',
+            theme: "dark",
             shared: true,
             intersect: false,
             y: {
-                formatter: (val) => `IDR ${val} Billion`
-            }
-        }
+                formatter: (val) => `${Number(val).toFixed(2)}%`,
+            },
+        },
     };
 
     const chartSeries = [
         {
-            name: 'Sales Revenue',
-            type: 'bar',
-            data: salesData.map(d => d.value)
+            name: "Year-over-Year Growth",
+            type: "bar",
+            data: growthPercentData.map((d) => d.value),
         },
         {
-            name: 'Growth Trend',
-            type: 'line',
-            data: salesData.map(d => d.value)
-        }
+            name: "Growth Trend",
+            type: "line",
+            data: growthPercentData.map((d) => d.value),
+        },
     ];
 
     return (
         <MainLayout>
             <Head>
-                <title>{__('Sales & Market Growth - PT Tri Centrum Fortuna | Expanding Excellence')}</title>
-                <meta name="description" content={__('Witness TCF\'s consistent growth and expanding market share in the automotive industry. Our performance reflects our commitment to quality and partnership.')} />
-                <meta property="og:title" content={__('TCF Sales & Growth - A Proven Track Record of Success')} />
-                <meta property="og:description" content={__('Consistent performance and strategic expansion in the Indonesian automotive manufacturing sector.')} />
+                <title>
+                    {__(
+                        "Sales & Market Growth - PT Tri Centrum Fortuna | Expanding Excellence",
+                    )}
+                </title>
+                <meta
+                    name="description"
+                    content={__(
+                        "Witness TCF's consistent growth and expanding market share in the automotive industry. Our performance reflects our commitment to quality and partnership.",
+                    )}
+                />
+                <meta
+                    property="og:title"
+                    content={__(
+                        "TCF Sales & Growth - A Proven Track Record of Success",
+                    )}
+                />
+                <meta
+                    property="og:description"
+                    content={__(
+                        "Consistent performance and strategic expansion in the Indonesian automotive manufacturing sector.",
+                    )}
+                />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta
+                    property="og:image"
+                    content={`${typeof window !== "undefined" ? window.location.origin : ""}/img/tcf-logo.png`}
+                />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
@@ -133,13 +238,18 @@ export default function SalesGrowth() {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <TrendingUp className="w-4 h-4" />
-                            {__('Future Growth')}
+                            {__("Future Growth")}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            {__('Sales')} & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Growth')}</span>
+                            {__("Sales")} &{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+                                {__("Growth")}
+                            </span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            {__('Driving sustainable growth through innovation and strategic expansion, committed to becoming the irreplaceable partner in the automotive sector.')}
+                            {__(
+                                "Driving sustainable growth through innovation and strategic expansion, committed to becoming the irreplaceable partner in the automotive sector.",
+                            )}
                         </p>
                     </motion.div>
                 </div>
@@ -149,8 +259,12 @@ export default function SalesGrowth() {
             <section className="py-24 bg-white overflow-hidden">
                 <div className="container mx-auto px-6">
                     <div className="max-w-xl mx-auto text-center mb-20">
-                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">{__('Strategic Roadmap')}</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">{__('Target & Milestones')}</h2>
+                        <span className="text-brand-primary font-bold tracking-widest uppercase text-sm">
+                            {__("Strategic Roadmap")}
+                        </span>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-2">
+                            {__("Target & Milestones")}
+                        </h2>
                         <div className="w-20 h-1.5 bg-brand-primary mx-auto mt-4 rounded-full"></div>
                     </div>
 
@@ -167,25 +281,35 @@ export default function SalesGrowth() {
                             >
                                 {/* Tooltip / Description Box (Hover) */}
                                 <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-48 bg-slate-900 text-white p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 z-50 pointer-events-none shadow-2xl mb-4 transform group-hover:-translate-y-2">
-                                    <p className="text-[11px] leading-relaxed text-slate-300">{m.desc}</p>
+                                    <p className="text-[11px] leading-relaxed text-slate-300">
+                                        {m.desc}
+                                    </p>
                                     <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 rotate-45"></div>
                                 </div>
 
                                 {/* Floating Icon */}
-                                <div className={`w-14 h-14 rounded-2xl ${m.color} flex items-center justify-center shadow-lg mb-6 ring-4 ring-white relative z-20 group-hover:scale-110 group-hover:rotate-6 transition-all`}>
+                                <div
+                                    className={`w-14 h-14 rounded-2xl ${m.color} flex items-center justify-center shadow-lg mb-6 ring-4 ring-white relative z-20 group-hover:scale-110 group-hover:rotate-6 transition-all`}
+                                >
                                     {m.icon}
                                 </div>
 
                                 {/* Stair Block */}
                                 <div
                                     className={`w-full ${m.color} rounded-t-[32px] relative shadow-xl overflow-hidden group-hover:brightness-110 transition-all flex flex-col items-center pt-10 px-4`}
-                                    style={{ height: `${(idx + 1) * 60 + 100}px` }}
+                                    style={{
+                                        height: `${(idx + 1) * 60 + 100}px`,
+                                    }}
                                 >
                                     <div className="absolute inset-x-0 top-0 h-2 bg-white/10"></div>
                                     <div className="mb-4">
-                                        <span className="text-white/20 font-black text-5xl tracking-tighter">{m.year}</span>
+                                        <span className="text-white/20 font-black text-5xl tracking-tighter">
+                                            {m.year}
+                                        </span>
                                     </div>
-                                    <h4 className="text-white font-bold text-xs uppercase tracking-wider leading-tight text-center relative z-10">{m.title}</h4>
+                                    <h4 className="text-white font-bold text-xs uppercase tracking-wider leading-tight text-center relative z-10">
+                                        {m.title}
+                                    </h4>
 
                                     {/* Glass reflection */}
                                     <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -205,16 +329,26 @@ export default function SalesGrowth() {
                                 viewport={{ once: true }}
                                 className="flex gap-5 p-6 bg-slate-50 rounded-[32px] border border-slate-100 items-start hover:bg-white hover:shadow-xl transition-all group"
                             >
-                                <div className={`w-14 h-14 shrink-0 rounded-2xl ${m.color} flex items-center justify-center shadow-lg text-white`}>
+                                <div
+                                    className={`w-14 h-14 shrink-0 rounded-2xl ${m.color} flex items-center justify-center shadow-lg text-white`}
+                                >
                                     {m.icon}
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className={`text-xl font-black ${m.textColor} opacity-80`}>{m.year}</span>
+                                        <span
+                                            className={`text-xl font-black ${m.textColor} opacity-80`}
+                                        >
+                                            {m.year}
+                                        </span>
                                         <div className="h-px flex-1 bg-slate-200"></div>
                                     </div>
-                                    <h4 className="text-base font-black text-slate-900 mb-1 leading-tight">{m.title}</h4>
-                                    <p className="text-slate-500 text-[13px] leading-relaxed">{m.desc}</p>
+                                    <h4 className="text-base font-black text-slate-900 mb-1 leading-tight">
+                                        {m.title}
+                                    </h4>
+                                    <p className="text-slate-500 text-[13px] leading-relaxed">
+                                        {m.desc}
+                                    </p>
                                 </div>
                             </motion.div>
                         ))}
@@ -231,25 +365,46 @@ export default function SalesGrowth() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">{__('Financial Report')}</span>
-                            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-6">{__('Sales & Growth Analysis')}</h2>
+                            <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">
+                                {__("Financial Report")}
+                            </span>
+                            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-6">
+                                {__("Sales & Growth Analysis")}
+                            </h2>
                             <p className="text-slate-600 mb-8 leading-relaxed">
-                                {__('Our performance reflects the trust of our partners. We recorded significant growth starting from 2022, with a target to reach IDR 826 Billion by 2026 through operational excellence and capacity expansion.')}
+                                {__(
+                                    "Our performance reflects the trust of our partners. We recorded significant growth starting from 2022, with a strong projected increase in 2026 driven by operational excellence and capacity expansion.",
+                                )}
                             </p>
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                        <span className="text-slate-500 text-sm font-bold uppercase">{__('Sales (Billion)')}</span>
+                                        <span className="text-slate-500 text-sm font-bold uppercase">
+                                            {__("Peak YoY Growth")}
+                                        </span>
                                     </div>
-                                    <p className="text-3xl font-black text-slate-900">826<span className="text-sm font-normal text-slate-400 ml-1">TRG</span></p>
+                                    <p className="text-3xl font-black text-slate-900">
+                                        {maxGrowth.toFixed(2)}
+                                        <span className="text-sm font-normal text-slate-400 ml-1">
+                                            %
+                                        </span>
+                                    </p>
                                 </div>
                                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                                     <div className="flex items-center gap-3 mb-2">
                                         <div className="w-3 h-3 rounded-full bg-brand-primary"></div>
-                                        <span className="text-slate-500 text-sm font-bold uppercase">{__('Growth Trend')}</span>
+                                        <span className="text-slate-500 text-sm font-bold uppercase">
+                                            {__("Projected Growth 2026")}
+                                        </span>
                                     </div>
-                                    <p className="text-3xl font-black text-slate-900">+45%<span className="text-sm font-normal text-slate-400 ml-1">AVG</span></p>
+                                    <p className="text-3xl font-black text-slate-900">
+                                        {projectedGrowth >= 0 ? "+" : ""}
+                                        {projectedGrowth.toFixed(2)}
+                                        <span className="text-sm font-normal text-slate-400 ml-1">
+                                            %
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </motion.div>
@@ -258,7 +413,7 @@ export default function SalesGrowth() {
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
                                     <TrendingUp className="text-blue-600 w-5 h-5" />
-                                    {__('Sales Performance Record')}
+                                    {__("Sales Performance Record")}
                                 </h3>
                             </div>
 
@@ -276,17 +431,17 @@ export default function SalesGrowth() {
                     {/* Navigation Buttons */}
                     <div className="mt-24 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-6">
                         <Link
-                            href={lRoute('capabilities.production-quality')}
+                            href={lRoute("capabilities.production-quality")}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-brand-primary transition-all shadow-lg group"
                         >
-                            {__('Production & Quality')}
+                            {__("Production & Quality")}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                         <Link
-                            href={lRoute('capabilities.loading-capacity')}
+                            href={lRoute("capabilities.loading-capacity")}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 border border-slate-200 font-bold rounded-2xl hover:border-brand-primary hover:text-brand-primary transition-all shadow-sm group"
                         >
-                            {__('Loading Capacity')}
+                            {__("Loading Capacity")}
                             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                         </Link>
                     </div>

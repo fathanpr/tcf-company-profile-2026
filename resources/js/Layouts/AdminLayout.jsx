@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link, usePage } from '@inertiajs/react';
+import React, { useState, useEffect } from "react";
+import { Link, usePage } from "@inertiajs/react";
 import {
     LayoutDashboard,
     Users,
     Newspaper,
     Box,
+    Image,
     ShieldCheck,
     History,
     Menu,
@@ -13,12 +14,12 @@ import {
     User as UserIcon,
     ChevronRight,
     Building2,
-    FileJson
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ModernAlert from '@/Components/ModernAlert';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { useLocalic } from '@/helpers';
+    FileJson,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import ModernAlert from "@/Components/ModernAlert";
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import { useLocalic } from "@/helpers";
 
 /**
  * Admin Layout
@@ -28,12 +29,15 @@ export default function AdminLayout({ children, title }) {
     const { auth, flash } = usePage().props;
     const { lRoute } = useLocalic();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [localFlash, setLocalFlash] = useState({ success: null, error: null });
+    const [localFlash, setLocalFlash] = useState({
+        success: null,
+        error: null,
+    });
 
     useEffect(() => {
         setLocalFlash({
             success: flash.success,
-            error: flash.error
+            error: flash.error,
         });
     }, [flash]);
 
@@ -50,76 +54,86 @@ export default function AdminLayout({ children, title }) {
         // Initial check
         handleResize();
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const userPermissions = auth.user.permissions || [];
 
     const navigation = [
         {
-            name: 'Dashboard',
-            href: lRoute('dashboard'),
+            name: "Dashboard",
+            href: lRoute("dashboard"),
             icon: LayoutDashboard,
-            active: route().current('dashboard')
+            active: route().current("dashboard"),
         },
         {
-            name: 'User Management',
-            href: lRoute('admin.users.index'),
+            name: "User Management",
+            href: lRoute("admin.users.index"),
             icon: Users,
-            permission: 'manage users',
-            active: route().current('admin.users.*')
+            permission: "manage users",
+            active: route().current("admin.users.*"),
         },
         {
-            name: 'Customer Management',
-            href: lRoute('admin.customers.index'),
+            name: "Customer Management",
+            href: lRoute("admin.customers.index"),
             icon: Building2,
-            permission: 'manage customers',
-            active: route().current('admin.customers.*')
+            permission: "manage customers",
+            active: route().current("admin.customers.*"),
         },
         {
-            name: 'News Management',
-            href: lRoute('admin.news.index'),
+            name: "News Management",
+            href: lRoute("admin.news.index"),
             icon: Newspaper,
-            permission: 'manage news',
-            active: route().current('admin.news.*')
+            permission: "manage news",
+            active: route().current("admin.news.*"),
         },
         {
-            name: 'Product Management',
-            href: lRoute('admin.products.index'),
+            name: "Product Management",
+            href: lRoute("admin.products.index"),
             icon: Box,
-            permission: 'manage products',
-            active: route().current('admin.products.*')
+            permission: "manage products",
+            active: route().current("admin.products.*"),
         },
         {
-            name: 'Role & Permission',
-            href: lRoute('admin.roles.index'),
+            name: "Gallery Management",
+            href: lRoute("admin.galleries.index"),
+            icon: Image,
+            permission: "manage galleries",
+            roles: ["Superuser", "Blogger"],
+            active: route().current("admin.galleries.*"),
+        },
+        {
+            name: "Role & Permission",
+            href: lRoute("admin.roles.index"),
             icon: ShieldCheck,
-            permission: 'manage roles',
-            active: route().current('admin.roles.*')
+            permission: "manage roles",
+            active: route().current("admin.roles.*"),
         },
         {
-            name: 'Activity Logs',
-            href: lRoute('admin.activity-logs.index'),
+            name: "Activity Logs",
+            href: lRoute("admin.activity-logs.index"),
             icon: History,
-            permission: 'view logs',
-            active: route().current('admin.activity-logs.*')
+            permission: "view logs",
+            active: route().current("admin.activity-logs.*"),
         },
         {
-            name: 'API Docs',
-            href: lRoute('admin.api-docs.index'),
+            name: "API Docs",
+            href: lRoute("admin.api-docs.index"),
             icon: FileJson,
-            permission: 'view api-docs',
-            active: route().current('admin.api-docs.*')
+            permission: "view api-docs",
+            active: route().current("admin.api-docs.*"),
         },
     ];
 
     const userRoles = auth.user.roles || [];
 
-    const filteredNavigation = navigation.filter(item => {
+    const filteredNavigation = navigation.filter((item) => {
         if (item.roles) {
-            return item.roles.some(role =>
-                userRoles.some(userRole => userRole.toLowerCase() === role.toLowerCase())
+            return item.roles.some((role) =>
+                userRoles.some(
+                    (userRole) => userRole.toLowerCase() === role.toLowerCase(),
+                ),
             );
         }
         return !item.permission || userPermissions.includes(item.permission);
@@ -143,7 +157,7 @@ export default function AdminLayout({ children, title }) {
             {/* Sidebar */}
             <aside
                 className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white transition-transform duration-300 transform 
-                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+                    ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
                     lg:translate-x-0 lg:fixed lg:inset-y-0 shadow-2xl lg:shadow-none`}
             >
                 <div className="h-full flex flex-col">
@@ -151,7 +165,9 @@ export default function AdminLayout({ children, title }) {
                     <div className="h-16 flex-shrink-0 flex items-center px-6 bg-slate-950/50 border-b border-slate-800/50">
                         <Link href="/" className="flex items-center gap-3">
                             <ApplicationLogo className="w-8 h-8" />
-                            <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">Admin Panel</span>
+                            <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
+                                Admin Panel
+                            </span>
                         </Link>
                     </div>
 
@@ -161,13 +177,18 @@ export default function AdminLayout({ children, title }) {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${item.active
-                                    ? 'bg-brand-primary text-white shadow-lg shadow-brand-primary/20'
-                                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
-                                    }`}
+                                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                                    item.active
+                                        ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20"
+                                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                                }`}
                             >
-                                <item.icon className={`w-5 h-5 ${item.active ? 'text-white' : 'group-hover:text-brand-secondary text-slate-500'}`} />
-                                <span className="text-sm font-bold tracking-wide">{item.name}</span>
+                                <item.icon
+                                    className={`w-5 h-5 ${item.active ? "text-white" : "group-hover:text-brand-secondary text-slate-500"}`}
+                                />
+                                <span className="text-sm font-bold tracking-wide">
+                                    {item.name}
+                                </span>
                                 {item.active && (
                                     <motion.div
                                         layoutId="active-pill"
@@ -187,12 +208,16 @@ export default function AdminLayout({ children, title }) {
                                 <UserIcon className="w-5 h-5 text-brand-primary" />
                             </div>
                             <div className="overflow-hidden text-ellipsis">
-                                <p className="text-sm font-bold truncate">{auth.user.name}</p>
-                                <p className="text-xs text-slate-500 truncate">{auth.user.roles[0] || 'Member'}</p>
+                                <p className="text-sm font-bold truncate">
+                                    {auth.user.name}
+                                </p>
+                                <p className="text-xs text-slate-500 truncate">
+                                    {auth.user.roles[0] || "Member"}
+                                </p>
                             </div>
                         </div>
                         <Link
-                            href={route('logout')}
+                            href={route("logout")}
                             method="post"
                             as="button"
                             className="w-full flex items-center justify-center gap-2 py-2 text-xs font-bold text-slate-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/20 rounded-lg border border-transparent transition-all"
@@ -213,9 +238,15 @@ export default function AdminLayout({ children, title }) {
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                             className="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-600"
                         >
-                            {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {isSidebarOpen ? (
+                                <X className="w-6 h-6" />
+                            ) : (
+                                <Menu className="w-6 h-6" />
+                            )}
                         </button>
-                        <h2 className="text-xl font-bold text-slate-800 tracking-tight">{title}</h2>
+                        <h2 className="text-xl font-bold text-slate-800 tracking-tight">
+                            {title}
+                        </h2>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -247,12 +278,16 @@ export default function AdminLayout({ children, title }) {
             <ModernAlert
                 type="success"
                 message={localFlash.success}
-                onClose={() => setLocalFlash(prev => ({ ...prev, success: null }))}
+                onClose={() =>
+                    setLocalFlash((prev) => ({ ...prev, success: null }))
+                }
             />
             <ModernAlert
                 type="error"
                 message={localFlash.error}
-                onClose={() => setLocalFlash(prev => ({ ...prev, error: null }))}
+                onClose={() =>
+                    setLocalFlash((prev) => ({ ...prev, error: null }))
+                }
             />
         </div>
     );

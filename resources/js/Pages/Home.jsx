@@ -25,37 +25,37 @@ export default function Home({ customers = [], products = [], news = [] }) {
             title: __('STAMPING'),
             desc: __('High-tonnage press capabilities delivering intricate automotive components with micron-level accuracy.'),
             icon: <Award className="w-12 h-12 text-brand-primary" />,
-            image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-14.JPG"
         },
         {
             title: __('WELDING'),
             desc: __('State-of-the-art automated welding lines ensuring structural integrity and consistent quality.'),
             icon: <Zap className="w-12 h-12 text-brand-primary" />,
-            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-16.JPG"
         },
         {
             title: __('BENDING'),
             desc: __('Precision bending services for complex geometries and structural requirements.'),
             icon: <Shield className="w-12 h-12 text-brand-secondary" />,
-            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-7.JPG"
         },
         {
             title: __('MACHINING'),
             desc: __('Advanced CNC machining for tight tolerances and high-quality surface finishes.'),
             icon: <Zap className="w-12 h-12 text-brand-secondary" />,
-            image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-5.JPG"
         },
         {
             title: __('PAINTING'),
             desc: __('Automated painting lines providing superior corrosion protection and aesthetic finish.'),
             icon: <Award className="w-12 h-12 text-brand-secondary" />,
-            image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-4.JPG"
         },
         {
             title: __('DIE MAKING'),
             desc: __('In-house design and manufacturing of high-precision dies and tooling.'),
             icon: <Shield className="w-12 h-12 text-brand-primary" />,
-            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
+            image: "/img/assets/assets-12.JPG"
         }
     ];
 

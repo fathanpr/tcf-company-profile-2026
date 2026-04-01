@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleAndPermissionSeeder::class,
             CustomerSeeder::class,
             ProductSeeder::class,
-            NewsSeeder::class,
+            // NewsSeeder::class,
         ]);
     }
 }
