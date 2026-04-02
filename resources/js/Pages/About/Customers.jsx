@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link, router } from '@inertiajs/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Users, ChevronLeft, ChevronRight, UserCheck, Globe } from 'lucide-react';
-import { useLocalic, useTranslation } from '@/helpers';
+import React, { useState, useEffect } from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import { Head, Link, router } from "@inertiajs/react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+    Search,
+    Users,
+    ChevronLeft,
+    ChevronRight,
+    UserCheck,
+    Globe,
+} from "lucide-react";
+import { useLocalic, useTranslation } from "@/helpers";
 
 export default function Customers({ customers, filters }) {
     const { lRoute } = useLocalic();
     const { __ } = useTranslation();
-    const [search, setSearch] = useState(filters.search || '');
+    const [search, setSearch] = useState(filters.search || "");
 
     // Handle Search with debounce or simple effect
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            if (search !== (filters.search || '')) {
-                router.get(lRoute('about.customers'), { search }, {
-                    preserveState: true,
-                    replace: true,
-                    preserveScroll: true
-                });
+            if (search !== (filters.search || "")) {
+                router.get(
+                    lRoute("about.customers"),
+                    { search },
+                    {
+                        preserveState: true,
+                        replace: true,
+                        preserveScroll: true,
+                    },
+                );
             }
         }, 500);
 
@@ -30,25 +41,47 @@ export default function Customers({ customers, filters }) {
         show: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
-            }
-        }
+                staggerChildren: 0.1,
+            },
+        },
     };
 
     const item = {
         hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0 }
+        show: { opacity: 1, y: 0 },
     };
 
     return (
         <MainLayout>
             <Head>
-                <title>{__('Our Valued Customers - PT Tri Centrum Fortuna | Trusted Tier 2 Partner')}</title>
-                <meta name="description" content={__('TCF proudly serves leading automotive giants in Indonesia. Join our network of satisfied clients who trust us for high-precision components.')} />
-                <meta property="og:title" content={__('TCF Customers - Partnering with Industry Leaders')} />
-                <meta property="og:description" content={__('Building long-term success with the world\'s most prominent automotive brands.')} />
+                <title>
+                    {__(
+                        "Our Valued Customers - PT Tri Centrum Fortuna | Trusted Tier 2 Partner",
+                    )}
+                </title>
+                <meta
+                    name="description"
+                    content={__(
+                        "TCF proudly serves leading automotive giants in Indonesia. Join our network of satisfied clients who trust us for high-precision components.",
+                    )}
+                />
+                <meta
+                    property="og:title"
+                    content={__(
+                        "TCF Customers - Partnering with Industry Leaders",
+                    )}
+                />
+                <meta
+                    property="og:description"
+                    content={__(
+                        "Building long-term success with the world's most prominent automotive brands.",
+                    )}
+                />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content={`${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta
+                    property="og:image"
+                    content={`${typeof window !== "undefined" ? window.location.origin : ""}/img/tcf-logo.png`}
+                />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
@@ -65,13 +98,18 @@ export default function Customers({ customers, filters }) {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <UserCheck className="w-4 h-4" />
-                            {__('Trusted Partnership')}
+                            {__("Trusted Partnership")}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            {__('Our Valued')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Customers')}</span>
+                            {__("Our Valued")}{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+                                {__("Customers")}
+                            </span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            {__('We are proud to serve industry leaders across the automotive and manufacturing sectors, building long-term relationships through quality and reliability.')}
+                            {__(
+                                "We are proud to serve industry leaders across the automotive and manufacturing sectors, building long-term relationships through quality and reliability.",
+                            )}
                         </p>
                     </motion.div>
                 </div>
@@ -93,7 +131,7 @@ export default function Customers({ customers, filters }) {
                             <input
                                 type="text"
                                 className="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
-                                placeholder={__('Search our customer base...')}
+                                placeholder={__("Search our customer base...")}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -115,13 +153,20 @@ export default function Customers({ customers, filters }) {
                                         key={customer.id}
                                         variants={item}
                                         whileHover={{ y: -5 }}
-                                        onClick={() => customer.website && window.open(customer.website, '_blank', 'noopener,noreferrer')}
-                                        className={`group bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center ${customer.website ? 'cursor-pointer' : ''}`}
+                                        onClick={() =>
+                                            customer.website &&
+                                            window.open(
+                                                customer.website,
+                                                "_blank",
+                                                "noopener,noreferrer",
+                                            )
+                                        }
+                                        className={`group bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center ${customer.website ? "cursor-pointer" : ""}`}
                                     >
                                         <div className="w-24 h-24 mb-6 relative">
                                             <div className="absolute inset-0 bg-slate-100 rounded-2xl group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500"></div>
                                             <img
-                                                src={`/${customer.logo}`}
+                                                src={customer.logo}
                                                 alt={customer.name}
                                                 className="w-full h-full object-contain relative z-10 p-4 drop-shadow-sm grayscale group-hover:grayscale-0 transition-all duration-300"
                                             />
@@ -131,7 +176,8 @@ export default function Customers({ customers, filters }) {
                                         </h3>
                                         <div className="mt-4 pt-4 border-t border-slate-50 w-full flex flex-col items-center gap-3">
                                             <div className="flex items-center gap-2 text-[10px] font-black text-brand-primary uppercase tracking-widest">
-                                                {__('Active Partner')} <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                                                {__("Active Partner")}{" "}
+                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                                             </div>
                                             {customer.website && (
                                                 <a
@@ -142,7 +188,14 @@ export default function Customers({ customers, filters }) {
                                                     title={customer.website}
                                                 >
                                                     <Globe className="w-3 h-3" />
-                                                    {customer.website.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]}
+                                                    {
+                                                        customer.website
+                                                            .replace(
+                                                                /^https?:\/\/(www\.)?/,
+                                                                "",
+                                                            )
+                                                            .split("/")[0]
+                                                    }
                                                 </a>
                                             )}
                                         </div>
@@ -158,8 +211,12 @@ export default function Customers({ customers, filters }) {
                                 <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-6 text-slate-300">
                                     <Users className="w-10 h-10" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">{__('No customers found')}</h3>
-                                <p className="text-slate-500">{__('Try adjusting your search criteria')}</p>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                                    {__("No customers found")}
+                                </h3>
+                                <p className="text-slate-500">
+                                    {__("Try adjusting your search criteria")}
+                                </p>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -169,23 +226,23 @@ export default function Customers({ customers, filters }) {
                         <div className="mt-20 flex justify-center">
                             <nav className="inline-flex items-center gap-2 p-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
                                 {customers.links.map((link, idx) => {
-                                    if (link.label.includes('Previous')) {
+                                    if (link.label.includes("Previous")) {
                                         return (
                                             <Link
                                                 key={idx}
-                                                href={link.url || '#'}
-                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'}`}
+                                                href={link.url || "#"}
+                                                className={`p-2 rounded-xl transition-all ${!link.url ? "text-slate-300 cursor-not-allowed" : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"}`}
                                             >
                                                 <ChevronLeft className="w-5 h-5" />
                                             </Link>
                                         );
                                     }
-                                    if (link.label.includes('Next')) {
+                                    if (link.label.includes("Next")) {
                                         return (
                                             <Link
                                                 key={idx}
-                                                href={link.url || '#'}
-                                                className={`p-2 rounded-xl transition-all ${!link.url ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'}`}
+                                                href={link.url || "#"}
+                                                className={`p-2 rounded-xl transition-all ${!link.url ? "text-slate-300 cursor-not-allowed" : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"}`}
                                             >
                                                 <ChevronRight className="w-5 h-5" />
                                             </Link>
@@ -194,9 +251,11 @@ export default function Customers({ customers, filters }) {
                                     return (
                                         <Link
                                             key={idx}
-                                            href={link.url || '#'}
-                                            className={`min-w-[40px] h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${link.active ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'}`}
-                                            dangerouslySetInnerHTML={{ __html: link.label }}
+                                            href={link.url || "#"}
+                                            className={`min-w-[40px] h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${link.active ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30" : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"}`}
+                                            dangerouslySetInnerHTML={{
+                                                __html: link.label,
+                                            }}
                                         />
                                     );
                                 })}
@@ -213,16 +272,20 @@ export default function Customers({ customers, filters }) {
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
                         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="text-center md:text-left">
-                                <h2 className="text-3xl font-black mb-4">{__('Interested in Partnering with Us?')}</h2>
+                                <h2 className="text-3xl font-black mb-4">
+                                    {__("Interested in Partnering with Us?")}
+                                </h2>
                                 <p className="text-blue-100 max-w-xl">
-                                    {__('Join our growing network of industry leaders. Let\'s discuss how we can support your manufacturing needs with our expertise.')}
+                                    {__(
+                                        "Join our growing network of industry leaders. Let's discuss how we can support your manufacturing needs with our expertise.",
+                                    )}
                                 </p>
                             </div>
                             <Link
-                                href={lRoute('home') + "#location"}
+                                href={lRoute("home") + "#location"}
                                 className="px-8 py-4 bg-white text-blue-600 font-black rounded-2xl hover:bg-blue-50 transition-colors shadow-xl"
                             >
-                                {__('Contact Sales Team')}
+                                {__("Contact Sales Team")}
                             </Link>
                         </div>
                     </div>
