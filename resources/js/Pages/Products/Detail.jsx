@@ -138,11 +138,7 @@ export default function Detail({ product }) {
                                             className={`aspect-square rounded-xl overflow-hidden border-2 transition-all relative group ${activeImage === img ? "border-blue-500 ring-4 ring-blue-500/20" : "border-slate-700 hover:border-slate-500"}`}
                                         >
                                             <img
-                                                src={
-                                                    img?.startsWith("http")
-                                                        ? img
-                                                        : `/${img}`
-                                                }
+                                                src={img}
                                                 className={`w-full h-full object-cover transition-all duration-300 ${activeImage === img ? "scale-110" : "opacity-60 group-hover:opacity-100"}`}
                                                 alt=""
                                             />
