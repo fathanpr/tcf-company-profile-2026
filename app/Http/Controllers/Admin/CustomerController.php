@@ -35,12 +35,17 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
-            'logo' => 'nullable|string',
             'website' => 'nullable|url',
             'is_active' => 'boolean',
-        ]);
+        ];
+
+        $rules['logo'] = $request->hasFile('logo')
+            ? 'nullable|image|max:2048'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $this->service->createCustomer($request->all());
 
@@ -64,12 +69,17 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
-            'logo' => 'nullable|string',
             'website' => 'nullable|url',
             'is_active' => 'boolean',
-        ]);
+        ];
+
+        $rules['logo'] = $request->hasFile('logo')
+            ? 'nullable|image|max:2048'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $this->service->updateCustomer($id, $request->all());
 

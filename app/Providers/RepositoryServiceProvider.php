@@ -8,6 +8,8 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Contracts\NewsRepositoryInterface;
 use App\Repositories\Eloquent\NewsRepository;
+use App\Repositories\Contracts\AdRepositoryInterface;
+use App\Repositories\Eloquent\AdRepository;
 use App\Repositories\Contracts\GalleryRepositoryInterface;
 use App\Repositories\Eloquent\GalleryRepository;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -29,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CustomerRepositoryInterface::class, CustomerRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(NewsRepositoryInterface::class, NewsRepository::class);
+        $this->app->bind(AdRepositoryInterface::class, AdRepository::class);
         $this->app->bind(GalleryRepositoryInterface::class, GalleryRepository::class);
         $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, EloquentRoleRepository::class);

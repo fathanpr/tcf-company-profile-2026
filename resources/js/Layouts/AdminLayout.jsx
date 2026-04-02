@@ -15,6 +15,7 @@ import {
     ChevronRight,
     Building2,
     FileJson,
+    Megaphone,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ModernAlert from "@/Components/ModernAlert";
@@ -87,6 +88,13 @@ export default function AdminLayout({ children, title }) {
             icon: Newspaper,
             permission: "manage news",
             active: route().current("admin.news.*"),
+        },
+        {
+            name: "Ads Management",
+            href: lRoute("admin.ads.index"),
+            icon: Megaphone,
+            permission: "manage news",
+            active: route().current("admin.ads.*"),
         },
         {
             name: "Product Management",

@@ -1,23 +1,32 @@
-import React from 'react';
-import AdminLayout from '@/Layouts/AdminLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { ChevronLeft, Building2, Save, Globe, Image as ImageIcon, RefreshCcw } from 'lucide-react';
+import React from "react";
+import AdminLayout from "@/Layouts/AdminLayout";
+import { Head, Link, router, useForm } from "@inertiajs/react";
+import { ChevronLeft, Building2, Globe, RefreshCcw } from "lucide-react";
+import ImageInput from "@/Components/ImageInput";
 
 /**
  * Customer Edit Page
  * Generate by Antigravity
  */
 export default function Edit({ customer }) {
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, processing, errors } = useForm({
         name: customer.name,
-        logo: customer.logo || '',
-        website: customer.website || '',
+        logo: customer.logo || "",
+        website: customer.website || "",
         is_active: !!customer.is_active,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('admin.customers.update', customer.id));
+
+        const payload = {
+            _method: "put",
+            ...data,
+        };
+
+        router.post(route("admin.customers.update", customer.id), payload, {
+            forceFormData: true,
+        });
     };
 
     return (
@@ -26,7 +35,7 @@ export default function Edit({ customer }) {
 
             <div className="max-w-2xl">
                 <Link
-                    href={route('admin.customers.index')}
+                    href={route("admin.customers.index")}
                     className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-6 text-sm font-bold"
                 >
                     <ChevronLeft className="w-4 h-4" />
@@ -40,8 +49,13 @@ export default function Edit({ customer }) {
                                 <Building2 className="w-6 h-6" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-slate-900">Partner Details</h3>
-                                <p className="text-sm text-slate-500">Update company profile and status for {customer.name}.</p>
+                                <h3 className="text-xl font-bold text-slate-900">
+                                    Partner Details
+                                </h3>
+                                <p className="text-sm text-slate-500">
+                                    Update company profile and status for{" "}
+                                    {customer.name}.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -56,11 +70,17 @@ export default function Edit({ customer }) {
                             <input
                                 type="text"
                                 value={data.name}
-                                onChange={e => setData('name', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? 'ring-2 ring-red-500' : ''}`}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.name ? "ring-2 ring-red-500" : ""}`}
                                 required
                             />
-                            {errors.name && <p className="text-xs font-bold text-red-500 mt-1">{errors.name}</p>}
+                            {errors.name && (
+                                <p className="text-xs font-bold text-red-500 mt-1">
+                                    {errors.name}
+                                </p>
+                            )}
                         </div>
 
                         {/* Website */}
@@ -72,29 +92,28 @@ export default function Edit({ customer }) {
                             <input
                                 type="url"
                                 value={data.website}
-                                onChange={e => setData('website', e.target.value)}
-                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.website ? 'ring-2 ring-red-500' : ''}`}
+                                onChange={(e) =>
+                                    setData("website", e.target.value)
+                                }
+                                className={`w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all ${errors.website ? "ring-2 ring-red-500" : ""}`}
                             />
-                            {errors.website && <p className="text-xs font-bold text-red-500 mt-1">{errors.website}</p>}
+                            {errors.website && (
+                                <p className="text-xs font-bold text-red-500 mt-1">
+                                    {errors.website}
+                                </p>
+                            )}
                         </div>
 
                         {/* Logo */}
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                                <ImageIcon className="w-4 h-4 text-slate-400" />
-                                Logo URL
-                            </label>
-                            <input
-                                type="text"
+                            <ImageInput
+                                label="Customer Logo"
                                 value={data.logo}
-                                onChange={e => setData('logo', e.target.value)}
-                                className="w-full px-4 py-3 bg-slate-50 border-transparent focus:bg-white focus:ring-2 focus:ring-brand-primary rounded-xl text-sm transition-all"
+                                onChange={(value) =>
+                                    setData("logo", value ?? "")
+                                }
+                                error={errors.logo}
                             />
-                            {data.logo && (
-                                <div className="mt-2 p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center h-32 max-w-xs">
-                                    <img src={data.logo.startsWith('http') || data.logo.startsWith('/') ? data.logo : `/${data.logo}`} alt="Preview" className="max-w-full max-h-full object-contain" />
-                                </div>
-                            )}
                         </div>
 
                         {/* Active Status */}
@@ -103,12 +122,19 @@ export default function Edit({ customer }) {
                                 <input
                                     type="checkbox"
                                     checked={data.is_active}
-                                    onChange={e => setData('is_active', e.target.checked)}
+                                    onChange={(e) =>
+                                        setData("is_active", e.target.checked)
+                                    }
                                     className="w-5 h-5 rounded text-orange-600 focus:ring-brand-primary"
                                 />
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-bold text-slate-700 font-bold">Active Status</span>
-                                    <span className="text-xs text-slate-500">Show this partner in the client scroll and about page.</span>
+                                    <span className="text-sm font-bold text-slate-700">
+                                        Active Status
+                                    </span>
+                                    <span className="text-xs text-slate-500">
+                                        Show this partner in the client scroll
+                                        and about page.
+                                    </span>
                                 </div>
                             </label>
                         </div>
@@ -120,7 +146,7 @@ export default function Edit({ customer }) {
                                 className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-orange-600 text-white rounded-xl text-base font-black hover:bg-orange-700 transition-all shadow-xl shadow-orange-600/20 disabled:opacity-50"
                             >
                                 <RefreshCcw className="w-5 h-5" />
-                                {processing ? 'Updating...' : 'Save Changes'}
+                                {processing ? "Updating..." : "Save Changes"}
                             </button>
                         </div>
                     </form>

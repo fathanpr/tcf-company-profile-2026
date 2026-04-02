@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import MainLayout from '@/Layouts/MainLayout';
-import { Head, Link, router } from '@inertiajs/react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import MainLayout from "@/Layouts/MainLayout";
+import { Head, Link, router } from "@inertiajs/react";
+import { motion } from "framer-motion";
 import {
     Search,
     Calendar,
@@ -9,28 +9,39 @@ import {
     ArrowRight,
     Tag,
     Clock,
-    User
-} from 'lucide-react';
-import { useLocalic, useTranslation } from '@/helpers';
+    User,
+} from "lucide-react";
+import { useLocalic, useTranslation } from "@/helpers";
+import AdsRail from "@/Components/AdsRail";
 
 /**
  * News Index Page
  * Generate by Antigravity
  */
-export default function Index({ news, filters }) {
+export default function Index({ news, filters, ads = [] }) {
     const { lRoute } = useLocalic();
     const { __ } = useTranslation();
-    const [search, setSearch] = useState(filters.search || '');
-    const [category, setCategory] = useState(filters.category || 'All');
+    const [search, setSearch] = useState(filters.search || "");
+    const [category, setCategory] = useState(filters.category || "All");
 
-    const categories = ['All', 'Industry', 'Corporate', 'Technology', 'Technical', 'Business', 'CSR', 'Events', 'General'].map(c => __(c));
+    const categories = [
+        "All",
+        "Industry",
+        "Corporate",
+        "Technology",
+        "Technical",
+        "Business",
+        "CSR",
+        "Events",
+        "General",
+    ].map((c) => __(c));
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             router.get(
-                lRoute('news.index'),
+                lRoute("news.index"),
                 { search, category },
-                { preserveState: true, replace: true }
+                { preserveState: true, replace: true },
             );
         }, 500);
 
@@ -42,25 +53,47 @@ export default function Index({ news, filters }) {
         show: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
-            }
-        }
+                staggerChildren: 0.1,
+            },
+        },
     };
 
     const item = {
         hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0 }
+        show: { opacity: 1, y: 0 },
     };
 
     return (
         <MainLayout>
             <Head>
-                <title>{__('News & Insights | PT Tri Centrum Fortuna')}</title>
-                <meta name="description" content={__('Stay updated with the latest news, technological insights, and corporate updates from PT Tri Centrum Fortuna - Indonesia\'s professional Tier 2 partner.')} />
-                <meta property="og:title" content={__('News & Insights | PT Tri Centrum Fortuna')} />
-                <meta property="og:description" content={__('Latest developments in automotive manufacturing, precision stamping, and robotic welding from TCF Indonesia.')} />
+                <title>{__("News & Insights | PT Tri Centrum Fortuna")}</title>
+                <meta
+                    name="description"
+                    content={__(
+                        "Stay updated with the latest news, technological insights, and corporate updates from PT Tri Centrum Fortuna - Indonesia's professional Tier 2 partner.",
+                    )}
+                />
+                <meta
+                    property="og:title"
+                    content={__("News & Insights | PT Tri Centrum Fortuna")}
+                />
+                <meta
+                    property="og:description"
+                    content={__(
+                        "Latest developments in automotive manufacturing, precision stamping, and robotic welding from TCF Indonesia.",
+                    )}
+                />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content={news.data.length > 0 ? (news.data[0].image.startsWith('https') ? news.data[0].image : `${typeof window !== 'undefined' ? window.location.origin : ''}${news.data[0].image}`) : `${typeof window !== 'undefined' ? window.location.origin : ''}/img/tcf-logo.png`} />
+                <meta
+                    property="og:image"
+                    content={
+                        news.data.length > 0
+                            ? news.data[0].image.startsWith("https")
+                                ? news.data[0].image
+                                : `${typeof window !== "undefined" ? window.location.origin : ""}${news.data[0].image}`
+                            : `${typeof window !== "undefined" ? window.location.origin : ""}/img/tcf-logo.png`
+                    }
+                />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
@@ -77,13 +110,18 @@ export default function Index({ news, filters }) {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-6">
                             <Calendar className="w-4 h-4" />
-                            {__('Media Center')}
+                            {__("Media Center")}
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-                            {__('News')} & <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">{__('Insights')}</span>
+                            {__("News")} &{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">
+                                {__("Insights")}
+                            </span>
                         </h1>
                         <p className="text-slate-400 text-lg leading-relaxed">
-                            {__('Discover the latest developments in precision stamping, automotive technology, and our journey as a leading manufacturing partner in Indonesia.')}
+                            {__(
+                                "Discover the latest developments in precision stamping, automotive technology, and our journey as a leading manufacturing partner in Indonesia.",
+                            )}
                         </p>
                     </motion.div>
                 </div>
@@ -93,7 +131,6 @@ export default function Index({ news, filters }) {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="grid lg:grid-cols-12 gap-12">
-
                         {/* News List (8 columns) */}
                         <div className="lg:col-span-8">
                             <motion.div
@@ -124,17 +161,33 @@ export default function Index({ news, filters }) {
                                                 <div className="flex items-center gap-4 text-slate-400 text-xs mb-3 font-medium">
                                                     <span className="flex items-center gap-1.5 text-sky-500 font-bold">
                                                         <Calendar className="w-3.5 h-3.5" />
-                                                        {new Date(article.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                                        {new Date(
+                                                            article.published_at,
+                                                        ).toLocaleDateString(
+                                                            "id-ID",
+                                                            {
+                                                                day: "numeric",
+                                                                month: "long",
+                                                                year: "numeric",
+                                                            },
+                                                        )}
                                                     </span>
                                                     <span className="flex items-center gap-1.5">
                                                         <Clock className="w-3.5 h-3.5" />
-                                                        {__('5 min read')}
+                                                        {__("5 min read")}
                                                     </span>
                                                 </div>
 
-                                                <Link href={lRoute('news.detail', { slug: article.slug })}>
+                                                <Link
+                                                    href={lRoute(
+                                                        "news.detail",
+                                                        { slug: article.slug },
+                                                    )}
+                                                >
                                                     <h2 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-sky-600 transition-colors leading-tight">
-                                                        {article.translated_title}
+                                                        {
+                                                            article.translated_title
+                                                        }
                                                     </h2>
                                                 </Link>
 
@@ -143,10 +196,13 @@ export default function Index({ news, filters }) {
                                                 </p>
 
                                                 <Link
-                                                    href={lRoute('news.detail', { slug: article.slug })}
+                                                    href={lRoute(
+                                                        "news.detail",
+                                                        { slug: article.slug },
+                                                    )}
                                                     className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 group-hover:translate-x-2 transition-transform"
                                                 >
-                                                    {__('Read Full Article')}
+                                                    {__("Read Full Article")}
                                                     <ArrowRight className="w-4 h-4 text-sky-600" />
                                                 </Link>
                                             </div>
@@ -154,7 +210,11 @@ export default function Index({ news, filters }) {
                                     ))
                                 ) : (
                                     <div className="text-center py-20 bg-slate-50 rounded-[40px] border border-dashed border-slate-200">
-                                        <p className="text-slate-400 font-bold">{__('No news articles found for this search/category.')}</p>
+                                        <p className="text-slate-400 font-bold">
+                                            {__(
+                                                "No news articles found for this search/category.",
+                                            )}
+                                        </p>
                                     </div>
                                 )}
                             </motion.div>
@@ -164,14 +224,17 @@ export default function Index({ news, filters }) {
                                 {news.links.map((link, idx) => (
                                     <Link
                                         key={idx}
-                                        href={link.url || '#'}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
-                                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${link.active
-                                            ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/20'
-                                            : link.url
-                                                ? 'bg-slate-50 text-slate-600 hover:bg-slate-100'
-                                                : 'bg-transparent text-slate-300 pointer-events-none'
-                                            }`}
+                                        href={link.url || "#"}
+                                        dangerouslySetInnerHTML={{
+                                            __html: link.label,
+                                        }}
+                                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                                            link.active
+                                                ? "bg-sky-600 text-white shadow-lg shadow-sky-600/20"
+                                                : link.url
+                                                  ? "bg-slate-50 text-slate-600 hover:bg-slate-100"
+                                                  : "bg-transparent text-slate-300 pointer-events-none"
+                                        }`}
                                     />
                                 ))}
                             </div>
@@ -179,20 +242,23 @@ export default function Index({ news, filters }) {
 
                         {/* Sidebar (4 columns) */}
                         <aside className="lg:col-span-4 space-y-12">
-
                             {/* Search */}
                             <div className="p-8 bg-slate-900 rounded-[32px] border border-white/5 shadow-2xl relative overflow-hidden group">
                                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                                 <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2 relative z-10">
                                     <Search className="w-5 h-5 text-brand-primary" />
-                                    {__('Search Articles')}
+                                    {__("Search Articles")}
                                 </h3>
                                 <div className="relative z-10">
                                     <input
                                         type="text"
                                         value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        placeholder={__('Search by keywords...')}
+                                        onChange={(e) =>
+                                            setSearch(e.target.value)
+                                        }
+                                        placeholder={__(
+                                            "Search by keywords...",
+                                        )}
                                         className="w-full bg-white/5 border-white/10 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 rounded-2xl py-4 pl-6 pr-12 text-sm text-white placeholder:text-slate-500 transition-all backdrop-blur-sm"
                                     />
                                     <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 w-5 h-5 group-hover:text-brand-primary transition-colors" />
@@ -203,17 +269,18 @@ export default function Index({ news, filters }) {
                             <div className="p-8 bg-slate-50 rounded-[32px] border border-slate-100">
                                 <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-2">
                                     <Tag className="w-5 h-5 text-brand-primary" />
-                                    {__('Categories')}
+                                    {__("Categories")}
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {categories.map((cat) => (
                                         <button
                                             key={cat}
                                             onClick={() => setCategory(cat)}
-                                            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${category === cat
-                                                ? 'bg-sky-600 border-sky-600 text-white shadow-md'
-                                                : 'bg-white border-slate-200 text-slate-600 hover:border-sky-300'
-                                                }`}
+                                            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                                                category === cat
+                                                    ? "bg-sky-600 border-sky-600 text-white shadow-md"
+                                                    : "bg-white border-slate-200 text-slate-600 hover:border-sky-300"
+                                            }`}
                                         >
                                             {cat}
                                         </button>
@@ -221,24 +288,30 @@ export default function Index({ news, filters }) {
                                 </div>
                             </div>
 
+                            <AdsRail ads={ads} title={__("Sponsored")} />
+
                             {/* Featured Banner/CTA */}
                             <div className="p-8 bg-sky-600 rounded-[32px] text-white overflow-hidden relative group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-700"></div>
-                                <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">{__('Need a professional manufacturing partner?')}</h4>
+                                <h4 className="text-xl font-black mb-4 relative z-10 leading-tight">
+                                    {__(
+                                        "Need a professional manufacturing partner?",
+                                    )}
+                                </h4>
                                 <p className="text-sky-100 text-xs mb-8 relative z-10 leading-relaxed">
-                                    {__('Check our production capabilities and see how we can support your business with high-precision components.')}
+                                    {__(
+                                        "Check our production capabilities and see how we can support your business with high-precision components.",
+                                    )}
                                 </p>
                                 <Link
-                                    href={lRoute('capabilities.sales-growth')}
+                                    href={lRoute("capabilities.sales-growth")}
                                     className="inline-flex items-center gap-2 bg-white text-sky-600 px-6 py-3 rounded-xl font-bold text-xs hover:bg-slate-100 transition-all relative z-10"
                                 >
-                                    {__('Our Capabilities')}
+                                    {__("Our Capabilities")}
                                     <ChevronRight className="w-4 h-4" />
                                 </Link>
                             </div>
-
                         </aside>
-
                     </div>
                 </div>
             </section>
