@@ -30,7 +30,8 @@ export default function Edit({ news, categories: dbCategories = [] }) {
     const [activeTab, setActiveTab] = React.useState("en");
     const { __ } = useTranslation();
 
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
+        _method: "put",
         title: news.title,
         title_id: news.title_id || "",
         category: news.category,
@@ -71,7 +72,7 @@ export default function Edit({ news, categories: dbCategories = [] }) {
 
     const submit = (e) => {
         e.preventDefault();
-        put(route("admin.news.update", news.id), {
+        post(route("admin.news.update", news.id), {
             forceFormData: true,
         });
     };
