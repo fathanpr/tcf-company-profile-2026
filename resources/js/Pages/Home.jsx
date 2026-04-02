@@ -591,11 +591,7 @@ export default function Home({ customers = [], products = [], news = [] }) {
                                     })}
                                 >
                                     <img
-                                        src={
-                                            prod.main_image?.startsWith("http")
-                                                ? prod.main_image
-                                                : `/${prod.main_image}`
-                                        }
+                                        src={prod.main_image}
                                         alt={prod.translated_name}
                                         className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                                     />
