@@ -343,11 +343,7 @@ export default function Detail({ product }) {
                             <motion.img
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                src={
-                                    previewImage?.startsWith("http")
-                                        ? previewImage
-                                        : `/${previewImage}`
-                                }
+                                src={previewImage}
                                 alt="Full Preview"
                                 className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                                 onClick={(e) => e.stopPropagation()}
