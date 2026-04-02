@@ -40,7 +40,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'name_id' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:products,slug',
@@ -48,7 +48,6 @@ class ProductController extends Controller
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
             'description_id' => 'nullable|string',
-            'main_image' => 'nullable|string',
             'is_active' => 'boolean',
             'meta_title' => 'nullable|string|max:255',
             'meta_title_id' => 'nullable|string|max:255',
@@ -58,7 +57,13 @@ class ProductController extends Controller
             'meta_keywords_id' => 'nullable|string|max:255',
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable', // Can be string or file
-        ]);
+        ];
+
+        $rules['main_image'] = $request->hasFile('main_image')
+            ? 'nullable|image|max:3072'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $this->service->createProduct($request->all());
 
@@ -76,7 +81,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'name_id' => 'nullable|string|max:255',
             'slug' => 'nullable|string|max:255|unique:products,slug,' . $id,
@@ -84,7 +89,6 @@ class ProductController extends Controller
             'customer_id' => 'nullable|exists:customers,id',
             'description' => 'required|string',
             'description_id' => 'nullable|string',
-            'main_image' => 'nullable|string',
             'is_active' => 'boolean',
             'meta_title' => 'nullable|string|max:255',
             'meta_title_id' => 'nullable|string|max:255',
@@ -94,7 +98,13 @@ class ProductController extends Controller
             'meta_keywords_id' => 'nullable|string|max:255',
             'product_images' => 'nullable|array',
             'product_images.*' => 'nullable', // Can be string or file
-        ]);
+        ];
+
+        $rules['main_image'] = $request->hasFile('main_image')
+            ? 'nullable|image|max:3072'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $this->service->updateProduct($id, $request->all());
 
