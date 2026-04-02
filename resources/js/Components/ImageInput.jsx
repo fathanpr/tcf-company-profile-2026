@@ -13,11 +13,19 @@ export default function ImageInput({
     const [urlInput, setUrlInput] = useState("");
     const [localError, setLocalError] = useState(null);
 
+    const isAbsoluteOrObjectUrl = (src) =>
+        /^(https?:\/\/|\/|blob:|data:)/i.test(src);
+
     useEffect(() => {
         // Determine initial mode and preview based on value
         if (value instanceof File) {
             setMode("upload");
-            setPreview(URL.createObjectURL(value));
+            const objectUrl = URL.createObjectURL(value);
+            setPreview(objectUrl);
+
+            return () => {
+                URL.revokeObjectURL(objectUrl);
+            };
         } else if (typeof value === "string" && value.length > 0) {
             setMode("url");
             setUrlInput(value);
@@ -55,9 +63,8 @@ export default function ImageInput({
     };
 
     const previewSrc = preview
-        ? typeof preview === "string" &&
-          !(preview.startsWith("http") || preview.startsWith("/"))
-            ? `/${preview}`
+        ? typeof preview === "string" && !isAbsoluteOrObjectUrl(preview)
+            ? `/${preview.replace(/^\/+/, "")}`
             : preview
         : null;
 

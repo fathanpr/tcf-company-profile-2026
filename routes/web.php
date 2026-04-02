@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -58,6 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('news', NewsController::class);
+        Route::resource('ads', AdController::class);
         Route::resource('products', ProductController::class);
         Route::resource('customers', CustomerController::class);
         Route::get('galleries/category/{category}/edit', [GalleryController::class, 'editByCategory'])->name('galleries.category.edit');

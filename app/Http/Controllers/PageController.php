@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Services\CustomerService;
 use App\Services\ProductService;
 use App\Services\NewsService;
+use App\Services\AdService;
 use App\Services\GalleryService;
 
 class PageController extends Controller
@@ -14,6 +15,7 @@ class PageController extends Controller
     protected $customerService;
     protected $productService;
     protected $newsService;
+    protected $adService;
     protected $galleryService;
 
     /**
@@ -24,11 +26,13 @@ class PageController extends Controller
         CustomerService $customerService,
         ProductService $productService,
         NewsService $newsService,
+        AdService $adService,
         GalleryService $galleryService
     ) {
         $this->customerService = $customerService;
         $this->productService = $productService;
         $this->newsService = $newsService;
+        $this->adService = $adService;
         $this->galleryService = $galleryService;
     }
 
@@ -106,6 +110,7 @@ class PageController extends Controller
 
         return Inertia::render('News/Index', [
             'news' => $news,
+            'ads' => $this->adService->getActiveAds(6)->items(),
             'filters' => $request->only(['search', 'category'])
         ]);
     }
@@ -123,7 +128,8 @@ class PageController extends Controller
         }
 
         return Inertia::render('News/Detail', [
-            'article' => $article
+            'article' => $article,
+            'ads' => $this->adService->getActiveAds(6)->items(),
         ]);
     }
 
