@@ -112,6 +112,7 @@ export default function ImageInput({
                 {mode === "upload" ? (
                     <div className="relative">
                         <input
+                            key="upload-input"
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
@@ -130,8 +131,9 @@ export default function ImageInput({
                 ) : (
                     <div className="relative">
                         <input
+                            key="url-input"
                             type="text"
-                            value={urlInput}
+                            value={urlInput ?? ""}
                             onChange={handleUrlChange}
                             placeholder="https://example.com/image.jpg atau img/logo.png"
                             className="w-full px-4 py-3 bg-slate-50 border-slate-200 focus:border-brand-primary focus:ring-brand-primary rounded-xl text-sm transition-all"

@@ -38,7 +38,7 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'title' => 'required|string|max:255',
             'title_id' => 'nullable|string|max:255',
             'category' => 'required|string',
@@ -46,14 +46,19 @@ class NewsController extends Controller
             'content_id' => 'nullable|string',
             'excerpt' => 'nullable|string|max:500',
             'excerpt_id' => 'nullable|string|max:500',
-            'image' => 'nullable|string',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
             'meta_keywords' => 'nullable|string',
             'meta_keywords_id' => 'nullable|string',
             'tags' => 'nullable|string',
             'reading_time' => 'nullable|integer',
-        ]);
+        ];
+
+        $rules['image'] = $request->hasFile('image')
+            ? 'nullable|image|max:2048'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
@@ -81,7 +86,7 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules = [
             'title' => 'required|string|max:255',
             'title_id' => 'nullable|string|max:255',
             'category' => 'required|string',
@@ -89,14 +94,19 @@ class NewsController extends Controller
             'content_id' => 'nullable|string',
             'excerpt' => 'nullable|string|max:500',
             'excerpt_id' => 'nullable|string|max:500',
-            'image' => 'nullable|string',
             'is_published' => 'boolean',
             'published_at' => 'nullable|date',
             'meta_keywords' => 'nullable|string',
             'meta_keywords_id' => 'nullable|string',
             'tags' => 'nullable|string',
             'reading_time' => 'nullable|integer',
-        ]);
+        ];
+
+        $rules['image'] = $request->hasFile('image')
+            ? 'nullable|image|max:2048'
+            : 'nullable|string|max:255';
+
+        $request->validate($rules);
 
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
